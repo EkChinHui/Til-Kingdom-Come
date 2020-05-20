@@ -14,30 +14,37 @@ public class PlayerController : MonoBehaviour
     private State state = State.idle;
 
     [Header("Movement")]
+    public float runSpeed = 4f;
+    public float rollSpeed = 13f;
+    private float rollTime = 0.3f;
+    public float rollDelay = 0.5f;
+    public bool canRoll = true;
+    public bool isActing = false;
+
+    [Header("Input")]
     // note to use getAxis for multiplayer mode so user can change their input
     private string left = "a";
     private string right = "d";
     private string down = "s";
     private string block = ".";
     private string attack = "/";
-    public float runSpeed = 2;
-    public float rollSpeed = 20;
-
-    [Header("Input")]
     private bool attemptLeft = false;
     private bool attemptRight = false;
     private bool attemptRoll = false;
     private bool attemptAttack = false;
     private bool attemptBlock = false;
 
-
-    [Header("Attacking")]
+    [Header("Combat")]
     public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public float attackRate = 2f;
-    public LayerMask enemylayers; 
+    public float attackRange = 3.14f;
+    public float attackDelay = 0.7f;
+    public float blockDelay = 0.7f;
+    public float knockDist = 10f;
+    public int damage = 1;
     // can only hit players in the enemy layer, figure out how this works in multiplayer
-    private float nextAttackTime = 0;
+    public LayerMask enemylayers;
+    private bool isAttacking = false;
+    private bool isBlocking = false;
 
     [Header("Health")]
     // Health system to make it convenient to change
@@ -50,6 +57,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        enemylayers = LayerMask.GetMask("Enemy");
 
         // set keys for player 2 in local multiplayer test
         SetKeysEnemy();
@@ -58,16 +66,23 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         InputManager();
-        if (attemptAttack && Time.time >= nextAttackTime)
+        if (isActing)
         {
-            Attack();
-            nextAttackTime = Time.time + 1f / attackRate;
+
+        }
+        else if (attemptAttack)
+        {
+            if (!isAttacking)
+            {
+                Attack();
+                StartCoroutine(AttackAnimDelay());
+            }
         }
         else if (attemptBlock)
         {
-            Block();
+            StartCoroutine(BlockAnimDelay());
         }
-        else
+        else if (!isAttacking)
         {
             Move();
         }
@@ -76,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (attemptRoll) 
+        if (attemptRoll && canRoll) 
         {
             Roll();
         }
@@ -102,35 +117,102 @@ public class PlayerController : MonoBehaviour
     {
         if (attemptRight)
         {
-            rb.velocity = new Vector2(rollSpeed, rb.velocity.y);
+            StartCoroutine(rollAnimDelay());
+            anim.SetTrigger("Roll");
             transform.localScale = new Vector2(1, 1);
         }
-        else
+        else if (attemptLeft)
         {
-            rb.velocity = new Vector2(-1 * rollSpeed, rb.velocity.y);
+            StartCoroutine(rollAnimDelay());
+            anim.SetTrigger("Roll");
             transform.localScale = new Vector2(-1, 1);
         }
-        anim.SetTrigger("Roll");
+
     }
 
-    private void Block()
+    private IEnumerator rollAnimDelay()
     {
-        anim.SetTrigger("Block");
+        canRoll = false;
+        isActing = true;
+        runSpeed = rollSpeed;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
+        Move();
+        yield return new WaitForSeconds(rollTime);
+        runSpeed = 4f;
+        isActing = false;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().gravityScale = 3.01f;
+        yield return new WaitForSeconds(rollDelay);
+        canRoll = true;
     }
+
 
     public void Attack()
     {
-        // Play an attack animation
-        anim.SetTrigger("Attack");
-
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemylayers);
 
         // Damage enemies
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<PlayerController>().TakeDamage(1);
+            if (enemy.GetComponent<PlayerController>() != null)
+            {
+                PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
+                float enemyDirection = otherPlayer.transform.localScale.x;
+                float myDirection = transform.localScale.x;
+                if (otherPlayer.isShieldUp() && (enemyDirection != myDirection))
+                {
+                    // otherplayer succesfully defends against attack\
+                    this.knockBack();
+                    //otherPlayer.knockBack();
+                    Debug.Log("Succesful block");
+
+                }
+                else 
+                {
+                    enemy.GetComponent<PlayerController>().TakeDamage(damage);
+                }
+            
+            }
         }
+    }
+
+    private IEnumerator AttackAnimDelay()
+    {
+        anim.SetTrigger("Attack");
+        isAttacking = true;
+        isActing = true;
+        yield return new WaitForSeconds(attackDelay);
+        isActing = false;
+        isAttacking = false;
+    }
+
+    private IEnumerator BlockAnimDelay()
+    {
+        anim.SetTrigger("Block");
+        isBlocking = true;
+        isActing = true;
+        yield return new WaitForSeconds(blockDelay);
+        isBlocking = false;
+        isActing = false;
+    }
+
+    public bool isShieldUp ()
+    {
+        return isBlocking;
+    }
+
+    public void knockBack()
+    {
+        if (transform.localScale.x < 0)
+        {
+            rb.velocity = new Vector2(knockDist, rb.velocity.y);
+        } else
+        {
+            rb.velocity = new Vector2(-knockDist, rb.velocity.y);
+        }
+
     }
 
     public void TakeDamage(int damageTaken)
@@ -154,6 +236,7 @@ public class PlayerController : MonoBehaviour
 
         // Disable sprite
         GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().simulated = false;
         this.enabled = false;
     }
 
