@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    private enum State { idle, run}//, attack, block, roll, die}
+    private enum State { idle, run }
     private State state = State.idle;
 
     [Header("Movement")]
@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour
             down = "down";
             attack = "]";
             block = "\\";
+            enemylayers = LayerMask.GetMask("Default");
         } 
     }
 
