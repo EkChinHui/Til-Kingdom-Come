@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
-        enemylayers = LayerMask.GetMask("Enemy");
+        enemylayers = LayerMask.GetMask("Player2");
 
         // set keys for player 2 in local multiplayer test
         SetKeysEnemy();
@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour
             down = "down";
             attack = "]";
             block = "\\";
-            enemylayers = LayerMask.GetMask("Default");
+            enemylayers = LayerMask.GetMask("Player1");
         } 
     }
 

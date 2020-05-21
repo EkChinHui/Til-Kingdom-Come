@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2320867615666489494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2320867616202855600}
   - component: {fileID: 2320867616202855601}
   - component: {fileID: 3924868170608288324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   isActing: 0
   attackPoint: {fileID: 2320867615666489494}
   attackRange: 2.43
-  attackDelay: 0.7
+  attackDelay: 0.6
   blockDelay: 0.7
   knockDist: 10
   damage: 1
