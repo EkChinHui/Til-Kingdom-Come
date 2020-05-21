@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Combat")]
     public Transform attackPoint;
-    public float attackRange = 3.14f;
-    public float attackDelay = 0.7f;
+    public float attackRange = 2.43f;
+    public float attackDelay = 0.5f;
     public float blockDelay = 0.7f;
     public float knockDist = 10f;
     public int damage = 1;

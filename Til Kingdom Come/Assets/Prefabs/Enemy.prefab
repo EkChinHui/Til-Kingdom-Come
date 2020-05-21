@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344005415831873745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 1.88, z: 0}
+  m_LocalPosition: {x: 1.37, y: 1.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 344005416236044234}
@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344005416236044243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4128757, y: -3.0142236, z: 0}
+  m_LocalPosition: {x: 3.75, y: -2.99, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 344005415831873746}
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -4442082563870626902, guid: e066387abb91b304694fb0b756b34dbb,
     type: 3}
-  m_Color: {r: 0.2830189, g: 0.23629408, b: 0.23629408, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,11 +156,12 @@ MonoBehaviour:
   canRoll: 1
   isActing: 0
   attackPoint: {fileID: 344005415831873746}
-  attackRange: 3.14
+  attackRange: 2.43
   attackDelay: 0.7
   blockDelay: 0.7
   knockDist: 10
   damage: 1
+  reactionDelay: 0.2
   enemylayers:
     serializedVersion: 2
     m_Bits: 0
