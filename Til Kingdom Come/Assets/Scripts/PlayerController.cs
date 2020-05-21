@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public float blockDelay = 0.7f;
     public float knockDist = 10f;
     public int damage = 1;
+    public float reactionDelay = 0.2f;
     // can only hit players in the enemy layer, figure out how this works in multiplayer
     public LayerMask enemylayers;
     private bool isAttacking = false;
@@ -68,13 +69,12 @@ public class PlayerController : MonoBehaviour
         InputManager();
         if (isActing)
         {
-
+            // if player is already acting, prevent player from doing other moves
         }
         else if (attemptAttack)
         {
             if (!isAttacking)
             {
-                Attack();
                 StartCoroutine(AttackAnimDelay());
             }
         }
@@ -166,7 +166,6 @@ public class PlayerController : MonoBehaviour
                     // otherplayer succesfully defends against attack\
                     this.knockBack();
                     //otherPlayer.knockBack();
-                    Debug.Log("Succesful block");
 
                 }
                 else 
@@ -180,9 +179,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator AttackAnimDelay()
     {
-        anim.SetTrigger("Attack");
-        isAttacking = true;
         isActing = true;
+        anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(reactionDelay);
+        Attack(); 
+        isAttacking = true;
         yield return new WaitForSeconds(attackDelay);
         isActing = false;
         isAttacking = false;
@@ -230,7 +231,6 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("die");
         // die animation
         anim.SetTrigger("Dead");
 
