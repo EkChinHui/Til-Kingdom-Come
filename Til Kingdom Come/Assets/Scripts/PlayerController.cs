@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("fields")]
     private Rigidbody2D rb;
     private Animator anim;
+    public ScoreKeeper scoreKeeper;
+
+    [Header("Achivements")]
+    public int wins;
+    public int losses;
 
     private enum State { idle, run }
     private State state = State.idle;
@@ -231,6 +237,16 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        losses++;
+        if (gameObject.tag == "Player1")
+        {
+            scoreKeeper.updateWins(2);
+        }
+        else if (gameObject.tag == "Player2")
+        {
+            scoreKeeper.updateWins(1);
+        }
+
         // die animation
         anim.SetTrigger("Dead");
 
@@ -251,7 +267,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetKeysEnemy()
     {
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Player2")
         {
             left = "left";
             right = "right";
