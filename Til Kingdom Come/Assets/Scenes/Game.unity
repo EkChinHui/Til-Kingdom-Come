@@ -627,6 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
+  wins: 1
   message: 'No. of Wins: '
 --- !u!1 &779790058
 GameObject:
@@ -693,8 +694,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 199.1
-  m_fontSizeBase: 199.1
+  m_fontSize: 75.9
+  m_fontSizeBase: 75.9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -710,7 +711,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -731,7 +732,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.05085002, y: -0.29869547, z: -220.0034, w: -27.252851}
+  m_margin: {x: -0.05085002, y: -0.29869547, z: 0.5700425, w: -1.2301711}
   m_textInfo:
     textComponent: {fileID: 779790059}
     characterCount: 0
@@ -781,8 +782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54, y: 244}
-  m_SizeDelta: {x: 172.8081, y: 30.907959}
+  m_AnchoredPosition: {x: 138, y: 150.4}
+  m_SizeDelta: {x: 556.9527, y: 218.02371}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1389716552
 GameObject:
@@ -16484,9 +16485,9 @@ MonoBehaviour:
   playerOne: {fileID: 134955848}
   playerTwo: {fileID: 528252040}
   winningMessage: {fileID: 779790059}
-  canvas: {fileID: 1676098940}
-  player1: {fileID: 2320867615945591389}
-  player2: {fileID: 8840402053365516257}
+  winsToGame: 2
+  Onewins: 0
+  TwoWins: 0
 --- !u!4 &1765212513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2320867615666489494, guid: 430bbaf8965a1644f9c3899856c21a68,
@@ -17354,18 +17355,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 430bbaf8965a1644f9c3899856c21a68, type: 3}
---- !u!114 &2320867615945591389 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
-    type: 3}
-  m_PrefabInstance: {fileID: 2320867615945591388}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8840402053365516256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17455,15 +17444,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6bdec85815570c45ae24a863b08529c, type: 3}
---- !u!114 &8840402053365516257 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8840402053365516256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

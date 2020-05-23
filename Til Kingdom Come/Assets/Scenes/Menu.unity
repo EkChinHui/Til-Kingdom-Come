@@ -2861,7 +2861,7 @@ PrefabInstance:
     - target: {fileID: 512347310524473916, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 512347310524473916, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
@@ -2902,7 +2902,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1758722888}
+      objectReference: {fileID: 1758722890}
+    - target: {fileID: 512347310524473916, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: passWins
+      objectReference: {fileID: 0}
+    - target: {fileID: 512347310524473916, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1055406672615865124, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: menuButtonController
@@ -4535,7 +4545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1579407915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4656,7 +4666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1735506880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4734,6 +4744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1828693538}
+  wins: 1
   message: 'No. of Wins: '
 --- !u!224 &1765748921 stripped
 RectTransform:

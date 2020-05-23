@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,17 +11,15 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     public ScoreKeeper scoreKeeper;
 
-    [Header("Achivements")]
-    public int wins;
-    public int losses;
+
 
     private enum State { idle, run }
     private State state = State.idle;
 
     [Header("Movement")]
     public float runSpeed = 4f;
-    public float rollSpeed = 13f;
-    private float rollTime = 0.3f;
+    public float rollSpeed = 18f;
+    private float rollTime = 0.4f;
     public float rollDelay = 0.5f;
     public bool canRoll = true;
     public bool isActing = false;
@@ -237,14 +234,13 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        losses++;
         if (gameObject.tag == "Player1")
         {
-            scoreKeeper.updateWins(2);
+            ScoreKeeper.scoreKeeper.updateWins(2);
         }
         else if (gameObject.tag == "Player2")
         {
-            scoreKeeper.updateWins(1);
+            ScoreKeeper.scoreKeeper.updateWins(1);
         }
 
         // die animation

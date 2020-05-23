@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class AnimatorFunctions : MonoBehaviour
 {
-    [SerializeField] MenuButtonController menuButtonController;
+    //[SerializeField] MenuButtonController menuButtonController;
     public bool disableOnce;
 
+    /*
     void PlaySound(AudioClip sound)
     {
         if(!disableOnce)
@@ -18,4 +19,5 @@ public class AnimatorFunctions : MonoBehaviour
             disableOnce = false;
         }
     }
+    */
 }

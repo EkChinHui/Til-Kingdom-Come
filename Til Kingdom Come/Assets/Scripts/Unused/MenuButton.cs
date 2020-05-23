@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuButton : MonoBehaviour
 {
+    /*
     [SerializeField] MenuButtonController menuButtonController;
     [SerializeField] Animator animator;
     [SerializeField] int thisIndex;
@@ -34,4 +35,5 @@ public class MenuButton : MonoBehaviour
             animator.SetBool("selected", true);
         }
     }
+    */
 }

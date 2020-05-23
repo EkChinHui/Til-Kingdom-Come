@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class UpdateWins : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    public static int wins = 1;
+    public int wins = 1;
+    public static int player1Wins = 0;
+    public static int player2Wins = 0;
     public string message = "No. of Wins: ";
 
     private void Start()
@@ -27,5 +30,10 @@ public class UpdateWins : MonoBehaviour
             wins = 1;
         }
         text.text = message + wins;
+    }
+
+    public void passWins()
+    {
+        ScoreKeeper.winsToGame = wins;
     }
 }
