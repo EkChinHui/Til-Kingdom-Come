@@ -6,42 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class ScoreKeeper : MonoBehaviour
 {
-
     public TextMeshProUGUI playerOne;
     public TextMeshProUGUI playerTwo;
     public TextMeshProUGUI winningMessage;
+    public PlayerController player1;
+    public PlayerController player2;
+    public EndPanelController endPanel;
     [SerializeField] public static int winsToGame;
-    public int Onewins = 0;
-    public int TwoWins = 0;
-
-    public static ScoreKeeper scoreKeeper;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        // singleton
-        if (!scoreKeeper)
-        {
-            scoreKeeper = this;
-        } else
-        {
-            Destroy(gameObject);
-        }
     }
-
 
     public void updateWins(int player)
     {
         if (player == 1)
         {
-            ScoreKeeper.scoreKeeper.Onewins++;
-            ScoreKeeper.scoreKeeper.playerOne.text = "Player 1 Wins: " + ScoreKeeper.scoreKeeper.Onewins;
+            player1.Score++;
+            playerOne.text = "Player 1 Wins: " + player1.Score;
         } else if (player == 2)
         {
-            ScoreKeeper.scoreKeeper.TwoWins++;
-            ScoreKeeper.scoreKeeper.playerTwo.text = "Player 2 Wins: " + ScoreKeeper.scoreKeeper.TwoWins;
+            player2.Score++;
+            playerTwo.text = "Player 2 Wins: " + player2.Score;
         }
         // delay after game ends to let death animation play out
         Invoke("TerminateGame", 3);
@@ -49,22 +36,29 @@ public class ScoreKeeper : MonoBehaviour
 
     void TerminateGame()
     {
-        if (ScoreKeeper.scoreKeeper.Onewins >= winsToGame)
+        if (player1.Score >= winsToGame)
         {
             // player one wins
-            ScoreKeeper.scoreKeeper.winningMessage.text = "Player one won!!!";
-        } else if (ScoreKeeper.scoreKeeper.TwoWins >= winsToGame)
+            endPanel.endGame();
+            winningMessage.text = "Player one won!!!";
+        } else if (player2.Score >= winsToGame)
         {
             // player two wins
-            ScoreKeeper.scoreKeeper.winningMessage.text = "Player two won!!!";
+            endPanel.endGame();
+            winningMessage.text = "Player two won!!!";
         } else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ResetLevel();
         }
         // load option to either restart or go back to menu
     }
 
+    void ResetLevel()
+    {
+        player2.ResetPlayer();
+        player1.ResetPlayer();
 
+    }
 
 
 }

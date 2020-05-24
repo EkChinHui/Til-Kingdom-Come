@@ -227,9 +227,9 @@ MonoBehaviour:
   playerOne: {fileID: 134955848}
   playerTwo: {fileID: 528252040}
   winningMessage: {fileID: 779790059}
-  endPanelController: {fileID: 1110248374}
-  Onewins: 0
-  TwoWins: 0
+  player1: {fileID: 553354023}
+  player2: {fileID: 467533087}
+  endPanel: {fileID: 1110248374}
 --- !u!4 &133473154
 Transform:
   m_ObjectHideFlags: 0
@@ -694,6 +694,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89b11bf6b7c7be84494e9f2a4440be24, type: 3}
+--- !u!114 &467533087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8840402053365516256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1018,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 935581903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &553354023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
+    type: 3}
+  m_PrefabInstance: {fileID: 2320867615945591388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &699005607
 GameObject:
   m_ObjectHideFlags: 0

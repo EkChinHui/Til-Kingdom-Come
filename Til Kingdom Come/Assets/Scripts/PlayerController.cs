@@ -10,10 +10,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public ScoreKeeper scoreKeeper;
+    public int Score = 0;
 
-
-
-    private enum State { idle, run }
+    private enum State { idle, run , dead}
     private State state = State.idle;
 
     [Header("Movement")]
@@ -23,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float rollDelay = 0.5f;
     public bool canRoll = true;
     public bool isActing = false;
+    public Vector2 originalPos;
 
     [Header("Input")]
     // note to use getAxis for multiplayer mode so user can change their input
@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 1;
     private int currentHealth;
 
+    private void Awake()
+    {
+        originalPos = gameObject.transform.position;
+    }
+
     private void Start()
     {
         // Instantiate variables on creation
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         InputManager();
-        if (isActing)
+        if (isActing || state == State.dead)
         {
             // if player is already acting, prevent player from doing other moves
         }
@@ -236,15 +241,17 @@ public class PlayerController : MonoBehaviour
     {
         if (gameObject.tag == "Player1")
         {
-            ScoreKeeper.scoreKeeper.updateWins(2);
+            scoreKeeper.updateWins(2);
         }
         else if (gameObject.tag == "Player2")
         {
-            ScoreKeeper.scoreKeeper.updateWins(1);
+            scoreKeeper.updateWins(1);
         }
 
+        state = State.dead;
+
         // die animation
-        anim.SetTrigger("Dead");
+        anim.SetBool("Dead", true);
 
         // Disable sprite
         GetComponent<Collider2D>().enabled = false;
@@ -282,6 +289,23 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public void ResetPlayer()
+    {
+        anim.SetBool("Dead", false);
+        state = State.idle;
+        this.enabled = true;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().simulated = true;
+        gameObject.transform.position = originalPos;
+        if (gameObject.CompareTag("Player2"))
+        {
+            gameObject.transform.localScale = new Vector2(-1, 1);
+        } else if (gameObject.CompareTag("Player1"))
+        {
+            gameObject.transform.localScale = new Vector2(1, 1);
+        }
     }
 
 }
