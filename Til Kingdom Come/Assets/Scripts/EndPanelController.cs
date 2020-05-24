@@ -7,16 +7,11 @@ public class EndPanelController : MonoBehaviour
 {
     public string mainMenu = "Menu";
     public EndPanelController endPanel;
-    public RedVictoryScreenController redVictoryScreen;
-    public BlueVictoryScreenController blueVictoryScreen;
-    public void endGame(int player)
+
+
+    public void endGame()
     {
         endPanel.gameObject.SetActive(true);
-        if (player == 1) {
-            redVictoryScreen.gameObject.SetActive(true);
-        } else if (player == 2) {
-            blueVictoryScreen.gameObject.SetActive(true);
-        }
     }
 
     public void backToMainMenu()
