@@ -143,14 +143,10 @@ public class PlayerController : MonoBehaviour
         canRoll = false;
         isActing = true;
         runSpeed = rollSpeed;
-        GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().gravityScale = 0f;
         Move();
         yield return new WaitForSeconds(rollTime);
         runSpeed = 4f;
         isActing = false;
-        GetComponent<Collider2D>().enabled = true;
-        GetComponent<Rigidbody2D>().gravityScale = 3.01f;
         yield return new WaitForSeconds(rollDelay);
         canRoll = true;
     }
