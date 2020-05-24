@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,11 +16,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public float runSpeed = 4f;
-    public float rollSpeed = 18f;
-    private float rollTime = 0.4f;
-    public float rollDelay = 0.5f;
+    public float rollSpeed = 23f;
     public bool canRoll = true;
     public bool isActing = false;
+    public bool isSilenced = false;
     public Vector2 originalPos;
 
     [Header("Input")]
@@ -37,14 +35,21 @@ public class PlayerController : MonoBehaviour
     private bool attemptAttack = false;
     private bool attemptBlock = false;
 
+    private float attackAnim;
+    private float blockAnim;
+    private float rollAnim;
+    private float attackCooldown = 0.4f;
+    private float blockCooldown = 0.4f;
+    private float rollCooldown = 0.6f;
+    public float reactionDelay = 0.2f;
+
+
     [Header("Combat")]
     public Transform attackPoint;
     public float attackRange = 2.43f;
-    public float attackDelay = 0.5f;
-    public float blockDelay = 0.7f;
-    public float knockDist = 10f;
+    public float knockDistAttacking = 8f;
+    public float knockDistBlocking = 4f;
     public int damage = 1;
-    public float reactionDelay = 0.2f;
     // can only hit players in the enemy layer, figure out how this works in multiplayer
     public LayerMask enemylayers;
     private bool isAttacking = false;
@@ -65,8 +70,10 @@ public class PlayerController : MonoBehaviour
         // Instantiate variables on creation
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        UpdateAnimClipTimes();
         currentHealth = maxHealth;
         enemylayers = LayerMask.GetMask("Player2");
+        attackPoint = gameObject.transform.GetChild(0);
 
         // set keys for player 2 in local multiplayer test
         SetKeysEnemy();
@@ -78,6 +85,10 @@ public class PlayerController : MonoBehaviour
         if (isActing || state == State.dead)
         {
             // if player is already acting, prevent player from doing other moves
+            if (isActing && isSilenced)
+            {
+                Move();
+            }
         }
         else if (attemptAttack)
         {
@@ -90,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(BlockAnimDelay());
         }
-        else if (!isAttacking)
+        else
         {
             Move();
         }
@@ -99,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (attemptRoll && canRoll) 
+        if (attemptRoll && canRoll && !isSilenced) 
         {
             Roll();
         }
@@ -126,13 +137,11 @@ public class PlayerController : MonoBehaviour
         if (attemptRight)
         {
             StartCoroutine(rollAnimDelay());
-            anim.SetTrigger("Roll");
             transform.localScale = new Vector2(1, 1);
         }
         else if (attemptLeft)
         {
             StartCoroutine(rollAnimDelay());
-            anim.SetTrigger("Roll");
             transform.localScale = new Vector2(-1, 1);
         }
 
@@ -142,12 +151,15 @@ public class PlayerController : MonoBehaviour
     {
         canRoll = false;
         isActing = true;
+        anim.SetTrigger("Roll");
         runSpeed = rollSpeed;
         Move();
-        yield return new WaitForSeconds(rollTime);
+        yield return new WaitForSeconds(rollAnim);
         runSpeed = 4f;
+        isSilenced = true;
+        yield return new WaitForSeconds(rollCooldown);
+        isSilenced = false;
         isActing = false;
-        yield return new WaitForSeconds(rollDelay);
         canRoll = true;
     }
 
@@ -168,9 +180,12 @@ public class PlayerController : MonoBehaviour
                 if (otherPlayer.isShieldUp() && (enemyDirection != myDirection))
                 {
                     // otherplayer succesfully defends against attack\
-                    this.knockBack();
-                    //otherPlayer.knockBack();
+                    this.knockBack(knockDistAttacking);
+                    otherPlayer.knockBack(knockDistBlocking);
 
+                } else if (!otherPlayer.canRoll)
+                {
+                    // the enemy is rolling and is invulnerable;
                 }
                 else 
                 {
@@ -186,9 +201,12 @@ public class PlayerController : MonoBehaviour
         isActing = true;
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(reactionDelay);
-        Attack(); 
         isAttacking = true;
-        yield return new WaitForSeconds(attackDelay);
+        Attack();
+        yield return new WaitForSeconds(attackAnim - reactionDelay);
+        isSilenced = true;
+        yield return new WaitForSeconds(attackCooldown);
+        isSilenced = false;
         isActing = false;
         isAttacking = false;
     }
@@ -198,8 +216,11 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Block");
         isBlocking = true;
         isActing = true;
-        yield return new WaitForSeconds(blockDelay);
+        yield return new WaitForSeconds(blockAnim);
+        isSilenced = true;
         isBlocking = false;
+        yield return new WaitForSeconds(blockCooldown);
+        isSilenced = false;
         isActing = false;
     }
 
@@ -208,14 +229,14 @@ public class PlayerController : MonoBehaviour
         return isBlocking;
     }
 
-    public void knockBack()
+    public void knockBack(float distance)
     {
         if (transform.localScale.x < 0)
         {
-            rb.velocity = new Vector2(knockDist, rb.velocity.y);
+            rb.velocity = new Vector2(distance, rb.velocity.y);
         } else
         {
-            rb.velocity = new Vector2(-knockDist, rb.velocity.y);
+            rb.velocity = new Vector2(-distance, rb.velocity.y);
         }
 
     }
@@ -301,6 +322,27 @@ public class PlayerController : MonoBehaviour
         } else if (gameObject.CompareTag("Player1"))
         {
             gameObject.transform.localScale = new Vector2(1, 1);
+        }
+    }
+
+    public void UpdateAnimClipTimes()
+    {
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        float cutshort = 0f;
+        foreach(AnimationClip clip in clips)
+        {
+            switch(clip.name)
+            {
+                case "Attack":
+                    attackAnim = clip.length - cutshort;
+                    break;
+                case "Block":
+                    blockAnim = clip.length - cutshort;
+                    break;
+                case "Roll":
+                    rollAnim = clip.length - cutshort;
+                    break;
+            }
         }
     }
 

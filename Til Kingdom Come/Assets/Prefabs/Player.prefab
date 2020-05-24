@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3924868170608288324}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &2320867616202855604
 Rigidbody2D:
   serializedVersion: 4
@@ -150,16 +150,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreKeeper: {fileID: 0}
+  Score: 0
   runSpeed: 4
-  rollSpeed: 13
+  rollSpeed: 25
   rollDelay: 0.5
   canRoll: 1
   isActing: 0
+  originalPos: {x: 0, y: 0}
   attackPoint: {fileID: 2320867615666489494}
   attackRange: 2.43
-  attackDelay: 0.6
+  attackDelay: 0.5
   blockDelay: 0.7
-  knockDist: 10
+  knockDistAttacking: 8
+  knockDistBlocking: 4
   damage: 1
   reactionDelay: 0.2
   enemylayers:
@@ -198,6 +202,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.61170566, y: 1.660444}
-  m_Size: {x: 1.442508, y: 3.3410497}
+  m_Offset: {x: -0.11746538, y: 1.660444}
+  m_Size: {x: 1.3640568, y: 3.3410497}
   m_Direction: 0
