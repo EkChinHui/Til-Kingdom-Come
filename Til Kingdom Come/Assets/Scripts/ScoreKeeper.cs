@@ -8,7 +8,6 @@ public class ScoreKeeper : MonoBehaviour
 {
     public TextMeshProUGUI playerOne;
     public TextMeshProUGUI playerTwo;
-    public TextMeshProUGUI winningMessage;
     public PlayerController player1;
     public PlayerController player2;
     public EndPanelController endPanel;
@@ -39,13 +38,11 @@ public class ScoreKeeper : MonoBehaviour
         if (player1.Score >= winsToGame)
         {
             // player one wins
-            winningMessage.text = "Player one won!!!";
-            endPanel.endGame();
+            endPanel.endGame(1);
         } else if (player2.Score >= winsToGame)
         {
             // player two wins
-            winningMessage.text = "Player two won!!!";
-            endPanel.endGame();
+            endPanel.endGame(2);
         } else
         {
             ResetLevel();
