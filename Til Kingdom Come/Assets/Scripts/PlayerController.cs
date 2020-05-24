@@ -168,7 +168,8 @@ public class PlayerController : MonoBehaviour
     {
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemylayers);
-
+        // maximum distance between both players for attack to be successful
+        float attackDistance = 1.934f + attackRange;
         // Damage enemies
         foreach(Collider2D enemy in hitEnemies)
         {
@@ -183,12 +184,18 @@ public class PlayerController : MonoBehaviour
                     this.knockBack(knockDistAttacking);
                     otherPlayer.knockBack(knockDistBlocking);
 
-                } else if (!otherPlayer.canRoll)
+                }
+                else if (!otherPlayer.canRoll)
                 {
                     // the enemy is rolling and is invulnerable;
                 }
+                else if (otherPlayer.isAttacking && (Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance))
+                {
+                    // the enemy attacked first and is in range
+                }
                 else 
                 {
+                    print(Mathf.Abs(otherPlayer.transform.position.x - transform.position.x));
                     enemy.GetComponent<PlayerController>().TakeDamage(damage);
                 }
             

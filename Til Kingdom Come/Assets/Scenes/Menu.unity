@@ -3422,6 +3422,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 604571a0ba7ea4776b2fdab638cee1bd,
         type: 3}
+    - target: {fileID: 7248637937353427696, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.54901963
+      objectReference: {fileID: 0}
     - target: {fileID: 7940381341439645905, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4931,6 +4936,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 75.00038
       objectReference: {fileID: 0}
+    - target: {fileID: 4257573321596999746, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.4117647
+      objectReference: {fileID: 0}
     - target: {fileID: 5050401702039035802, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4989,12 +4999,12 @@ PrefabInstance:
     - target: {fileID: 5050401702039035802, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -789
+      value: -810
       objectReference: {fileID: 0}
     - target: {fileID: 5050401702039035802, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -465
+      value: -500.47995
       objectReference: {fileID: 0}
     - target: {fileID: 5050401702039035802, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
@@ -5091,15 +5101,45 @@ PrefabInstance:
       propertyPath: m_margin.x
       value: -22.196045
       objectReference: {fileID: 0}
+    - target: {fileID: 5813462389843825102, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813462389843825102, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813462389843825102, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 49.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813462389843825102, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 49.999992
+      objectReference: {fileID: 0}
     - target: {fileID: 5852969321008324519, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -55.27
       objectReference: {fileID: 0}
     - target: {fileID: 5852969321008324519, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 278.22446
+      value: 42.453224
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852969321008324519, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852969321008324519, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 38.887543
       objectReference: {fileID: 0}
     - target: {fileID: 6579186871510413883, guid: 89b11bf6b7c7be84494e9f2a4440be24,
         type: 3}
@@ -5110,6 +5150,17 @@ PrefabInstance:
         type: 3}
       propertyPath: menuButtonController
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248637937353427696, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c9a018101b67a4b798f192a27e68f535,
+        type: 3}
+    - target: {fileID: 7248637937353427696, guid: 89b11bf6b7c7be84494e9f2a4440be24,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.54901963
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89b11bf6b7c7be84494e9f2a4440be24, type: 3}
