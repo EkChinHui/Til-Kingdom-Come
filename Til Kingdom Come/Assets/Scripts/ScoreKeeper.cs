@@ -12,7 +12,7 @@ public class ScoreKeeper : MonoBehaviour
     public PlayerController player1;
     public PlayerController player2;
     public EndPanelController endPanel;
-    [SerializeField] public static int winsToGame;
+    [SerializeField] public static int winsToGame = 1;
 
 
     public void Start()
@@ -39,13 +39,13 @@ public class ScoreKeeper : MonoBehaviour
         if (player1.Score >= winsToGame)
         {
             // player one wins
-            endPanel.endGame();
             winningMessage.text = "Player one won!!!";
+            endPanel.endGame();
         } else if (player2.Score >= winsToGame)
         {
             // player two wins
-            endPanel.endGame();
             winningMessage.text = "Player two won!!!";
+            endPanel.endGame();
         } else
         {
             ResetLevel();
