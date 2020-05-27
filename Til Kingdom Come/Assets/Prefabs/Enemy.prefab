@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344005416236044243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.27, y: -2.99, z: 0}
+  m_LocalPosition: {x: 10.05, y: -2.94, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 344005415831873746}
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -4442082563870626902, guid: e066387abb91b304694fb0b756b34dbb,
     type: 3}
-  m_Color: {r: 0.31132078, g: 0.3098523, b: 0.3098523, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,9 +130,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1.2
   m_AngularDrag: 0.05
-  m_GravityScale: 3.01
+  m_GravityScale: 3.4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -153,19 +153,17 @@ MonoBehaviour:
   scoreKeeper: {fileID: 0}
   Score: 0
   runSpeed: 4
-  rollSpeed: 25
-  rollDelay: 0.5
+  rollSpeed: 23
   canRoll: 1
   isActing: 0
+  isSilenced: 0
   originalPos: {x: 0, y: 0}
+  reactionDelay: 0.2
   attackPoint: {fileID: 344005415831873746}
   attackRange: 2.43
-  attackDelay: 0.5
-  blockDelay: 0.7
   knockDistAttacking: 8
   knockDistBlocking: 4
   damage: 1
-  reactionDelay: 0.2
   enemylayers:
     serializedVersion: 2
     m_Bits: 0
