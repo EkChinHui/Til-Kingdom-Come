@@ -5,7 +5,7 @@ using UnityEngine;
 public class FarCloudMovement : MonoBehaviour
 {
     RectTransform rectTransform;
-    float speed = -50f;
+    float speed = -25f;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();

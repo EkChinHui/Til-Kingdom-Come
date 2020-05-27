@@ -195,7 +195,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else 
                 {
-                    print(Mathf.Abs(otherPlayer.transform.position.x - transform.position.x));
                     enemy.GetComponent<PlayerController>().TakeDamage(damage);
                 }
             

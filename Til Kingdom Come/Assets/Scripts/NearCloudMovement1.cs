@@ -5,7 +5,7 @@ using UnityEngine;
 public class NearCloudMovement1 : MonoBehaviour
 {
     RectTransform rectTransform;
-    float speed = -100f;
+    float speed = -40f;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();

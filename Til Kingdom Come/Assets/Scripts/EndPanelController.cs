@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndPanelController : MonoBehaviour
 {
-    public string mainMenu = "Menu";
+    public string mainMenu = "Main Menu";
     public EndPanelController endPanel;
     public RedVictoryScreenController redVictoryScreen;
     public BlueVictoryScreenController blueVictoryScreen;
