@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapChanger : MonoBehaviour
 {
     [Header("Sprite to change")]
-    public SpriteRenderer spriteRenderer;
+    public Image image;
 
     [Header("Sprites to cycle through")]
     public List<Sprite> sprites = new List<Sprite>();
@@ -18,7 +19,7 @@ public class MapChanger : MonoBehaviour
         {
             current = 0;
         }
-        spriteRenderer.sprite = sprites[current];
+        image.sprite = sprites[current];
     }
 
     public void PreviousOption()
@@ -28,7 +29,7 @@ public class MapChanger : MonoBehaviour
         {
             current = sprites.Count - 1;
         }
-        spriteRenderer.sprite = sprites[current];
+        image.sprite = sprites[current];
     }
 
 
