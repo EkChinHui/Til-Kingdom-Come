@@ -10,9 +10,6 @@ public class MapLoader : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     void Start()
     {
-
-
-        Debug.Log(MapToLoad);
         foreach (Transform child in transform)
         {
             if(child.gameObject.name == MapToLoad)

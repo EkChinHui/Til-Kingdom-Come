@@ -35,8 +35,6 @@ public class UpdateWins : MonoBehaviour
     public void passWins()
     {
         MapLoader.MapToLoad = "Map" + (MapChanger.current + 1);
-        Debug.Log(MapChanger.current);
-        Debug.Log(MapLoader.MapToLoad);
         ScoreKeeper.winsToGame = wins;
     }
 }
