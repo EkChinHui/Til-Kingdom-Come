@@ -10,7 +10,7 @@ public class MapChanger : MonoBehaviour
 
     [Header("Sprites to cycle through")]
     public List<Sprite> sprites = new List<Sprite>();
-    public int current = 0;
+    public static int current = 0;
 
     public void NextOption()
     {
