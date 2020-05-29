@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] public string mapToLoad;
+    public string scene;
 
     public void LoadMap()
     {
-        SceneManager.LoadScene(mapToLoad);
+        SceneManager.LoadScene(scene);
     }
 
     public void ReloadScene()

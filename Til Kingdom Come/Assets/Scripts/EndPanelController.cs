@@ -19,12 +19,6 @@ public class EndPanelController : MonoBehaviour
         }
     }
 
-    public void backToMainMenu()
-    {
-        //endPanel.gameObject.SetActive(false);
-        SceneManager.LoadScene(mainMenu);
-    }
-
 
     public void ReloadGame()
     {

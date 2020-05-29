@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapToLoad: Main Menu
+  scene: Main Menu
 --- !u!1 &1707539841
 GameObject:
   m_ObjectHideFlags: 0
