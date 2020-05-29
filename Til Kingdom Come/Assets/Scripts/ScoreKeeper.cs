@@ -23,11 +23,11 @@ public class ScoreKeeper : MonoBehaviour
         if (player == 1)
         {
             player1.Score++;
-            playerOne.text = "Player 1 Wins: " + player1.Score;
+            playerOne.text = "Player 1 wins: " + player1.Score;
         } else if (player == 2)
         {
             player2.Score++;
-            playerTwo.text = "Player 2 Wins: " + player2.Score;
+            playerTwo.text = "Player 2 wins: " + player2.Score;
         }
         // delay after game ends to let death animation play out
         Invoke("TerminateGame", 3);
