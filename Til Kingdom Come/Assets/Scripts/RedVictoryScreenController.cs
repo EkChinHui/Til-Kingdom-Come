@@ -6,6 +6,7 @@ public class RedVictoryScreenController : MonoBehaviour
 {
     RectTransform rectTransform;
     float speed = 500f;
+    float endPoint = 50f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class RedVictoryScreenController : MonoBehaviour
         lower();
     }
     public void lower() {
-        if(rectTransform.anchoredPosition.y > 0) {
+        if(rectTransform.anchoredPosition.y > endPoint) {
             rectTransform.anchoredPosition -= new Vector2(0, Time.deltaTime * speed);
         }
     }

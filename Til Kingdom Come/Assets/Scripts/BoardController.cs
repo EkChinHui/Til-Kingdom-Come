@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueVictoryScreenController : MonoBehaviour
+public class BoardController : MonoBehaviour
 {
+    // Start is called before the first frame update
     RectTransform rectTransform;
     float speed = 500f;
-    float endPoint = 50f;
+    float endPoint = -50f;
     // Start is called before the first frame update
     void Start()
     {
