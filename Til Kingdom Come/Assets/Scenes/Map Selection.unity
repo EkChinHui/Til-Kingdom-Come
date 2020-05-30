@@ -601,7 +601,7 @@ MonoBehaviour:
   image: {fileID: 1050783410}
   sprites:
   - {fileID: 21300000, guid: f1114e8bf974abb4e904b216309a0d55, type: 3}
-  - {fileID: 21300000, guid: 3c136aa50053e57408e32d68c1c3ead6, type: 3}
+  - {fileID: 21300000, guid: 6ea8eeb58b8f64ce18058262bf7d0cd2, type: 3}
 --- !u!114 &1043045036 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3245617222476765513, guid: a5453337206284c69af3a7a4ae352036,
