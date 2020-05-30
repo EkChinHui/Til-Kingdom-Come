@@ -600,8 +600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1050783410}
   sprites:
-  - {fileID: 21300000, guid: 6c426a2106b47de4e92dd0883ca7286e, type: 3}
-  - {fileID: 21300000, guid: a14446e234d3a1e47aab304d33c42b4a, type: 3}
+  - {fileID: 21300000, guid: f1114e8bf974abb4e904b216309a0d55, type: 3}
+  - {fileID: 21300000, guid: 3c136aa50053e57408e32d68c1c3ead6, type: 3}
 --- !u!114 &1043045036 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3245617222476765513, guid: a5453337206284c69af3a7a4ae352036,
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6c426a2106b47de4e92dd0883ca7286e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1114e8bf974abb4e904b216309a0d55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

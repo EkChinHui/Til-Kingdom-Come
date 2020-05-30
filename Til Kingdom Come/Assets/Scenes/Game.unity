@@ -748,7 +748,7 @@ MonoBehaviour:
   offset: {x: 0, y: 4.5, z: -1}
   smoothTime: 0.5
   minZoom: 13
-  maxZoom: 5
+  maxZoom: 7
   zoomLimiter: 50
 --- !u!20 &519420031
 Camera:
@@ -823,7 +823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &527717229
 Grid:
   m_ObjectHideFlags: 0
