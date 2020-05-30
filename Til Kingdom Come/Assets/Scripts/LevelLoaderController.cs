@@ -7,7 +7,7 @@ public class LevelLoaderController : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    public string sceneName = "Map Selection";
+    [SerializeField] public string sceneName;
     public void LoadLevel(string sceneName) {
         StartCoroutine(Helper(sceneName));
     }
