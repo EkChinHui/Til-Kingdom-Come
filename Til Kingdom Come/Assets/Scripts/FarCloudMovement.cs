@@ -15,7 +15,7 @@ public class FarCloudMovement : MonoBehaviour
     {
         //update the position
         if (rectTransform.anchoredPosition.x <= -1920) {
-            rectTransform.anchoredPosition = new Vector2(1920, 0);
+            rectTransform.anchoredPosition = new Vector2(1920, rectTransform.anchoredPosition.y);
         }
 
         rectTransform.anchoredPosition += new Vector2(Time.deltaTime * speed, 0);
