@@ -54,7 +54,6 @@ public class ScoreKeeper : MonoBehaviour
     {
         player2.ResetPlayer();
         player1.ResetPlayer();
-
     }
 
 

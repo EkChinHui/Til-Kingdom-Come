@@ -12,6 +12,10 @@ public class MapChanger : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>();
     public static int current = 0;
 
+    public void Start() {
+        current = 0;
+    }
+
     public void NextOption()
     {
         current++;

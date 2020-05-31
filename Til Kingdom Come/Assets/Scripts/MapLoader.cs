@@ -10,19 +10,17 @@ public class MapLoader : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     void Start()
     {
+        print(MapToLoad);
         foreach (Transform child in transform)
         {
             if(child.gameObject.name == MapToLoad)
             {
                 child.gameObject.SetActive(true);
             }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
-
-    private void Awake()
-    {
-        
-    }
-
-
 }

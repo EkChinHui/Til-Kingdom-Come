@@ -11,7 +11,6 @@ public class BlueVictoryScreenController : MonoBehaviour
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        print(rectTransform.anchoredPosition);
     }
     
     void Update() {
