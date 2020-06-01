@@ -578,7 +578,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1908496485}
-  - component: {fileID: 667606628}
   m_Layer: 5
   m_Name: Setting Button
   m_TagString: Untagged
@@ -586,19 +585,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &667606628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667606627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Settings
 --- !u!1 &687123969
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +669,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 477211644}
-  - component: {fileID: 932407313}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -691,19 +676,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &932407313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932407312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Map Selection
 --- !u!1 &967830576
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +779,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632499932}
-  - component: {fileID: 1000054115}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -815,19 +786,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1000054115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000054114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: 
 --- !u!1 &1152183865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +1901,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921845624}
-  - component: {fileID: 1839065167}
   m_Layer: 5
   m_Name: Control Button
   m_TagString: Untagged
@@ -1951,19 +1908,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1839065167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839065166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Controls
 --- !u!224 &1908496485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2256,7 +2200,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1000054115}
+      - m_Target: {fileID: 1371258220}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
