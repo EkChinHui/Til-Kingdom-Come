@@ -6,63 +6,70 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("fields")]
-    private Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     private Animator anim;
     public ScoreKeeper scoreKeeper;
     public int Score = 0;
+    public Skill skill;
+    public PlayerController otherPlayer;
 
-    private enum State { idle, run , dead}
+    private enum State { idle, run, dead}
     private State state = State.idle;
 
     [Header("Movement")]
     public float runSpeed = 4f;
     public float rollSpeed = 23f;
-    public bool canRoll = true;
-    public bool isActing = false;
-    public bool isSilenced = false;
-    public Vector2 originalPos;
+    private bool canRoll = true;
+    [HideInInspector] public bool isActing = false;
+    private bool isSilenced = false;
+    private Vector2 originalPos;
 
     [Header("Input")]
     // note to use getAxis for multiplayer mode so user can change their input
-    private string left = "a";
-    private string right = "d";
-    private string down = "s";
-    private string block = ".";
-    private string attack = "/";
+    private string leftKey = "left";
+    private string rightKey = "right";
+    private string rollKey = "down";
+    private string blockKey = ".";
+    private string attackKey = "/";
+    private string skillKey = ",";
     private bool attemptLeft = false;
     private bool attemptRight = false;
     private bool attemptRoll = false;
     private bool attemptAttack = false;
     private bool attemptBlock = false;
+    private bool attemptSkill = false;
 
     private float attackAnim;
     private float blockAnim;
     private float rollAnim;
     private float attackCooldown = 0.4f;
+    private float reactionDelay = 0.2f;
     private float blockCooldown = 0.4f;
     private float rollCooldown = 0.6f;
-    public float reactionDelay = 0.2f;
+  
 
 
     [Header("Combat")]
     public Transform attackPoint;
     public float attackRange = 2.43f;
-    public float knockDistAttacking = 8f;
-    public float knockDistBlocking = 4f;
-    public int damage = 1;
+    private float knockDistAttacking = 8f;
+    private float knockDistBlocking = 4f;
+    private int damage = 1;
     // can only hit players in the enemy layer, figure out how this works in multiplayer
-    public LayerMask enemylayers;
+    private LayerMask enemylayers;
     private bool isAttacking = false;
     private bool isBlocking = false;
 
     [Header("Health")]
     // Health system to make it convenient to change
-    public int maxHealth = 1;
+    private int maxHealth = 1;
     private int currentHealth;
 
     private void Awake()
     {
+        // remember the original position of the players so match can be reset
         originalPos = gameObject.transform.position;
+        
     }
 
     private void Start()
@@ -74,9 +81,10 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         enemylayers = LayerMask.GetMask("Player2");
         attackPoint = gameObject.transform.GetChild(0);
+        skill = GetComponent<Skill>();
 
         // set keys for player 2 in local multiplayer test
-        SetKeysEnemy();
+        SetKeysPlayer2();
     }
 
     public void Update()
@@ -89,6 +97,10 @@ public class PlayerController : MonoBehaviour
             {
                 Move();
             }
+        }else if (attemptSkill)
+        {
+            skill.Cast(this, otherPlayer);
+            anim.SetTrigger(skill.SkillName);
         }
         else if (attemptAttack)
         {
@@ -105,7 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-        anim.SetInteger("state", (int)state);
+        anim.SetInteger("state", (int) state);
     }
 
     private void Move()
@@ -180,14 +192,14 @@ public class PlayerController : MonoBehaviour
                 float myDirection = transform.localScale.x;
                 if (otherPlayer.isShieldUp() && (enemyDirection != myDirection))
                 {
-                    // otherplayer succesfully defends against attack\
+                    // otherplayer succesfully defends against attack
                     this.knockBack(knockDistAttacking);
                     otherPlayer.knockBack(knockDistBlocking);
 
                 }
                 else if (!otherPlayer.canRoll)
                 {
-                    // the enemy is rolling and is invulnerable;
+                    // the enemy is rolling and is invulnerable
                 }
                 else if (otherPlayer.isAttacking && (Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance))
                 {
@@ -206,6 +218,7 @@ public class PlayerController : MonoBehaviour
     {
         isActing = true;
         anim.SetTrigger("Attack");
+        // reaction delay to allow opponent to react
         yield return new WaitForSeconds(reactionDelay);
         isAttacking = true;
         Attack();
@@ -284,22 +297,24 @@ public class PlayerController : MonoBehaviour
 
     private void InputManager()
     {
-        attemptLeft = Input.GetKey(left);
-        attemptRight = Input.GetKey(right);
-        attemptRoll = Input.GetKeyDown(down);
-        attemptAttack = Input.GetKeyDown(attack);
-        attemptBlock = Input.GetKeyDown(block);
+        attemptLeft = Input.GetKey(leftKey);
+        attemptRight = Input.GetKey(rightKey);
+        attemptRoll = Input.GetKeyDown(rollKey);
+        attemptAttack = Input.GetKeyDown(attackKey);
+        attemptBlock = Input.GetKeyDown(blockKey);
+        attemptSkill = Input.GetKeyDown(skillKey);
     }
 
-    private void SetKeysEnemy()
+    private void SetKeysPlayer2()
     {
         if (gameObject.tag == "Player2")
         {
-            left = "left";
-            right = "right";
-            down = "down";
-            attack = "]";
-            block = "\\";
+            leftKey = "a";
+            rightKey = "d";
+            rollKey = "s";
+            attackKey = "f";
+            blockKey = "g";
+            skillKey = "h";
             enemylayers = LayerMask.GetMask("Player1");
         } 
     }
@@ -331,22 +346,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // updates animation times
     public void UpdateAnimClipTimes()
     {
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
-        float cutshort = 0f;
         foreach(AnimationClip clip in clips)
         {
             switch(clip.name)
             {
                 case "Attack":
-                    attackAnim = clip.length - cutshort;
+                    attackAnim = clip.length;
                     break;
                 case "Block":
-                    blockAnim = clip.length - cutshort;
+                    blockAnim = clip.length;
                     break;
                 case "Roll":
-                    rollAnim = clip.length - cutshort;
+                    rollAnim = clip.length;
                     break;
             }
         }

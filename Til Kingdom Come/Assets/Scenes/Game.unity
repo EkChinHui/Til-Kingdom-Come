@@ -33411,6 +33411,11 @@ PrefabInstance:
       propertyPath: scoreKeeper
       value: 
       objectReference: {fileID: 133473152}
+    - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
+        type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 344005416236044243, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_Name
@@ -33558,6 +33563,11 @@ PrefabInstance:
       propertyPath: scoreKeeper
       value: 
       objectReference: {fileID: 133473152}
+    - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
+        type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855604, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_LinearDrag
@@ -34093,7 +34103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5050401701607275665}
-  - component: {fileID: 6579186871875555633}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -34101,19 +34110,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6579186871875555633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6579186871875555632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66eb75eeb7494844ca9278a9e603983c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Main Menu
 --- !u!1 &6579186872336607988
 GameObject:
   m_ObjectHideFlags: 0
