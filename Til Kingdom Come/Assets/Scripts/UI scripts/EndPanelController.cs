@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class EndPanelController : MonoBehaviour
 {
-    public string mainMenu = "Main Menu";
     public EndPanelController endPanel;
     public RedVictoryScreenController redVictoryScreen;
     public BlueVictoryScreenController blueVictoryScreen;
@@ -19,10 +18,9 @@ public class EndPanelController : MonoBehaviour
         }
     }
 
-
+    // called with the restart button
     public void ReloadGame()
     {
-        //endPanel.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

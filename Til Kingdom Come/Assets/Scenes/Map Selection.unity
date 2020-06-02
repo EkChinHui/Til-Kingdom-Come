@@ -811,7 +811,7 @@ RectTransform:
   m_GameObject: {fileID: 1050783409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.74, y: 0.74, z: 1}
   m_Children: []
   m_Father: {fileID: 250459442}
   m_RootOrder: 2
@@ -1103,6 +1103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level Loader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453650798890808343, guid: a5453337206284c69af3a7a4ae352036,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5453337206284c69af3a7a4ae352036, type: 3}

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static int totalPlayers = 0;
+
     [Header("fields")]
     [HideInInspector] public Rigidbody2D rb;
     private Animator anim;
@@ -12,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public int Score = 0;
     public Skill skill;
     public PlayerController otherPlayer;
+    public int playerNo;
+    
 
     private enum State { idle, run, dead}
     private State state = State.idle;
@@ -26,12 +32,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Input")]
     // note to use getAxis for multiplayer mode so user can change their input
-    private string leftKey = "left";
-    private string rightKey = "right";
-    private string rollKey = "down";
-    private string blockKey = ".";
-    private string attackKey = "/";
-    private string skillKey = ",";
+    public KeyCode leftKey;
+    public KeyCode rightKey;
+    public KeyCode rollKey;
+    public KeyCode blockKey;
+    public KeyCode attackKey;
+    public KeyCode skillKey;
     private bool attemptLeft = false;
     private bool attemptRight = false;
     private bool attemptRoll = false;
@@ -55,7 +61,6 @@ public class PlayerController : MonoBehaviour
     private float knockDistAttacking = 8f;
     private float knockDistBlocking = 4f;
     private int damage = 1;
-    // can only hit players in the enemy layer, figure out how this works in multiplayer
     private LayerMask enemylayers;
     private bool isAttacking = false;
     private bool isBlocking = false;
@@ -69,7 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         // remember the original position of the players so match can be reset
         originalPos = gameObject.transform.position;
-        
+        PlayerController.totalPlayers = 0;
+
     }
 
     private void Start()
@@ -79,12 +85,11 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         UpdateAnimClipTimes();
         currentHealth = maxHealth;
-        enemylayers = LayerMask.GetMask("Player2");
+        enemylayers = LayerMask.GetMask("Player");
         attackPoint = gameObject.transform.GetChild(0);
         skill = GetComponent<Skill>();
-
-        // set keys for player 2 in local multiplayer test
-        SetKeysPlayer2();
+        totalPlayers++;
+        playerNo = totalPlayers;
     }
 
     public void Update()
@@ -275,14 +280,9 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        if (gameObject.tag == "Player1")
-        {
-            scoreKeeper.updateWins(2);
-        }
-        else if (gameObject.tag == "Player2")
-        {
-            scoreKeeper.updateWins(1);
-        }
+        Debug.Log(scoreKeeper);
+        Debug.Log(playerNo);
+        scoreKeeper.updateWins(playerNo);
 
         state = State.dead;
 
@@ -305,11 +305,12 @@ public class PlayerController : MonoBehaviour
         attemptSkill = Input.GetKeyDown(skillKey);
     }
 
+    /*
     private void SetKeysPlayer2()
     {
         if (gameObject.tag == "Player2")
         {
-            leftKey = "a";
+            leftKey= "a";
             rightKey = "d";
             rollKey = "s";
             attackKey = "f";
@@ -318,6 +319,7 @@ public class PlayerController : MonoBehaviour
             enemylayers = LayerMask.GetMask("Player1");
         } 
     }
+    */
 
     // draws wireframe for attack point to make it easier to set attack range
     private void OnDrawGizmosSelected()
