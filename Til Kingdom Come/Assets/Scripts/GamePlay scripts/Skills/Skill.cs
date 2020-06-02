@@ -10,6 +10,7 @@ public abstract class Skill : MonoBehaviour
 
     public string SkillName { get { return skillName; } }
 
+
     public abstract void Cast(PlayerController player, PlayerController opponent);
 
 }
