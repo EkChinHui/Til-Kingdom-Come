@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
         enemylayers = LayerMask.GetMask("Player");
         attackPoint = gameObject.transform.GetChild(0);
         skill = GetComponent<Skill>();
+
         totalPlayers++;
         playerNo = totalPlayers;
     }
@@ -127,20 +128,27 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (attemptRoll && canRoll && !isSilenced) 
+        if (attemptRoll && canRoll && !isSilenced)
         {
             Roll();
         }
         else if (attemptRight)
         {
             rb.velocity = new Vector2(runSpeed, rb.velocity.y);
-            transform.localScale = new Vector2(1, 1);
+            if (transform.rotation.y != 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
             state = State.run;
         }
         else if (attemptLeft)
         {
             rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
-            transform.localScale = new Vector2(-1, 1);
+            if (transform.rotation.y == 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+            }
             state = State.run;
         }
         else
@@ -154,12 +162,18 @@ public class PlayerController : MonoBehaviour
         if (attemptRight)
         {
             StartCoroutine(rollAnimDelay());
-            transform.localScale = new Vector2(1, 1);
+            if (transform.rotation.y != 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         else if (attemptLeft)
         {
             StartCoroutine(rollAnimDelay());
-            transform.localScale = new Vector2(-1, 1);
+            if (transform.rotation.y == 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+            }
         }
 
     }

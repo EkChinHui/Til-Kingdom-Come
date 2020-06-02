@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class KnifeProjectile : MonoBehaviour
 {
-    public float speed;
-    public float lifeTime;
-    public float distance;
+    public Rigidbody2D rb;
+    public float speed = 15f;
+    public int damage = 1;
+    public float lifeTime = 3;
     public LayerMask collide;
 
     private void Start()
@@ -17,16 +18,27 @@ public class KnifeProjectile : MonoBehaviour
 
     private void Update()
     {
+        rb.velocity = transform.right * speed;
+    }
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, collide);
-        if (hitInfo.collider != null)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 10)
         {
-            if(hitInfo.collider.CompareTag("Player"))
+            PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
+            if (damagedPlayer != null) 
             {
-                DestroyProjectile();
+                if (damagedPlayer.isShieldUp())
+                {
+                    DestroyProjectile();
+                } else
+                {
+                    damagedPlayer.TakeDamage(damage);
+                    DestroyProjectile();
+                }
+                
             }
         }
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
     void DestroyProjectile()
