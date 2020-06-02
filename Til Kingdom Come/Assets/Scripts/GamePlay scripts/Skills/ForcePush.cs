@@ -16,17 +16,9 @@ public class ForcePush : Skill
 
     public override void Cast(PlayerController player, PlayerController opponent)
     {
-        Debug.Log("Pulls enemy");
-        //PlayerController otherPlayer = GetComponent<PlayerController>();
-        float enemyDirection = opponent.transform.localScale.x;
-        float myDirection = player.transform.localScale.x;
         Vector2 enemyVelocity = opponent.rb.velocity;
-        if (enemyDirection != myDirection)
-        {
-            opponent.knockBack(pushDistance);
-            StartCoroutine(stun(opponent));
-        }
-       
+        opponent.knockBack(-pushDistance);
+        StartCoroutine(stun(opponent));
     }
 
     public IEnumerator stun(PlayerController opponent)

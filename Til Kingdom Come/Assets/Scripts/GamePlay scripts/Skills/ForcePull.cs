@@ -16,16 +16,10 @@ public class ForcePull : Skill
 
     public override void Cast(PlayerController player, PlayerController opponent)
     {
-        Debug.Log("Pulls enemy");
-        //PlayerController otherPlayer = GetComponent<PlayerController>();
-        float enemyDirection = opponent.transform.localScale.x;
-        float myDirection = player.transform.localScale.x;
+
         Vector2 enemyVelocity = opponent.rb.velocity;
-        if (enemyDirection != myDirection)
-        {
-            opponent.knockBack(-pullDistance);
+            opponent.knockBack(pullDistance);
             StartCoroutine(stun(opponent));
-        }
        
     }
 
