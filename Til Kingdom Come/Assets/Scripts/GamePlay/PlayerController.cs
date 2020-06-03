@@ -11,7 +11,7 @@ namespace GamePlay
 
         [Header("fields")]
         [HideInInspector] public Rigidbody2D rb;
-        private Animator anim;
+        public Animator anim;
         public ScoreKeeper scoreKeeper;
         public int score;
         public Skill skill;
@@ -75,7 +75,7 @@ namespace GamePlay
         {
             // remember the original position of the players so match can be reset
             originalPos = gameObject.transform.position;
-            PlayerController.totalPlayers = 0;
+            totalPlayers = 0;
 
         }
 
@@ -106,7 +106,6 @@ namespace GamePlay
             }else if (attemptSkill)
             {
                 skill.Cast(this, otherPlayer);
-                anim.SetTrigger(skill.SkillName);
             }
             else if (attemptAttack)
             {

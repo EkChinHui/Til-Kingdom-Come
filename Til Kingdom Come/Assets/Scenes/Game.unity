@@ -329,6 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 133473154}
   - component: {fileID: 133473152}
+  - component: {fileID: 133473153}
   m_Layer: 0
   m_Name: ScoreKeeper
   m_TagString: Untagged
@@ -353,6 +354,19 @@ MonoBehaviour:
   player1: {fileID: 553354023}
   player2: {fileID: 4761566363159624451}
   endPanel: {fileID: 1110248374}
+--- !u!114 &133473153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133473151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04c1175b7fb2664cb78cd60fe5a1c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 297938866}
 --- !u!4 &133473154
 Transform:
   m_ObjectHideFlags: 0
@@ -576,6 +590,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2320867615945591388}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &297938866 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2320867616202855601, guid: 430bbaf8965a1644f9c3899856c21a68,
+    type: 3}
+  m_PrefabInstance: {fileID: 2320867615945591388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &297938869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,12 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd7598fc9f552468dff2a609302d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Throw Knives
-  skillDescription: 
-  skillCooldown: 0
   rangePoint: {fileID: 1200237074}
   knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
-  spawnPoint: {fileID: 0}
 --- !u!1 &432934920
 GameObject:
   m_ObjectHideFlags: 0
@@ -12110,9 +12126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efcafdc9db912943afd2fc61883e544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Force Pull
-  skillDescription: 
-  skillCooldown: 0
   pullDistance: 6
   stunDuration: 0.2
 --- !u!114 &923251614

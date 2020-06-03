@@ -11,18 +11,30 @@ namespace GamePlay.Skills
 
         private void Start()
         {
-            this.skillName = "Force Pull";
-            this.skillDescription = "Pulls the enemy towards you";
-            this.skillCooldown = 1f;
-            skillName = "ForcePull";
+            skillName = "Force Pull";
+            skillInfo = "Pulls the enemy towards you";
+            skillCooldown = 1f;
         }
 
         public override void Cast(PlayerController player, PlayerController opponent)
         {
+            if (!CanCast()) return;
+
+            StartCoroutine(AnimDelay(player));
+
             int pullDirection = opponent.transform.position.x - player.transform.position.x > 0 ? 1 : -1;
             opponent.KnockBack(pullDirection * pullDistance);
             StartCoroutine(Stun(opponent));
        
+        }
+
+        private IEnumerator AnimDelay(PlayerController player)
+        {
+            var animDelay = AnimationTimes.instance.ForcePullAnim;
+            player.anim.SetTrigger(skillName);
+            player.isActing = true;
+            yield return new WaitForSeconds(animDelay);
+            player.isActing = false;
         }
 
         private IEnumerator Stun(PlayerController opponent)

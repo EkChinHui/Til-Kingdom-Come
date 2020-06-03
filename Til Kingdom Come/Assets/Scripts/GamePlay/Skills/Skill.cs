@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -6,14 +7,10 @@ namespace GamePlay.Skills
     public abstract class Skill : MonoBehaviour
     {
         protected string skillName;
-        protected string skillDescription;
+        protected string skillInfo;
         protected float skillCooldown;
         private float nextAvailTime;
-
-        private void Start()
-        {
-            
-        }
+        
 
         // getter
         public string SkillName => skillName;
