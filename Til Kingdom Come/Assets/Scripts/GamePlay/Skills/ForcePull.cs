@@ -13,7 +13,7 @@ namespace GamePlay.Skills
         {
             skillName = "Force Pull";
             skillInfo = "Pulls the enemy towards you";
-            skillCooldown = 1f;
+            skillCooldown = 10f;
         }
 
         public override void Cast(PlayerController player, PlayerController opponent)
