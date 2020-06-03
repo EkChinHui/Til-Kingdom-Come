@@ -44,13 +44,7 @@ namespace GamePlay
         private bool attemptAttack;
         private bool attemptBlock;
         private bool attemptSkill;
-
-        private float attackAnim;
-        private float blockAnim;
-        private float rollAnim;
-        private float forcePullAnim;
-        private float forcePushAnim;
-        private float throwKnivesAnim;
+        
         private const float AttackCooldown = 0.4f;
         private const float ReactionDelay = 0.2f;
         private const float BlockCooldown = 0.4f;
@@ -68,7 +62,7 @@ namespace GamePlay
         private bool isBlocking;
 
         [Header("Health")]
-// Health system to make it convenient to change
+        // Health system to make it convenient to change
         private const int MaxHealth = 1;
 
         private int currentHealth;
@@ -90,7 +84,6 @@ namespace GamePlay
             // Instantiate variables on creation
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            UpdateAnimClipTimes();
             currentHealth = MaxHealth;
             enemylayer = LayerMask.GetMask("Player");
             attackPoint = gameObject.transform.GetChild(0);
@@ -192,7 +185,7 @@ namespace GamePlay
             anim.SetTrigger(Roll1);
             runSpeed = rollSpeed;
             Move();
-            yield return new WaitForSeconds(rollAnim);
+            yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
             runSpeed = 4f;
             isSilenced = true;
             yield return new WaitForSeconds(RollCooldown);
@@ -245,7 +238,7 @@ namespace GamePlay
             yield return new WaitForSeconds(ReactionDelay);
             isAttacking = true;
             Attack();
-            yield return new WaitForSeconds(attackAnim - ReactionDelay);
+            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
             isSilenced = true;
             yield return new WaitForSeconds(AttackCooldown);
             isSilenced = false;
@@ -258,7 +251,7 @@ namespace GamePlay
             anim.SetTrigger(Block);
             isBlocking = true;
             isActing = true;
-            yield return new WaitForSeconds(blockAnim);
+            yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             isSilenced = true;
             isBlocking = false;
             yield return new WaitForSeconds(BlockCooldown);
@@ -343,27 +336,7 @@ namespace GamePlay
             }
         }
 
-        // updates animation times
-        private void UpdateAnimClipTimes()
-        {
-            AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
 
-            foreach(AnimationClip clip in clips)
-            {
-                switch(clip.name)
-                {
-                    case "Attack":
-                        attackAnim = clip.length;
-                        break;
-                    case "Block":
-                        blockAnim = clip.length;
-                        break;
-                    case "Roll":
-                        rollAnim = clip.length;
-                        break;
-                }
-            }
-        }
 
     }
 }
