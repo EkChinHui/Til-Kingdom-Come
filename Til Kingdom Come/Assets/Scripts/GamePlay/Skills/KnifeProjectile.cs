@@ -25,6 +25,7 @@ namespace GamePlay.Skills
             if (collision.gameObject.layer != 10) return;
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
+            // Player can still be hit while rolling
             if (damagedPlayer.IsShieldUp())
             {
                 DestroyProjectile();
