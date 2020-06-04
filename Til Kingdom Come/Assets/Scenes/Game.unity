@@ -33564,32 +33564,32 @@ PrefabInstance:
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: leftKey
-      value: 97
+      value: 276
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: rightKey
-      value: 100
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: rollKey
-      value: 115
+      value: 274
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: attackKey
-      value: 102
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: blockKey
-      value: 103
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: skillKey
-      value: 104
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
@@ -33776,32 +33776,32 @@ PrefabInstance:
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: leftKey
-      value: 276
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: rightKey
-      value: 275
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: rollKey
-      value: 274
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: blockKey
-      value: 46
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: attackKey
-      value: 47
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: skillKey
-      value: 44
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}

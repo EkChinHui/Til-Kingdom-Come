@@ -7,7 +7,7 @@ namespace UI
         // Start is called before the first frame update
         public static string mapToLoad = "Map1";
 
-        [RuntimeInitializeOnLoadMethod]
+        //[RuntimeInitializeOnLoadMethod]
         void Start()
         {
             foreach (Transform child in transform)

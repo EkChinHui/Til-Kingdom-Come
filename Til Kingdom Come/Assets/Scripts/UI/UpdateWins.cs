@@ -11,10 +11,7 @@ namespace UI
         public static int player1Wins = 0;
         public static int player2Wins = 0;
         public string message = "No. of wins: ";
-
-        private void Start()
-        {
-        }
+        
         public void AddWins()
         {
             wins++;
