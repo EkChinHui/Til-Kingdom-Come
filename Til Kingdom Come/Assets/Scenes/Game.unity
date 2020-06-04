@@ -590,6 +590,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2320867615945591388}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &297938865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297938864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b30b06101f4536ab8729a59e918df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftKey: 97
+  rightKey: 100
+  rollKey: 115
+  blockKey: 103
+  attackKey: 102
+  skillKey: 104
 --- !u!95 &297938866 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2320867616202855601, guid: 430bbaf8965a1644f9c3899856c21a68,
@@ -12114,6 +12132,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 131855736329294414}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &923251609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923251608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b30b06101f4536ab8729a59e918df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftKey: 276
+  rightKey: 275
+  rollKey: 274
+  blockKey: 46
+  attackKey: 47
+  skillKey: 44
 --- !u!114 &923251613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33596,6 +33632,11 @@ PrefabInstance:
       propertyPath: attackRange
       value: 1.59
       objectReference: {fileID: 0}
+    - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
+        type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 923251609}
     - target: {fileID: 344005416236044243, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_Name
@@ -33808,6 +33849,11 @@ PrefabInstance:
       propertyPath: attackRange
       value: 1.59
       objectReference: {fileID: 0}
+    - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
+        type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 297938865}
     - target: {fileID: 2320867616202855604, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_LinearDrag

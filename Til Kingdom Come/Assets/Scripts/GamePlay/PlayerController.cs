@@ -17,7 +17,8 @@ namespace GamePlay
         public Skill skill;
         public PlayerController otherPlayer;
         public int playerNo;
-    
+        
+        public PlayerInput playerInput;
 
         private enum State { Idle, Run, Dead}
         private State state = State.Idle;
@@ -30,26 +31,10 @@ namespace GamePlay
         private bool isSilenced;
         private Vector2 originalPos;
 
-        [Header("Input")]
-        // note to use getAxis for multi-player mode so user can change their input
-        public KeyCode leftKey;
-        public KeyCode rightKey;
-        public KeyCode rollKey;
-        public KeyCode blockKey;
-        public KeyCode attackKey;
-        public KeyCode skillKey;
-        private bool attemptLeft;
-        private bool attemptRight;
-        private bool attemptRoll;
-        private bool attemptAttack;
-        private bool attemptBlock;
-        private bool attemptSkill;
-        
         private const float AttackCooldown = 0.4f;
         private const float ReactionDelay = 0.2f;
         private const float BlockCooldown = 0.4f;
         private const float RollCooldown = 0.6f;
-
 
         [Header("Combat")]
         public Transform attackPoint;
@@ -95,7 +80,6 @@ namespace GamePlay
 
         public void Update()
         {
-            InputManager();
             if (isActing || state == State.Dead)
             {
                 // if player is already acting, prevent player from doing other moves
@@ -103,18 +87,18 @@ namespace GamePlay
                 {
                     Move();
                 }
-            }else if (attemptSkill)
+            }else if (playerInput.AttemptSkill)
             {
                 skill.Cast(this, otherPlayer);
             }
-            else if (attemptAttack)
+            else if (playerInput.AttemptAttack)
             {
                 if (!isAttacking)
                 {
                     StartCoroutine(AttackAnimDelay());
                 }
             }
-            else if (attemptBlock)
+            else if (playerInput.AttemptBlock)
             {
                 StartCoroutine(BlockAnimDelay());
             }
@@ -127,11 +111,11 @@ namespace GamePlay
 
         private void Move()
         {
-            if (attemptRoll && canRoll && !isSilenced)
+            if (playerInput.AttemptRoll && canRoll && !isSilenced)
             {
                 Roll();
             }
-            else if (attemptRight)
+            else if (playerInput.AttemptRight)
             {
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
@@ -141,7 +125,7 @@ namespace GamePlay
 
                 state = State.Run;
             }
-            else if (attemptLeft)
+            else if (playerInput.AttemptLeft)
             {
                 rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
@@ -158,7 +142,7 @@ namespace GamePlay
 
         private void Roll()
         {
-            if (attemptRight)
+            if (playerInput.AttemptRight)
             {
                 StartCoroutine(RollAnimDelay());
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
@@ -166,7 +150,7 @@ namespace GamePlay
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
             }
-            else if (attemptLeft)
+            else if (playerInput.AttemptLeft)
             {
                 StartCoroutine(RollAnimDelay());
                 if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
@@ -298,15 +282,7 @@ namespace GamePlay
             this.enabled = false;
         }
 
-        private void InputManager()
-        {
-            attemptLeft = Input.GetKey(leftKey);
-            attemptRight = Input.GetKey(rightKey);
-            attemptRoll = Input.GetKeyDown(rollKey);
-            attemptAttack = Input.GetKeyDown(attackKey);
-            attemptBlock = Input.GetKeyDown(blockKey);
-            attemptSkill = Input.GetKeyDown(skillKey);
-        }
+
 
         // draws wireframe for attack point to make it easier to set attack range
         private void OnDrawGizmosSelected()
