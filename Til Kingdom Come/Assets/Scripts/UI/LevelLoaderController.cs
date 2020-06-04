@@ -13,7 +13,7 @@ namespace UI
             StartCoroutine(Helper(sceneName));
         }
 
-        IEnumerator Helper(string sceneName) {
+        private IEnumerator Helper(string sceneName) {
             // Play animation
             transition.SetTrigger("Start");
 

@@ -22,11 +22,11 @@ namespace GamePlay.Skills
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer != 10) return;
+            if (collision.gameObject.layer != 8) return;
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
             // Player can still be hit while rolling
-            if (damagedPlayer.IsShieldUp())
+            if (damagedPlayer.isBlocking)
             {
                 DestroyProjectile();
             } else

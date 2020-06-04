@@ -4,14 +4,15 @@ namespace UI
 {
     public class FarCloudMovement : MonoBehaviour
     {
-        RectTransform rectTransform;
-        float speed = -25f;
-        void Start()
+        private RectTransform rectTransform;
+        private float speed = -25f;
+
+        private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
         }
 
-        void Update()
+        private void Update()
         {
             //update the position
             if (rectTransform.anchoredPosition.x <= -1920) {

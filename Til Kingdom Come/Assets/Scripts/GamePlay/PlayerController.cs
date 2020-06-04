@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace GamePlay
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
         public static int totalPlayers;
@@ -12,11 +13,8 @@ namespace GamePlay
         [Header("fields")]
         [HideInInspector] public Rigidbody2D rb;
         public Animator anim;
-        public ScoreKeeper scoreKeeper;
-        public int score;
         public PlayerController otherPlayer;
         public int playerNo;
-        
         public PlayerInput playerInput;
 
         private enum State { Idle, Run, Dead}
@@ -26,8 +24,6 @@ namespace GamePlay
         public float runSpeed = 4f;
         public float rollSpeed = 23f;
         private Vector2 originalPos;
-        
-
 
         [Header("Combat")]
         public bool isAttacking;
@@ -40,9 +36,7 @@ namespace GamePlay
         [Header("Health")]
         // Health system to make it convenient to change
         private const int MaxHealth = 1;
-
         public int currentHealth;
-        private static readonly int Dead = Animator.StringToHash("Dead");
 
         [Header("Skills")] // FIX: update to a list of swappable skills
         public Attack attack;
@@ -50,12 +44,18 @@ namespace GamePlay
         public Roll roll;
         public Skill skill;
 
+        public delegate void DeathDelegate(int playerNo);
+
+        public static event DeathDelegate DeathEvent;
+            
+        
+        public bool IsBlocking => isBlocking;
+
         private void Awake()
         {
             // remember the original position of the players so match can be reset
             originalPos = gameObject.transform.position;
             totalPlayers = 0;
-
         }
 
         private void Start()
@@ -65,6 +65,7 @@ namespace GamePlay
             anim = GetComponent<Animator>();
             currentHealth = MaxHealth;
             skill = GetComponent<Skill>();
+            ScoreKeeper.ResetPlayersEvent += ResetPlayer;
 
             totalPlayers++;
             playerNo = totalPlayers;
@@ -131,12 +132,7 @@ namespace GamePlay
                 state = State.Idle;
             }
         }
-
-
-        public bool IsShieldUp ()
-        {
-            return isBlocking;
-        }
+        
 
         public void KnockBack(float distance)
         {
@@ -160,40 +156,34 @@ namespace GamePlay
 
         void Die()
         {
-            scoreKeeper.UpdateWins(playerNo);
-
+            if (DeathEvent != null)
+            {
+                DeathEvent(playerNo);
+            }
             state = State.Dead;
 
             // die animation
-            anim.SetBool(Dead, true);
+            anim.SetBool("Dead", true);
 
             // Disable sprite
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Rigidbody2D>().simulated = false;
-            this.enabled = false;
+            enabled = false;
         }
-
-
-
-
+        
         public void ResetPlayer()
         {
-            anim.SetBool(Dead, false);
+            anim.SetBool("Dead", false);
             state = State.Idle;
-            this.enabled = true;
+            enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPos;
-            if (gameObject.CompareTag("Player2"))
-            {
-                gameObject.transform.localScale = new Vector2(-1, 1);
-            } else if (gameObject.CompareTag("Player1"))
-            {
-                gameObject.transform.localScale = new Vector2(1, 1);
-            }
         }
 
-
-
+        private void OnDestroy()
+        {
+            ScoreKeeper.ResetPlayersEvent -= ResetPlayer;
+        }
     }
 }

@@ -10,12 +10,12 @@ namespace UI
         private const float EndPoint = -50f;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
         }
-    
-        void Update() {
+
+        private void Update() {
             Lower();
         }
         public void Lower() {

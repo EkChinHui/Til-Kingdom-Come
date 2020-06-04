@@ -4,14 +4,15 @@ namespace UI
 {
     public class NearCloudMovement : MonoBehaviour
     {
-        RectTransform rectTransform;
-        float speed = -40f;
-        void Start()
+        private RectTransform rectTransform;
+        private float speed = -40f;
+
+        private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
         }
 
-        void Update()
+        private void Update()
         {
             //update the position
             if (rectTransform.anchoredPosition.x <= -1920) {

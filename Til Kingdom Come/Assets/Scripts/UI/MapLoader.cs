@@ -8,7 +8,7 @@ namespace UI
         public static string mapToLoad = "Map1";
 
         //[RuntimeInitializeOnLoadMethod]
-        void Start()
+        private void Start()
         {
             foreach (Transform child in transform)
             {

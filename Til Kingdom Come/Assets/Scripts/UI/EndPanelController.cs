@@ -1,21 +1,34 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using GamePlay;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace UI
 {
     public class EndPanelController : MonoBehaviour
     {
-        public EndPanelController endPanel;
+        public GameObject board;
         public RedVictoryScreenController redVictoryScreen;
         public BlueVictoryScreenController blueVictoryScreen;
-        public void EndGame(int player)
+
+        private void Start()
         {
-            endPanel.gameObject.SetActive(true);
-            if (player == 1) {
-                redVictoryScreen.gameObject.SetActive(true);
-            } else if (player == 2) {
-                blueVictoryScreen.gameObject.SetActive(true);
+            ScoreKeeper.OnGameEnd += EndGame;
+        }
+
+        private void EndGame(int player)
+        {
+            board.SetActive(true);
+            switch (player)
+            { 
+                case 1:
+                    redVictoryScreen.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    blueVictoryScreen.gameObject.SetActive(true);
+                    break;
             }
         }
 
@@ -24,6 +37,11 @@ namespace UI
         public void ReloadGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        private void OnDestroy()
+        {
+            ScoreKeeper.OnGameEnd -= EndGame;
         }
     }
 }

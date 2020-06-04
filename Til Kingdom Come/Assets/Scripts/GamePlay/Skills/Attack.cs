@@ -45,7 +45,7 @@ namespace GamePlay.Skills
                 PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
                 float enemyDirection = otherPlayer.transform.rotation.eulerAngles.y;
                 float myDirection = player.transform.rotation.eulerAngles.y;
-                if (otherPlayer.IsShieldUp() && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
+                if (otherPlayer.isBlocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
                 {
                     // other player successfully defends against attack
                     player.KnockBack(KnockDistAttacking);

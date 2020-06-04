@@ -4,16 +4,17 @@ namespace UI
 {
     public class BlueVictoryScreenController : MonoBehaviour
     {
-        RectTransform rectTransform;
-        float speed = 500f;
-        float endPoint = 50f;
+        private RectTransform rectTransform;
+        private float speed = 500f;
+
+        private float endPoint = 50f;
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
         }
-    
-        void Update() {
+
+        private void Update() {
             Lower();
         }
         public void Lower() {
