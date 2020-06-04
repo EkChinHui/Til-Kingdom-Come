@@ -1220,7 +1220,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1457377375}
-        m_MethodName: addWins
+        m_MethodName: AddWins
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1274,7 +1274,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1457377375}
-        m_MethodName: minusWins
+        m_MethodName: MinusWins
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
