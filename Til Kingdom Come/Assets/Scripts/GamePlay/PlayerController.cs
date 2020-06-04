@@ -14,7 +14,6 @@ namespace GamePlay
         public Animator anim;
         public ScoreKeeper scoreKeeper;
         public int score;
-        public Skill skill;
         public PlayerController otherPlayer;
         public int playerNo;
         
@@ -26,35 +25,30 @@ namespace GamePlay
         [Header("Movement")]
         public float runSpeed = 4f;
         public float rollSpeed = 23f;
-        private bool canRoll = true;
-        [HideInInspector] public bool isActing;
-        private bool isSilenced;
         private Vector2 originalPos;
+        
 
-        private const float AttackCooldown = 0.4f;
-        private const float ReactionDelay = 0.2f;
-        private const float BlockCooldown = 0.4f;
-        private const float RollCooldown = 0.6f;
 
         [Header("Combat")]
-        public Transform attackPoint;
-        public float attackRange = 2.43f;
-        private const float KnockDistAttacking = 8f;
-        private const float KnockDistBlocking = 4f;
-        private const int Damage = 1;
-        private LayerMask enemylayer;
-        private bool isAttacking;
-        private bool isBlocking;
+        public bool isAttacking;
+        public bool isBlocking;
+        public bool canRoll = true; 
+        public bool isActing;
+        public bool isSilenced;
+        public LayerMask enemyLayer = 8;
 
         [Header("Health")]
         // Health system to make it convenient to change
         private const int MaxHealth = 1;
 
-        private int currentHealth;
-        private static readonly int Roll1 = Animator.StringToHash("Roll");
+        public int currentHealth;
         private static readonly int Dead = Animator.StringToHash("Dead");
-        private static readonly int Attack1 = Animator.StringToHash("Attack");
-        private static readonly int Block = Animator.StringToHash("Block");
+
+        [Header("Skills")] // FIX: update to a list of swappable skills
+        public Attack attack;
+        public Block block;
+        public Roll roll;
+        public Skill skill;
 
         private void Awake()
         {
@@ -70,8 +64,6 @@ namespace GamePlay
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = MaxHealth;
-            enemylayer = LayerMask.GetMask("Player");
-            attackPoint = gameObject.transform.GetChild(0);
             skill = GetComponent<Skill>();
 
             totalPlayers++;
@@ -95,12 +87,12 @@ namespace GamePlay
             {
                 if (!isAttacking)
                 {
-                    StartCoroutine(AttackAnimDelay());
+                    attack.Cast(this, otherPlayer);
                 }
             }
             else if (playerInput.AttemptBlock)
             {
-                StartCoroutine(BlockAnimDelay());
+                block.Cast(this, otherPlayer);
             }
             else
             {
@@ -109,11 +101,11 @@ namespace GamePlay
             anim.SetInteger("state", (int) state);
         }
 
-        private void Move()
+        public void Move()
         {
             if (playerInput.AttemptRoll && canRoll && !isSilenced)
             {
-                Roll();
+                roll.Cast(this, otherPlayer);
             }
             else if (playerInput.AttemptRight)
             {
@@ -140,107 +132,6 @@ namespace GamePlay
             }
         }
 
-        private void Roll()
-        {
-            if (playerInput.AttemptRight)
-            {
-                StartCoroutine(RollAnimDelay());
-                if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                }
-            }
-            else if (playerInput.AttemptLeft)
-            {
-                StartCoroutine(RollAnimDelay());
-                if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180f, 0);
-                }
-            }
-
-        }
-
-        private IEnumerator RollAnimDelay()
-        {
-            canRoll = false;
-            isActing = true;
-            anim.SetTrigger(Roll1);
-            runSpeed = rollSpeed;
-            Move();
-            yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
-            runSpeed = 4f;
-            isSilenced = true;
-            yield return new WaitForSeconds(RollCooldown);
-            isSilenced = false;
-            isActing = false;
-            canRoll = true;
-        }
-
-
-        private void Attack()
-        {
-            // Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemylayer);
-            // maximum distance between both players for attack to be successful
-            float attackDistance = 1.934f + attackRange;
-            // Damage enemies
-            foreach(Collider2D enemy in hitEnemies)
-            {
-                if (enemy.GetComponent<PlayerController>() == null) continue;
-                PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
-                float enemyDirection = otherPlayer.transform.localScale.x;
-                float myDirection = transform.localScale.x;
-                if (otherPlayer.IsShieldUp() && (Math.Abs(enemyDirection - myDirection) > Mathf.Epsilon))
-                {
-                    // otherplayer succesfully defends against attack
-                    this.KnockBack(KnockDistAttacking);
-                    otherPlayer.KnockBack(KnockDistBlocking);
-
-                }
-                else if (!otherPlayer.canRoll)
-                {
-                    // the enemy is rolling and is invulnerable
-                }
-                else if (otherPlayer.isAttacking && (Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance))
-                {
-                    // the enemy attacked first and is in range
-                }
-                else 
-                {
-                    enemy.GetComponent<PlayerController>().TakeDamage(Damage);
-                }
-            }
-        }
-
-        private IEnumerator AttackAnimDelay()
-        {
-            isActing = true;
-            anim.SetTrigger(Attack1);
-            // reaction delay to allow opponent to react
-            yield return new WaitForSeconds(ReactionDelay);
-            isAttacking = true;
-            Attack();
-            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
-            isSilenced = true;
-            yield return new WaitForSeconds(AttackCooldown);
-            isSilenced = false;
-            isActing = false;
-            isAttacking = false;
-        }
-
-        private IEnumerator BlockAnimDelay()
-        {
-            anim.SetTrigger(Block);
-            isBlocking = true;
-            isActing = true;
-            yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
-            isSilenced = true;
-            isBlocking = false;
-            yield return new WaitForSeconds(BlockCooldown);
-            isSilenced = false;
-            isActing = false;
-        }
 
         public bool IsShieldUp ()
         {
@@ -284,15 +175,6 @@ namespace GamePlay
 
 
 
-        // draws wireframe for attack point to make it easier to set attack range
-        private void OnDrawGizmosSelected()
-        {
-            if (attackPoint == null)
-            {
-                return;
-            }
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        }
 
         public void ResetPlayer()
         {
