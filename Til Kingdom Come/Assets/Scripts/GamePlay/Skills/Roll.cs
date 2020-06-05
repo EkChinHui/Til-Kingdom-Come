@@ -8,7 +8,7 @@ namespace GamePlay.Skills
     {
         public bool dashing;
         public float dashTime = 1f;
-        public float rollSpeed = 20f;
+        public float rollSpeed = 40f;
         private const float RollCooldown = 2f;
         private PlayerController playerController;
         private void Start()
