@@ -8,7 +8,7 @@ namespace GamePlay.Skills
     {
         
         private const int Damage = 1;
-        public float AttRange = 2.43f;
+        public float attRange = 2.43f;
         public Transform attackPoint;
         private const float KnockDistAttacking = 8f;
         private const float KnockDistBlocking = 4f;
@@ -28,16 +28,15 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             StartCoroutine(AttackAnimDelay(player));
-
-
+            EndCast();
         }
         
         private void AttackCast(PlayerController player)
         {
             // Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, AttRange, playerLayer);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // maximum distance between both players for attack to be successful
-            float attackDistance = 1.934f + AttRange;
+            float attackDistance = 1.934f + attRange;
             // Damage enemies
             foreach(Collider2D enemy in hitEnemies)
             {
@@ -45,23 +44,26 @@ namespace GamePlay.Skills
                 PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
                 float enemyDirection = otherPlayer.transform.rotation.eulerAngles.y;
                 float myDirection = player.transform.rotation.eulerAngles.y;
-                if (otherPlayer.isBlocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
+                if (otherPlayer.combatState == PlayerController.CombatState.Blocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
                 {
                     // other player successfully defends against attack
                     player.KnockBack(KnockDistAttacking);
                     otherPlayer.KnockBack(KnockDistBlocking);
                 }
-                else if (!otherPlayer.canRoll)
+                else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
                 {
                     // the enemy is rolling and is invulnerable
+                    return;
                 }
-                else if (otherPlayer.isAttacking && (Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance))
+                else if (otherPlayer.combatState == PlayerController.CombatState.Attacking && 
+                         Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance)
                 {
                     // the enemy attacked first and is in range
+                    return;
                 }
                 else
                 {
-                    enemy.GetComponent<PlayerController>().TakeDamage(Damage);
+                    player.otherPlayer.TakeDamage(Damage);
                 }
             }
             
@@ -69,18 +71,13 @@ namespace GamePlay.Skills
         
         private IEnumerator AttackAnimDelay(PlayerController player)
         {
-            player.isActing = true;
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(ReactionDelay);
-            player.isAttacking = true;
-            AttackCast(player);
+            player.combatState = PlayerController.CombatState.Attacking;
+                AttackCast(player);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
-            player.isSilenced = true;
-            yield return new WaitForSeconds(AttackCooldown);
-            player.isSilenced = false;
-            player.isActing = false;
-            player.isAttacking = false;
+            player.combatState = PlayerController.CombatState.Vulnerable;
         }
         
         
@@ -91,7 +88,7 @@ namespace GamePlay.Skills
             {
                 return;
             }
-            Gizmos.DrawWireSphere(attackPoint.position, AttRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attRange);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace GamePlay.Skills
             int pullDirection = opponent.transform.position.x - player.transform.position.x > 0 ? 1 : -1;
             opponent.KnockBack(pullDirection * pullDistance);
             StartCoroutine(Stun(opponent));
+            EndCast();
        
         }
 
@@ -32,16 +33,12 @@ namespace GamePlay.Skills
         {
             var animDelay = AnimationTimes.instance.ForcePullAnim;
             player.anim.SetTrigger(skillName);
-            player.isActing = true;
             yield return new WaitForSeconds(animDelay);
-            player.isActing = false;
         }
 
         private IEnumerator Stun(PlayerController opponent)
         {
-            opponent.isActing = true;
             yield return new WaitForSeconds(stunDuration);
-            opponent.isActing = false;
             yield return null;
         }
     }

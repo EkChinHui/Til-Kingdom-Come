@@ -6,7 +6,11 @@ namespace GamePlay.Skills
 {
     public class Roll : Skill
     {
-        private const float RollCooldown = 0.6f;
+        public bool dashing;
+        public float dashTime = 1f;
+        public float rollSpeed = 20f;
+        private const float RollCooldown = 2f;
+        private PlayerController playerController;
         private void Start()
         {
             skillName = "Roll";
@@ -14,18 +18,47 @@ namespace GamePlay.Skills
             skillCooldown = RollCooldown;
         }
 
+        private void Update()
+        {
+            if (dashing)
+                RollMove(playerController);
+        }
+
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-            RollDirection(player);
+            playerController = player;
+            FlipSprite(player);
             StartCoroutine(RollAnimDelay(player));
+            EndCast();
+        }
+
+        private void RollMove(PlayerController player)
+        {
+            if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
+            {
+                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Force);
+            }
+            else if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
+            {
+                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Force);
+            }
+        }
+
+        private IEnumerator RollAnimDelay(PlayerController player)
+        {
+            player.anim.SetTrigger("Roll");
+            player.combatState = PlayerController.CombatState.Rolling;
+            dashing = true;
+            yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
+            dashing = false;
+            player.combatState = PlayerController.CombatState.Vulnerable;
         }
         
-        private void RollDirection(PlayerController player)
+        private void FlipSprite(PlayerController player)
         {
             if (player.playerInput.AttemptRight)
             {
-                
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -38,23 +71,6 @@ namespace GamePlay.Skills
                     transform.rotation = Quaternion.Euler(0, 180f, 0);
                 }
             }
-
-        }
-
-        private IEnumerator RollAnimDelay(PlayerController player)
-        {
-            player.canRoll = false;
-            player.isActing = true;
-            player.anim.SetTrigger("Roll");
-            player.runSpeed = player.rollSpeed;
-            player.Move();
-            yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
-            player.runSpeed = 4f; // FIX: replace this hardcoded value
-            player.isSilenced = true;
-            yield return new WaitForSeconds(RollCooldown);
-            player.isSilenced = false;
-            player.isActing = false;
-            player.canRoll = true;
         }
     }
 }

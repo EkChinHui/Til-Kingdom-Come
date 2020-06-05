@@ -26,10 +26,13 @@ namespace GamePlay.Skills
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
             // Player can still be hit while rolling
-            if (damagedPlayer.isBlocking)
+            if (damagedPlayer.combatState == PlayerController.CombatState.Blocking)
             {
                 DestroyProjectile();
-            } else
+            } else if (damagedPlayer.combatState == PlayerController.CombatState.Rolling)
+            {
+                return;
+            }
             {
                 damagedPlayer.TakeDamage(damage);
                 DestroyProjectile();

@@ -11,26 +11,25 @@ namespace GamePlay
         public static int totalPlayers;
 
         [Header("fields")]
-        [HideInInspector] public Rigidbody2D rb;
+        public Rigidbody2D rb;
         public Animator anim;
+        private new Collider2D collider2D;
         public PlayerController otherPlayer;
         public int playerNo;
         public PlayerInput playerInput;
 
         private enum State { Idle, Run, Dead}
         private State state = State.Idle;
+        public enum CombatState { Vulnerable, Blocking, Rolling, Attacking }
+        public CombatState combatState = CombatState.Vulnerable;
 
-        [Header("Movement")]
+        
+        [Header("Movement")] 
         public float runSpeed = 4f;
         public float rollSpeed = 23f;
         private Vector2 originalPos;
 
         [Header("Combat")]
-        public bool isAttacking;
-        public bool isBlocking;
-        public bool canRoll = true; 
-        public bool isActing;
-        public bool isSilenced;
         public LayerMask enemyLayer = 8;
 
         [Header("Health")]
@@ -44,12 +43,10 @@ namespace GamePlay
         public Roll roll;
         public Skill skill;
 
+        #region Events
         public delegate void DeathDelegate(int playerNo);
-
         public static event DeathDelegate DeathEvent;
-            
-        
-        public bool IsBlocking => isBlocking;
+        #endregion
 
         private void Awake()
         {
@@ -62,53 +59,45 @@ namespace GamePlay
         {
             // Instantiate variables on creation
             rb = GetComponent<Rigidbody2D>();
+            collider2D = GetComponent<Collider2D>();
             anim = GetComponent<Animator>();
-            currentHealth = MaxHealth;
             skill = GetComponent<Skill>();
+            currentHealth = MaxHealth;
             ScoreKeeper.ResetPlayersEvent += ResetPlayer;
 
             totalPlayers++;
             playerNo = totalPlayers;
-        }
+        }  
 
         public void Update()
         {
-            if (isActing || state == State.Dead)
+            if (state == State.Dead)
             {
-                // if player is already acting, prevent player from doing other moves
-                if (isActing && isSilenced)
-                {
-                    Move();
-                }
             }else if (playerInput.AttemptSkill)
             {
                 skill.Cast(this, otherPlayer);
             }
             else if (playerInput.AttemptAttack)
             {
-                if (!isAttacking)
-                {
-                    attack.Cast(this, otherPlayer);
-                }
+                attack.Cast(this, otherPlayer);
             }
             else if (playerInput.AttemptBlock)
             {
                 block.Cast(this, otherPlayer);
+            } else if (playerInput.AttemptRoll)
+            {
+                roll.Cast(this, otherPlayer);
             }
-            else
+            else if (combatState != CombatState.Rolling)
             {
                 Move();
             }
             anim.SetInteger("state", (int) state);
         }
 
-        public void Move()
+        private void Move()
         {
-            if (playerInput.AttemptRoll && canRoll && !isSilenced)
-            {
-                roll.Cast(this, otherPlayer);
-            }
-            else if (playerInput.AttemptRight)
+            if (playerInput.AttemptRight)
             {
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
@@ -137,7 +126,7 @@ namespace GamePlay
         public void KnockBack(float distance)
         {
             rb.velocity = transform.localScale.x < 0 
-                ? new Vector2(distance, rb.velocity.y) 
+                ? new Vector2(distance, rb.velocity.y)
                 : new Vector2(-distance, rb.velocity.y);
         }
 
@@ -154,24 +143,21 @@ namespace GamePlay
             }
         }
 
-        void Die()
+        private void Die()
         {
-            if (DeathEvent != null)
-            {
-                DeathEvent(playerNo);
-            }
+            DeathEvent?.Invoke(playerNo);
             state = State.Dead;
 
             // die animation
             anim.SetBool("Dead", true);
 
             // Disable sprite
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().simulated = false;
+            collider2D.enabled = false;
+            rb.simulated = false;
             enabled = false;
         }
         
-        public void ResetPlayer()
+        private void ResetPlayer()
         {
             anim.SetBool("Dead", false);
             state = State.Idle;

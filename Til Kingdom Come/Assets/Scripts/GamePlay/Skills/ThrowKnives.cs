@@ -23,11 +23,8 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-
             StartCoroutine(AnimDelay(player));
-
-
-
+            EndCast();
         }
         
         
@@ -35,12 +32,9 @@ namespace GamePlay.Skills
         {
             var animDelay = AnimationTimes.instance.ThrowKnivesAnim;
             player.anim.SetTrigger(skillName);
-            player.isActing = true;
             yield return new WaitForSeconds(knifeDelay);
             Instantiate(knife, rangePoint.position, rangePoint.rotation);
             yield return new WaitForSeconds(animDelay - knifeDelay);
-            player.isActing = false;
-
         }
 
     }

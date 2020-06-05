@@ -18,19 +18,15 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             StartCoroutine(BlockAnimDelay(player));
+            EndCast();
         }
         
         private IEnumerator BlockAnimDelay(PlayerController player)
         {
             player.anim.SetTrigger("Block");
-            player.isBlocking = true;
-            player.isActing = true;
+            player.combatState = PlayerController.CombatState.Blocking;
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
-            player.isSilenced = true;
-            player.isBlocking = false;
-            yield return new WaitForSeconds(BlockCooldown);
-            player.isSilenced = false;
-            player.isActing = false;
+            player.combatState = PlayerController.CombatState.Vulnerable;
         }
     }
 }

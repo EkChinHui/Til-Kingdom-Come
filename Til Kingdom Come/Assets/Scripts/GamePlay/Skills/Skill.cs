@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GamePlay.Skills
 {
@@ -17,10 +15,12 @@ namespace GamePlay.Skills
         
         protected bool CanCast()
         {
-            if (!(Time.time > nextAvailTime)) return false;
-            nextAvailTime = skillCooldown + Time.time;
-            return true;
+            return Time.time > nextAvailTime;
+        }
 
+        protected void EndCast()
+        {
+            nextAvailTime = skillCooldown + Time.time;
         }
 
         public abstract void Cast(PlayerController player, PlayerController opponent);

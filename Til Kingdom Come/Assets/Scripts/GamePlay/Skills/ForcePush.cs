@@ -24,24 +24,20 @@ namespace GamePlay.Skills
             int pushDirection = opponent.transform.position.x - player.transform.position.x > 0 ? -1 : 1;
             opponent.KnockBack(pushDirection * pushDistance);
             StartCoroutine(Stun(opponent));
+            EndCast();
             
         }
         private IEnumerator AnimDelay(PlayerController player)
         {
-            var animDelay = AnimationTimes.instance.ForcePushAnim;
+            var forcePushAnim= AnimationTimes.instance.ForcePushAnim;
             player.anim.SetTrigger(skillName);
-            player.isActing = true;
-            yield return new WaitForSeconds(animDelay);
-            player.isActing = false;
+            yield return new WaitForSeconds(forcePushAnim);
         }
         
         
         private IEnumerator Stun(PlayerController opponent)
         {
-            opponent.isActing = true;
             yield return new WaitForSeconds(stunDuration);
-            opponent.isActing = false;
-            yield return null;
         }
     }
 }
