@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaca187ec0a445e8855c5597ed28580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttRange: 1.68
+  attRange: 2.43
   attackPoint: {fileID: 131402542}
   playerLayer:
     serializedVersion: 2
@@ -665,6 +665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2858e22a9dd64f8abb71570ab992507b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashing: 0
+  rollSpeed: 1.5
 --- !u!1 &432934920
 GameObject:
   m_ObjectHideFlags: 0
@@ -12213,7 +12215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaca187ec0a445e8855c5597ed28580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttRange: 1.64
+  attRange: 2.43
   attackPoint: {fileID: 1238364196}
   playerLayer:
     serializedVersion: 2
@@ -12242,6 +12244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2858e22a9dd64f8abb71570ab992507b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashing: 0
+  rollSpeed: 1.5
 --- !u!1 &929441540
 GameObject:
   m_ObjectHideFlags: 0

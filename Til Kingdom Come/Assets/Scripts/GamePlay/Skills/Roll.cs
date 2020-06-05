@@ -7,8 +7,7 @@ namespace GamePlay.Skills
     public class Roll : Skill
     {
         public bool dashing;
-        public float dashTime = 1f;
-        public float rollSpeed = 40f;
+        public float rollSpeed = 1.5f;
         private const float RollCooldown = 2f;
         private PlayerController playerController;
         private void Start()
@@ -18,10 +17,13 @@ namespace GamePlay.Skills
             skillCooldown = RollCooldown;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (dashing)
+            {
                 RollMove(playerController);
+            }
+
         }
 
         public override void Cast(PlayerController player, PlayerController opponent)
@@ -37,22 +39,23 @@ namespace GamePlay.Skills
         {
             if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
             {
-                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Force);
+                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Impulse);
             }
             else if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
             {
-                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Force);
+                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Impulse);
             }
         }
 
         private IEnumerator RollAnimDelay(PlayerController player)
         {
-            player.anim.SetTrigger("Roll");
             player.combatState = PlayerController.CombatState.Rolling;
             dashing = true;
+            player.anim.SetTrigger("Roll");
             yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
             dashing = false;
             player.combatState = PlayerController.CombatState.Vulnerable;
+            player.rb.velocity = Vector2.zero;
         }
         
         private void FlipSprite(PlayerController player)

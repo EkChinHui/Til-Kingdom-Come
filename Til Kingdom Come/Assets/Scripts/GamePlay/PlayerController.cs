@@ -23,10 +23,8 @@ namespace GamePlay
         public enum CombatState { Vulnerable, Blocking, Rolling, Attacking }
         public CombatState combatState = CombatState.Vulnerable;
 
-        
         [Header("Movement")] 
         public float runSpeed = 4f;
-        public float rollSpeed = 23f;
         private Vector2 originalPos;
 
         [Header("Combat")]
@@ -125,9 +123,11 @@ namespace GamePlay
 
         public void KnockBack(float distance)
         {
-            rb.velocity = transform.localScale.x < 0 
-                ? new Vector2(distance, rb.velocity.y)
-                : new Vector2(-distance, rb.velocity.y);
+            var velocity = rb.velocity;
+            velocity = transform.localScale.x < 0 
+                ? new Vector2(distance, velocity.y)
+                : new Vector2(-distance, velocity.y);
+            rb.velocity = velocity;
         }
 
         public void TakeDamage(int damageTaken)
