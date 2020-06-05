@@ -18,8 +18,7 @@ namespace GamePlay
 
         public delegate void GameEndDelegate(int player);
         public static event GameEndDelegate OnGameEnd;
-
-
+        public RoundStartPanelController roundStartPanel;
         public void Start()
         {
             PlayerController.DeathEvent += UpdateWins;
@@ -57,6 +56,7 @@ namespace GamePlay
             {
                 if (ResetPlayersEvent != null)
                 {
+                    roundStartPanel.nextRound();
                     ResetPlayersEvent();
                 }
             }
