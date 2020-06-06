@@ -11,8 +11,8 @@ namespace GamePlay.Skills
 
         private void Start()
         {
+            // Destroys the projectile after its lifetime has ended
             Invoke(nameof(DestroyProjectile), lifeTime);
-
         }
 
         private void Update()
@@ -22,20 +22,22 @@ namespace GamePlay.Skills
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer != 8) return;
+            if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
-            // Player can still be hit while rolling
-            if (damagedPlayer.combatState == PlayerController.CombatState.Blocking)
+            switch (damagedPlayer.combatState)
             {
-                DestroyProjectile();
-            } else if (damagedPlayer.combatState == PlayerController.CombatState.Rolling)
-            {
-                return;
-            }
-            {
-                damagedPlayer.TakeDamage(damage);
-                DestroyProjectile();
+                // Player cant be hit while rolling
+                case PlayerController.CombatState.Rolling:
+                    return;
+                case PlayerController.CombatState.Blocking:
+                    DestroyProjectile();
+                    Debug.Log("here");
+                    break;
+                default:
+                    damagedPlayer.TakeDamage(damage);
+                    DestroyProjectile();
+                    return;
             }
         }
 
