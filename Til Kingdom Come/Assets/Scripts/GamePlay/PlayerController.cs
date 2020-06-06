@@ -18,10 +18,10 @@ namespace GamePlay
         public int playerNo;
         public PlayerInput playerInput;
 
-        private enum State { Idle, Run, Dead}
+        private enum State { Idle, Run}
         private State state = State.Idle;
-        public enum CombatState { Vulnerable, Blocking, Rolling, Attacking }
-        public CombatState combatState = CombatState.Vulnerable;
+        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Dead}
+        public CombatState combatState = CombatState.NonCombatState;
 
         [Header("Movement")] 
         public float runSpeed = 4f;
@@ -35,7 +35,7 @@ namespace GamePlay
         private const int MaxHealth = 1;
         public int currentHealth;
 
-        [Header("Skills")] // FIX: update to a list of swappable skills
+        [Header("Skills")] 
         public Attack attack;
         public Block block;
         public Roll roll;
@@ -69,9 +69,9 @@ namespace GamePlay
 
         public void Update()
         {
-            if (state == State.Dead)
-            {
-            }else if (playerInput.AttemptSkill)
+            if (combatState == CombatState.Dead) return; 
+            
+            if (playerInput.AttemptSkill)
             {
                 skill.Cast(this, otherPlayer);
             }
@@ -86,7 +86,7 @@ namespace GamePlay
             {
                 roll.Cast(this, otherPlayer);
             }
-            else if (combatState != CombatState.Rolling)
+            else if (combatState == CombatState.NonCombatState)
             {
                 Move();
             }
@@ -146,7 +146,7 @@ namespace GamePlay
         private void Die()
         {
             DeathEvent?.Invoke(playerNo);
-            state = State.Dead;
+            combatState = CombatState.Dead;
 
             // die animation
             anim.SetBool("Dead", true);
@@ -160,7 +160,7 @@ namespace GamePlay
         private void ResetPlayer()
         {
             anim.SetBool("Dead", false);
-            state = State.Idle;
+            combatState = CombatState.NonCombatState;
             enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;

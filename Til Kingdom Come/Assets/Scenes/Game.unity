@@ -623,6 +623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd7598fc9f552468dff2a609302d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
   rangePoint: {fileID: 1200237074}
   knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
 --- !u!114 &297938872
@@ -637,7 +641,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaca187ec0a445e8855c5597ed28580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attRange: 2.43
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
+  attRange: 1.85
   attackPoint: {fileID: 131402542}
   playerLayer:
     serializedVersion: 2
@@ -654,6 +662,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db4840e0ff415c9a244fc7d7a52dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
 --- !u!114 &297938874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2858e22a9dd64f8abb71570ab992507b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
   dashing: 0
   rollSpeed: 1.5
 --- !u!1 &432934920
@@ -1207,6 +1223,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597973717}
   m_CullTransparentMesh: 0
+--- !u!1 &703005904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703005905}
+  m_Layer: 8
+  m_Name: RangedPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703005905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703005904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.02, y: 1.78, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4761566363159624453}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &739513561
 GameObject:
   m_ObjectHideFlags: 0
@@ -12186,11 +12232,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 923251608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efcafdc9db912943afd2fc61883e544, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cdd7598fc9f552468dff2a609302d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullDistance: 6
-  stunDuration: 0.2
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
+  rangePoint: {fileID: 703005905}
+  knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
 --- !u!114 &923251614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12216,11 +12266,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaca187ec0a445e8855c5597ed28580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attRange: 2.43
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
+  attRange: 1.85
   attackPoint: {fileID: 1238364196}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
 --- !u!114 &923251617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12233,6 +12287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db4840e0ff415c9a244fc7d7a52dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
 --- !u!114 &923251618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12245,6 +12303,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2858e22a9dd64f8abb71570ab992507b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillInfo: 
+  skillCooldown: 0
+  nextAvailTime: 0
   dashing: 0
   rollSpeed: 1.5
 --- !u!1 &929441540
@@ -33887,12 +33949,12 @@ PrefabInstance:
     - target: {fileID: 344005415831873746, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.28
+      value: 2.55
       objectReference: {fileID: 0}
     - target: {fileID: 344005415831873746, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044233, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
@@ -33999,7 +34061,7 @@ PrefabInstance:
         type: 3}
       propertyPath: skill
       value: 
-      objectReference: {fileID: 923251613}
+      objectReference: {fileID: 0}
     - target: {fileID: 344005416236044238, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: otherPlayer
@@ -34205,12 +34267,12 @@ PrefabInstance:
     - target: {fileID: 2320867615666489494, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.28
+      value: 2.61
       objectReference: {fileID: 0}
     - target: {fileID: 2320867615666489494, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855600, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}

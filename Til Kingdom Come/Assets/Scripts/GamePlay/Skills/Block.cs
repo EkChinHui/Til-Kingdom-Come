@@ -26,7 +26,7 @@ namespace GamePlay.Skills
             player.anim.SetTrigger("Block");
             player.combatState = PlayerController.CombatState.Blocking;
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
-            player.combatState = PlayerController.CombatState.Vulnerable;
+            player.combatState = PlayerController.CombatState.NonCombatState;
         }
     }
 }

@@ -8,13 +8,13 @@ namespace GamePlay.Skills
     {
         
         private const int Damage = 1;
-        public float attRange = 2.43f;
+        public float attRange = 1.85f;
         public Transform attackPoint;
         private const float KnockDistAttacking = 8f;
         private const float KnockDistBlocking = 4f;
         private const float AttackCooldown = 0.4f;
-        private const float ReactionDelay = 0.4f;
-        public LayerMask playerLayer = 8;
+        private const float ReactionDelay = 0.2f;
+        public LayerMask playerLayer;
 
 
         private void Start()
@@ -22,6 +22,7 @@ namespace GamePlay.Skills
             skillName = "Attack";
             skillInfo = "basic attack";
             skillCooldown = AttackCooldown;
+            playerLayer = 1 << LayerMask.NameToLayer("Player");
         }
 
         public override void Cast(PlayerController player, PlayerController opponent)
@@ -37,9 +38,11 @@ namespace GamePlay.Skills
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // maximum distance between both players for attack to be successful
             float attackDistance = 1.934f + attRange;
+
             // Damage enemies
             foreach(Collider2D enemy in hitEnemies)
             {
+                Debug.Log(enemy.name);
                 if (enemy.GetComponent<PlayerController>() == null) continue;
                 PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
                 float enemyDirection = otherPlayer.transform.rotation.eulerAngles.y;
@@ -75,9 +78,9 @@ namespace GamePlay.Skills
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(ReactionDelay);
             player.combatState = PlayerController.CombatState.Attacking;
-                AttackCast(player);
+            AttackCast(player);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
-            player.combatState = PlayerController.CombatState.Vulnerable;
+            player.combatState = PlayerController.CombatState.NonCombatState;
         }
         
         

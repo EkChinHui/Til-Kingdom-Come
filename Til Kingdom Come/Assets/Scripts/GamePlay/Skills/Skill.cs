@@ -4,10 +4,10 @@ namespace GamePlay.Skills
 {
     public abstract class Skill : MonoBehaviour
     {
-        protected string skillName;
-        protected string skillInfo;
-        protected float skillCooldown;
-        private float nextAvailTime;
+        [SerializeField] protected string skillName;
+        [SerializeField] protected string skillInfo;
+        [SerializeField] protected float skillCooldown;
+        [SerializeField] private float nextAvailTime;
         
 
         // getter
