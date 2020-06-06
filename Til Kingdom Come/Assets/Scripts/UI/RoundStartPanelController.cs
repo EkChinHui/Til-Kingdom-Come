@@ -13,17 +13,23 @@ public class RoundStartPanelController : MonoBehaviour
     private float endYAxis = 0;
     private bool lowering = false;
     private bool raising = false;
+    private bool playSound = false;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         startYAxis = rectTransform.anchoredPosition.y;
         lowering = true;
+        playSound = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (lowering) {
+            if (playSound) {
+                AudioManager.instance.Play("Round Start");
+                playSound = false;
+            }
             Lower();
         } else if (raising) {
             StartCoroutine(Raise());
@@ -56,5 +62,6 @@ public class RoundStartPanelController : MonoBehaviour
     public void nextRound() {
         UpdateRoundNumber();
         lowering = true;
+        playSound = true;
     }
 }
