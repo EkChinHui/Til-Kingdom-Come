@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &211147034
 GameObject:
@@ -360,7 +360,7 @@ RectTransform:
   - {fileID: 5050401700505052880}
   - {fileID: 1457377374}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 696903337}
   - component: {fileID: 696903336}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,6 +681,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696903334}
   m_CullTransparentMesh: 0
+--- !u!1001 &738740785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3013796
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5925137
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 808.9916
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697092, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 864c8e5587eb04510aaa562b68a1e2dc, type: 3}
 --- !u!1 &987816601
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +828,7 @@ GameObject:
   - component: {fileID: 1050783411}
   - component: {fileID: 1050783410}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -956,7 +1025,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878941560
 GameObject:
@@ -1082,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
@@ -1167,6 +1236,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1457377375}
         m_MethodName: PassWins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1043045036}
+        m_MethodName: StopThemeMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1735,7 +1815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7247371a54f0a4350bf869b7d334f101, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcf1de890e2fb463b9fee85bd938b4ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1979,7 +2059,7 @@ RectTransform:
   m_GameObject: {fileID: 3463350009546331121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5050401701637367576}
   m_RootOrder: 0
@@ -1987,7 +2067,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 14, y: 5}
-  m_SizeDelta: {x: 160, y: 96}
+  m_SizeDelta: {x: 112, y: 68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5852969321482650681
 RectTransform:
