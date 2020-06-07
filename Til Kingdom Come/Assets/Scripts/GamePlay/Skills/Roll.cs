@@ -30,6 +30,7 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             playerController = player;
+            AudioManager.instance.Play("Roll");
             FlipSprite(player);
             StartCoroutine(RollAnimDelay(player));
             EndCast();

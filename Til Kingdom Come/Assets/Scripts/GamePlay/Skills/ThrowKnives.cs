@@ -23,6 +23,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
+            AudioManager.instance.Play("Throw Knife");
             StartCoroutine(AnimDelay(player));
             EndCast();
         }
