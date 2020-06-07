@@ -8,7 +8,6 @@ namespace UI
     {
         public Animator transition;
         public float transitionTime = 1f;
-        [SerializeField] public string sceneName;
         public void LoadLevel(string sceneName) {
             StartCoroutine(Helper(sceneName));
         }
@@ -19,7 +18,6 @@ namespace UI
 
             // Wait for animation to finish running
             yield return new WaitForSeconds(transitionTime);
-
             SceneManager.LoadScene(sceneName);
         }
 

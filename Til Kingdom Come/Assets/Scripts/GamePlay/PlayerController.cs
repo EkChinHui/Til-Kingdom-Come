@@ -47,7 +47,10 @@ namespace GamePlay
         {
             // remember the original position of the players so match can be reset
             originalPos = gameObject.transform.position;
-            totalPlayers = 0;
+            totalPlayers++;
+            playerNo = totalPlayers;
+            ScoreKeeper.resetPlayersEvent += ResetPlayer;
+            ScoreKeeper.passPlayerSkills += PassPlayerSkills;
         }
 
         private void Start()
@@ -55,13 +58,8 @@ namespace GamePlay
             // Instantiate variables on creation
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            skill = GetComponent<Skill>();
             currentHealth = MaxHealth;
-            ScoreKeeper.resetPlayersEvent += ResetPlayer;
-
-            totalPlayers++;
-            playerNo = totalPlayers;
-        }  
+        }
 
         public void Update()
         {
@@ -156,6 +154,28 @@ namespace GamePlay
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPos;
+        }
+        
+        private void PassPlayerSkills(int player, int assignSkill)
+        {
+            Debug.Log(player + ": " + assignSkill + " : " + playerNo);
+            if (player != playerNo) return;
+            switch (assignSkill)
+            {
+                case 1:
+                    gameObject.AddComponent<ForcePush>();
+                    skill = GetComponent<ForcePush>();
+                    break;
+                case 2:
+                    gameObject.AddComponent<ForcePull>();
+                    skill = GetComponent<ForcePull>();
+                    break;
+                case 3: 
+                    gameObject.AddComponent<ThrowKnives>();
+                    skill = GetComponent<ThrowKnives>();
+                    break;
+            }
+            
         }
 
         private void OnDestroy()
