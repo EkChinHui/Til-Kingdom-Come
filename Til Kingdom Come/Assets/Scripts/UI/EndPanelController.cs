@@ -20,6 +20,7 @@ namespace UI
 
         private void EndGame(int player)
         {
+            AudioManager.instance.Play("Victory");
             board.SetActive(true);
             switch (player)
             { 
