@@ -5,8 +5,9 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public AudioMixer audioMixer;
     public static AudioManager instance;
+    public Sound[] sounds;
 
     void Awake()
     {
@@ -36,6 +37,9 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
+        audioMixer.SetFloat("Master", linearise(PlayerPrefs.GetFloat("Master", 1)));
+        audioMixer.SetFloat("Music", linearise(PlayerPrefs.GetFloat("Music", 1)));
+        audioMixer.SetFloat("SoundEffect", linearise(PlayerPrefs.GetFloat("SoundEffect", 1)));
         Play("Theme");
     }
 
@@ -70,5 +74,10 @@ public class AudioManager : MonoBehaviour
  
         audioSource.Stop();
         audioSource.volume = startVolume;
+    }
+
+    private float linearise(float value)
+    {
+        return Mathf.Log10(value) * 20;
     }
 }
