@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using GamePlay.Skills;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ namespace GamePlay
         [Header("fields")]
         public Rigidbody2D rb;
         public Animator anim;
-        private new Collider2D collider2D;
         public PlayerController otherPlayer;
         public int playerNo;
         public PlayerInput playerInput;
@@ -24,7 +22,7 @@ namespace GamePlay
         public CombatState combatState = CombatState.NonCombatState;
 
         [Header("Movement")] 
-        public float runSpeed = 4f;
+        private float runSpeed = 4f;
         private Vector2 originalPos;
 
         [Header("Combat")]
@@ -42,8 +40,7 @@ namespace GamePlay
         public Skill skill;
 
         #region Events
-        public delegate void DeathDelegate(int playerNo);
-        public static event DeathDelegate DeathEvent;
+        public static Action<int> onDeath;
         #endregion
 
         private void Awake()
@@ -57,11 +54,10 @@ namespace GamePlay
         {
             // Instantiate variables on creation
             rb = GetComponent<Rigidbody2D>();
-            collider2D = GetComponent<Collider2D>();
             anim = GetComponent<Animator>();
             skill = GetComponent<Skill>();
             currentHealth = MaxHealth;
-            ScoreKeeper.ResetPlayersEvent += ResetPlayer;
+            ScoreKeeper.resetPlayersEvent += ResetPlayer;
 
             totalPlayers++;
             playerNo = totalPlayers;
@@ -145,16 +141,11 @@ namespace GamePlay
 
         private void Die()
         {
-            DeathEvent?.Invoke(playerNo);
+            onDeath?.Invoke(playerNo);
             combatState = CombatState.Dead;
 
             // die animation
             anim.SetBool("Dead", true);
-
-            // Disable sprite
-            collider2D.enabled = false;
-            rb.simulated = false;
-            enabled = false;
         }
         
         private void ResetPlayer()
@@ -169,7 +160,7 @@ namespace GamePlay
 
         private void OnDestroy()
         {
-            ScoreKeeper.ResetPlayersEvent -= ResetPlayer;
+            ScoreKeeper.resetPlayersEvent -= ResetPlayer;
         }
     }
 }

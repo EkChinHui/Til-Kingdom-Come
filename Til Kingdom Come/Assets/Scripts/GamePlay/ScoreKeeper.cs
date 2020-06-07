@@ -11,17 +11,18 @@ namespace GamePlay
         public TextMeshProUGUI playerTwo;
         private int playerOneScore;
         private int playerTwoScore;
-        [SerializeField] public static int winsToGame = 1;
-
-        public delegate void ResetDelegate();
-        public static event ResetDelegate ResetPlayersEvent;
-
-        public delegate void GameEndDelegate(int player);
-        public static event GameEndDelegate OnGameEnd;
+        public static int winsToGame = 1;
         public RoundStartPanelController roundStartPanel;
+
+        #region Events
+        public static Action resetPlayersEvent;
+        public static Action<int> onGameEnd;
+        #endregion
+
+       
         public void Start()
         {
-            PlayerController.DeathEvent += UpdateWins;
+            PlayerController.onDeath += UpdateWins;
         }
 
         private void UpdateWins(int player)
@@ -47,17 +48,17 @@ namespace GamePlay
             if (playerOneScore >= winsToGame)
             {
                 // player one wins
-                OnGameEnd?.Invoke(1);
+                onGameEnd?.Invoke(1);
             } else if (playerTwoScore >= winsToGame)
             {
                 // player two wins
-                OnGameEnd?.Invoke(2);
+                onGameEnd?.Invoke(2);
             } else
             {
-                if (ResetPlayersEvent != null)
+                if (resetPlayersEvent != null)
                 {
                     roundStartPanel.nextRound();
-                    ResetPlayersEvent();
+                    resetPlayersEvent();
                 }
             }
             // load option to either restart or go back to menu
@@ -65,7 +66,7 @@ namespace GamePlay
 
         private void OnDestroy()
         {
-            PlayerController.DeathEvent -= UpdateWins;
+            PlayerController.onDeath -= UpdateWins;
         }
     }
 }

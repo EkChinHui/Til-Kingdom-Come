@@ -6,9 +6,8 @@ namespace GamePlay.Skills
     {
         [SerializeField] protected string skillName;
         [SerializeField] protected string skillInfo;
-        [SerializeField] protected float skillCooldown;
-        [SerializeField] private float nextAvailTime;
-        
+        protected float skillCooldown;
+        private float nextAvailTime;
 
         // getter
         public string SkillName => skillName;

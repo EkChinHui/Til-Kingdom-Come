@@ -15,7 +15,7 @@ namespace UI
 
         private void Start()
         {
-            ScoreKeeper.OnGameEnd += EndGame;
+            ScoreKeeper.onGameEnd += EndGame;
         }
 
         private void EndGame(int player)
@@ -41,7 +41,7 @@ namespace UI
 
         private void OnDestroy()
         {
-            ScoreKeeper.OnGameEnd -= EndGame;
+            ScoreKeeper.onGameEnd -= EndGame;
         }
     }
 }

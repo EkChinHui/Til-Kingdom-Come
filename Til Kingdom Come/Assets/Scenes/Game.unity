@@ -611,24 +611,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteSheetName: Player1
---- !u!114 &297938870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297938864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdd7598fc9f552468dff2a609302d1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: 
-  skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
-  rangePoint: {fileID: 1200237074}
-  knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
 --- !u!114 &297938872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
   attRange: 1.85
   attackPoint: {fileID: 131402542}
   playerLayer:
@@ -664,8 +644,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
 --- !u!114 &297938874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,8 +658,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
   dashing: 0
   rollSpeed: 1.5
 --- !u!1 &432934920
@@ -12306,8 +12282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
   rangePoint: {fileID: 703005905}
   knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
 --- !u!114 &923251614
@@ -12337,8 +12311,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
   attRange: 1.85
   attackPoint: {fileID: 1238364196}
   playerLayer:
@@ -12358,8 +12330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
 --- !u!114 &923251618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12374,8 +12344,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  skillCooldown: 0
-  nextAvailTime: 0
   dashing: 0
   rollSpeed: 1.5
 --- !u!1 &929441540
@@ -28871,7 +28839,7 @@ PrefabInstance:
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
@@ -34175,7 +34143,7 @@ PrefabInstance:
     - target: {fileID: 344005416236044234, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044234, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
@@ -34589,7 +34557,7 @@ PrefabInstance:
     - target: {fileID: 2320867616202855606, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855606, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
