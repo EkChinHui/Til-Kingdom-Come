@@ -158,7 +158,6 @@ namespace GamePlay
         
         private void PassPlayerSkills(int player, int assignSkill)
         {
-            Debug.Log(player + ": " + assignSkill + " : " + playerNo);
             if (player != playerNo) return;
             switch (assignSkill)
             {

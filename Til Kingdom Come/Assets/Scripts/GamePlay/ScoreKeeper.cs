@@ -25,8 +25,6 @@ namespace GamePlay
 
         public void Start()
         {
-            Debug.Log("player one skill: " + playerOneSkill);
-            Debug.Log("player two skill: " + playerTwoSkill);
             PlayerController.onDeath += UpdateWins;
             passPlayerSkills(1, playerOneSkill);
             passPlayerSkills(2, playerTwoSkill);
