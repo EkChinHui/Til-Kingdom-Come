@@ -5,6 +5,7 @@ namespace GamePlay
 {
     public class PlayerInput : MonoBehaviour
     {
+        public bool InputIsEnabled = true;
         [Header("Input")]
         // note to use getAxis for multi-player mode so user can change their input
         public KeyCode leftKey;
@@ -27,8 +28,13 @@ namespace GamePlay
         public bool AttemptBlock => attemptBlock;
         public bool AttemptSkill => attemptSkill;
 
+        private void Start()
+        {
+            PauseMenuController.PauseToggle += Toggle;
+        }
         private void Update()
         {
+            if (!InputIsEnabled) return;
             InputManager();
         }
         
@@ -40,6 +46,16 @@ namespace GamePlay
             attemptAttack = Input.GetKeyDown(attackKey);
             attemptBlock = Input.GetKeyDown(blockKey);
             attemptSkill = Input.GetKeyDown(skillKey);
+        }
+
+        private void Toggle()
+        {
+            InputIsEnabled = !InputIsEnabled;
+        }
+
+        private void OnDestroy()
+        {
+            PauseMenuController.PauseToggle -= Toggle;
         }
     }
 }

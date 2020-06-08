@@ -12,12 +12,14 @@ public class RoundStartPanelController : MonoBehaviour
     private float startYAxis;
     private float endYAxis = 0;
     private bool lowering = false;
+    private bool waiting = false;
     private bool raising = false;
     private bool playSound = false;
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         startYAxis = rectTransform.anchoredPosition.y;
+        if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
         lowering = true;
         playSound = true;
     }
@@ -25,14 +27,16 @@ public class RoundStartPanelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lowering) {
+        if (lowering && !waiting && !raising) {
             if (playSound) {
                 AudioManager.instance.Play("Round Start");
                 playSound = false;
             }
             Lower();
-        } else if (raising) {
-            StartCoroutine(Raise());
+        } else if (!lowering && waiting && !raising) {
+            StartCoroutine(WaitFor(1));
+        } else if (!lowering && !waiting && raising) {
+            Raise();
         }
     }
 
@@ -41,19 +45,23 @@ public class RoundStartPanelController : MonoBehaviour
             rectTransform.anchoredPosition -= new Vector2(0, Time.deltaTime * speed);
         } else {
             lowering = false;
-            raising = true;
+            waiting = true;
         }
     }
-
-    public IEnumerator Raise() {
-        yield return new WaitForSeconds(1);
+    public void Raise() {
         if(rectTransform.anchoredPosition.y < startYAxis) {
             rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
         } else {
             raising = false;
+            if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
         }
     }
-
+    IEnumerator WaitFor(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        waiting = false;
+        raising = true;
+    }
     private void UpdateRoundNumber() {
         roundNumber++;
         roundNumberText.text = "Round " + roundNumber;
@@ -61,6 +69,7 @@ public class RoundStartPanelController : MonoBehaviour
 
     public void nextRound() {
         UpdateRoundNumber();
+        if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
         lowering = true;
         playSound = true;
     }
