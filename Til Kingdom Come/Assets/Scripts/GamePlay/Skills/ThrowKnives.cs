@@ -16,6 +16,7 @@ namespace GamePlay.Skills
             skillName = "Throw Knives"; 
             skillInfo = "Throws knives at opponent";
             skillCooldown = 10f;
+
         }
 
 
@@ -23,6 +24,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
+            Instantiate(GameObject.Find("Knife"), new Vector3(0, 0, 0), Quaternion.identity);
             AudioManager.instance.Play("Throw Knife");
             StartCoroutine(AnimDelay(player));
             EndCast();

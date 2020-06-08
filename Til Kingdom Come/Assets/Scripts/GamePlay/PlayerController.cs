@@ -1,5 +1,6 @@
 ﻿using System;
 using GamePlay.Skills;
+using UI;
 using UnityEngine;
 
 namespace GamePlay
@@ -50,7 +51,7 @@ namespace GamePlay
             totalPlayers++;
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
-            ScoreKeeper.passPlayerSkills += PassPlayerSkills;
+            SkillSelectionManager.passPlayerSkills += PassPlayerSkills;
         }
 
         private void Start()
@@ -156,25 +157,11 @@ namespace GamePlay
             gameObject.transform.position = originalPos;
         }
         
-        private void PassPlayerSkills(int player, int assignSkill)
+        private void PassPlayerSkills(int player, Skill assignSkill)
         {
+            Debug.Log(player + " : " + skill.name);
             if (player != playerNo) return;
-            switch (assignSkill)
-            {
-                case 1:
-                    gameObject.AddComponent<ForcePush>();
-                    skill = GetComponent<ForcePush>();
-                    break;
-                case 2:
-                    gameObject.AddComponent<ForcePull>();
-                    skill = GetComponent<ForcePull>();
-                    break;
-                case 3: 
-                    gameObject.AddComponent<ThrowKnives>();
-                    skill = GetComponent<ThrowKnives>();
-                    break;
-            }
-            
+            skill = assignSkill;
         }
 
         private void OnDestroy()

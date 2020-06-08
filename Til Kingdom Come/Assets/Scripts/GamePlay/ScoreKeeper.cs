@@ -13,21 +13,16 @@ namespace GamePlay
         private int playerOneScore;
         private int playerTwoScore;
         public static int winsToGame = 1;
-        public static int playerOneSkill;
-        public static int playerTwoSkill;
         public RoundStartPanelController roundStartPanel;
 
         #region Events
         public static Action resetPlayersEvent;
         public static Action<int> onGameEnd;
-        public static Action<int, int> passPlayerSkills;
         #endregion
 
         public void Start()
         {
             PlayerController.onDeath += UpdateWins;
-            passPlayerSkills(1, playerOneSkill);
-            passPlayerSkills(2, playerTwoSkill);
         }
 
         private void UpdateWins(int player)
