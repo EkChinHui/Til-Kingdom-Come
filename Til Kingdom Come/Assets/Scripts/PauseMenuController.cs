@@ -6,22 +6,26 @@ using System;
 public class PauseMenuController : MonoBehaviour
 {
     public static Action PauseToggle;
+    public bool canPause = true;
     private bool gameIsPaused = false;
     public GameObject pauseMenu;
     public GameObject blurEffect;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (canPause)
         {
-            if(gameIsPaused)
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
-                if (PauseToggle != null) PauseToggle();
-                Resume();
-            }
-            else
-            {
-                if (PauseToggle != null) PauseToggle();
-                Pause();
+                if(gameIsPaused)
+                {
+                    if (PauseToggle != null) PauseToggle();
+                    Resume();
+                }
+                else
+                {
+                    if (PauseToggle != null) PauseToggle();
+                    Pause();
+                }
             }
         }
     }

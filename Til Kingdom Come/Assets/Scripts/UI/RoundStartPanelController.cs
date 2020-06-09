@@ -6,8 +6,9 @@ using UnityEngine;
 public class RoundStartPanelController : MonoBehaviour
 {
     public TextMeshProUGUI roundNumberText;
-    private float roundNumber = 1;
+    public PauseMenuController pauseMenuController;
     private RectTransform rectTransform;
+    private float roundNumber = 1;
     private float speed = 500f;
     private float startYAxis;
     private float endYAxis = 0;
@@ -22,6 +23,7 @@ public class RoundStartPanelController : MonoBehaviour
         if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
         lowering = true;
         playSound = true;
+        pauseMenuController.canPause = false;
     }
 
     // Update is called once per frame
@@ -54,6 +56,7 @@ public class RoundStartPanelController : MonoBehaviour
         } else {
             raising = false;
             if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
+            pauseMenuController.canPause = true;
         }
     }
     IEnumerator WaitFor(int seconds)
@@ -71,6 +74,7 @@ public class RoundStartPanelController : MonoBehaviour
         UpdateRoundNumber();
         if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
         lowering = true;
+        pauseMenuController.canPause = false;
         playSound = true;
     }
 }
