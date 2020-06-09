@@ -325,9 +325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedPlayerSkills: 
   totalPlayers: 2
-  forcePull: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
-    type: 3}
   forcePush: {fileID: 7964931500498912422, guid: 62c43af573df1c24a923c7f46ea185fa,
+    type: 3}
+  forcePull: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
     type: 3}
   throwKnives: {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09,
     type: 3}
@@ -2568,7 +2568,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: sounds.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2798,6 +2798,32 @@ PrefabInstance:
       propertyPath: audioMixer
       value: 
       objectReference: {fileID: 24100000, guid: eb84e4c20b5b64dd183e38cb08d8bf9e,
+        type: 2}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Victory
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f7cae700fe1d44328b160b0459ce216b, type: 3}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: sounds.Array.data[8].outputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 269792397252150912, guid: eb84e4c20b5b64dd183e38cb08d8bf9e,
         type: 2}
     - target: {fileID: 649129866234697092, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
