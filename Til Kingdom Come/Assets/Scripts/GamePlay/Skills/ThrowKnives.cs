@@ -28,7 +28,7 @@ namespace GamePlay.Skills
             rangePoint = player.transform;
             AudioManager.instance.Play("Throw Knife");
             StartCoroutine(AnimDelay(player));
-            EndCast();
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(player.skill.SkillCooldown));
         }
         
         

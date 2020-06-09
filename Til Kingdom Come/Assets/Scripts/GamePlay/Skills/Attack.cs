@@ -28,8 +28,8 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
+            StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
             StartCoroutine(AttackAnimDelay(player));
-            EndCast();
         }
         
         private void AttackCast(PlayerController player)

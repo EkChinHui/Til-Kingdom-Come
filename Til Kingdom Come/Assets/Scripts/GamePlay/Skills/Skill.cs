@@ -16,12 +16,10 @@ namespace GamePlay.Skills
         
         protected bool CanCast()
         {
-            return Time.time > nextAvailTime;
-        }
-
-        protected void EndCast()
-        {
+            if (Time.time < nextAvailTime) return false;
             nextAvailTime = skillCooldown + Time.time;
+            return true;
+
         }
 
         public float TimeLeft()
