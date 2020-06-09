@@ -19,7 +19,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-
+            
             StartCoroutine(AnimDelay(player));
 
             int pullDirection = opponent.transform.position.x - player.transform.position.x > 0 ? 1 : -1;
@@ -31,9 +31,11 @@ namespace GamePlay.Skills
 
         private IEnumerator AnimDelay(PlayerController player)
         {
+            player.combatState = PlayerController.CombatState.Skill;
             var animDelay = AnimationTimes.instance.ForcePullAnim;
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(animDelay);
+            player.combatState = PlayerController.CombatState.NonCombatState;
         }
 
         private IEnumerator Stun(PlayerController opponent)

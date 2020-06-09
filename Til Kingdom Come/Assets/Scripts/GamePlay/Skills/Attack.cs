@@ -46,7 +46,6 @@ namespace GamePlay.Skills
                 // Damage enemies
                 foreach(Collider2D enemy in hitEnemies)
                 {
-                    Debug.Log(enemy.name);
                     if (enemy.GetComponent<PlayerController>() == null) continue;
                     PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
                     float enemyDirection = otherPlayer.transform.rotation.eulerAngles.y;
@@ -81,10 +80,10 @@ namespace GamePlay.Skills
         
         private IEnumerator AttackAnimDelay(PlayerController player)
         {
+            player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(ReactionDelay);
-            player.combatState = PlayerController.CombatState.Attacking;
             AttackCast(player);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;

@@ -8,8 +8,8 @@ namespace UI
     public class SkillSelectionManager : MonoBehaviour
     {
         private List<Skill> allSkills = new List<Skill>();
-        public static List<int> assignedPlayerSkills; // add in order of player number
-        public static int totalPlayers = 2;
+        public List<int> assignedPlayerSkills; // add in order of player number
+        public int totalPlayers = 2;
 
         #region Events
         public static Action<int, Skill> passPlayerSkills;
@@ -41,15 +41,14 @@ namespace UI
             allSkills.Add(forcePull);
             allSkills.Add(forcePush);
             allSkills.Add(throwKnives);
-            
-            AssignSkills();
         }
 
-        private void AssignSkills()
+        public void AssignSkills()
         {
             for (var i = 0; i < totalPlayers; i++)
             {
-                passPlayerSkills(i + 1, allSkills[assignedPlayerSkills[i]]);
+                //Debug.Log(allSkills[assignedPlayerSkills[i] - 1].SkillName);
+                passPlayerSkills(i + 1, allSkills[assignedPlayerSkills[i] - 1]);
             }
         }
     }

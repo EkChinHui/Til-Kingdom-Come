@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -8,15 +9,15 @@ namespace GamePlay.Skills
         public Transform rangePoint;
         public GameObject knife;
         private float knifeDelay = 0.4f;
+        public float heightOffset;
+        public float distanceOffset;
 
         // Start is called before the first frame update
         void Start()
         {
-            rangePoint = gameObject.transform.GetChild(1);
             skillName = "Throw Knives"; 
             skillInfo = "Throws knives at opponent";
-            skillCooldown = 10f;
-
+            skillCooldown = 1f;
         }
 
 
@@ -24,7 +25,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-            Instantiate(GameObject.Find("Knife"), new Vector3(0, 0, 0), Quaternion.identity);
+            rangePoint = player.transform;
             AudioManager.instance.Play("Throw Knife");
             StartCoroutine(AnimDelay(player));
             EndCast();
@@ -34,10 +35,20 @@ namespace GamePlay.Skills
         private IEnumerator AnimDelay(PlayerController player)
         {
             var animDelay = AnimationTimes.instance.ThrowKnivesAnim;
+            player.combatState = PlayerController.CombatState.Skill;
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(knifeDelay);
-            Instantiate(knife, rangePoint.position, rangePoint.rotation);
+            var tempOffset = distanceOffset;
+            if (Math.Abs(rangePoint.rotation.eulerAngles.y - 180) < Mathf.Epsilon)
+            {
+                tempOffset = -distanceOffset;
+            }
+
+            Debug.Log($"player rotation: {rangePoint.eulerAngles.x} , tempOffset: {tempOffset}");
+            var pos = new Vector3(tempOffset, heightOffset, 0);
+            Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
             yield return new WaitForSeconds(animDelay - knifeDelay);
+            player.combatState = PlayerController.CombatState.NonCombatState;
         }
 
     }

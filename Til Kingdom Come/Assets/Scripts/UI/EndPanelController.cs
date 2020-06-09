@@ -20,7 +20,7 @@ namespace UI
 
         private void EndGame(int player)
         {
-            AudioManager.instance.Play("Victory");
+            //AudioManager.instance.Play("Victory");
             board.SetActive(true);
             switch (player)
             { 
@@ -37,6 +37,7 @@ namespace UI
         [UsedImplicitly]
         public void ReloadGame()
         {
+            PlayerController.totalPlayers = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

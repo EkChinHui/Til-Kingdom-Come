@@ -1,6 +1,4 @@
-﻿using System;
-using GamePlay;
-using GamePlay.Skills;
+﻿using GamePlay;
 using UnityEngine;
 
 namespace UI
@@ -12,7 +10,7 @@ namespace UI
 
         private void Start()
         {
-            SkillSelectionManager.assignedPlayerSkills.Clear();
+            SkillSelectionManager.instance.assignedPlayerSkills.Clear();
         }
 
         public void SelectSkillPlayerOne(int skillNo)
@@ -27,9 +25,8 @@ namespace UI
 
         public void PassSkills()
         {
-            SkillSelectionManager.assignedPlayerSkills.Add(playerOneSkill);
-            SkillSelectionManager.assignedPlayerSkills.Add(playerTwoSkill);
-            Debug.Log(SkillSelectionManager.assignedPlayerSkills);
+            SkillSelectionManager.instance.assignedPlayerSkills.Add(playerOneSkill);
+            SkillSelectionManager.instance.assignedPlayerSkills.Add(playerTwoSkill);
             PlayerController.totalPlayers = 0;
         }
         

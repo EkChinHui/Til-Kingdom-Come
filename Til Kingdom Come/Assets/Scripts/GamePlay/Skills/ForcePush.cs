@@ -29,9 +29,11 @@ namespace GamePlay.Skills
         }
         private IEnumerator AnimDelay(PlayerController player)
         {
+            player.combatState = PlayerController.CombatState.Skill;
             var forcePushAnim= AnimationTimes.instance.ForcePushAnim;
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(forcePushAnim);
+            player.combatState = PlayerController.CombatState.NonCombatState;
         }
         
         

@@ -19,7 +19,7 @@ namespace GamePlay
 
         private enum State { Idle, Run}
         private State state = State.Idle;
-        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Dead}
+        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
         public CombatState combatState = CombatState.NonCombatState;
 
         [Header("Movement")] 
@@ -40,6 +40,9 @@ namespace GamePlay
         public Roll roll;
         public Skill skill;
 
+        [Header("UI")] 
+        public CooldownUiController cooldownUiController;
+
         #region Events
         public static Action<int> onDeath;
         #endregion
@@ -52,6 +55,7 @@ namespace GamePlay
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkills;
+            SkillSelectionManager.instance.AssignSkills();
         }
 
         private void Start()
@@ -64,8 +68,8 @@ namespace GamePlay
 
         public void Update()
         {
-            if (combatState == CombatState.Dead) return; 
-            
+            if (combatState == CombatState.Dead) return;
+            if (combatState != CombatState.NonCombatState) return;
             if (playerInput.AttemptSkill)
             {
                 skill.Cast(this, otherPlayer);
@@ -159,7 +163,6 @@ namespace GamePlay
         
         private void PassPlayerSkills(int player, Skill assignSkill)
         {
-            Debug.Log(player + " : " + skill.name);
             if (player != playerNo) return;
             skill = assignSkill;
         }
@@ -167,6 +170,7 @@ namespace GamePlay
         private void OnDestroy()
         {
             ScoreKeeper.resetPlayersEvent -= ResetPlayer;
+            SkillSelectionManager.passPlayerSkills -= PassPlayerSkills;
         }
     }
 }

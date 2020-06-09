@@ -5,7 +5,7 @@ namespace GamePlay
 {
     public class PlayerInput : MonoBehaviour
     {
-        public bool InputIsEnabled = true;
+        private bool inputIsEnabled = true;
         [Header("Input")]
         // note to use getAxis for multi-player mode so user can change their input
         public KeyCode leftKey;
@@ -34,7 +34,7 @@ namespace GamePlay
         }
         private void Update()
         {
-            if (!InputIsEnabled) return;
+            if (!inputIsEnabled) return;
             InputManager();
         }
         
@@ -50,7 +50,7 @@ namespace GamePlay
 
         private void Toggle()
         {
-            InputIsEnabled = !InputIsEnabled;
+            inputIsEnabled = !inputIsEnabled;
         }
 
         private void OnDestroy()

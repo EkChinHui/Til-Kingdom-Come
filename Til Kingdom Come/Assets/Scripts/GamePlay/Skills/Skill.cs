@@ -22,6 +22,11 @@ namespace GamePlay.Skills
             nextAvailTime = skillCooldown + Time.time;
         }
 
+        protected float TimeLeft()
+        {
+            return nextAvailTime - Time.time;
+        }
+
         public abstract void Cast(PlayerController player, PlayerController opponent);
 
     }
