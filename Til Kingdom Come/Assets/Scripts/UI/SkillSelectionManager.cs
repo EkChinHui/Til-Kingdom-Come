@@ -17,8 +17,8 @@ namespace UI
         #endregion
 
         #region All Skills
-        public GameObject forcePull;
         public GameObject forcePush;
+        public GameObject forcePull;
         public GameObject throwKnives;
         #endregion
         
@@ -39,8 +39,8 @@ namespace UI
         }
         private void Start()
         {
-            Skills.Add(forcePull);
             Skills.Add(forcePush);
+            Skills.Add(forcePull);
             Skills.Add(throwKnives);
         }
 
