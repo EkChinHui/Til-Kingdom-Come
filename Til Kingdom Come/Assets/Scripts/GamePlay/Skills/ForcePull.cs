@@ -19,13 +19,13 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-            
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(player.skill.SkillCooldown));
             StartCoroutine(AnimDelay(player));
 
             int pullDirection = opponent.transform.position.x - player.transform.position.x > 0 ? 1 : -1;
             opponent.KnockBack(pullDirection * pullDistance);
             StartCoroutine(Stun(opponent));
-            EndCast();
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
        
         }
 

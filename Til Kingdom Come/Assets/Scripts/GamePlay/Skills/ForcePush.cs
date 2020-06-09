@@ -24,7 +24,7 @@ namespace GamePlay.Skills
             int pushDirection = opponent.transform.position.x - player.transform.position.x > 0 ? -1 : 1;
             opponent.KnockBack(pushDirection * pushDistance);
             StartCoroutine(Stun(opponent));
-            EndCast();
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
             
         }
         private IEnumerator AnimDelay(PlayerController player)

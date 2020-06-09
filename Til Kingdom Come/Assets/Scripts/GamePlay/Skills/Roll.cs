@@ -33,7 +33,7 @@ namespace GamePlay.Skills
             AudioManager.instance.Play("Roll");
             FlipSprite(player);
             StartCoroutine(RollAnimDelay(player));
-            EndCast();
+            StartCoroutine(player.cooldownUiController.rollIcon.ChangesFillAmount(skillCooldown));
         }
 
         private void RollMove(PlayerController player)

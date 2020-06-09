@@ -18,7 +18,7 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             StartCoroutine(BlockAnimDelay(player));
-            EndCast();
+            StartCoroutine(player.cooldownUiController.blockIcon.ChangesFillAmount(skillCooldown));
         }
         
         private IEnumerator BlockAnimDelay(PlayerController player)

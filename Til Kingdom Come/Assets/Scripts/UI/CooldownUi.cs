@@ -11,7 +11,7 @@ namespace UI
 
         public void Start()
         {
-            //darkMask.enabled = false;
+            darkMask.fillAmount = 0;
         }
 
         public IEnumerator ChangesFillAmount(float duration)
