@@ -9,6 +9,7 @@ namespace UI
         public Animator transition;
         public float transitionTime = 1f;
         public void LoadLevel(string sceneName) {
+            Debug.Log("Load level + " + sceneName);
             StartCoroutine(Helper(sceneName));
         }
 
