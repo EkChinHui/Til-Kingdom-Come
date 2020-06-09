@@ -1850,6 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebc1f5bac8d546d1afbc070a471112c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPause: 1
   pauseMenu: {fileID: 1008306073}
   blurEffect: {fileID: 1929757069}
 --- !u!1 &597973717
@@ -2220,7 +2221,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 624944a1004854714986e46fbf409f42, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -13331,9 +13332,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedPlayerSkills: 
   totalPlayers: 2
-  forcePull: {fileID: 875749345}
-  forcePush: {fileID: 875749344}
-  throwKnives: {fileID: 875749343}
+  forcePull: {fileID: 0}
+  forcePush: {fileID: 0}
+  throwKnives: {fileID: 0}
 --- !u!4 &875749347
 Transform:
   m_ObjectHideFlags: 0
@@ -33675,6 +33676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundNumberText: {fileID: 2070298623}
+  pauseMenuController: {fileID: 584988114}
 --- !u!1 &1776185725
 GameObject:
   m_ObjectHideFlags: 0
@@ -37532,7 +37534,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7ade865c3f65a494e8d032e73701d9a0, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
