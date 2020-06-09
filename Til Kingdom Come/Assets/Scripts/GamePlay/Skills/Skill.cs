@@ -9,6 +9,8 @@ namespace GamePlay.Skills
         protected float skillCooldown;
         private float nextAvailTime;
 
+        public float SkillCooldown => skillCooldown;
+
         // getter
         public string SkillName => skillName;
         
@@ -22,7 +24,7 @@ namespace GamePlay.Skills
             nextAvailTime = skillCooldown + Time.time;
         }
 
-        protected float TimeLeft()
+        public float TimeLeft()
         {
             return nextAvailTime - Time.time;
         }

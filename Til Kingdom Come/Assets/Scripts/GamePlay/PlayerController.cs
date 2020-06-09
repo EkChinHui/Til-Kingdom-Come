@@ -73,17 +73,21 @@ namespace GamePlay
             if (playerInput.AttemptSkill)
             {
                 skill.Cast(this, otherPlayer);
+                StartCoroutine(cooldownUiController.skillIcon.ChangesFillAmount(skill.SkillCooldown));
             }
             else if (playerInput.AttemptAttack)
             {
                 attack.Cast(this, otherPlayer);
+                StartCoroutine(cooldownUiController.attackIcon.ChangesFillAmount(attack.SkillCooldown));
             }
             else if (playerInput.AttemptBlock)
             {
                 block.Cast(this, otherPlayer);
+                StartCoroutine(cooldownUiController.attackIcon.ChangesFillAmount(block.SkillCooldown));
             } else if (playerInput.AttemptRoll)
             {
                 roll.Cast(this, otherPlayer);
+                StartCoroutine(cooldownUiController.attackIcon.ChangesFillAmount(roll.SkillCooldown));
             }
             else if (combatState == CombatState.NonCombatState)
             {
