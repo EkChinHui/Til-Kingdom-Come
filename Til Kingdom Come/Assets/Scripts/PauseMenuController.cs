@@ -26,7 +26,7 @@ public class PauseMenuController : MonoBehaviour
         }
     }
 
-    private void Resume()
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         blurEffect.SetActive(false);
@@ -39,5 +39,10 @@ public class PauseMenuController : MonoBehaviour
         blurEffect.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+    }
+
+    public void UnfreezeTime()
+    {
+        Time.timeScale = 1f;
     }
 }
