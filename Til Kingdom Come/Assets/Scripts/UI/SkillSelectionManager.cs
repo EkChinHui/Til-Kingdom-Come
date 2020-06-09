@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GamePlay.Skills;
 using UnityEngine;
@@ -7,18 +8,18 @@ namespace UI
 {
     public class SkillSelectionManager : MonoBehaviour
     {
-        private List<Skill> allSkills = new List<Skill>();
+        private List<GameObject> Skills = new List<GameObject>();
         public List<int> assignedPlayerSkills; // add in order of player number
         public int totalPlayers = 2;
 
         #region Events
-        public static Action<int, Skill> passPlayerSkills;
+        public static Action<int, GameObject> passPlayerSkills;
         #endregion
 
         #region All Skills
-        public ForcePull forcePull;
-        public ForcePush forcePush;
-        public ThrowKnives throwKnives;
+        public GameObject forcePull;
+        public GameObject forcePush;
+        public GameObject throwKnives;
         #endregion
         
         public static SkillSelectionManager instance;
@@ -38,9 +39,9 @@ namespace UI
         }
         private void Start()
         {
-            allSkills.Add(forcePull);
-            allSkills.Add(forcePush);
-            allSkills.Add(throwKnives);
+            Skills.Add(forcePull);
+            Skills.Add(forcePush);
+            Skills.Add(throwKnives);
         }
 
         public void AssignSkills()
@@ -48,7 +49,7 @@ namespace UI
             for (var i = 0; i < totalPlayers; i++)
             {
                 //Debug.Log(allSkills[assignedPlayerSkills[i] - 1].SkillName);
-                passPlayerSkills(i + 1, allSkills[assignedPlayerSkills[i] - 1]);
+                passPlayerSkills(i + 1, Skills[assignedPlayerSkills[i] - 1]);
             }
         }
     }

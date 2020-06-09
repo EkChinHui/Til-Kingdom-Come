@@ -304,9 +304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 503837650}
   - component: {fileID: 503837649}
-  - component: {fileID: 503837648}
-  - component: {fileID: 503837647}
-  - component: {fileID: 503837646}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -314,56 +311,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &503837646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503837645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdd7598fc9f552468dff2a609302d1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Throw Knives
-  skillInfo: 
-  rangePoint: {fileID: 503837650}
-  knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
-  heightOffset: 2
-  distanceOffset: 2
---- !u!114 &503837647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503837645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e6f5cb519d500459962489160b9c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Force Push
-  skillInfo: 
-  pushDistance: 6
-  stunDuration: 0.2
---- !u!114 &503837648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503837645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efcafdc9db912943afd2fc61883e544, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Force Pull
-  skillInfo: 
-  pullDistance: 6
-  stunDuration: 0.2
 --- !u!114 &503837649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,9 +325,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedPlayerSkills: 
   totalPlayers: 2
-  forcePull: {fileID: 503837648}
-  forcePush: {fileID: 503837647}
-  throwKnives: {fileID: 503837646}
+  forcePull: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
+    type: 3}
+  forcePush: {fileID: 7964931500498912422, guid: 62c43af573df1c24a923c7f46ea185fa,
+    type: 3}
+  throwKnives: {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09,
+    type: 3}
 --- !u!4 &503837650
 Transform:
   m_ObjectHideFlags: 0

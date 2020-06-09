@@ -5,8 +5,8 @@ namespace UI
 {
     public class SkillSelector : MonoBehaviour
     {
-        private int playerOneSkill;
-        private int playerTwoSkill;
+        private int playerOneSkill = 1;
+        private int playerTwoSkill = 1;
 
         private void Start()
         {

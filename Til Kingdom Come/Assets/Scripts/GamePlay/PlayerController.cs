@@ -101,7 +101,6 @@ namespace GamePlay
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
-
                 state = State.Run;
             }
             else if (playerInput.AttemptLeft)
@@ -161,10 +160,10 @@ namespace GamePlay
             gameObject.transform.position = originalPos;
         }
         
-        private void PassPlayerSkills(int player, Skill assignSkill)
+        private void PassPlayerSkills(int player, GameObject assignSkill)
         {
             if (player != playerNo) return;
-            skill = assignSkill;
+            skill = Instantiate(assignSkill).GetComponent<Skill>();
         }
 
         private void OnDestroy()
