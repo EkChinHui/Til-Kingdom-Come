@@ -20,9 +20,8 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             StartCoroutine(AnimDelay(player));
-
-            int pullDirection = opponent.transform.position.x - player.transform.position.x > 0 ? 1 : -1;
-            opponent.KnockBack(pullDirection * pullDistance);
+            Debug.Log($"Player {player.playerNo} used {skillName}");
+            opponent.KnockBack(-1 * pullDistance);
             StartCoroutine(Stun(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
        

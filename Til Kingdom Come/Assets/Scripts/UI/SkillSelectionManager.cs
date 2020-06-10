@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using GamePlay.Skills;
+
 using UnityEngine;
 
 namespace UI
 {
     public class SkillSelectionManager : MonoBehaviour
     {
-        private List<GameObject> Skills = new List<GameObject>();
+        private List<GameObject> skillPrefabs = new List<GameObject>();
         public List<int> assignedPlayerSkills; // add in order of player number
+
         public int totalPlayers = 2;
 
         #region Events
@@ -26,6 +27,7 @@ namespace UI
 
         private void Awake()
         {
+            // singleton
             if (instance == null)
             {
                 instance = this;
@@ -39,9 +41,9 @@ namespace UI
         }
         private void Start()
         {
-            Skills.Add(forcePush);
-            Skills.Add(forcePull);
-            Skills.Add(throwKnives);
+            skillPrefabs.Add(forcePush); // 0
+            skillPrefabs.Add(forcePull); // 1
+            skillPrefabs.Add(throwKnives); // 2
         }
 
         public void AssignSkills()
@@ -49,7 +51,8 @@ namespace UI
             Debug.Log("Assigning skills to players");
             for (var i = 0; i < totalPlayers; i++)
             {
-                passPlayerSkills(i + 1, Skills[assignedPlayerSkills[i] - 1]);
+                //               player no, assigned skill
+                passPlayerSkills(i + 1, skillPrefabs[assignedPlayerSkills[i]]);
             }
         }
     }

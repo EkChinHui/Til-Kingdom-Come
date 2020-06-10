@@ -5,8 +5,8 @@ namespace UI
 {
     public class SkillSelector : MonoBehaviour
     {
-        private int playerOneSkill = 1;
-        private int playerTwoSkill = 1;
+        private int playerOneSkill = 0;
+        private int playerTwoSkill = 0;
 
         private void Start()
         {
@@ -27,6 +27,7 @@ namespace UI
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Add(playerOneSkill);
             SkillSelectionManager.instance.assignedPlayerSkills.Add(playerTwoSkill);
+            // resets the total players to 0
             PlayerController.totalPlayers = 0;
         }
         

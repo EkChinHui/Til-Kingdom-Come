@@ -22,25 +22,28 @@ namespace GamePlay.Skills
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Wall"))
-            {
-                DestroyProjectile();
-            }
+            // destroys projectile if it touches a wall
+            if (collision.CompareTag("Wall")) DestroyProjectile();
+            
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+            // projectile collides a player
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
             switch (damagedPlayer.combatState)
             {
                 // Player cant be hit while rolling
                 case PlayerController.CombatState.Rolling:
+                    Debug.Log("Successful dodge");
                     return;
+                // Player will not be damaged while blocking (projectile is destroyed)
                 case PlayerController.CombatState.Blocking:
                     DestroyProjectile();
-                    Debug.Log("here");
+                    Debug.Log("Successful block");
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);
                     DestroyProjectile();
+                    Debug.Log("Projectile Hits target");
                     return;
             }
         }

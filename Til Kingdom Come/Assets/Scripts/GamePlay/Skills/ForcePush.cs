@@ -19,10 +19,9 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
-
+            Debug.Log($"Player {player.playerNo} used {skillName}");
             StartCoroutine(AnimDelay(player));
-            int pushDirection = opponent.transform.position.x - player.transform.position.x > 0 ? -1 : 1;
-            opponent.KnockBack(pushDirection * pushDistance);
+            opponent.KnockBack(pushDistance);
             StartCoroutine(Stun(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
             
