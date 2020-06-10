@@ -11,14 +11,7 @@ namespace UI
         {
             foreach (Transform child in transform)
             {
-                if(child.gameObject.name == mapToLoad)
-                {
-                    child.gameObject.SetActive(true);
-                }
-                else
-                {
-                    child.gameObject.SetActive(false);
-                }
+                child.gameObject.SetActive(child.gameObject.name == mapToLoad);
             }
         }
     }

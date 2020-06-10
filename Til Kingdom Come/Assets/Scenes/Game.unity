@@ -458,7 +458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &133556108
 GameObject:
@@ -504,7 +504,7 @@ Transform:
   - {fileID: 435449622}
   - {fileID: 945803577}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &134955847
 GameObject:
@@ -1985,7 +1985,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697090, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2243,7 +2243,7 @@ GameObject:
   - component: {fileID: 739513565}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13332,8 +13332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedPlayerSkills: 
   totalPlayers: 2
-  forcePull: {fileID: 0}
   forcePush: {fileID: 0}
+  forcePull: {fileID: 0}
   throwKnives: {fileID: 0}
 --- !u!4 &875749347
 Transform:
@@ -13347,7 +13347,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &899992755
 GameObject:
@@ -31159,7 +31159,7 @@ PrefabInstance:
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453650798890808342, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
@@ -31184,7 +31184,7 @@ PrefabInstance:
     - target: {fileID: 8453650798890808343, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8453650798890808343, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
@@ -31403,7 +31403,7 @@ PrefabInstance:
     - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
         type: 3}
@@ -31788,7 +31788,7 @@ GameObject:
   - component: {fileID: 1593557506}
   m_Layer: 0
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33458,7 +33458,7 @@ RectTransform:
   - {fileID: 1726696170}
   - {fileID: 584988113}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -33719,7 +33719,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790795521
 GameObject:
@@ -37733,7 +37733,7 @@ PrefabInstance:
     - target: {fileID: 344005416236044234, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 344005416236044234, guid: c6bdec85815570c45ae24a863b08529c,
         type: 3}
@@ -38157,7 +38157,7 @@ PrefabInstance:
     - target: {fileID: 2320867616202855606, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2320867616202855606, guid: 430bbaf8965a1644f9c3899856c21a68,
         type: 3}

@@ -47,5 +47,5 @@ MonoBehaviour:
   skillInfo: 
   rangePoint: {fileID: 0}
   knife: {fileID: 248301440400570547, guid: 728adb677c0f18548b90a87f4b0ff898, type: 3}
-  heightOffset: 0
-  distanceOffset: 0
+  heightOffset: 2
+  distanceOffset: 2

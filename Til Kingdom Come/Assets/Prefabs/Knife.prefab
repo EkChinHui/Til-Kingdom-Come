@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7243731116663652529}
   m_Layer: 0
   m_Name: Knife
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,3 @@ MonoBehaviour:
   speed: 15
   damage: 1
   lifeTime: 3
-  distance: 100
-  collide:
-    serializedVersion: 2
-    m_Bits: 0

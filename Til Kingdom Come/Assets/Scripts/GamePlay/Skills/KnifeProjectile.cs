@@ -22,6 +22,10 @@ namespace GamePlay.Skills
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.CompareTag("Wall"))
+            {
+                DestroyProjectile();
+            }
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             PlayerController damagedPlayer = collision.GetComponent<PlayerController>();
             if (damagedPlayer == null) return;
