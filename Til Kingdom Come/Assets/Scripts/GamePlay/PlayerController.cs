@@ -122,7 +122,7 @@ namespace GamePlay
         public void KnockBack(float distance)
         {
             var velocity = rb.velocity;
-            velocity = transform.localScale.x < 0 
+            velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(distance, velocity.y)
                 : new Vector2(-distance, velocity.y);
             rb.velocity = velocity;
