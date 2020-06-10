@@ -16,9 +16,7 @@ namespace GamePlay
         public PlayerController otherPlayer;
         public int playerNo;
         public PlayerInput playerInput;
-
-        private enum State { Idle, Run}
-        private State state = State.Idle;
+        
         public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
         public CombatState combatState = CombatState.NonCombatState;
 
@@ -68,7 +66,9 @@ namespace GamePlay
 
         public void Update()
         {
+            // if the player is dead, the player state should not be updated
             if (combatState == CombatState.Dead) return;
+            // the player should only be able to perform other actions in the NonCombatState
             if (combatState != CombatState.NonCombatState) return;
             if (playerInput.AttemptSkill)
             {
@@ -89,32 +89,31 @@ namespace GamePlay
             {
                 Move();
             }
-            anim.SetInteger("state", (int) state);
         }
 
         private void Move()
         {
             if (playerInput.AttemptRight)
             {
+                anim.SetInteger("state", 1);
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
-                state = State.Run;
             }
             else if (playerInput.AttemptLeft)
             {
+                anim.SetInteger("state", 1);
                 rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
                 {
                     transform.rotation = Quaternion.Euler(0, 180f, 0);
                 }
-                state = State.Run;
             }
             else
             {
-                state = State.Idle;
+                anim.SetInteger("state", 0);
             }
         }
         
@@ -151,6 +150,7 @@ namespace GamePlay
         }
         
         private void ResetPlayer()
+        // resets player position based on start position and resets combatState
         {
             anim.SetBool("Dead", false);
             combatState = CombatState.NonCombatState;
@@ -161,6 +161,7 @@ namespace GamePlay
         }
         
         private void PassPlayerSkills(int player, GameObject assignSkill)
+        // assign player skills based on skill selection menu
         {
             if (player != playerNo) return;
             skill = Instantiate(assignSkill).GetComponent<Skill>();
