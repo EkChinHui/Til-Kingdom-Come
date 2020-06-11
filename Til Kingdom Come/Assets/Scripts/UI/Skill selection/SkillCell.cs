@@ -9,7 +9,8 @@ namespace UI.Skill_selection
     {
         public string skillName;
         public Sprite skillIcon;
-        
+        public int skillNumber;
+
 
     }
 }

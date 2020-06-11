@@ -15,3 +15,4 @@ MonoBehaviour:
   skillName: Throw Knives
   skillIcon: {fileID: 7040758548717563640, guid: 10286f78c8233c4409e680c6b9b361ad,
     type: 3}
+  skillNumber: 2
