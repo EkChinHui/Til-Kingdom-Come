@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace UI.Skill_selection
 {
@@ -17,13 +16,12 @@ namespace UI.Skill_selection
         {
             UpdateInputManager();
             transform.position += new Vector3(horizontal, vertical, 0) * Time.deltaTime * speed;
-
+            // Canvas Screen space has to be set to camera for it to work
             Vector3 worldSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -worldSize.x, worldSize.x),
                 Mathf.Clamp(transform.position.y, -worldSize.y, worldSize.y),
                 transform.position.z);
-
         }
 
         private void UpdateInputManager()

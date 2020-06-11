@@ -1,7 +1,5 @@
 ﻿using System;
-using GamePlay.Skills;
 using TMPro;
-using UI;
 using UnityEngine;
 
 namespace GamePlay

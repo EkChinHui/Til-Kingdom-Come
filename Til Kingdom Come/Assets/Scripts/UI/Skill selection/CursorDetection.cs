@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,77 +15,56 @@ namespace UI.Skill_selection
         public Color color;
         public string border = "Border1";
 
-        public KeyCode select;
-        public KeyCode cancel;
-
         #region Events
-
         public static Action<int, int> onSkillSelect;
-
         #endregion
-
-        // Start is called before the first frame update
+        
         void Start()
         {
             gr = GetComponentInParent<GraphicRaycaster>();
             SetColor();
             border = "Border" + playerNo;
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
-
+            // Pointer returns a list of gameobjects the cursor is over
             pointerEventData.position = Camera.main.WorldToScreenPoint(transform.position);
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pointerEventData, results);
 
+            /*
+             * If items are found, results can only contain SkillCells. All other
+             * graphics objects have their "raycast target" set to false
+             */
             if (results.Count > 0)
             {
                 Transform raycastSkill = results[0].gameObject.transform;
-                if (Input.GetKeyDown(select))
+                if (currentSkill == null)
                 {
-                    if (currentSkill == null)
-                    {
-                        currentSkill = raycastSkill;
-                        currentSkill.Find(border).GetComponent<Image>().color = color;
-                        var skillNo = currentSkill.GetComponent<SkillNumber>().skillNumber;
-                        onSkillSelect?.Invoke(playerNo, skillNo);
-                        Debug.Log(currentSkill.name);
-                    }
-                }
-            }
-            if (currentSkill != null)
-            {
-                if (Input.GetKeyDown(cancel))
+                    currentSkill = raycastSkill;
+                    currentSkill.Find(border).GetComponent<Image>().color = color;
+                    var skillNo = currentSkill.GetComponent<SkillNumber>().skillNumber;
+                    onSkillSelect?.Invoke(playerNo, skillNo);
+                } 
+                else if (currentSkill != raycastSkill)
                 {
                     currentSkill.Find(border).GetComponent<Image>().color = Color.clear;
-                    currentSkill = null;
+                    currentSkill = raycastSkill;
                 }
+                else if (currentSkill == raycastSkill)
+                {
+                    currentSkill.Find(border).GetComponent<Image>().color = color;
+                    var skillNo = currentSkill.GetComponent<SkillNumber>().skillNumber;
+                    onSkillSelect?.Invoke(playerNo, skillNo);
+                }
+                
             }
         }
-
-        private void SelectSkill(Transform t)
-        {
-            if (t != null)
-            {
-                t.Find(border).GetComponent<Image>().color = Color.white;
-                t.Find(border).GetComponent<Image>().DOColor(color, 0.7f).SetLoops(-1);
-            }
-
-            currentSkill = t;
-            if (t != null)
-            {
-                t.Find(border).GetComponent<Image>().color = color;
-            }
-            else
-            {
-                //t.Find("Border").GetComponent<Image>().color = Color.clear;
-            }
-
-        }
-
+        
         private void SetColor()
+        // sets color based on player number , playerNo is set in Inspector
+        // Wen Hao you can set the color by rgba values, you can also let the bg alternate using Color.Lerp or DOColor from the DOTween package
         {
             switch (playerNo)
             {
