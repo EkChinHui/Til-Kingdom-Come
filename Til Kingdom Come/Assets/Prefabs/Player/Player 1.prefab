@@ -191,6 +191,8 @@ MonoBehaviour:
   otherPlayer: {fileID: 0}
   playerNo: 0
   playerInput: {fileID: 4415915515710630155}
+  bloodSplash: {fileID: 291438960380146473, guid: 29a8723467d5ab940970b3762af580b0,
+    type: 3}
   combatState: 0
   enemyLayer:
     serializedVersion: 2

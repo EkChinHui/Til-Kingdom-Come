@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 
-public class SkillNumber : MonoBehaviour
+namespace UI.Skill_selection
 {
-    public int skillNumber;
-    public bool border1;
-    public bool border2;
-
-    public string SelectBorder()
+    public class SkillNumber : MonoBehaviour
     {
-        return border1 ? "Border2" : "Border1";
+        public int skillNumber;
     }
 }
