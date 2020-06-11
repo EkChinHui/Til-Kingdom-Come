@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GamePlay;
 using TMPro;
-using UI.Skill_selection;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.Skill_selection
 {
     public class SkillSelector : MonoBehaviour
     {
@@ -21,27 +21,36 @@ namespace UI
             {
                 SpawnSkillCell(skill);
             }
-        }
 
+            CursorDetection.onSkillSelect += SelectSkills;
+        }
+        
         private void SpawnSkillCell(SkillCell skill)
         {
             GameObject skillCell = Instantiate(skillCellPrefab, transform);
+
+            skillCell.name = skill.skillName;
 
             Image skillIcon = skillCell.transform.Find("Skill Icon").GetComponent<Image>();
             TextMeshProUGUI skillName = skillCell.transform.Find("Skill name").GetComponent<TextMeshProUGUI>();
 
             skillIcon.sprite = skill.skillIcon;
             skillName.text = skill.skillName;
+            SkillNumber skillNumber = skillCell.GetComponent<SkillNumber>();
+            skillNumber.skillNumber = skill.skillNumber;
         }
-
-        public void SelectSkillPlayerOne(int skillNo)
+        
+        private void SelectSkills(int playerNo, int skillNo)
         {
-            playerOneSkill = skillNo;
-        }
-
-        public void SelectSkillPlayerTwo(int skillNo)
-        {
-            playerTwoSkill = skillNo;
+            switch (playerNo)
+            {
+                case 1:
+                    playerOneSkill = skillNo;
+                    break;
+                case 2:
+                    playerTwoSkill = skillNo;
+                    break;
+            }
         }
 
         public void PassSkills()
@@ -51,6 +60,10 @@ namespace UI
             // resets the total players to 0
             PlayerController.totalPlayers = 0;
         }
-        
+
+        private void OnDestroy()
+        {
+            CursorDetection.onSkillSelect -= SelectSkills;
+        }
     }
 }
