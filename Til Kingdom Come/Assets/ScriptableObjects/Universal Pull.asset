@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0bdfa2f74136024f9525cceb8a1b0f8, type: 3}
-  m_Name: Force Pull
+  m_Name: Universal Pull
   m_EditorClassIdentifier: 
-  skillName: Force Pull
+  skillName: Universal Pull
   skillIcon: {fileID: 21300000, guid: 2665f2165e4e8435281e5cbe68d392a8, type: 3}
   skillNumber: 1

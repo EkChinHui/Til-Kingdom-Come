@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0bdfa2f74136024f9525cceb8a1b0f8, type: 3}
-  m_Name: Force Push
+  m_Name: Throwing Knives
   m_EditorClassIdentifier: 
-  skillName: Force Push
-  skillIcon: {fileID: 4434692913647792918, guid: 894ee645b69b9204db8d3191269c3cf3,
+  skillName: Throwing Knives
+  skillIcon: {fileID: 7040758548717563640, guid: 10286f78c8233c4409e680c6b9b361ad,
     type: 3}
+  skillNumber: 2
