@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using UnityEngine;
 
-namespace UI
+namespace GamePlay
 {
     public class SkillSelectionManager : MonoBehaviour
     {
