@@ -17,7 +17,10 @@ namespace GamePlay
         public PlayerController otherPlayer;
         public int playerNo;
         public PlayerInput playerInput;
+        
+        [Header("Particle effects")]
         public GameObject bloodSplash;
+        public GameObject sparks;
         
         public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
         public CombatState combatState = CombatState.NonCombatState;
@@ -45,6 +48,7 @@ namespace GamePlay
 
         #region Events
         public static Action<int> onDeath;
+        public Action onSuccessfulBlock;
         #endregion
 
         private void Awake()
@@ -56,6 +60,7 @@ namespace GamePlay
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkills;
             SkillSelectionManager.instance.AssignSkills();
+            onSuccessfulBlock += SuccessfulBlock;
         }
 
         private void Start()
@@ -146,23 +151,18 @@ namespace GamePlay
         {
             onDeath?.Invoke(playerNo);
             combatState = CombatState.Dead;
-
             // die animation
             anim.SetBool("Dead", true);
+            
             // offset particles to be emitted at body level
             var heightOffset = new Vector3(0, 2f, 0);
-            var startRotation = 0f;
 
             ParticleSystem bloodSplashEffect = bloodSplash.GetComponent<ParticleSystem>();
+            // adjusts rotation of particle effect
             var shapeModule = bloodSplashEffect.shape;
-            if (Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon)
-            {
-                shapeModule.rotation = new Vector3(0, -90, 0);
-            }
-            else
-            {
-                shapeModule.rotation = new Vector3(0, 90, 0);
-            }
+            shapeModule.rotation = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon 
+                ? new Vector3(0, -90, 0) 
+                : new Vector3(0, 90, 0);
 
             Instantiate(bloodSplash, transform.position + heightOffset, Quaternion.identity);
         }
@@ -189,6 +189,7 @@ namespace GamePlay
         {
             ScoreKeeper.resetPlayersEvent -= ResetPlayer;
             SkillSelectionManager.passPlayerSkills -= PassPlayerSkills;
+            onSuccessfulBlock -= SuccessfulBlock;
         }
     }
 }

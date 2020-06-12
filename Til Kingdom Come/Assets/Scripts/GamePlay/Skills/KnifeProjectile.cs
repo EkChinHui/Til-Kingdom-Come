@@ -39,6 +39,7 @@ namespace GamePlay.Skills
                 case PlayerController.CombatState.Blocking:
                     DestroyProjectile();
                     Debug.Log("Successful block");
+                    damagedPlayer.onSuccessfulBlock?.Invoke();
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);

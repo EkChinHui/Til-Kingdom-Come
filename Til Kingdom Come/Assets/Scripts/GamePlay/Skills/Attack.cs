@@ -16,7 +16,6 @@ namespace GamePlay.Skills
         private const float ReactionDelay = 0.2f;
         public LayerMask playerLayer;
 
-
         private void Start()
         {
             skillName = "Attack";
@@ -54,6 +53,8 @@ namespace GamePlay.Skills
                     {
                         // other player successfully defends against attack
                         AudioManager.instance.Play("Swords Collide");
+                        // trigger successful block event
+                        otherPlayer.onSuccessfulBlock?.Invoke();
                         player.KnockBack(KnockDistAttacking);
                         otherPlayer.KnockBack(KnockDistBlocking);
                     }
