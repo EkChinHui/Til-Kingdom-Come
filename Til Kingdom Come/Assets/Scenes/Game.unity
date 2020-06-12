@@ -439,6 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOne: {fileID: 134955848}
   playerTwo: {fileID: 528252040}
+  pauseMenuController: {fileID: 584988114}
   roundStartPanel: {fileID: 1726696171}
 --- !u!4 &133473154
 Transform:
@@ -31124,7 +31125,7 @@ PrefabInstance:
     - target: {fileID: 8453650798890808343, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453650798890808343, guid: a5453337206284c69af3a7a4ae352036,
         type: 3}

@@ -8,6 +8,7 @@ namespace GamePlay
     {
         public TextMeshProUGUI playerOne;
         public TextMeshProUGUI playerTwo;
+        public PauseMenuController pauseMenuController;
         private int playerOneScore;
         private int playerTwoScore;
         public static int winsToGame = 1;
@@ -59,6 +60,7 @@ namespace GamePlay
                     resetPlayersEvent();
                 }
             }
+            pauseMenuController.canPause = false;
             // load option to either restart or go back to menu
         }
 

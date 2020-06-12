@@ -53,7 +53,7 @@ namespace GamePlay.Skills
                     float myDirection = player.transform.rotation.eulerAngles.y;
                     if (otherPlayer.combatState == PlayerController.CombatState.Blocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
                     {
-                        // other player successfully defends against attack
+                        // enemy successfully defends against attack
                         AudioManager.instance.Play("Swords Collide");
                         // trigger successful block event
                         otherPlayer.onSuccessfulBlock?.Invoke();
@@ -62,7 +62,13 @@ namespace GamePlay.Skills
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
                     {
-                        // the enemy is rolling and is invulnerable
+                        // enemy is rolling and is invulnerable
+                        AudioManager.instance.Play("Sword Swing");
+                        return;
+                    }
+                    else if (otherPlayer.combatState == PlayerController.CombatState.Dead)
+                    {
+                        // enemy is dead
                         AudioManager.instance.Play("Sword Swing");
                         return;
                     }
