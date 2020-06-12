@@ -26,7 +26,10 @@ namespace GamePlay.Skills
 
         public override void Cast(PlayerController player, PlayerController opponent)
         {
-            if (!CanCast()) return;
+            // 5.0125 value is the maximum distance between 2 players for the attack to be successful
+            // currently obtained manually by trial and error but we should find a way to calculate it
+            bool opponentAttackedFirst = opponent.combatState == PlayerController.CombatState.Attacking && Mathf.Abs(opponent.transform.position.x - player.transform.position.x) <= 5.0125f;
+            if (!CanCast() || opponentAttackedFirst) return;
             StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
             StartCoroutine(AttackAnimDelay(player));
         }
@@ -36,7 +39,6 @@ namespace GamePlay.Skills
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // maximum distance between both players for attack to be successful
-            float attackDistance = 1.934f + attRange;
             if (hitEnemies.Length == 0) {
                 AudioManager.instance.Play("Sword Swing");
             }
@@ -64,12 +66,6 @@ namespace GamePlay.Skills
                         AudioManager.instance.Play("Sword Swing");
                         return;
                     }
-                    else if (otherPlayer.combatState == PlayerController.CombatState.Attacking && 
-                            Mathf.Abs(otherPlayer.transform.position.x - transform.position.x) <= attackDistance)
-                    {
-                        // the enemy attacked first and is in range
-                        return;
-                    }
                     else
                     {
                         AudioManager.instance.Play("Decapitation");
@@ -83,6 +79,7 @@ namespace GamePlay.Skills
         {
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack");
+            print(player + " attacks");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(ReactionDelay);
             AttackCast(player);
