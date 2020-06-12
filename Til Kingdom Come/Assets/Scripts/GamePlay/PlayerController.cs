@@ -146,6 +146,18 @@ namespace GamePlay
                 // hurt;
             }
         }
+        private void SuccessfulBlock()
+        {
+            var heightOffset = new Vector3(0, 1.5f, 0);
+            ParticleSystem sparksEffect = sparks.GetComponent<ParticleSystem>();
+            // adjusts rotation of particle effect
+            var shapeModule = sparksEffect.shape;
+            shapeModule.rotation = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon 
+                ? new Vector3(0, 90, 0) 
+                : new Vector3(0, -90, 0);
+            
+            Instantiate(sparks, transform.position + heightOffset, Quaternion.identity);
+        }
 
         private void Die()
         {
