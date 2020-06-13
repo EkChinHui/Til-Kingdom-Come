@@ -64,15 +64,14 @@ namespace UI.Skill_selection
         
         private void SetColor()
         // sets color based on player number , playerNo is set in Inspector
-        // Wen Hao you can set the color by rgba values, you can also let the bg alternate using Color.Lerp or DOColor from the DOTween package
         {
             switch (playerNo)
             {
                 case 1:
-                    color = Color.red;
+                    color = new Color(0.99f, 0.78f, 0.54f);
                     break;
                 case 2:
-                    color = Color.blue;
+                    color = new Color(0.99f, 0.78f, 0.54f);
                     break;
             }
         }
