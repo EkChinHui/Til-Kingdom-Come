@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Throwing Knives
   m_EditorClassIdentifier: 
   skillName: Throwing Knives
-  skillIcon: {fileID: 7040758548717563640, guid: 10286f78c8233c4409e680c6b9b361ad,
-    type: 3}
+  skillIcon: {fileID: 21300000, guid: f4c72c3047141114cb4b37c9d50488ac, type: 3}
   skillNumber: 2

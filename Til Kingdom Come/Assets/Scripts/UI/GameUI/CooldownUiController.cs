@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using GamePlay;
+using GamePlay.Skills;
+using UnityEngine;
+using UnityEngine.UI;
 
-namespace UI
+namespace UI.GameUI
 {
     public class CooldownUiController : MonoBehaviour
     {
@@ -8,15 +11,28 @@ namespace UI
         public CooldownUi blockIcon;
         public CooldownUi rollIcon;
         public CooldownUi skillIcon;
+        public int playerNo;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
+            SkillSelectionManager.passPlayerSkills += SetSkillIcon;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void SetSkillIcon(int player, GameObject skill)
         {
+            if (player != playerNo) return;
+            Skill chosenSkill = skill.GetComponent<Skill>();
+            Sprite icon = chosenSkill.icon;
+            skillIcon.image.sprite = icon;
+            var darkmask = skillIcon.GetComponentInChildren<Image>();
+            Debug.Log(darkmask.name);
+            darkmask.sprite = icon;
+            skillIcon.darkMask.sprite = darkmask.sprite;
+        }
+
+        private void OnDestroy()
+        {
+            SkillSelectionManager.passPlayerSkills -= SetSkillIcon;
         }
     }
     

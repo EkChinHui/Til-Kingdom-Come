@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Almighty Push
   m_EditorClassIdentifier: 
   skillName: Almighty Push
-  skillIcon: {fileID: 4434692913647792918, guid: 894ee645b69b9204db8d3191269c3cf3,
-    type: 3}
+  skillIcon: {fileID: 21300000, guid: 9d972393b9571e6448c50d6dbca4681b, type: 3}
   skillNumber: 0
