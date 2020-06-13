@@ -1780,7 +1780,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 900, y: 400}
+  m_SizeDelta: {x: 1200, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1918064796
 MonoBehaviour:
@@ -1798,6 +1798,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b6b223824b51c3445b53601239f298fb, type: 2}
   - {fileID: 11400000, guid: 1273343cc811dfe489441f54c86971b2, type: 2}
   - {fileID: 11400000, guid: 2279fd10301bd2f47a17dd0dd2c723eb, type: 2}
+  - {fileID: 11400000, guid: bcc76990e2e21411d8a0cd92df6d177c, type: 2}
   skillCellPrefab: {fileID: 8844277990344288591, guid: efe3b02b7b32ca04fb256e1b396145af,
     type: 3}
 --- !u!114 &1918064797

@@ -331,6 +331,8 @@ MonoBehaviour:
     type: 3}
   throwKnives: {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09,
     type: 3}
+  catapult: {fileID: 2412509056745015346, guid: 9e7a9cfe066d54557944054716f73dc9,
+    type: 3}
 --- !u!4 &503837650
 Transform:
   m_ObjectHideFlags: 0

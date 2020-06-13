@@ -1,17 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GamePlay.Skills
 {
-    public class KnifeProjectile : MonoBehaviour
+    public class BoulderProjectile : MonoBehaviour
     {
-        public Rigidbody2D rb;
-        public float speed = 15f;
         public int damage = 1;
-        private void Update()
-        {
-            rb.velocity = transform.right * speed;
-        }
-
+        // Start is called before the first frame update
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall
@@ -27,20 +23,13 @@ namespace GamePlay.Skills
                 case PlayerController.CombatState.Rolling:
                     Debug.Log("Successful dodge");
                     return;
-                // Player will not be damaged while blocking (projectile is destroyed)
-                case PlayerController.CombatState.Blocking:
-                    DestroyProjectile();
-                    Debug.Log("Successful block");
-                    damagedPlayer.onSuccessfulBlock?.Invoke();
-                    break;
                 default:
                     damagedPlayer.TakeDamage(damage);
-                    DestroyProjectile();
+                    // DestroyProjectile();
                     Debug.Log("Projectile Hits target");
                     return;
             }
         }
-
         private void DestroyProjectile()
         {
             Destroy(gameObject);    

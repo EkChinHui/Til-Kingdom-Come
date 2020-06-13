@@ -14,6 +14,7 @@ namespace GamePlay
         private float forcePullAnim;
         private float forcePushAnim;
         private float throwKnivesAnim;
+        private float catapultAnim;
 
         public float AttackAnim => attackAnim;
 
@@ -26,6 +27,8 @@ namespace GamePlay
         public float ForcePushAnim => forcePushAnim;
 
         public float ThrowKnivesAnim => throwKnivesAnim;
+
+        public float CatapultAnim => catapultAnim;
 
         private void Awake()
         {
@@ -71,6 +74,9 @@ namespace GamePlay
                         break;
                     case "ThrowKnives":
                         instance.throwKnivesAnim = clip.length;
+                        break;
+                    case "Catapult":
+                        instance.catapultAnim = clip.length;
                         break;
                 }
             }
