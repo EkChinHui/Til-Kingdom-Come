@@ -629,6 +629,75 @@ RectTransform:
   m_AnchoredPosition: {x: 202, y: -85}
   m_SizeDelta: {x: 172.80814, y: 30.907944}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &177420621
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.1591177
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8589443
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -357.1387
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503842, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088720501516503855, guid: 87d3884e35fba9b48b2b249f2b97dca2,
+        type: 3}
+      propertyPath: m_Name
+      value: 'Gravel '
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87d3884e35fba9b48b2b249f2b97dca2, type: 3}
 --- !u!1 &192404711
 GameObject:
   m_ObjectHideFlags: 0
