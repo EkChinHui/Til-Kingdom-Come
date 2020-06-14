@@ -46,4 +46,4 @@ MonoBehaviour:
   skillName: Catapult
   skillInfo: 
   icon: {fileID: 21300000, guid: e4f4558c734c4e445a77edbca0bc4189, type: 3}
-  boulder: {fileID: 3818900605665800707, guid: ea8d32579437d4e62ba9cb53dbd7ac76, type: 3}
+  boulder: {fileID: 4695700779189571704, guid: ea8d32579437d4e62ba9cb53dbd7ac76, type: 3}
