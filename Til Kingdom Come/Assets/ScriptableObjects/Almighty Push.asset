@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Almighty Push
   m_EditorClassIdentifier: 
   skillName: Almighty Push
+  skillInfo: Fus Ro Dah
+  skillCooldown: 3
   skillIcon: {fileID: 21300000, guid: 9d972393b9571e6448c50d6dbca4681b, type: 3}
   skillNumber: 0

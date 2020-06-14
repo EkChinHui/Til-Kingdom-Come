@@ -31,10 +31,14 @@ namespace UI.Skill_selection
             skillCell.name = skill.skillName;
 
             Image skillIcon = skillCell.transform.Find("Skill Icon").GetComponent<Image>();
-            TextMeshProUGUI skillName = skillCell.transform.Find("Skill name").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI skillName = skillCell.transform.Find("Skill Name").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI skillInfo = skillCell.transform.Find("Skill Info").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI skillCooldown = skillCell.transform.Find("Skill Cooldown").GetComponent<TextMeshProUGUI>();
 
             skillIcon.sprite = skill.skillIcon;
             skillName.text = skill.skillName;
+            skillInfo.text = skill.skillInfo;
+            skillCooldown.text = "Cooldown: " + skill.skillCooldown + "s";
             SkillNumber skillNumber = skillCell.GetComponent<SkillNumber>();
             skillNumber.skillNumber = skill.skillNumber;
         }
