@@ -52,6 +52,15 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+    public void PlayDelayed(string name, float delay)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null) {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+        s.source.PlayDelayed(delay);
+    }
     public void FadeOut(string name, float time)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
