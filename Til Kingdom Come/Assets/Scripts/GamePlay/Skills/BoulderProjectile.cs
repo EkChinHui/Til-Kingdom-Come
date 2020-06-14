@@ -7,7 +7,8 @@ namespace GamePlay.Skills
     public class BoulderProjectile : MonoBehaviour
     {
         public int damage = 1;
-        // Start is called before the first frame update
+        public GameObject collideEffect;
+        
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall
@@ -32,6 +33,7 @@ namespace GamePlay.Skills
         private void Impact()
         {
             AudioManager.instance.Play("Boulder Hit");
+            Instantiate(collideEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);    
         }
     }
