@@ -11,7 +11,7 @@ namespace GamePlay.Skills
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall
-            if (collision.CompareTag("Wall")) DestroyProjectile();
+            if (collision.CompareTag("Wall")) Impact();
             
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             // projectile collides a player
@@ -25,13 +25,13 @@ namespace GamePlay.Skills
                     return;
                 default:
                     damagedPlayer.TakeDamage(damage);
-                    // DestroyProjectile();
                     Debug.Log("Projectile Hits target");
                     return;
             }
         }
-        private void DestroyProjectile()
+        private void Impact()
         {
+            AudioManager.instance.Play("Boulder Hit");
             Destroy(gameObject);    
         }
     }

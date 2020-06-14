@@ -19,6 +19,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
+            AudioManager.instance.Play("Catapult");
             StartCoroutine(AnimDelay(player, opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }

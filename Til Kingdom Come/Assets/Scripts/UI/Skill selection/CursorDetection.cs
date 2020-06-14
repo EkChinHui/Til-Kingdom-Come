@@ -68,10 +68,10 @@ namespace UI.Skill_selection
             switch (playerNo)
             {
                 case 1:
-                    color = new Color(0.99f, 0.78f, 0.54f);
+                    color = Color.red;
                     break;
                 case 2:
-                    color = new Color(0.99f, 0.78f, 0.54f);
+                    color = Color.blue;
                     break;
             }
         }
