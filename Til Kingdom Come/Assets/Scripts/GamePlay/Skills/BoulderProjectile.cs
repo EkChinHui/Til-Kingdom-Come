@@ -8,6 +8,7 @@ namespace GamePlay.Skills
     {
         public int damage = 1;
         public GameObject collideEffect;
+        public float heightOffset;
         
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -33,7 +34,8 @@ namespace GamePlay.Skills
         private void Impact()
         {
             AudioManager.instance.Play("Boulder Hit");
-            Instantiate(collideEffect, transform.position, Quaternion.identity);
+            var offSet = new Vector3(0, heightOffset, 0);
+            Instantiate(collideEffect, transform.position + offSet, Quaternion.identity);
             Destroy(gameObject);    
         }
     }
