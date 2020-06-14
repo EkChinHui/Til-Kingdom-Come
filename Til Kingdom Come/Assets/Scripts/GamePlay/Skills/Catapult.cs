@@ -13,6 +13,7 @@ namespace GamePlay.Skills
         {
             skillName = "Catapult";
             skillInfo = "Calls in a catapult strike on the opponent";
+            skillNumber = 3;
             skillCooldown = 5f;
         }
         public override void Cast(PlayerController player, PlayerController opponent)

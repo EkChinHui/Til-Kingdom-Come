@@ -17,6 +17,7 @@ namespace GamePlay.Skills
         {
             skillName = "Throw Knives"; 
             skillInfo = "Throws knives at opponent";
+            skillNumber = 2;
             skillCooldown = 1f;
         }
 

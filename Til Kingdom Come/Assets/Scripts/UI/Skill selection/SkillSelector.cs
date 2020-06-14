@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GamePlay;
+using GamePlay.Skills;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,39 +9,43 @@ namespace UI.Skill_selection
 {
     public class SkillSelector : MonoBehaviour
     {
-        public List<SkillCell> allCells = new List<SkillCell>();
+        public List<GameObject> skillPrefabs;
         public GameObject skillCellPrefab;
         private int playerOneSkill = 0;
         private int playerTwoSkill = 0;
 
+        private void Awake()
+        {
+            CursorDetection.onSkillSelect += SelectSkills;
+        }
+
         private void Start()
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Clear();
-            foreach (var skill in allCells)
-            {
-                SpawnSkillCell(skill);
-            }
 
-            CursorDetection.onSkillSelect += SelectSkills;
+            foreach (var skills in skillPrefabs)
+            {
+                SpawnSkillCell(skills);
+            }
         }
-        
-        private void SpawnSkillCell(SkillCell skill)
+
+        private void SpawnSkillCell(GameObject go)
         {
             GameObject skillCell = Instantiate(skillCellPrefab, transform);
-
-            skillCell.name = skill.skillName;
-
-            Image skillIcon = skillCell.transform.Find("Skill Icon").GetComponent<Image>();
+            var skill = go.GetComponent<Skill>();
+            skillCell.name = skill.SkillName;
+            
             TextMeshProUGUI skillName = skillCell.transform.Find("Skill Name").GetComponent<TextMeshProUGUI>();
+            Image skillIcon = skillCell.transform.Find("Skill Icon").GetComponent<Image>();
             TextMeshProUGUI skillInfo = skillCell.transform.Find("Skill Info").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI skillCooldown = skillCell.transform.Find("Skill Cooldown").GetComponent<TextMeshProUGUI>();
-
-            skillIcon.sprite = skill.skillIcon;
-            skillName.text = skill.skillName;
-            skillInfo.text = skill.skillInfo;
-            skillCooldown.text = "Cooldown: " + skill.skillCooldown + "s";
             SkillNumber skillNumber = skillCell.GetComponent<SkillNumber>();
-            skillNumber.skillNumber = skill.skillNumber;
+            
+            skillName.text = skill.SkillName;
+            skillIcon.sprite = skill.icon;
+            skillInfo.text = skill.SkillInfo;
+            skillCooldown.text = "Cooldown: " + skill.SkillCooldown + "s";
+            skillNumber.skillNumber = skill.SkillNumber;
         }
         
         private void SelectSkills(int playerNo, int skillNo)

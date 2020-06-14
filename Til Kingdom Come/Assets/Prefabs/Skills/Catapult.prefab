@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Catapult
-  skillInfo: 
+  skillInfo: Drops a boulder above the enemy
   icon: {fileID: 21300000, guid: e4f4558c734c4e445a77edbca0bc4189, type: 3}
+  skillCooldown: 10
+  skillNumber: 3
   boulder: {fileID: 4695700779189571704, guid: ea8d32579437d4e62ba9cb53dbd7ac76, type: 3}

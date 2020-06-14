@@ -24,10 +24,10 @@ namespace UI.GameUI
             Skill chosenSkill = skill.GetComponent<Skill>();
             Sprite icon = chosenSkill.icon;
             skillIcon.image.sprite = icon;
-            var darkmask = skillIcon.GetComponentInChildren<Image>();
-            Debug.Log(darkmask.name);
-            darkmask.sprite = icon;
-            skillIcon.darkMask.sprite = darkmask.sprite;
+            var darkMask = skillIcon.GetComponentInChildren<Image>();
+            Debug.Log(darkMask.name);
+            darkMask.sprite = icon;
+            skillIcon.darkMask.sprite = darkMask.sprite;
         }
 
         private void OnDestroy()

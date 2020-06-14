@@ -1799,6 +1799,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1273343cc811dfe489441f54c86971b2, type: 2}
   - {fileID: 11400000, guid: 2279fd10301bd2f47a17dd0dd2c723eb, type: 2}
   - {fileID: 11400000, guid: bcc76990e2e21411d8a0cd92df6d177c, type: 2}
+  skillPrefabs:
+  - {fileID: 7964931500498912422, guid: 62c43af573df1c24a923c7f46ea185fa, type: 3}
+  - {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938, type: 3}
+  - {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09, type: 3}
+  - {fileID: 2412509056745015346, guid: 9e7a9cfe066d54557944054716f73dc9, type: 3}
   skillCellPrefab: {fileID: 8844277990344288591, guid: efe3b02b7b32ca04fb256e1b396145af,
     type: 3}
 --- !u!114 &1918064797

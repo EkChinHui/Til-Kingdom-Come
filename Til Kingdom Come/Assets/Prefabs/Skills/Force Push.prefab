@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Force Push
-  skillInfo: 
+  skillInfo: Pushes the enemy
   icon: {fileID: 21300000, guid: 9d972393b9571e6448c50d6dbca4681b, type: 3}
+  skillCooldown: 10
+  skillNumber: 0
   pushDistance: 6
   stunDuration: 0.2

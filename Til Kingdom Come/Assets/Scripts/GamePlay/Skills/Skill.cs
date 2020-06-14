@@ -7,13 +7,17 @@ namespace GamePlay.Skills
         [SerializeField] protected string skillName;
         [SerializeField] protected string skillInfo;
         public Sprite icon;
-        protected float skillCooldown;
+        [SerializeField] protected float skillCooldown;
         private float nextAvailTime;
+        [SerializeField] protected int skillNumber;
 
-        public float SkillCooldown => skillCooldown;
-
-        // getter
+        #region getters
         public string SkillName => skillName;
+        public string SkillInfo => skillInfo;
+        public float SkillCooldown => skillCooldown;
+        public int SkillNumber => skillNumber;
+        #endregion
+
         
         protected bool CanCast()
         {

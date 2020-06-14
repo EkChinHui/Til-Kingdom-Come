@@ -13,6 +13,7 @@ namespace GamePlay.Skills
         {
             skillName = "Force Pull";
             skillInfo = "Pulls the enemy towards you";
+            skillNumber = 1;
             skillCooldown = 10f;
         }
 
