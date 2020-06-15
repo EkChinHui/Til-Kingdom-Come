@@ -19,6 +19,7 @@ namespace UI
 
         private void EndGame(int player)
         {
+            AudioManager.instance.FadeOut("Battle Theme", 2);
             AudioManager.instance.Play("Victory");
             board.SetActive(true);
             switch (player)
@@ -36,6 +37,7 @@ namespace UI
         [UsedImplicitly]
         public void ReloadGame()
         {
+            AudioManager.instance.Play("Battle Theme");
             PlayerController.totalPlayers = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
