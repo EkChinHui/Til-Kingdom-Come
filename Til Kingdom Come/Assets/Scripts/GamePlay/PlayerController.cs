@@ -138,7 +138,7 @@ namespace GamePlay
         public void TakeDamage(int damageTaken)
         {
             currentHealth -= damageTaken;
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 && combatState != CombatState.Dead)
             {
                 Die();
             } 
