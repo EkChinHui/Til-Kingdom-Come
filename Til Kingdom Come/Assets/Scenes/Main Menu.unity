@@ -645,18 +645,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951373531}
   m_CullTransparentMesh: 0
---- !u!114 &1161714170 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 649129867050269487}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c225ea4077f4728881001dd1b4eb16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1288402372
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +899,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1161714170}
+        - m_Target: {fileID: 1371258220}
           m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
@@ -1089,7 +1077,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1161714170}
+        - m_Target: {fileID: 1371258220}
           m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
@@ -1731,7 +1719,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1161714170}
+        - m_Target: {fileID: 1371258220}
           m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
@@ -2236,7 +2224,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1161714170}
+        - m_Target: {fileID: 1371258220}
           m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
@@ -2317,7 +2305,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: music.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2903,6 +2891,51 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[9].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: music.Array.data[1].name
+      value: Battle Theme 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: music.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0808ba4bdffbe464ca6bbbcb3cdef97f, type: 3}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: music.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: music.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: music.Array.data[1].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[8].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[7].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697092, guid: 864c8e5587eb04510aaa562b68a1e2dc,

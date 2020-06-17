@@ -4,7 +4,7 @@ namespace UI
 {
     public class MapLoader : MonoBehaviour
     {
-        public static string mapToLoad = "Map1";
+        public static string mapToLoad = "Map 1";
         
         // Sets the Map to the selected map
         private void Start()

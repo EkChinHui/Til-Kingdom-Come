@@ -424,7 +424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &133556108
 GameObject:
@@ -470,7 +470,7 @@ Transform:
   - {fileID: 435449622}
   - {fileID: 945803577}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &134955847
 GameObject:
@@ -1140,7 +1140,7 @@ GameObject:
   - component: {fileID: 435449622}
   - component: {fileID: 435449621}
   m_Layer: 0
-  m_Name: Map2
+  m_Name: Map 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,8 +1380,9 @@ GameObject:
   m_Component:
   - component: {fileID: 527717230}
   - component: {fileID: 527717229}
+  - component: {fileID: 527717231}
   m_Layer: 0
-  m_Name: Map1
+  m_Name: Map 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1416,6 +1417,18 @@ Transform:
   m_Father: {fileID: 133556110}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &527717231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527717228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb30d275a3894428685a55bac501c6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528252038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,8 +1968,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 584988114}
-        m_MethodName: UnfreezeTime
+      - m_Target: {fileID: 1110248374}
+        m_MethodName: ReloadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1966,8 +1979,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1110248374}
-        m_MethodName: ReloadGame
+      - m_Target: {fileID: 584988114}
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2031,8 +2044,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1442570689}
-          m_MethodName: Play
+        - m_Target: {fileID: 2037314631}
+          m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13682,7 +13695,7 @@ GameObject:
   - component: {fileID: 945803577}
   - component: {fileID: 945803576}
   m_Layer: 0
-  m_Name: Map3
+  m_Name: Map 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14198,8 +14211,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1442570689}
-          m_MethodName: Play
+        - m_Target: {fileID: 2037314631}
+          m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -34829,87 +34842,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1441816921}
   darkMask: {fileID: 929167374}
---- !u!1001 &1442570688
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.266685
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.7249732
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1405.6223
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882756, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5095930306981882874, guid: e22a6afa1d6514bfe8984e23c998b339,
-        type: 3}
-      propertyPath: m_Name
-      value: Audio Controller
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e22a6afa1d6514bfe8984e23c998b339, type: 3}
---- !u!114 &1442570689 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5095930306981882757, guid: e22a6afa1d6514bfe8984e23c998b339,
-    type: 3}
-  m_PrefabInstance: {fileID: 1442570688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f563dba809c49368d7ef26b556f7ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1492539056
 GameObject:
   m_ObjectHideFlags: 0
@@ -36658,7 +36590,7 @@ RectTransform:
   - {fileID: 1726696170}
   - {fileID: 584988113}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -36919,7 +36851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790795521
 GameObject:
@@ -38474,7 +38406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056067357
 GameObject:
@@ -40907,7 +40839,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 584988114}
-        m_MethodName: UnfreezeTime
+        m_MethodName: Home
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -40982,8 +40914,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1442570689}
-          m_MethodName: Play
+        - m_Target: {fileID: 2037314631}
+          m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -41132,9 +41064,9 @@ MonoBehaviour:
           m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1442570689}
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1110248374}
+        m_MethodName: Home
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -41272,8 +41204,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1442570689}
-          m_MethodName: Play
+        - m_Target: {fileID: 2037314631}
+          m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -41340,8 +41272,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1442570689}
-          m_MethodName: Play
+        - m_Target: {fileID: 2037314631}
+          m_MethodName: PlaySoundEffect
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -41454,7 +41386,7 @@ PrefabInstance:
     - target: {fileID: 4415915516255590480, guid: c908bebe607dc2e4fa265c441dc47a50,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4415915516255590480, guid: c908bebe607dc2e4fa265c441dc47a50,
         type: 3}
@@ -41553,7 +41485,7 @@ PrefabInstance:
     - target: {fileID: 6994200491213559191, guid: 7d948a8acf830fb4cb16f521d3494355,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6994200491213559191, guid: 7d948a8acf830fb4cb16f521d3494355,
         type: 3}

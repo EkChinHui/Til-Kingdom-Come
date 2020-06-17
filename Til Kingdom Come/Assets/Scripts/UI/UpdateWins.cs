@@ -30,7 +30,7 @@ namespace UI
 
         public void PassWins()
         {
-            MapLoader.mapToLoad = "Map" + (MapChanger.current + 1);
+            MapLoader.mapToLoad = "Map " + (MapChanger.current + 1);
             ScoreKeeper.winsToGame = wins;
         }
     }

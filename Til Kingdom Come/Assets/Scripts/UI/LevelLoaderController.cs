@@ -9,7 +9,7 @@ namespace UI
         public Animator transition;
         public float transitionTime = 1f;
         public void LoadLevel(string sceneName) {
-            Debug.Log("Load level + " + sceneName);
+            Debug.Log("Loading Scene: " + sceneName);
             StartCoroutine(Helper(sceneName));
         }
 
@@ -31,6 +31,11 @@ namespace UI
         public void PlaySoundEffect(string name)
         {
             AudioManager.instance.PlaySoundEffect(name);
+        }
+
+        public void FadeOutCurrentMusic()
+        {
+            AudioManager.instance.FadeOutCurrentMusic();
         }
     }
 }

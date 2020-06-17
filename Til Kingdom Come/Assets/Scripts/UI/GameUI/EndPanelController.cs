@@ -19,6 +19,8 @@ namespace UI
 
         private void EndGame(int player)
         {
+            AudioManager.instance.FadeOutCurrentMusic();
+            AudioManager.instance.PlaySoundEffect("Victory");
             board.SetActive(true);
             switch (player)
             { 
@@ -35,8 +37,15 @@ namespace UI
         [UsedImplicitly]
         public void ReloadGame()
         {
+            Debug.Log("Reloading Game");
             PlayerController.totalPlayers = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void Home()
+        {
+            Debug.Log("Back to Main Menu");
+            AudioManager.instance.PlayMusic("Main Theme");
         }
 
         private void OnDestroy()

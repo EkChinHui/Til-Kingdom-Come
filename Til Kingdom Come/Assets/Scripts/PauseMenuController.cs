@@ -30,6 +30,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("Resuming Game");
+        AudioManager.instance.PlayCurrentMusic();
         pauseMenu.SetActive(false);
         blurEffect.SetActive(false);
         Time.timeScale = 1f;
@@ -37,14 +39,25 @@ public class PauseMenuController : MonoBehaviour
     }
     private void Pause()
     {
+        Debug.Log("Pausing Game");
+        AudioManager.instance.PauseCurrentMusic();
         pauseMenu.SetActive(true);
         blurEffect.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
-    public void UnfreezeTime()
+    public void Home()
     {
+        Debug.Log("Back to Main Menu");
+        AudioManager.instance.StopCurrentMusic();
+        AudioManager.instance.PlayMusic("Main Theme");
+        Time.timeScale = 1f;
+    }
+
+    public void Restart()
+    {
+        AudioManager.instance.StopCurrentMusic();
         Time.timeScale = 1f;
     }
 }
