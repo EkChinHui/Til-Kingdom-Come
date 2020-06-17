@@ -59,12 +59,15 @@ namespace GamePlay.Skills
         {
             if (AttackPriority(player, opponent) || !CanCast()) return;
             // after charges are depleted the cooldown will be longer to refill it again
-            if (currentCharges <= 0) return;
-            
+            if (currentCharges <= 0) {
+                print("0 charges left");
+                return;
+            }
+
             UpdateDecay();
             currentCharges -= 1;
-            print(currentCharges);
-            print(currentCombo);
+            print("charges: " + currentCharges);
+            print("combo: " + currentCombo);
             nextDecayTime = Time.time + decayTime;
             StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
             StartCoroutine(AttackAnimDelay(player));
@@ -73,7 +76,11 @@ namespace GamePlay.Skills
 
         private void Charging()
         {
-            if (currentCharges > 3) return;
+            if (currentCharges >= 3)
+            {
+                nextChargeTime = Time.time + chargeTime;
+            }
+
             if (Time.time >= nextChargeTime)
             {
                 currentCharges++;

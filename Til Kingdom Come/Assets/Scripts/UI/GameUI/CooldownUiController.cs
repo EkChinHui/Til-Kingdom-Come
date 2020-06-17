@@ -25,7 +25,6 @@ namespace UI.GameUI
             Sprite icon = chosenSkill.icon;
             skillIcon.image.sprite = icon;
             var darkMask = skillIcon.GetComponentInChildren<Image>();
-            Debug.Log(darkMask.name);
             darkMask.sprite = icon;
             skillIcon.darkMask.sprite = darkMask.sprite;
         }
