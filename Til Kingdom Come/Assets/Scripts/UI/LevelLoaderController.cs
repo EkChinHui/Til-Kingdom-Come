@@ -27,5 +27,10 @@ namespace UI
             Debug.Log("Quiting game");
             Application.Quit();
         }
+
+        public void PlaySoundEffect(string name)
+        {
+            AudioManager.instance.PlaySoundEffect(name);
+        }
     }
 }
