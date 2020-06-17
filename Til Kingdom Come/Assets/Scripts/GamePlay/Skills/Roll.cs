@@ -30,7 +30,7 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             playerController = player;
-            AudioManager.instance.Play("Roll");
+            AudioManager.instance.PlaySoundEffect("Roll");
             FlipSprite(player);
             StartCoroutine(RollAnimDelay(player));
             StartCoroutine(player.cooldownUiController.rollIcon.ChangesFillAmount(skillCooldown));

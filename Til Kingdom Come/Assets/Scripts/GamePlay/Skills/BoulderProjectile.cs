@@ -33,7 +33,7 @@ namespace GamePlay.Skills
         }
         private void Impact()
         {
-            AudioManager.instance.Play("Boulder Hit");
+            AudioManager.instance.PlaySoundEffect("Boulder Hit");
             var offSet = new Vector3(0, heightOffset, 0);
             Instantiate(collideEffect, transform.position + offSet, Quaternion.identity);
             Destroy(gameObject);    

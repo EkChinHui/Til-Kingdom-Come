@@ -30,7 +30,7 @@ public class RoundStartPanelController : MonoBehaviour
     {
         if (lowering && !waiting && !raising) {
             if (playSound) {
-                AudioManager.instance.Play("Round Start");
+                AudioManager.instance.PlaySoundEffect("Round Start");
                 playSound = false;
             }
             Lower();

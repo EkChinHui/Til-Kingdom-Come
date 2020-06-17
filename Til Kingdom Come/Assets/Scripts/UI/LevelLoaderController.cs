@@ -27,9 +27,5 @@ namespace UI
             Debug.Log("Quiting game");
             Application.Quit();
         }
-
-        public void StopThemeMusic() {
-            AudioManager.instance.FadeOut("Theme", 1);
-        }
     }
 }

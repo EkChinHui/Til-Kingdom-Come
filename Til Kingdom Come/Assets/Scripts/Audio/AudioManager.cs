@@ -7,7 +7,12 @@ public class AudioManager : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public static AudioManager instance;
-    public Sound[] sounds;
+    public AudioMixerGroup musicOutput;
+    public Sound[] music;
+    public AudioMixerGroup soundEffectOutput;
+    public Sound[] soundEffect;
+    private string currentMusic;
+    private float fadeOutTime = 2f;
 
     void Awake()
     {
@@ -20,10 +25,9 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         DontDestroyOnLoad(gameObject);
 
-        foreach(Sound s in sounds)
+        foreach(Sound s in music)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -31,45 +35,59 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.outputAudioMixerGroup;
+            s.source.outputAudioMixerGroup = musicOutput;
+        }
+
+        foreach(Sound s in soundEffect)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = soundEffectOutput;
         }
     }
-
     public void Start()
     {
+        // update volume slider in settings page according to player preferences
         audioMixer.SetFloat("Master", linearise(PlayerPrefs.GetFloat("Master", 1)));
         audioMixer.SetFloat("Music", linearise(PlayerPrefs.GetFloat("Music", 1)));
         audioMixer.SetFloat("SoundEffect", linearise(PlayerPrefs.GetFloat("SoundEffect", 1)));
-        Play("Theme");
+        PlayMusic("Main Theme");
     }
-
-    public void Play(string name)
+    public void PlayMusic(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(music, music => music.name == name);
         if (s == null) {
-            Debug.LogWarning("Sound: " + name + " not found!");
+            Debug.LogWarning("Music: " + name + " not found!");
             return;
         }
+        Debug.Log("Playing Music: " + name + ".");
+        s.source.Play();
+        currentMusic = name;
+    }
+    public void PlaySoundEffect(string name)
+    {
+        Sound s = Array.Find(soundEffect, sound => sound.name == name);
+        if (s == null) {
+            Debug.LogWarning("Sound Effect: " + name + " not found!");
+            return;
+        }
+        Debug.Log("Playing Sound Effect: " + name + ".");
         s.source.Play();
     }
-    public void PlayDelayed(string name, float delay)
+    public void FadeOutCurrentMusic()
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(music, music => music.name == currentMusic);
         if (s == null) {
-            Debug.LogWarning("Sound: " + name + " not found!");
+            Debug.LogWarning("Music: " + name + " not found!");
             return;
         }
-        s.source.PlayDelayed(delay);
-    }
-    public void FadeOut(string name, float time)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null) {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
-        }
-
-        StartCoroutine(AudioFadeOut(s.source, 2));
+        Debug.Log("Fading Out Music: " + name + ".");
+        StartCoroutine(AudioFadeOut(s.source, fadeOutTime));
+        currentMusic = null;
     }
 
     private IEnumerator AudioFadeOut(AudioSource audioSource, float fadeTime) {

@@ -28,7 +28,7 @@ namespace GamePlay.Skills
             if (!CanCast()) return;
             rangePoint = player.transform;
             Debug.Log($"Player {player.playerNo} used {skillName}");
-            AudioManager.instance.Play("Throw Knife");
+            AudioManager.instance.PlaySoundEffect("Throw Knife");
             StartCoroutine(AnimDelay(player));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }

@@ -127,7 +127,7 @@ namespace GamePlay.Skills
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // maximum distance between both players for attack to be successful
             if (hitEnemies.Length == 0) {
-                AudioManager.instance.Play("Sword Swing");
+                AudioManager.instance.PlaySoundEffect("Sword Swing");
             }
             else
             {
@@ -141,7 +141,7 @@ namespace GamePlay.Skills
                     if (otherPlayer.combatState == PlayerController.CombatState.Blocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)
                     {
                         // enemy successfully defends against attack
-                        AudioManager.instance.Play("Swords Collide");
+                        AudioManager.instance.PlaySoundEffect("Swords Collide");
                         // trigger successful block event
                         otherPlayer.onSuccessfulBlock?.Invoke();
                         player.KnockBack(knockDistAttacking);
@@ -150,18 +150,18 @@ namespace GamePlay.Skills
                     else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
                     {
                         // enemy is rolling and is invulnerable
-                        AudioManager.instance.Play("Sword Swing");
+                        AudioManager.instance.PlaySoundEffect("Sword Swing");
                         return;
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Dead)
                     {
                         // enemy is dead
-                        AudioManager.instance.Play("Sword Swing");
+                        AudioManager.instance.PlaySoundEffect("Sword Swing");
                         return;
                     }
                     else
                     {
-                        AudioManager.instance.Play("Decapitation");
+                        AudioManager.instance.PlaySoundEffect("Decapitation");
                         player.otherPlayer.TakeDamage(Damage);
                     }
                 }
