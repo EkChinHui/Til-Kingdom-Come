@@ -29,6 +29,7 @@ namespace GamePlay
         [Header("Movement")] 
         private float runSpeed = 4f;
         private Vector2 originalPos;
+        private Quaternion originalRotation;
 
         [Header("Combat")]
         public LayerMask enemyLayer = 8;
@@ -56,6 +57,7 @@ namespace GamePlay
         {
             // remember the original position of the players so match can be reset
             originalPos = gameObject.transform.position;
+            originalRotation = gameObject.transform.rotation;
             totalPlayers++;
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
@@ -199,6 +201,7 @@ namespace GamePlay
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPos;
+            gameObject.transform.rotation = originalRotation;
         }
         
         private void PassPlayerSkills(int player, GameObject assignSkill)

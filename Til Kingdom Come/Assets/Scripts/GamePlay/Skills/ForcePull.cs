@@ -22,6 +22,7 @@ namespace GamePlay.Skills
             if (!CanCast()) return;
             StartCoroutine(AnimDelay(player));
             Debug.Log($"Player {player.playerNo} used {skillName}");
+            AudioManager.instance.Play("Force Pull");
             opponent.KnockBack(-1 * pullDistance);
             StartCoroutine(Stun(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));

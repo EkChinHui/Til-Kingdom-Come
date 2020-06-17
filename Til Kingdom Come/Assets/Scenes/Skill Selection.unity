@@ -823,6 +823,17 @@ MonoBehaviour:
             m_StringArgument: Button
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2146583619}
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Battle Theme
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!95 &867960608
 Animator:
   serializedVersion: 3
@@ -1794,11 +1805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30be1c47e046f0a59042867fc31def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allCells:
-  - {fileID: 11400000, guid: b6b223824b51c3445b53601239f298fb, type: 2}
-  - {fileID: 11400000, guid: 1273343cc811dfe489441f54c86971b2, type: 2}
-  - {fileID: 11400000, guid: 2279fd10301bd2f47a17dd0dd2c723eb, type: 2}
-  - {fileID: 11400000, guid: bcc76990e2e21411d8a0cd92df6d177c, type: 2}
   skillPrefabs:
   - {fileID: 7964931500498912422, guid: 62c43af573df1c24a923c7f46ea185fa, type: 3}
   - {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938, type: 3}
