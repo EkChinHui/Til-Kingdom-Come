@@ -17,23 +17,10 @@ namespace GamePlay.Skills
         private float knockDistBlocking = 4f;
         private float attackCooldown = 0f;
         private float reactionDelay = 0.2f;
-
-        #region Combo information
-        private enum Combo
-        {
-            One,
-            Two,
-            Three
-        }
-
-        private Combo currentCombo = Combo.One;
-        public float decayTime = 1f;
-        public float nextDecayTime;
-        private int currentCharges = 3;
-        private float chargeTime = 10f;
-        private float nextChargeTime;
-        #endregion
-
+        public Charges charges;
+        public int maxCharges = 3;
+        public float chargeTime = 5f;
+        public Combo combo;
 
         private void Start()
         {
@@ -41,11 +28,9 @@ namespace GamePlay.Skills
             skillInfo = "basic attack";
             skillCooldown = attackCooldown;
             playerLayer = 1 << LayerMask.NameToLayer("Player");
-        }
-
-        private void Update()
-        {
-            Charging();
+            charges = gameObject.AddComponent<Charges>();
+            charges.SetCharges(maxCharges, chargeTime);
+            combo = new Combo();
         }
 
         protected override bool CanCast()
@@ -58,67 +43,21 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (AttackPriority(player, opponent) || !CanCast()) return;
-            // after charges are depleted the cooldown will be longer to refill it again
-            if (currentCharges <= 0) {
+
+            if (charges.CurrentCharge <= 0) {
                 print("0 charges left");
                 return;
             }
 
-            UpdateDecay();
-            currentCharges -= 1;
-            print("charges: " + currentCharges);
-            print("combo: " + currentCombo);
-            nextDecayTime = Time.time + decayTime;
+            combo.UpdateDecay();
+            charges.CurrentCharge -= 1;
+            print("charges: " + charges.CurrentCharge);
+            print("combo: " + combo.CurrentCombo);
+            // within the decay time combo will be upgraded to next combo;
+            combo.SetDecay();
             StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
             StartCoroutine(AttackAnimDelay(player));
-            UpdateCombo();
-        }
-
-        private void Charging()
-        {
-            if (currentCharges >= 3)
-            {
-                nextChargeTime = Time.time + chargeTime;
-            }
-
-            if (Time.time >= nextChargeTime)
-            {
-                currentCharges++;
-                nextChargeTime = Time.time + chargeTime;
-            }
-        }
-
-        private void UpdateDecay()
-        {
-            // able to chain attack within a certain window, else performs a normal attack
-            switch (currentCombo)
-            {
-                case Combo.One:
-                    return;
-                case Combo.Two:
-                    if (Time.time > nextDecayTime) currentCombo = Combo.One;
-                    break;
-                case Combo.Three:
-                    if (Time.time > nextDecayTime) currentCombo = Combo.One;
-                    break;
-            }
-        }
-
-        private void UpdateCombo()
-        {
-            // after an attack, updates what the next combo will be
-            switch (currentCombo)
-            {
-                case Combo.One:
-                    currentCombo = Combo.Two;
-                    break;
-                case Combo.Two:
-                    currentCombo = Combo.Three;
-                    break;
-                case Combo.Three:
-                    currentCombo = Combo.One;
-                    break;
-            }
+            combo.UpdateCombo();
         }
         
         private void AttackCast(PlayerController player)

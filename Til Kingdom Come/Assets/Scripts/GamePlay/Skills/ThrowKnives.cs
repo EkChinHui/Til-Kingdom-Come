@@ -11,21 +11,28 @@ namespace GamePlay.Skills
         private float knifeDelay = 0.4f;
         public float heightOffset;
         public float distanceOffset;
-
-        // Start is called before the first frame update
+        public Charges charges;
+        public int maxCharges = 2;
+        public float chargeTime = 5f;
+        
         void Start()
         {
             skillName = "Throw Knives"; 
             skillInfo = "Throws knives at opponent";
             skillNumber = 2;
-            skillCooldown = 1f;
+            skillCooldown = 0f;
+            charges = gameObject.AddComponent<Charges>();
+            charges.SetCharges(maxCharges, chargeTime);
         }
-
-
 
         public override void Cast(PlayerController player, PlayerController opponent)
         {
             if (!CanCast()) return;
+            if (charges.CurrentCharge <= 0) {
+                print("0 charges left");
+                return;
+            }
+            charges.CurrentCharge -= 1;
             rangePoint = player.transform;
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Throw Knife");

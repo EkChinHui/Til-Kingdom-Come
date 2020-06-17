@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GamePlay.Skills
 {
@@ -7,6 +8,7 @@ namespace GamePlay.Skills
         public Rigidbody2D rb;
         public float speed = 15f;
         public int damage = 1;
+
         private void Update()
         {
             rb.velocity = transform.right * speed;
