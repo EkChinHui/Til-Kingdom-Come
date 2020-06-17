@@ -6,32 +6,112 @@ namespace GamePlay.Skills
 {
     public class Attack : Skill
     {
+        public Transform attackPoint;
         
+        private LayerMask playerLayer;
+        
+        [Header("Variables")]
         private const int Damage = 1;
         public float attRange = 1.85f;
-        public Transform attackPoint;
-        private const float KnockDistAttacking = 8f;
-        private const float KnockDistBlocking = 4f;
-        private const float AttackCooldown = 0.4f;
-        private const float ReactionDelay = 0.2f;
-        public LayerMask playerLayer;
+        public float knockDistAttacking = 8f;
+        private float knockDistBlocking = 4f;
+        private float attackCooldown = 0f;
+        private float reactionDelay = 0.2f;
+
+        #region Combo information
+        private enum Combo
+        {
+            One,
+            Two,
+            Three
+        }
+
+        private Combo currentCombo = Combo.One;
+        public float decayTime = 1f;
+        public float nextDecayTime;
+        private int currentCharges = 3;
+        private float chargeTime = 10f;
+        private float nextChargeTime;
+        #endregion
+
 
         private void Start()
         {
             skillName = "Attack";
             skillInfo = "basic attack";
-            skillCooldown = AttackCooldown;
+            skillCooldown = attackCooldown;
             playerLayer = 1 << LayerMask.NameToLayer("Player");
+        }
+
+        private void Update()
+        {
+            Charging();
+        }
+
+        protected override bool CanCast()
+        {
+            if (Time.time < nextAvailTime) return false;
+            nextAvailTime = skillCooldown + Time.time;
+            return true;
         }
 
         public override void Cast(PlayerController player, PlayerController opponent)
         {
-            // 5.0125 value is the maximum distance between 2 players for the attack to be successful
-            // currently obtained manually by trial and error but we should find a way to calculate it
-            bool opponentAttackedFirst = opponent.combatState == PlayerController.CombatState.Attacking && Mathf.Abs(opponent.transform.position.x - player.transform.position.x) <= 5.0125f;
-            if (!CanCast() || opponentAttackedFirst) return;
+            if (AttackPriority(player, opponent) || !CanCast()) return;
+            // after charges are depleted the cooldown will be longer to refill it again
+            if (currentCharges <= 0) return;
+            
+            UpdateDecay();
+            currentCharges -= 1;
+            print(currentCharges);
+            print(currentCombo);
+            nextDecayTime = Time.time + decayTime;
             StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
             StartCoroutine(AttackAnimDelay(player));
+            UpdateCombo();
+        }
+
+        private void Charging()
+        {
+            if (currentCharges > 3) return;
+            if (Time.time >= nextChargeTime)
+            {
+                currentCharges++;
+                nextChargeTime = Time.time + chargeTime;
+            }
+        }
+
+        private void UpdateDecay()
+        {
+            // able to chain attack within a certain window, else performs a normal attack
+            switch (currentCombo)
+            {
+                case Combo.One:
+                    return;
+                case Combo.Two:
+                    if (Time.time > nextDecayTime) currentCombo = Combo.One;
+                    break;
+                case Combo.Three:
+                    if (Time.time > nextDecayTime) currentCombo = Combo.One;
+                    break;
+            }
+        }
+
+        private void UpdateCombo()
+        {
+            // after an attack, updates what the next combo will be
+            switch (currentCombo)
+            {
+                case Combo.One:
+                    currentCombo = Combo.Two;
+                    break;
+                case Combo.Two:
+                    currentCombo = Combo.Three;
+                    break;
+                case Combo.Three:
+                    currentCombo = Combo.One;
+                    break;
+            }
         }
         
         private void AttackCast(PlayerController player)
@@ -57,8 +137,8 @@ namespace GamePlay.Skills
                         AudioManager.instance.Play("Swords Collide");
                         // trigger successful block event
                         otherPlayer.onSuccessfulBlock?.Invoke();
-                        player.KnockBack(KnockDistAttacking);
-                        otherPlayer.KnockBack(KnockDistBlocking);
+                        player.KnockBack(knockDistAttacking);
+                        otherPlayer.KnockBack(knockDistBlocking);
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
                     {
@@ -80,6 +160,15 @@ namespace GamePlay.Skills
                 }
             }
         }
+
+        private bool AttackPriority(PlayerController player, PlayerController opponent)
+        // 5.0125 value is the maximum distance between 2 players for the attack to be successful
+        // currently obtained manually by trial and error but we should find a way to calculate it`
+        {
+            var opponentAttackedFirst = opponent.combatState == PlayerController.CombatState.Attacking 
+                                        && Mathf.Abs(opponent.transform.position.x - player.transform.position.x) <= 5.0125f;
+            return opponentAttackedFirst;
+        }
         
         private IEnumerator AttackAnimDelay(PlayerController player)
         {
@@ -87,9 +176,9 @@ namespace GamePlay.Skills
             player.anim.SetTrigger("Attack");
             print(player + " attacks");
             // reaction delay to allow opponent to react
-            yield return new WaitForSeconds(ReactionDelay);
+            yield return new WaitForSeconds(reactionDelay);
             AttackCast(player);
-            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - ReactionDelay);
+            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
         }
         

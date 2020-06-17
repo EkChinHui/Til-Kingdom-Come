@@ -74,6 +74,15 @@ namespace GamePlay
 
         public void Update()
         {
+            // combo system
+            if (combatState == CombatState.Attacking)
+            {
+                if (playerInput.AttemptAttack)
+                {
+                    attack.Cast(this, otherPlayer);
+                }
+            }
+            
             // if the player is dead, the player state should not be updated
             if (combatState == CombatState.Dead) return;
             // the player should only be able to perform other actions in the NonCombatState
@@ -89,7 +98,8 @@ namespace GamePlay
             else if (playerInput.AttemptBlock)
             {
                 block.Cast(this, otherPlayer);
-            } else if (playerInput.AttemptRoll)
+            } 
+            else if (playerInput.AttemptRoll)
             {
                 roll.Cast(this, otherPlayer);
             }
