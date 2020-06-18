@@ -188,7 +188,7 @@ namespace GamePlay
             shapeModule.rotation = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon 
                 ? new Vector3(0, -90, 0) 
                 : new Vector3(0, 90, 0);
-
+            
             Instantiate(bloodSplash, transform.position + heightOffset, Quaternion.identity);
         }
         

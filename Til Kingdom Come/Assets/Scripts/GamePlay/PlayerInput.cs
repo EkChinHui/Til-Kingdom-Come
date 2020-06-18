@@ -47,8 +47,17 @@ namespace GamePlay
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        private void Toggle()
+        public void Toggle()
         {
+            if (!inputIsEnabled)
+            {
+                attemptLeft = false;
+                attemptRight = false;
+                attemptRoll = false;
+                attemptAttack = false;
+                attemptBlock = false;
+                attemptSkill = false;
+            }
             inputIsEnabled = !inputIsEnabled;
         }
 
@@ -56,5 +65,6 @@ namespace GamePlay
         {
             PauseMenuController.PauseToggle -= Toggle;
         }
+        
     }
 }
