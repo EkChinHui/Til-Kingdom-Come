@@ -13,14 +13,14 @@ namespace GamePlay
         private float attack3Anim;
         private float blockAnim; 
         private float rollAnim;
-        private float forcePullAnim;
+        private float confusionAnim;
         private float throwKnivesAnim;
         public float AttackAnim => attackAnim;
         public float Attack2Anim => attack2Anim;
         public float Attack3Anim => attack3Anim;
         public float BlockAnim => blockAnim;
         public float RollAnim => rollAnim;
-        public float ForcePullAnim => forcePullAnim;
+        public float ConfusionAnim => confusionAnim;
         public float ThrowKnivesAnim => throwKnivesAnim;
         private void Awake()
         {
@@ -64,8 +64,8 @@ namespace GamePlay
                     case "Roll":
                         instance.rollAnim = clip.length;
                         break;
-                    case "Force Pull":
-                        instance.forcePullAnim = clip.length;
+                    case "Confusion":
+                        instance.confusionAnim = clip.length;
                         break;
                     case "ThrowKnives":
                         instance.throwKnivesAnim = clip.length;

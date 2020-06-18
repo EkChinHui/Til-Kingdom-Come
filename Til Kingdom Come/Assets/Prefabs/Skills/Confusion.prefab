@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2787994124815223461}
   - component: {fileID: 1763155690027805343}
   m_Layer: 0
-  m_Name: Force Pull
+  m_Name: Confusion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,10 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efcafdc9db912943afd2fc61883e544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Force Pull
-  skillInfo: Pulls the enemy
+  skillName: Confusion
+  skillInfo: Confuses the enemy reversing their controls
   icon: {fileID: 21300000, guid: 0e6c110d307742548be5910b1df803f2, type: 3}
   skillCooldown: 10
   skillNumber: 1
-  pullDistance: 6
-  stunDuration: 0.2
+  pushDistance: 10
+  confusionDuration: 5

@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace GamePlay.Skills
 {
-    public class ForcePull : Skill
+    public class Confusion : Skill
     {
-        [SerializeField] private float pullDistance = 6f;
-        [SerializeField] private float stunDuration = 0.2f;
+        [SerializeField] private float pushDistance = 6f;
+        [SerializeField] private float confusionDuration = 4f;
 
 
         private void Start()
         { 
-            skillName = "Force Pull";
-            skillInfo = "Pulls the enemy towards you";
+            skillName = "Confusion";
+            skillInfo = "Confuse the enemy, reversing the controls of the enemy";
             skillNumber = 1;
             skillCooldown = 10f;
         }
@@ -23,8 +23,8 @@ namespace GamePlay.Skills
             StartCoroutine(AnimDelay());
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Force Pull");
-            opponent.KnockBack(-1 * pullDistance);
-            StartCoroutine(Stun(opponent));
+            opponent.KnockBack(pushDistance);
+            StartCoroutine(Confuse(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
        
         }
@@ -32,15 +32,18 @@ namespace GamePlay.Skills
         private IEnumerator AnimDelay()
         {
             player.combatState = PlayerController.CombatState.Skill;
-            var animDelay = AnimationTimes.instance.ForcePullAnim;
+            var animDelay = AnimationTimes.instance.ConfusionAnim;
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(animDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
+            yield return null;
         }
 
-        private IEnumerator Stun(PlayerController opponent)
+        private IEnumerator Confuse(PlayerController opponent)
         {
-            yield return new WaitForSeconds(stunDuration);
+            opponent.playerInput.SwitchKeys();
+            yield return new WaitForSeconds(confusionDuration);
+            opponent.playerInput.SwitchKeys();
             yield return null;
         }
     }

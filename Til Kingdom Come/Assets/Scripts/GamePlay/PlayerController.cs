@@ -1,8 +1,6 @@
 ﻿using System;
 using GamePlay.Skills;
-using UI;
 using UI.GameUI;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace GamePlay
@@ -136,7 +134,6 @@ namespace GamePlay
                 anim.SetInteger("state", 0);
             }
         }
-        
 
         public void KnockBack(float distance)
         {
