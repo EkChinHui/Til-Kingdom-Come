@@ -4,6 +4,7 @@ namespace GamePlay.Skills
 {
     public abstract class Skill : MonoBehaviour
     {
+        protected PlayerController player;
         [SerializeField] protected string skillName;
         [SerializeField] protected string skillInfo;
         public Sprite icon;
@@ -31,7 +32,12 @@ namespace GamePlay.Skills
             return nextAvailTime - Time.time;
         }
 
-        public abstract void Cast(PlayerController player, PlayerController opponent);
+        public abstract void Cast(PlayerController opponent);
 
+        public void AssignPlayer(PlayerController player)
+        {
+            this.player = player;
+        }
+        
     }
 }

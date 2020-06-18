@@ -46,5 +46,10 @@ namespace GamePlay.Skills
                 nextChargeTime = Time.time + chargeTime;
             }
         }
+
+        public void RefillCharges()
+        {
+            currentCharge = maxCharge;
+        }
     }
 }

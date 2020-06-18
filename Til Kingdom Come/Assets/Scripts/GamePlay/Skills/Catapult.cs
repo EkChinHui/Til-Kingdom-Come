@@ -10,18 +10,19 @@ namespace GamePlay.Skills
         private int numberOfBoulders = 3;
         // Start is called before the first frame update
         void Start()
-        {
+        { 
             skillName = "Catapult";
             skillInfo = "Calls in a catapult strike on the opponent";
             skillNumber = 3;
         }
-        public override void Cast(PlayerController player, PlayerController opponent)
+        
+        public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
-            StartCoroutine(AnimDelay(player, opponent));
+            StartCoroutine(AnimDelay(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
-        private IEnumerator AnimDelay(PlayerController player, PlayerController opponent)
+        private IEnumerator AnimDelay(PlayerController opponent)
         {
             var animDelay = AnimationTimes.instance.CatapultAnim;
             player.combatState = PlayerController.CombatState.Skill;

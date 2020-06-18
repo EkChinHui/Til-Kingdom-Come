@@ -17,17 +17,17 @@ namespace GamePlay.Skills
         }
 
 
-        public override void Cast(PlayerController player, PlayerController opponent)
+        public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
             Debug.Log($"Player {player.playerNo} used {skillName}");
-            StartCoroutine(AnimDelay(player));
+            StartCoroutine(AnimDelay());
             opponent.KnockBack(pushDistance);
             StartCoroutine(Stun(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
             
         }
-        private IEnumerator AnimDelay(PlayerController player)
+        private IEnumerator AnimDelay()
         {
             player.combatState = PlayerController.CombatState.Skill;
             var forcePushAnim= AnimationTimes.instance.ForcePushAnim;

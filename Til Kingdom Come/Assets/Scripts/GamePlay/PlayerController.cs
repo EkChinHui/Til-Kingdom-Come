@@ -81,7 +81,7 @@ namespace GamePlay
             {
                 if (playerInput.AttemptAttack)
                 {
-                    attack.Cast(this, otherPlayer);
+                    attack.Cast(otherPlayer);
                 }
             }
             
@@ -91,19 +91,19 @@ namespace GamePlay
             if (combatState != CombatState.NonCombatState) return;
             if (playerInput.AttemptSkill)
             {
-                skill.Cast(this, otherPlayer);
+                skill.Cast(otherPlayer);
             }
             else if (playerInput.AttemptAttack)
             {
-                attack.Cast(this, otherPlayer);
+                attack.Cast(otherPlayer);
             }
             else if (playerInput.AttemptBlock)
             {
-                block.Cast(this, otherPlayer);
+                block.Cast(otherPlayer);
             } 
             else if (playerInput.AttemptRoll)
             {
-                roll.Cast(this, otherPlayer);
+                roll.Cast(otherPlayer);
             }
             else if (combatState == CombatState.NonCombatState)
             {
@@ -178,7 +178,7 @@ namespace GamePlay
             combatState = CombatState.Dead;
             // die animation
             anim.SetBool("Dead", true);
-            
+             
             // offset particles to be emitted at body level
             var heightOffset = new Vector3(0, 2f, 0);
 
@@ -195,6 +195,7 @@ namespace GamePlay
         private void ResetPlayer()
         // resets player position based on start position and resets combatState
         {
+            attack.charges.RefillCharges();
             anim.SetBool("Dead", false);
             combatState = CombatState.NonCombatState;
             enabled = true;
@@ -209,6 +210,12 @@ namespace GamePlay
         {
             if (player != playerNo) return;
             skill = Instantiate(assignSkill).GetComponent<Skill>();
+            skill.AssignPlayer(this);
+            var skillCharges = skill.GetComponent<Charges>();
+            if (skillCharges != null)
+            {
+                cooldownUiController.skillIcon.GetComponent<DisplayCharges>().charges = skillCharges.CurrentCharge;
+            }
         }
 
         private void OnDestroy()

@@ -33,6 +33,6 @@ namespace UI.GameUI
         {
             SkillSelectionManager.passPlayerSkills -= SetSkillIcon;
         }
+        
     }
-    
 }

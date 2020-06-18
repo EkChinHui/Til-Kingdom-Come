@@ -9,9 +9,9 @@ namespace GamePlay.Skills
         public bool dashing;
         public float rollSpeed = 1.5f;
         private const float RollCooldown = 2f;
-        private PlayerController playerController;
         private void Start()
         {
+            player = gameObject.GetComponentInParent<PlayerController>();
             skillName = "Roll";
             skillInfo = "Rolls a short distance, invulnerable while rolling";
             skillCooldown = RollCooldown;
@@ -21,22 +21,21 @@ namespace GamePlay.Skills
         {
             if (dashing)
             {
-                RollMove(playerController);
+                RollMove();
             }
 
         }
 
-        public override void Cast(PlayerController player, PlayerController opponent)
+        public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
-            playerController = player;
             AudioManager.instance.PlaySoundEffect("Roll");
-            FlipSprite(player);
-            StartCoroutine(RollAnimDelay(player));
+            FlipSprite();
+            StartCoroutine(RollAnimDelay());
             StartCoroutine(player.cooldownUiController.rollIcon.ChangesFillAmount(skillCooldown));
         }
 
-        private void RollMove(PlayerController player)
+        private void RollMove()
         {
             if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
             {
@@ -48,7 +47,7 @@ namespace GamePlay.Skills
             }
         }
 
-        private IEnumerator RollAnimDelay(PlayerController player)
+        private IEnumerator RollAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Rolling;
             dashing = true;
@@ -59,7 +58,7 @@ namespace GamePlay.Skills
             player.rb.velocity = Vector2.zero;
         }
         
-        private void FlipSprite(PlayerController player)
+        private void FlipSprite()
         {
             if (player.playerInput.AttemptRight)
             {

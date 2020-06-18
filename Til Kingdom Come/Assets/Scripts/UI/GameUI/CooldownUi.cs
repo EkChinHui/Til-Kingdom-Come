@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.GameUI
 {
     public class CooldownUi : MonoBehaviour
     {
@@ -25,5 +26,6 @@ namespace UI
                 yield return null;
             }
         }
+        
     }
 }

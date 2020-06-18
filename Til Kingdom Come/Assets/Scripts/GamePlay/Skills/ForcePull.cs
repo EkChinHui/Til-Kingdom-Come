@@ -10,17 +10,17 @@ namespace GamePlay.Skills
 
 
         private void Start()
-        {
+        { 
             skillName = "Force Pull";
             skillInfo = "Pulls the enemy towards you";
             skillNumber = 1;
             skillCooldown = 10f;
         }
 
-        public override void Cast(PlayerController player, PlayerController opponent)
+        public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
-            StartCoroutine(AnimDelay(player));
+            StartCoroutine(AnimDelay());
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Force Pull");
             opponent.KnockBack(-1 * pullDistance);
@@ -29,7 +29,7 @@ namespace GamePlay.Skills
        
         }
 
-        private IEnumerator AnimDelay(PlayerController player)
+        private IEnumerator AnimDelay()
         {
             player.combatState = PlayerController.CombatState.Skill;
             var animDelay = AnimationTimes.instance.ForcePullAnim;

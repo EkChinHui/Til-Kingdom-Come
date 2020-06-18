@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UI.GameUI;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -24,8 +25,14 @@ namespace GamePlay.Skills
             charges = gameObject.AddComponent<Charges>();
             charges.SetCharges(maxCharges, chargeTime);
         }
+        
+        private void Update()
+        {
+            player.cooldownUiController.skillIcon.gameObject.GetComponent<DisplayCharges>()
+                .UpdateCharges(charges.CurrentCharge);
+        }
 
-        public override void Cast(PlayerController player, PlayerController opponent)
+        public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
             if (charges.CurrentCharge <= 0) {
@@ -36,12 +43,11 @@ namespace GamePlay.Skills
             rangePoint = player.transform;
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Throw Knife");
-            StartCoroutine(AnimDelay(player));
+            StartCoroutine(AnimDelay());
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
-        
-        
-        private IEnumerator AnimDelay(PlayerController player)
+
+        private IEnumerator AnimDelay()
         {
             var animDelay = AnimationTimes.instance.ThrowKnivesAnim;
             player.combatState = PlayerController.CombatState.Skill;

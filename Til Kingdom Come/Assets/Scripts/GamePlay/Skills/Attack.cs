@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UI.GameUI;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -21,9 +22,9 @@ namespace GamePlay.Skills
         public int maxCharges = 3;
         public float chargeTime = 5f;
         public Combo combo;
-
         private void Start()
         {
+            player = gameObject.GetComponentInParent<PlayerController>();
             skillName = "Attack";
             skillInfo = "basic attack";
             skillCooldown = attackCooldown;
@@ -33,24 +34,20 @@ namespace GamePlay.Skills
             combo = new Combo();
         }
 
-        protected override bool CanCast()
+        private void Update()
         {
-            if (Time.time < nextAvailTime) return false;
-            nextAvailTime = skillCooldown + Time.time;
-            return true;
+               player.cooldownUiController.attackIcon.gameObject.GetComponent<DisplayCharges>()
+                .UpdateCharges(charges.CurrentCharge);
         }
 
-        public override void Cast(PlayerController player, PlayerController opponent)
+        public override void Cast(PlayerController opponent)
         {
             if (AttackPriority(player, opponent) || !CanCast()) return;
-
-            if (charges.CurrentCharge <= 0) {
-                print("0 charges left");
-                return;
-            }
-
+            if (charges.CurrentCharge <= 0) return;
+            
             combo.UpdateDecay();
             charges.CurrentCharge -= 1;
+
             print("charges: " + charges.CurrentCharge);
             print("combo: " + combo.CurrentCombo);
             // within the decay time combo will be upgraded to next combo;
