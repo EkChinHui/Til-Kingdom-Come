@@ -42,7 +42,7 @@ namespace GamePlay.Skills
 
         public override void Cast(PlayerController opponent)
         {
-            if (AttackPriority(player, opponent) || !CanCast()) return;
+            if (AttackPriority(opponent) || !CanCast()) return;
             if (charges.CurrentCharge <= 0) return;
             
             combo.UpdateDecay();
@@ -54,13 +54,13 @@ namespace GamePlay.Skills
             {
                 case (Combo.ComboNumber.One):
                     StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
-                    StartCoroutine(ComboOneAnimDelay(player));
+                    StartCoroutine(ComboOneAnimDelay());
                     break;
                 case (Combo.ComboNumber.Two):
-                    StartCoroutine(ComboTwoAnimDelay(player));
+                    StartCoroutine(ComboTwoAnimDelay());
                     break;
                 case (Combo.ComboNumber.Three):
-                    StartCoroutine(ComboThreeAnimDelay(player));
+                    StartCoroutine(ComboThreeAnimDelay());
                     break;
             }
             combo.UpdateCombo();
@@ -69,7 +69,7 @@ namespace GamePlay.Skills
             Debug.Log("Attack Executed: " + combo.CurrentCombo);
         }
         
-        private void AttackCast(PlayerController player)
+        private void AttackCast()
         {
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
@@ -116,7 +116,7 @@ namespace GamePlay.Skills
             }
         }
 
-        private bool AttackPriority(PlayerController player, PlayerController opponent)
+        private bool AttackPriority(PlayerController opponent)
         // 5.0125 value is the maximum distance between 2 players for the attack to be successful
         // currently obtained manually by trial and error but we should find a way to calculate it`
         {
@@ -125,35 +125,43 @@ namespace GamePlay.Skills
             return opponentAttackedFirst;
         }
         
-        private IEnumerator ComboOneAnimDelay(PlayerController player)
+        private IEnumerator ComboOneAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
-            AttackCast(player);
+            AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
         }
 
-        private IEnumerator ComboTwoAnimDelay(PlayerController player)
+        private IEnumerator ComboTwoAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack 2");
+            var velocity = player.rb.velocity;
+            player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
+                ? new Vector2(-10f, velocity.y)
+                : new Vector2(10f, velocity.y);
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
-            AttackCast(player);
+            AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
         }
 
-        private IEnumerator ComboThreeAnimDelay(PlayerController player)
+        private IEnumerator ComboThreeAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack 3");
+            var velocity = player.rb.velocity;
+            player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
+                ? new Vector2(-10f, velocity.y)
+                : new Vector2(10f, velocity.y);
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
-            AttackCast(player);
+            AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
         }

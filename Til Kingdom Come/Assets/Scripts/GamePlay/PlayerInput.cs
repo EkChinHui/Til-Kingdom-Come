@@ -31,6 +31,7 @@ namespace GamePlay
         {
             PauseMenuController.PauseToggle += Toggle;
         }
+        
         private void Update()
         {
             if (!inputIsEnabled) return;
@@ -47,9 +48,9 @@ namespace GamePlay
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        public void Toggle()
+        private void Toggle()
         {
-            if (!inputIsEnabled)
+            if (inputIsEnabled)
             {
                 attemptLeft = false;
                 attemptRight = false;
@@ -59,6 +60,13 @@ namespace GamePlay
                 attemptSkill = false;
             }
             inputIsEnabled = !inputIsEnabled;
+        }
+
+        public void SwitchKeys()
+        {
+            var tempLeftKey = leftKey;
+            leftKey = rightKey;
+            rightKey = tempLeftKey;
         }
 
         private void OnDestroy()
