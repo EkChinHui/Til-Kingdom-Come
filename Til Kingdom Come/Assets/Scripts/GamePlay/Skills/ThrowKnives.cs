@@ -9,7 +9,7 @@ namespace GamePlay.Skills
     {
         public Transform rangePoint;
         public GameObject knife;
-        private float knifeDelay = 0.4f;
+        private float knifeDelay = 0.6f;
         public float heightOffset;
         public float distanceOffset;
         public Charges charges;

@@ -9,27 +9,19 @@ namespace GamePlay
         public Animator anim;
 
         private float attackAnim;
+        private float attack2Anim;
+        private float attack3Anim;
         private float blockAnim; 
         private float rollAnim;
         private float forcePullAnim;
-        private float forcePushAnim;
         private float throwKnivesAnim;
-        private float catapultAnim;
-
         public float AttackAnim => attackAnim;
-
+        public float Attack2Anim => attack2Anim;
+        public float Attack3Anim => attack3Anim;
         public float BlockAnim => blockAnim;
-
         public float RollAnim => rollAnim;
-
         public float ForcePullAnim => forcePullAnim;
-
-        public float ForcePushAnim => forcePushAnim;
-
         public float ThrowKnivesAnim => throwKnivesAnim;
-
-        public float CatapultAnim => catapultAnim;
-
         private void Awake()
         {
             if (instance == null)
@@ -60,6 +52,12 @@ namespace GamePlay
                     case "Attack":
                         instance.attackAnim = clip.length;
                         break;
+                    case "Attack 2":
+                        instance.attack2Anim = clip.length;
+                        break;
+                    case "Attack 3":
+                        instance.attack3Anim = clip.length;
+                        break;
                     case "Block":
                         instance.blockAnim = clip.length;
                         break;
@@ -69,14 +67,8 @@ namespace GamePlay
                     case "Force Pull":
                         instance.forcePullAnim = clip.length;
                         break;
-                    case "Force Push":
-                        instance.forcePushAnim = clip.length;
-                        break;
                     case "ThrowKnives":
                         instance.throwKnivesAnim = clip.length;
-                        break;
-                    case "Catapult":
-                        instance.catapultAnim = clip.length;
                         break;
                 }
             }

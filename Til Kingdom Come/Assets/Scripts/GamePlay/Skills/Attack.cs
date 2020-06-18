@@ -48,20 +48,32 @@ namespace GamePlay.Skills
             combo.UpdateDecay();
             charges.CurrentCharge -= 1;
 
-            print("charges: " + charges.CurrentCharge);
-            print("combo: " + combo.CurrentCombo);
-            // within the decay time combo will be upgraded to next combo;
+            // Combo will be upgraded to next combo if it is executed within the decay time
             combo.SetDecay();
-            StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
-            StartCoroutine(AttackAnimDelay(player));
+            switch (combo.CurrentCombo)
+            {
+                case (Combo.ComboNumber.One):
+                    StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
+                    StartCoroutine(ComboOneAnimDelay(player));
+                    break;
+                case (Combo.ComboNumber.Two):
+                    StartCoroutine(ComboTwoAnimDelay(player));
+                    break;
+                case (Combo.ComboNumber.Three):
+                    StartCoroutine(ComboThreeAnimDelay(player));
+                    break;
+            }
             combo.UpdateCombo();
+
+            Debug.Log("Attack Charges Left: " + charges.CurrentCharge);
+            Debug.Log("Attack Executed: " + combo.CurrentCombo);
         }
         
         private void AttackCast(PlayerController player)
         {
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
-            // maximum distance between both players for attack to be successful
+            // Maximum distance between both players for attack to be successful
             if (hitEnemies.Length == 0) {
                 AudioManager.instance.PlaySoundEffect("Sword Swing");
             }
@@ -113,11 +125,32 @@ namespace GamePlay.Skills
             return opponentAttackedFirst;
         }
         
-        private IEnumerator AttackAnimDelay(PlayerController player)
+        private IEnumerator ComboOneAnimDelay(PlayerController player)
         {
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack");
-            print(player + " attacks");
+            // reaction delay to allow opponent to react
+            yield return new WaitForSeconds(reactionDelay);
+            AttackCast(player);
+            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
+            player.combatState = PlayerController.CombatState.NonCombatState;
+        }
+
+        private IEnumerator ComboTwoAnimDelay(PlayerController player)
+        {
+            player.combatState = PlayerController.CombatState.Attacking;
+            player.anim.SetTrigger("Attack 2");
+            // reaction delay to allow opponent to react
+            yield return new WaitForSeconds(reactionDelay);
+            AttackCast(player);
+            yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
+            player.combatState = PlayerController.CombatState.NonCombatState;
+        }
+
+        private IEnumerator ComboThreeAnimDelay(PlayerController player)
+        {
+            player.combatState = PlayerController.CombatState.Attacking;
+            player.anim.SetTrigger("Attack 3");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast(player);

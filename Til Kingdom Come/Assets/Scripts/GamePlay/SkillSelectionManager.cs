@@ -16,10 +16,8 @@ namespace GamePlay
         #endregion
 
         #region All Skills
-        public GameObject forcePush;
-        public GameObject forcePull;
         public GameObject throwKnives;
-        public GameObject catapult;
+        public GameObject forcePull;
         #endregion
         
         public static SkillSelectionManager instance;
@@ -40,10 +38,8 @@ namespace GamePlay
         }
         private void Start()
         {
-            skillPrefabs.Add(forcePush); // 0
-            skillPrefabs.Add(forcePull); // 1
-            skillPrefabs.Add(throwKnives); // 2
-            skillPrefabs.Add(catapult); // 3
+            skillPrefabs.Add(throwKnives); // 1
+            skillPrefabs.Add(forcePull); // 2
         }
 
         public void AssignSkills()
