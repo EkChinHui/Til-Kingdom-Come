@@ -9,6 +9,11 @@ namespace GamePlay.Skills
         public float speed = 15f;
         public int damage = 1;
 
+        private void Awake()
+        {
+            ScoreKeeper.resetPlayersEvent += DestroyProjectile;
+        }
+
         private void Update()
         {
             rb.velocity = transform.right * speed;
@@ -46,6 +51,11 @@ namespace GamePlay.Skills
         private void DestroyProjectile()
         {
             Destroy(gameObject);    
+        }
+
+        private void OnDestroy()
+        {
+            ScoreKeeper.resetPlayersEvent -= DestroyProjectile;
         }
     }
 }
