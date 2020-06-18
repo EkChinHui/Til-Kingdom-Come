@@ -11,9 +11,8 @@ public class AudioManager : MonoBehaviour
     public Sound[] music;
     public AudioMixerGroup soundEffectOutput;
     public Sound[] soundEffect;
-    private string currentMusic;
-    private string previousMusic;
-    private float fadeOutTime = 2f;
+    private Sound currentMusic;
+    private float fadeOutTime = 1f;
 
     void Awake()
     {
@@ -70,7 +69,7 @@ public class AudioManager : MonoBehaviour
         }
         Debug.Log("Playing Music: " + name + ".");
         s.source.Play();
-        currentMusic = name;
+        currentMusic = s;
     }
 
     public void PlaySoundEffect(string name)
@@ -86,61 +85,44 @@ public class AudioManager : MonoBehaviour
 
     public void FadeOutCurrentMusic()
     {
-        Sound s = Array.Find(music, music => music.name == currentMusic);
-        if (s == null) {
-            Debug.LogWarning("Current Music: " + currentMusic + " not found!");
+        if (currentMusic == null) {
+            Debug.LogWarning("No current music!");
             return;
         }
-        Debug.Log("Fading Out Music: " + currentMusic + ".");
-        StartCoroutine(AudioFadeOut(s.source, fadeOutTime));
-        previousMusic = currentMusic;
+        Debug.Log("No current music!");
+        StartCoroutine(AudioFadeOut(currentMusic.source, fadeOutTime));
         currentMusic = null;
     }
 
     public void PlayCurrentMusic()
     {
-        Sound s = Array.Find(music, music => music.name == currentMusic);
-        if (s == null) {
-            Debug.LogWarning("Current Music: " + currentMusic + " not found!");
+        if (currentMusic == null) {
+            Debug.LogWarning("No current music!");
             return;
         }
-        Debug.Log("Playing Music: " + currentMusic + ".");
-        s.source.Play();
+        Debug.Log("Playing Music: " + currentMusic.name + ".");
+        currentMusic.source.Play();
     }
 
     public void PauseCurrentMusic()
     {
-        Sound s = Array.Find(music, music => music.name == currentMusic);
-        if (s == null) {
-            Debug.LogWarning("Current Music: " + currentMusic + " not found!");
+        if (currentMusic == null) {
+            Debug.LogWarning("No current music!");
             return;
         }
-        Debug.Log("Pausing Music: " + currentMusic + ".");
-        s.source.Pause();
+        Debug.Log("Pausing Music: " + currentMusic.name + ".");
+        currentMusic.source.Pause();
     }
 
     public void StopCurrentMusic()
     {
-        Sound s = Array.Find(music, music => music.name == currentMusic);
-        if (s == null) {
-            Debug.LogWarning("Current Music: " + currentMusic + " not found!");
+        if (currentMusic == null) {
+            Debug.LogWarning("No current music!");
             return;
         }
-        Debug.Log("Stopping Music: " + currentMusic + ".");
-        s.source.Stop();
-        previousMusic = currentMusic;
+        Debug.Log("Stopping Music: " + currentMusic.name + ".");
+        currentMusic.source.Stop();
         currentMusic = null;
-    }
-
-    public void PlayPreviousMusic()
-    {
-        Sound s = Array.Find(music, music => music.name == previousMusic);
-        if (s == null) {
-            Debug.LogWarning("Previous Music: " + previousMusic + " not found!");
-            return;
-        }
-        Debug.Log("Playing Music: " + previousMusic + ".");
-        s.source.Play();
     }
 
     private IEnumerator AudioFadeOut(AudioSource audioSource, float fadeTime) {
@@ -148,7 +130,6 @@ public class AudioManager : MonoBehaviour
  
         while (audioSource.volume > 0) {
             audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
- 
             yield return null;
         }
  
