@@ -128,17 +128,20 @@ namespace GamePlay.Skills
         private IEnumerator ComboOneAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
+            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
+            player.playerInput.Toggle();
         }
 
         private IEnumerator ComboTwoAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
+            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack 2");
             var velocity = player.rb.velocity;
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
@@ -149,11 +152,13 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
+            player.playerInput.Toggle();
         }
 
         private IEnumerator ComboThreeAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
+            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack 3");
             var velocity = player.rb.velocity;
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
@@ -164,6 +169,7 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
+            player.playerInput.Toggle();
         }
         
         

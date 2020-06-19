@@ -21,7 +21,7 @@ namespace GamePlay
         public GameObject bloodSplash;
         public GameObject sparks;
         
-        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
+        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead, God}
         public CombatState combatState = CombatState.NonCombatState;
 
         [Header("Movement")] 
@@ -146,14 +146,18 @@ namespace GamePlay
 
         public void TakeDamage(int damageTaken)
         {
-            currentHealth -= damageTaken;
-            if (currentHealth <= 0 && combatState != CombatState.Dead)
+            if (combatState != CombatState.God)
             {
-                Die();
-            } 
-            else
-            {
-                // hurt;
+                Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
+                currentHealth -= damageTaken;
+                if (currentHealth <= 0 && combatState != CombatState.Dead)
+                {
+                    Die();
+                } 
+                else
+                {
+                    // hurt;
+                }
             }
         }
         private void SuccessfulBlock()
@@ -171,7 +175,10 @@ namespace GamePlay
 
         private void Die()
         {
+            Debug.Log("Player " + playerNo + " dies.");
+            Debug.Log("Player " + otherPlayer.playerNo + " enters God mode.");
             onDeath?.Invoke(playerNo);
+            otherPlayer.combatState = CombatState.God;
             combatState = CombatState.Dead;
             // die animation
             anim.SetBool("Dead", true);
@@ -193,6 +200,7 @@ namespace GamePlay
         // resets player position based on start position and resets combatState
         {
             attack.charges.RefillCharges();
+            block.charges.RefillCharges();
             anim.SetBool("Dead", false);
             combatState = CombatState.NonCombatState;
             enabled = true;

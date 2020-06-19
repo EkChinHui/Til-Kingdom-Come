@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using System;
 
 namespace GamePlay
 {
     public class PlayerInput : MonoBehaviour
     {
+        public static Action OnToggleInput;
         private bool inputIsEnabled = true;
         [Header("Input")]
         // note to use getAxis for multi-player mode so user can change their input
@@ -29,7 +31,7 @@ namespace GamePlay
 
         private void Start()
         {
-            PauseMenuController.PauseToggle += Toggle;
+            OnToggleInput += Toggle;
         }
         
         private void Update()
@@ -48,7 +50,7 @@ namespace GamePlay
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        private void Toggle()
+        public void Toggle()
         {
             if (inputIsEnabled)
             {
@@ -60,6 +62,7 @@ namespace GamePlay
                 attemptSkill = false;
             }
             inputIsEnabled = !inputIsEnabled;
+            Debug.Log("Toggle Input");
         }
 
         public void SwitchKeys()
@@ -71,7 +74,7 @@ namespace GamePlay
 
         private void OnDestroy()
         {
-            PauseMenuController.PauseToggle -= Toggle;
+            OnToggleInput -= Toggle;
         }
         
     }

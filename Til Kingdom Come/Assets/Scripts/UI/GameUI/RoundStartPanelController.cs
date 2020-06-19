@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using GamePlay;
 
 public class RoundStartPanelController : MonoBehaviour
 {
@@ -15,11 +16,12 @@ public class RoundStartPanelController : MonoBehaviour
     private bool waiting = false;
     private bool raising = false;
     private bool playSound = false;
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         startYAxis = rectTransform.anchoredPosition.y;
-        if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
+        if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
         lowering = true;
         playSound = true;
         pauseMenuController.canPause = false;
@@ -54,7 +56,7 @@ public class RoundStartPanelController : MonoBehaviour
             rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
         } else {
             raising = false;
-            if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
+            if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
             pauseMenuController.canPause = true;
         }
     }
@@ -71,7 +73,7 @@ public class RoundStartPanelController : MonoBehaviour
 
     public void nextRound() {
         UpdateRoundNumber();
-        if (PauseMenuController.PauseToggle != null) PauseMenuController.PauseToggle();
+        if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
         lowering = true;
         pauseMenuController.canPause = false;
         playSound = true;

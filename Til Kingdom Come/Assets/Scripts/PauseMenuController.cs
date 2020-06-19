@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System;
+using GamePlay;
 
 public class PauseMenuController : MonoBehaviour
 {
-    public static Action PauseToggle;
     public bool canPause = true;
     private bool gameIsPaused = false;
     public GameObject pauseMenu;
@@ -16,12 +16,12 @@ public class PauseMenuController : MonoBehaviour
             {
                 if(gameIsPaused)
                 {
-                    if (PauseToggle != null) PauseToggle();
+                    if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
                     Resume();
                 }
                 else
                 {
-                    if (PauseToggle != null) PauseToggle();
+                    if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
                     Pause();
                 }
             }

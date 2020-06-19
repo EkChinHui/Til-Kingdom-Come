@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 97155047}
   - component: {fileID: 97155045}
   m_Layer: 5
-  m_Name: Player 2 cooldowns
+  m_Name: Player 2 Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 324292053}
   - component: {fileID: 324292052}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 352883432}
   - component: {fileID: 352883431}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 404785778}
   - component: {fileID: 404785777}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13405,7 +13405,7 @@ GameObject:
   - component: {fileID: 776601529}
   - component: {fileID: 776601528}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13659,7 +13659,7 @@ GameObject:
   - component: {fileID: 899992758}
   - component: {fileID: 899992757}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13816,7 +13816,7 @@ GameObject:
   - component: {fileID: 901153991}
   - component: {fileID: 901153990}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14516,7 +14516,7 @@ GameObject:
   - component: {fileID: 1100834371}
   - component: {fileID: 1100834370}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15053,7 +15053,7 @@ GameObject:
   - component: {fileID: 1250174575}
   - component: {fileID: 1250174574}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16518,7 +16518,7 @@ GameObject:
   - component: {fileID: 1332110224}
   - component: {fileID: 1332110223}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35522,7 +35522,7 @@ GameObject:
   - component: {fileID: 1516538541}
   - component: {fileID: 1516538540}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35766,7 +35766,7 @@ GameObject:
   - component: {fileID: 1581981535}
   - component: {fileID: 1581981534}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36932,7 +36932,7 @@ GameObject:
   - component: {fileID: 1605301178}
   - component: {fileID: 1605301177}
   m_Layer: 5
-  m_Name: skillName
+  m_Name: Skill Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37089,7 +37089,7 @@ GameObject:
   - component: {fileID: 1626243836}
   - component: {fileID: 1626243835}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41499,7 +41499,7 @@ GameObject:
   - component: {fileID: 2063527265}
   - component: {fileID: 2063527264}
   m_Layer: 5
-  m_Name: charges
+  m_Name: Charges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42001,7 +42001,7 @@ GameObject:
   - component: {fileID: 2111674109}
   - component: {fileID: 2111674107}
   m_Layer: 5
-  m_Name: Player 1 cooldowns
+  m_Name: Player 1 Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

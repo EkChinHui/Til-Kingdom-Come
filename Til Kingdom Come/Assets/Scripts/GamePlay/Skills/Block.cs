@@ -7,7 +7,7 @@ namespace GamePlay.Skills
     public class Block : Skill
     {
         private const float BlockCooldown = 0f;
-        private Charges charges;
+        public Charges charges;
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
@@ -36,10 +36,12 @@ namespace GamePlay.Skills
         
         private IEnumerator BlockAnimDelay(PlayerController player)
         {
-            player.anim.SetTrigger("Block");
             player.combatState = PlayerController.CombatState.Blocking;
+            player.playerInput.Toggle();
+            player.anim.SetTrigger("Block");
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             player.combatState = PlayerController.CombatState.NonCombatState;
+            player.playerInput.Toggle();
         }
     }
 }
