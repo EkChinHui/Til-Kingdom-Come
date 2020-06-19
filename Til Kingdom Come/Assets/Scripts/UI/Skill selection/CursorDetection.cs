@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -32,7 +30,7 @@ namespace UI.Skill_selection
             gr = GetComponentInParent<GraphicRaycaster>();
             SetColor();
             border = "Border" + playerNo;
-
+            start = false;
             startPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
             startTime = Time.time;
             endPos = playerNo == 1 
@@ -45,6 +43,10 @@ namespace UI.Skill_selection
         
         void Update()
         {
+            if (rectTransform.anchoredPosition == new Vector2(endPos.x, endPos.y))
+            {
+                start = true;
+            }
             if (!start)
             {
                 LowerPiece();
@@ -87,7 +89,7 @@ namespace UI.Skill_selection
         {
             #region Set default location
             
-            float distCovered = (Time.time - startTime) * 600;
+            float distCovered = (Time.time - startTime) * 300;
             float fractionOfJourney = distCovered / distance;
             rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, fractionOfJourney);
 
