@@ -32,18 +32,19 @@ namespace GamePlay.Skills
             {
                 // Player cant be hit while rolling
                 case PlayerController.CombatState.Rolling:
-                    Debug.Log("Successful dodge");
+                    Debug.Log("Successfully Dodged Throwing Knife");
                     return;
                 // Player will not be damaged while blocking (projectile is destroyed)
                 case PlayerController.CombatState.Blocking:
                     DestroyProjectile();
-                    Debug.Log("Successful block");
+                    AudioManager.instance.PlaySoundEffect("Swords Collide");
+                    Debug.Log("Successfully Blocked Throwing Knife");
                     damagedPlayer.onSuccessfulBlock?.Invoke();
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);
                     DestroyProjectile();
-                    Debug.Log("Projectile Hits target");
+                    Debug.Log("Throwing Knife Hit");
                     return;
             }
         }
