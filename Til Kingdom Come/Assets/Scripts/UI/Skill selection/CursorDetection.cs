@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 namespace UI.Skill_selection
 {
@@ -14,7 +17,12 @@ namespace UI.Skill_selection
         public int playerNo;
         public Color color;
         public string border = "Border1";
-
+        private float startTime;
+        private float distance;
+        public bool start = false;
+        public RectTransform rectTransform;
+        private Vector3 startPos;
+        private Vector3 endPos;
         #region Events
         public static Action<int, int> onSkillSelect;
         #endregion
@@ -24,10 +32,23 @@ namespace UI.Skill_selection
             gr = GetComponentInParent<GraphicRaycaster>();
             SetColor();
             border = "Border" + playerNo;
+
+            startPos = gameObject.GetComponent<RectTransform>().anchoredPosition;
+            startTime = Time.time;
+            endPos = playerNo == 1 
+                ? new Vector3(-80, -324, 0) 
+                : new Vector3(80, -324, 0);
+            distance = Vector3.Distance(startPos, endPos);
+            rectTransform = gameObject.GetComponent<RectTransform>();
+
         }
         
         void Update()
         {
+            if (!start)
+            {
+                LowerPiece();
+            }
             // Pointer returns a list of gameobjects the cursor is over
             pointerEventData.position = Camera.main.WorldToScreenPoint(transform.position);
             List<RaycastResult> results = new List<RaycastResult>();
@@ -46,7 +67,7 @@ namespace UI.Skill_selection
                     currentSkill.Find(border).GetComponent<Image>().color = color;
                     var skillNo = currentSkill.GetComponent<SkillNumber>().skillNumber;
                     onSkillSelect?.Invoke(playerNo, skillNo);
-                } 
+                }
                 else if (currentSkill != raycastSkill)
                 {
                     currentSkill.Find(border).GetComponent<Image>().color = Color.clear;
@@ -60,6 +81,17 @@ namespace UI.Skill_selection
                 }
                 
             }
+        }
+
+        private void LowerPiece()
+        {
+            #region Set default location
+            
+            float distCovered = (Time.time - startTime) * 600;
+            float fractionOfJourney = distCovered / distance;
+            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, fractionOfJourney);
+
+            #endregion
         }
         
         private void SetColor()
