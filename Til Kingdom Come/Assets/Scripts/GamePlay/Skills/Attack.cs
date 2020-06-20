@@ -51,6 +51,11 @@ namespace GamePlay.Skills
             if (charges.CurrentCharge <= 0) return;
             
             combo.UpdateDecay();
+            if (charges.CurrentCharge == maxCharges)
+            {
+                charges.isCharging = true;
+            }
+
             charges.CurrentCharge -= 1;
             // Disable input
             player.playerInput.Toggle();
