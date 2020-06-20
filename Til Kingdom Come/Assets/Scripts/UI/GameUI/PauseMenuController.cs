@@ -16,12 +16,12 @@ public class PauseMenuController : MonoBehaviour
             {
                 if(gameIsPaused)
                 {
-                    if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
+                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
                     Resume();
                 }
                 else
                 {
-                    if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
+                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
                     Pause();
                 }
             }

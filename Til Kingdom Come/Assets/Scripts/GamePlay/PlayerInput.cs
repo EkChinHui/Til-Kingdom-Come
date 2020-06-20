@@ -5,7 +5,7 @@ namespace GamePlay
 {
     public class PlayerInput : MonoBehaviour
     {
-        public static Action OnToggleInput;
+        public static Action onToggleInput;
         private bool inputIsEnabled = true;
         [Header("Input")]
         // note to use getAxis for multi-player mode so user can change their input
@@ -31,7 +31,7 @@ namespace GamePlay
 
         private void Start()
         {
-            OnToggleInput += Toggle;
+            onToggleInput += Toggle;
         }
         
         private void Update()
@@ -74,7 +74,7 @@ namespace GamePlay
 
         private void OnDestroy()
         {
-            OnToggleInput -= Toggle;
+            onToggleInput -= Toggle;
         }
         
     }

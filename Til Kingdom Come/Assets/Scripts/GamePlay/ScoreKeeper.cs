@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using UI.GameUI;
 using UnityEngine;
 
 namespace GamePlay

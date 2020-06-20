@@ -150,6 +150,7 @@ namespace GamePlay.Skills
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
+            CameraShake.ShakeOnce(0.4f);
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombatState;
             player.playerInput.Toggle();
@@ -168,6 +169,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
+            CameraShake.ShakeOnce(1f);
             player.combatState = PlayerController.CombatState.NonCombatState;
             player.playerInput.Toggle();
         }

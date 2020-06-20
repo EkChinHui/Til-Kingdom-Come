@@ -1,81 +1,84 @@
 ﻿using System.Collections;
+using GamePlay;
 using TMPro;
 using UnityEngine;
-using GamePlay;
 
-public class RoundStartPanelController : MonoBehaviour
+namespace UI.GameUI
 {
-    public TextMeshProUGUI roundNumberText;
-    public PauseMenuController pauseMenuController;
-    private RectTransform rectTransform;
-    private float roundNumber = 1;
-    private float speed = 500f;
-    private float startYAxis;
-    private float endYAxis = 0;
-    private bool lowering = false;
-    private bool waiting = false;
-    private bool raising = false;
-    private bool playSound = false;
-
-    void Start()
+    public class RoundStartPanelController : MonoBehaviour
     {
-        rectTransform = GetComponent<RectTransform>();
-        startYAxis = rectTransform.anchoredPosition.y;
-        if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
-        lowering = true;
-        playSound = true;
-        pauseMenuController.canPause = false;
-    }
+        public TextMeshProUGUI roundNumberText;
+        public PauseMenuController pauseMenuController;
+        private RectTransform rectTransform;
+        private float roundNumber = 1;
+        private float speed = 500f;
+        private float startYAxis;
+        private float endYAxis = 0;
+        private bool lowering = false;
+        private bool waiting = false;
+        private bool raising = false;
+        private bool playSound = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (lowering && !waiting && !raising) {
-            if (playSound) {
-                AudioManager.instance.PlaySoundEffect("Round Start");
-                playSound = false;
+        void Start()
+        {
+            rectTransform = GetComponent<RectTransform>();
+            startYAxis = rectTransform.anchoredPosition.y;
+            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            lowering = true;
+            playSound = true;
+            pauseMenuController.canPause = false;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (lowering && !waiting && !raising) {
+                if (playSound) {
+                    AudioManager.instance.PlaySoundEffect("Round Start");
+                    playSound = false;
+                }
+                Lower();
+            } else if (!lowering && waiting && !raising) {
+                StartCoroutine(WaitFor(1));
+            } else if (!lowering && !waiting && raising) {
+                Raise();
             }
-            Lower();
-        } else if (!lowering && waiting && !raising) {
-            StartCoroutine(WaitFor(1));
-        } else if (!lowering && !waiting && raising) {
-            Raise();
         }
-    }
 
-    public void Lower() {
-        if(rectTransform.anchoredPosition.y > endYAxis) {
-            rectTransform.anchoredPosition -= new Vector2(0, Time.deltaTime * speed);
-        } else {
-            lowering = false;
-            waiting = true;
+        public void Lower() {
+            if(rectTransform.anchoredPosition.y > endYAxis) {
+                rectTransform.anchoredPosition -= new Vector2(0, Time.deltaTime * speed);
+            } else {
+                lowering = false;
+                waiting = true;
+            }
         }
-    }
-    public void Raise() {
-        if(rectTransform.anchoredPosition.y < startYAxis) {
-            rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
-        } else {
-            raising = false;
-            if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
-            pauseMenuController.canPause = true;
+        public void Raise() {
+            if(rectTransform.anchoredPosition.y < startYAxis) {
+                rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
+            } else {
+                raising = false;
+                if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+                pauseMenuController.canPause = true;
+            }
         }
-    }
-    IEnumerator WaitFor(int seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        waiting = false;
-        raising = true;
-    }
-    private void UpdateRoundNumber() {
-        roundNumber++;
-        roundNumberText.text = "Round " + roundNumber;
-    }
+        IEnumerator WaitFor(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            waiting = false;
+            raising = true;
+        }
+        private void UpdateRoundNumber() {
+            roundNumber++;
+            roundNumberText.text = "Round " + roundNumber;
+        }
 
-    public void nextRound() {
-        UpdateRoundNumber();
-        if (PlayerInput.OnToggleInput != null) PlayerInput.OnToggleInput();
-        lowering = true;
-        pauseMenuController.canPause = false;
-        playSound = true;
+        public void nextRound() {
+            UpdateRoundNumber();
+            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            lowering = true;
+            pauseMenuController.canPause = false;
+            playSound = true;
+        }
     }
 }
