@@ -7,7 +7,7 @@ namespace GamePlay.Skills
         public int damage = 1;
         public GameObject collideEffect;
         public float heightOffset;
-        
+        public GameObject parent;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall
@@ -23,9 +23,13 @@ namespace GamePlay.Skills
                 case PlayerController.CombatState.Rolling:
                     Debug.Log("Successful dodge");
                     return;
+                case PlayerController.CombatState.Dead:
+                    return;
                 default:
+                    Debug.Log(damagedPlayer.combatState);
                     damagedPlayer.TakeDamage(damage);
-                    Debug.Log("Projectile Hits target");
+                    Debug.Log("Projectile Hits Target");
+                    Impact();
                     return;
             }
         }
@@ -34,7 +38,7 @@ namespace GamePlay.Skills
             AudioManager.instance.PlaySoundEffect("Boulder Hit");
             var offSet = new Vector3(0, heightOffset, 0);
             Instantiate(collideEffect, transform.position + offSet, Quaternion.identity);
-            Destroy(gameObject);    
+            Destroy(parent);
         }
     }
 }
