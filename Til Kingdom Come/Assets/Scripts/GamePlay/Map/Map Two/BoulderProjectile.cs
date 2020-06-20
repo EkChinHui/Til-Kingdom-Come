@@ -4,6 +4,8 @@ namespace GamePlay.Map.Map_Two
 {
     public class BoulderProjectile : MonoBehaviour
     {
+        public static int soundEffectClipNumber = 1;
+        private int totalSoundEffectClips = 3;
         public int damage = 1;
         public GameObject collideEffect;
         public float heightOffset;
@@ -35,7 +37,17 @@ namespace GamePlay.Map.Map_Two
         }
         private void Impact()
         {
-            AudioManager.instance.PlaySoundEffect("Boulder Hit");
+            // Alternate between clips to prevent sound from being cut off
+            AudioManager.instance.PlaySoundEffect("Boulder Hit " + soundEffectClipNumber);
+            if (soundEffectClipNumber == totalSoundEffectClips)
+            {
+                soundEffectClipNumber = 1;
+            }
+            else
+            {
+                soundEffectClipNumber++;
+            }
+
             var offSet = new Vector3(0, heightOffset, 0);
             Instantiate(collideEffect, transform.position + offSet, Quaternion.identity);
             Destroy(parent);

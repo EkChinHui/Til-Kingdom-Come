@@ -5,8 +5,9 @@ namespace GamePlay.Map.Map_Two
     public class MapTwoController : MonoBehaviour
     {
         private float frequencyOfBoulderSpawn = 0.005f;
-        private float boulderSpawnYAxis = 30;
+        private float boulderSpawnYAxis = 25;
         public GameObject boulder;
+        public GameObject endPanelBoard;
         // Start is called before the first frame update
         private void Start()
         {
@@ -15,12 +16,15 @@ namespace GamePlay.Map.Map_Two
 
         private void Update()
         {
-            float randomNumber = Random.Range(0, 1f);
-            if (randomNumber < frequencyOfBoulderSpawn)
+            if (!endPanelBoard.activeSelf)
             {
-                float boulderSpawnXAxis = Random.Range(-15, 15);
-                var boulderSpawnPosition = new Vector3(boulderSpawnXAxis, boulderSpawnYAxis, 0);
-                Instantiate(boulder, boulderSpawnPosition, Quaternion.identity);
+                float randomNumber = Random.Range(0, 1f);
+                if (randomNumber < frequencyOfBoulderSpawn)
+                {
+                    float boulderSpawnXAxis = Random.Range(-15, 15);
+                    var boulderSpawnPosition = new Vector3(boulderSpawnXAxis, boulderSpawnYAxis, 0);
+                    Instantiate(boulder, boulderSpawnPosition, Quaternion.identity);
+                }
             }
         }
     }

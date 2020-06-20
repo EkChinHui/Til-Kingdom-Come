@@ -2306,7 +2306,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.size
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2802,7 +2802,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[4].volume
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2822,7 +2822,7 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[5].volume
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2872,17 +2872,17 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[9].name
-      value: Boulder Hit
+      value: Boulder Hit 1
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[9].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 7a0e95dcf3e8946018b0077bc74ab3a4, type: 3}
+      objectReference: {fileID: 8300000, guid: dd7b579ae8768435e9008f932a8824fe, type: 3}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: soundEffect.Array.data[9].volume
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
@@ -2957,6 +2957,66 @@ PrefabInstance:
     - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
         type: 3}
       propertyPath: music.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[10].name
+      value: Boulder Hit 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a0703400b3d79469da3a0181d45d036a, type: 3}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[10].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[10].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[11].name
+      value: Boulder Hit 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 78d00c82b7e994426bd453ea0f4c089e, type: 3}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[11].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[11].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[12].name
+      value: Sword Smash
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: cbedd21a1397c43b78d3a88f83703487, type: 3}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[12].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649129866234697091, guid: 864c8e5587eb04510aaa562b68a1e2dc,
+        type: 3}
+      propertyPath: soundEffect.Array.data[12].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 649129866234697092, guid: 864c8e5587eb04510aaa562b68a1e2dc,

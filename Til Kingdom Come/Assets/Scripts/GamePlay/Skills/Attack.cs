@@ -179,6 +179,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
+            AudioManager.instance.PlaySoundEffect("Sword Smash");
             CameraShake.ShakeOnce();
             player.combatState = PlayerController.CombatState.NonCombatState;
             player.playerInput.Toggle();

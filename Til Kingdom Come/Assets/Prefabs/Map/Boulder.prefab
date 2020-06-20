@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2636327955172305176}
+  - component: {fileID: 3577808186947221994}
   - component: {fileID: 5494051651861861384}
   - component: {fileID: 5345726525392230215}
   m_Layer: 0
@@ -18,7 +18,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2636327955172305176
+--- !u!4 &3577808186947221994
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 516948004517072053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2906398646524433552}
   m_RootOrder: 0
@@ -123,8 +123,8 @@ Transform:
   m_LocalPosition: {x: -7.4105387, y: -0.8687932, z: -0.71672344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2636327955172305176}
-  - {fileID: 3039463392392440603}
+  - {fileID: 3577808186947221994}
+  - {fileID: 3068032745133851679}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3039463392392440603}
+  - component: {fileID: 3068032745133851679}
   - component: {fileID: 8969956676377605962}
   - component: {fileID: 8191890002591460282}
   - component: {fileID: 5342681004746683591}
@@ -160,8 +160,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3039463392392440603
-Transform:
+--- !u!224 &3068032745133851679
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -174,6 +174,11 @@ Transform:
   m_Father: {fileID: 2906398646524433552}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.48, y: 0.48}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &8969956676377605962
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -239,7 +244,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.1
+  m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -1533,6 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boulder: {fileID: 4695700779189571704, guid: ea8d32579437d4e62ba9cb53dbd7ac76, type: 3}
+  endPanelBoard: {fileID: 106440838}
 --- !u!1 &453373024
 GameObject:
   m_ObjectHideFlags: 0
