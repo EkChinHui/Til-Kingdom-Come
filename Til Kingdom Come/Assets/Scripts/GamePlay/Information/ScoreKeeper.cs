@@ -1,4 +1,5 @@
 ﻿using System;
+using GamePlay.Player;
 using TMPro;
 using UI.GameUI;
 using UnityEngine;

@@ -3,7 +3,7 @@ using GamePlay.Skills;
 using UI.GameUI;
 using UnityEngine;
 
-namespace GamePlay
+namespace GamePlay.Player
 {
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour

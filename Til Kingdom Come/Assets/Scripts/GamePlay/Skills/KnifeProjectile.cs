@@ -1,4 +1,5 @@
 ﻿using System;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Skills

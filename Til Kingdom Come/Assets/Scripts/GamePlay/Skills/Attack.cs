@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using GamePlay.Player;
 using UI.GameUI;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace GamePlay.Skills
     public class Attack : Skill
     {
         public Transform attackPoint;
-        
+        public GameObject comboEffect;
         private LayerMask playerLayer;
         
         [Header("Variables")]
@@ -172,6 +173,7 @@ namespace GamePlay.Skills
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack 3");
             var velocity = player.rb.velocity;
+            // move forward
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(-10f, velocity.y)
                 : new Vector2(10f, velocity.y);
@@ -182,6 +184,17 @@ namespace GamePlay.Skills
             AudioManager.instance.PlaySoundEffect("Sword Smash");
             CameraShake.ShakeOnce();
             player.combatState = PlayerController.CombatState.NonCombatState;
+
+            #region Particles
+            var distanceOffset = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon
+                ? 4f
+                : -4f;
+            var offset = new Vector3(distanceOffset, 0, 0);
+
+            Instantiate(comboEffect, transform.position + offset, Quaternion.identity);
+            
+            #endregion
+            
             player.playerInput.Toggle();
         }
         

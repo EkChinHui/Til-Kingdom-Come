@@ -1,4 +1,5 @@
 ﻿using GamePlay;
+using GamePlay.Player;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;

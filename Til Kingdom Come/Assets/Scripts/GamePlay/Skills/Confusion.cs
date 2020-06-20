@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Skills

@@ -150,7 +150,7 @@ SpriteRenderer:
   m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!50 &6994200491213559189
@@ -194,6 +194,7 @@ MonoBehaviour:
   bloodSplash: {fileID: 291438960380146473, guid: 29a8723467d5ab940970b3762af580b0,
     type: 3}
   sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
+  godMode: 0
   combatState: 0
   enemyLayer:
     serializedVersion: 2
@@ -253,6 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
+  icon: {fileID: 0}
+  skillCooldown: 0
+  skillNumber: 0
   dashing: 0
   rollSpeed: 1.5
 --- !u!114 &4694163163192250292
@@ -269,6 +273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
+  icon: {fileID: 0}
+  skillCooldown: 0
+  skillNumber: 0
+  maxCharges: 3
+  chargeTime: 5
+  charges: {fileID: 0}
 --- !u!114 &4694163163192250293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,11 +293,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillInfo: 
-  attRange: 1.85
+  icon: {fileID: 0}
+  skillCooldown: 0
+  skillNumber: 0
   attackPoint: {fileID: 6994200490671950263}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  comboEffect: {fileID: 1469282148606194943, guid: 9b0e0c01b9ded3047829f41048fbea8c,
+    type: 3}
+  attRange: 1.85
+  knockDistAttacking: 8
+  charges: {fileID: 0}
+  maxCharges: 3
+  chargeTime: 5
 --- !u!114 &4694163163192250282
 MonoBehaviour:
   m_ObjectHideFlags: 0
