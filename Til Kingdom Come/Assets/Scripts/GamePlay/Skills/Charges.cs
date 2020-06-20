@@ -8,6 +8,7 @@ namespace GamePlay.Skills
         private float nextChargeTime;
         private int currentCharge;
         private int maxCharge;
+        public bool isCharging = false;
 
         public int CurrentCharge
         {
@@ -38,10 +39,9 @@ namespace GamePlay.Skills
             if (currentCharge >= maxCharge)
             {
                 nextChargeTime = Time.time + chargeTime;
-            }
-
-            if (Time.time >= nextChargeTime)
+            } else if (Time.time >= nextChargeTime)
             {
+                isCharging = true;
                 currentCharge++;
                 nextChargeTime = Time.time + chargeTime;
             }
