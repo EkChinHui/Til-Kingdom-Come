@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Throw Knives
   skillInfo: Throw Knives pew pew
-  icon: {fileID: 21300000, guid: f4c72c3047141114cb4b37c9d50488ac, type: 3}
+  icon: {fileID: 21300000, guid: ebb65f6a5fe2d8d4c8e48a5f74c6b6b0, type: 3}
   skillCooldown: 10
   skillNumber: 0
   rangePoint: {fileID: 0}
