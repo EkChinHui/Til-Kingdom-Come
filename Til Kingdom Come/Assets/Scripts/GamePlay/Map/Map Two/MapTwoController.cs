@@ -4,8 +4,8 @@ namespace GamePlay.Map.Map_Two
 {
     public class MapTwoController : MonoBehaviour
     {
-        private float frequencyOfBoulderSpawn = 0.01f;
-        private float boulderSpawnYAxis = 40;
+        private float frequencyOfBoulderSpawn = 0.005f;
+        private float boulderSpawnYAxis = 30;
         public GameObject boulder;
         // Start is called before the first frame update
         private void Start()

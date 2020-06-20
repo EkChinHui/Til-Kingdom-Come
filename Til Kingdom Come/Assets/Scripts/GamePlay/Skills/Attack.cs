@@ -36,8 +36,13 @@ namespace GamePlay.Skills
 
         private void Update()
         {
-               player.cooldownUiController.attackIcon.gameObject.GetComponent<DisplayCharges>()
-                .UpdateCharges(charges.CurrentCharge);
+               player.cooldownUiController.attackIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
+               if (charges.isCharging && charges.CurrentCharge < maxCharges)
+               {
+                   charges.isCharging = false;
+                   Debug.Log("Attack Charging");
+                   StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(chargeTime));
+               }
         }
 
         public override void Cast(PlayerController opponent)
@@ -47,13 +52,14 @@ namespace GamePlay.Skills
             
             combo.UpdateDecay();
             charges.CurrentCharge -= 1;
+            // Disable input
+            player.playerInput.Toggle();
 
             // Combo will be upgraded to next combo if it is executed within the decay time
             combo.SetDecay();
             switch (combo.CurrentCombo)
             {
                 case (Combo.ComboNumber.One):
-                    StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(skillCooldown));
                     StartCoroutine(ComboOneAnimDelay());
                     break;
                 case (Combo.ComboNumber.Two):
@@ -128,7 +134,6 @@ namespace GamePlay.Skills
         private IEnumerator ComboOneAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
-            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
@@ -141,7 +146,6 @@ namespace GamePlay.Skills
         private IEnumerator ComboTwoAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
-            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack 2");
             var velocity = player.rb.velocity;
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
@@ -158,7 +162,6 @@ namespace GamePlay.Skills
         private IEnumerator ComboThreeAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
-            player.playerInput.Toggle();
             player.anim.SetTrigger("Attack 3");
             var velocity = player.rb.velocity;
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
