@@ -1,26 +1,30 @@
 ﻿using UnityEngine;
 
-public class BoulderShadowController : MonoBehaviour
+namespace GamePlay.Map.Map_Two
 {
-    private float y = -3.10f;
-    private float groundHeight = -2.3f;
-    public GameObject boulder;
-    void Start()
+    public class BoulderShadowController : MonoBehaviour
     {
-        transform.position = new Vector2(transform.position.x, y);
-    }
+        private float y = -3.10f;
+        private float groundHeight = -2.3f;
+        public GameObject boulder;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (boulder != null)
+        private void Start()
         {
-            var distanceFromGround = boulder.transform.position.y - groundHeight;
-            transform.localScale = new Vector3(6 * 1 / distanceFromGround, transform.localScale.y, transform.localScale.z);
+            transform.position = new Vector2(transform.position.x, y);
         }
-        else
+
+        // Update is called once per frame
+        private void Update()
         {
-            Destroy(gameObject);
+            if (boulder != null)
+            {
+                var distanceFromGround = boulder.transform.position.y - groundHeight;
+                transform.localScale = new Vector3(6 * 1 / distanceFromGround, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

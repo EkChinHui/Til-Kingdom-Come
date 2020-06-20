@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamePlay.Skills
+namespace GamePlay.Map.Map_Two
 {
     public class BoulderProjectile : MonoBehaviour
     {
