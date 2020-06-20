@@ -28,8 +28,13 @@ namespace GamePlay.Skills
         
         private void Update()
         {
-            player.cooldownUiController.skillIcon.gameObject.GetComponent<DisplayCharges>()
-                .UpdateCharges(charges.CurrentCharge);
+            player.cooldownUiController.skillIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
+            if (charges.isCharging && charges.CurrentCharge < maxCharges)
+            {
+                charges.isCharging = false;
+                Debug.Log("Throw Knives Charging");
+                StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(chargeTime));
+            }
         }
 
         public override void Cast(PlayerController opponent)
@@ -39,12 +44,19 @@ namespace GamePlay.Skills
                 print("0 charges left");
                 return;
             }
+
+            // Trigger cooldown UI
+            if (charges.CurrentCharge == maxCharges)
+            {
+                Debug.Log("Block Charging");
+                charges.isCharging = true;
+            }
+
             charges.CurrentCharge -= 1;
             rangePoint = player.transform;
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Throw Knife");
             StartCoroutine(AnimDelay());
-            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
 
         private IEnumerator AnimDelay()

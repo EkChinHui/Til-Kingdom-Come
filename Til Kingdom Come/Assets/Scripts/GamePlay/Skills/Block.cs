@@ -7,6 +7,8 @@ namespace GamePlay.Skills
     public class Block : Skill
     {
         private const float BlockCooldown = 0f;
+        public int maxCharges = 3;
+        public float chargeTime = 5f;
         public Charges charges;
         private void Start()
         {
@@ -15,23 +17,34 @@ namespace GamePlay.Skills
             skillInfo = "Blocks various attacks";
             skillCooldown = BlockCooldown;
             charges = gameObject.AddComponent<Charges>();
-            charges.SetCharges(3, 5f);
+            charges.SetCharges(maxCharges, chargeTime);
         }
         
         private void Update()
         {
-            player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>()
-                .UpdateCharges(charges.CurrentCharge);
+            player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
+            if (charges.isCharging && charges.CurrentCharge < maxCharges)
+            {
+                charges.isCharging = false;
+                Debug.Log("Block Charging");
+                StartCoroutine(player.cooldownUiController.blockIcon.ChangesFillAmount(chargeTime));
+            }
         }
         
         public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
             if (charges.CurrentCharge <= 0) return;
-            charges.CurrentCharge--;
 
+            // Trigger cooldown UI
+            if (charges.CurrentCharge == maxCharges)
+            {
+                Debug.Log("Block Charging");
+                charges.isCharging = true;
+            }
+
+            charges.CurrentCharge--;
             StartCoroutine(BlockAnimDelay(player));
-            StartCoroutine(player.cooldownUiController.blockIcon.ChangesFillAmount(skillCooldown));
         }
         
         private IEnumerator BlockAnimDelay(PlayerController player)

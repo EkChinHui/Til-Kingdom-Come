@@ -51,8 +51,11 @@ namespace GamePlay.Skills
             if (charges.CurrentCharge <= 0) return;
             
             combo.UpdateDecay();
+
+            // Trigger cooldown UI
             if (charges.CurrentCharge == maxCharges)
             {
+                Debug.Log("Attack Charging");
                 charges.isCharging = true;
             }
 
