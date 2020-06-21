@@ -60,6 +60,7 @@ namespace GamePlay.Information
                 {
                     roundStartPanel.nextRound();
                     resetPlayersEvent();
+                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
                 }
             }
             pauseMenuController.canPause = false;
