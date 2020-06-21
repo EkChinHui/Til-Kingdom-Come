@@ -3,6 +3,7 @@ using System.Collections;
 using GamePlay.Player;
 using UI.GameUI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GamePlay.Skills
 {
@@ -11,6 +12,8 @@ namespace GamePlay.Skills
         public Transform attackPoint;
         public GameObject comboEffect;
         private LayerMask playerLayer;
+        public Sprite attack2;
+        public Sprite attack3;
         
         [Header("Variables")]
         private const int Damage = 1;
@@ -23,6 +26,8 @@ namespace GamePlay.Skills
         public int maxCharges = 3;
         public float chargeTime = 5f;
         public Combo combo;
+        private CooldownUi attackIcon;
+        private Image darkMask;
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
@@ -33,6 +38,8 @@ namespace GamePlay.Skills
             charges = gameObject.AddComponent<Charges>();
             charges.SetCharges(maxCharges, chargeTime);
             combo = new Combo();
+            attackIcon = player.cooldownUiController.attackIcon;
+            darkMask = attackIcon.darkMask.GetComponent<Image>();
         }
 
         private void Update()
@@ -44,14 +51,30 @@ namespace GamePlay.Skills
                    Debug.Log("Attack Charging");
                    StartCoroutine(player.cooldownUiController.attackIcon.ChangesFillAmount(chargeTime));
                }
+            
+               combo.UpdateDecay();
+               // Swap skill icon based on current combo
+               switch (combo.CurrentCombo)
+               {
+                   case Combo.ComboNumber.One:
+                       attackIcon.image.sprite = icon;
+                       darkMask.sprite = icon;
+                       break;
+                   case Combo.ComboNumber.Two:
+                       attackIcon.image.sprite = attack2;
+                       darkMask.sprite = attack2;
+                       break;
+                   case Combo.ComboNumber.Three:
+                       attackIcon.image.sprite = attack3;
+                       darkMask.sprite = attack3;
+                       break;
+               }
         }
 
         public override void Cast(PlayerController opponent)
         {
             if (AttackPriority(opponent) || !CanCast()) return;
             if (charges.CurrentCharge <= 0) return;
-            
-            combo.UpdateDecay();
 
             // Trigger cooldown UI
             if (charges.CurrentCharge == maxCharges)

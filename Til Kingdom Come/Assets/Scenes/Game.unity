@@ -1597,7 +1597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 815de9c8c95f4fc4b8d15ff277ab574e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13651,7 +13651,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 815de9c8c95f4fc4b8d15ff277ab574e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14090,7 +14090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 815de9c8c95f4fc4b8d15ff277ab574e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37337,7 +37337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 815de9c8c95f4fc4b8d15ff277ab574e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -42442,6 +42442,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4415915515710630146, guid: c908bebe607dc2e4fa265c441dc47a50,
+        type: 3}
+      propertyPath: attack2
+      value: 
+      objectReference: {fileID: 21300000, guid: a31454502c9664d43a89f3068cff3a0f,
+        type: 3}
+    - target: {fileID: 4415915515710630146, guid: c908bebe607dc2e4fa265c441dc47a50,
+        type: 3}
+      propertyPath: attack3
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b8d640637222ce408fac5bc9fdfbc69,
+        type: 3}
+    - target: {fileID: 4415915515710630146, guid: c908bebe607dc2e4fa265c441dc47a50,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39,
+        type: 3}
     - target: {fileID: 4415915516255590480, guid: c908bebe607dc2e4fa265c441dc47a50,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42526,6 +42544,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4694163163192250293, guid: 7d948a8acf830fb4cb16f521d3494355,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: ec296234363871d42b1b9983fe84ec39,
+        type: 3}
+    - target: {fileID: 4694163163192250293, guid: 7d948a8acf830fb4cb16f521d3494355,
+        type: 3}
+      propertyPath: attack2
+      value: 
+      objectReference: {fileID: 21300000, guid: a31454502c9664d43a89f3068cff3a0f,
+        type: 3}
+    - target: {fileID: 4694163163192250293, guid: 7d948a8acf830fb4cb16f521d3494355,
+        type: 3}
+      propertyPath: attack3
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b8d640637222ce408fac5bc9fdfbc69,
+        type: 3}
     - target: {fileID: 6994200491213559185, guid: 7d948a8acf830fb4cb16f521d3494355,
         type: 3}
       propertyPath: otherPlayer

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GamePlay
+namespace GamePlay.Information
 {
     public class SkillSelectionManager : MonoBehaviour
     {

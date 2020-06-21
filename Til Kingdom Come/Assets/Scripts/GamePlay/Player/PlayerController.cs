@@ -1,4 +1,5 @@
 ﻿using System;
+using GamePlay.Information;
 using GamePlay.Skills;
 using UI.GameUI;
 using UnityEngine;
@@ -204,6 +205,8 @@ namespace GamePlay.Player
             block.charges.RefillCharges();
             godMode = false;
             anim.SetBool("Dead", false);
+            anim.SetInteger("State", 0);
+            rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombatState;
             enabled = true;
             GetComponent<Collider2D>().enabled = true;

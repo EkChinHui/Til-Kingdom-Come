@@ -3,7 +3,7 @@ using GamePlay;
 using TMPro;
 using UnityEngine;
 
-namespace UI.GameUI
+namespace UI.GameUI.Round_Start
 {
     public class RoundStartPanelController : MonoBehaviour
     {

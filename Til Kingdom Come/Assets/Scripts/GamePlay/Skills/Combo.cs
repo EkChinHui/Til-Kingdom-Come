@@ -11,8 +11,8 @@ namespace GamePlay.Skills
             Three
         }
         private ComboNumber currentCombo = ComboNumber.One;
-        public ComboNumber CurrentCombo => currentCombo;     
-        public float decayTime = 1.5f;
+        public ComboNumber CurrentCombo => currentCombo;
+        private float decayTime = 1.5f;
         private float nextDecayTime;
         
         public void UpdateCombo()

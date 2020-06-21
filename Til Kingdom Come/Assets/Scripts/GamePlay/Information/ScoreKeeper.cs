@@ -1,10 +1,10 @@
 ﻿using System;
 using GamePlay.Player;
 using TMPro;
-using UI.GameUI;
+using UI.GameUI.Round_Start;
 using UnityEngine;
 
-namespace GamePlay
+namespace GamePlay.Information
 {
     public class ScoreKeeper : MonoBehaviour
     {

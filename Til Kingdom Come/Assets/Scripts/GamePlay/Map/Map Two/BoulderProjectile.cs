@@ -1,4 +1,5 @@
-﻿using GamePlay.Player;
+﻿using System;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Map.Map_Two
@@ -11,6 +12,7 @@ namespace GamePlay.Map.Map_Two
         public GameObject collideEffect;
         public float heightOffset;
         public GameObject parent;
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall

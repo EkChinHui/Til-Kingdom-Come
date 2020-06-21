@@ -1,4 +1,5 @@
 ﻿using GamePlay;
+using GamePlay.Information;
 using GamePlay.Skills;
 using UnityEngine;
 using UnityEngine.UI;
