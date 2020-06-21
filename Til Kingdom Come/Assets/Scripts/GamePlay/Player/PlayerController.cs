@@ -55,7 +55,7 @@ namespace GamePlay.Player
 
         private void Awake()
         {
-            // remember the original position of the players so match can be reset
+            // Remember the original position of the players so match can be reset
             originalPos = gameObject.transform.position;
             originalRotation = gameObject.transform.rotation;
             totalPlayers++;
@@ -158,7 +158,7 @@ namespace GamePlay.Player
                 } 
                 else
                 {
-                    // hurt;
+                    // Hurt;
                 }
             }
         }
@@ -166,7 +166,7 @@ namespace GamePlay.Player
         {
             var heightOffset = new Vector3(0, 1.5f, 0);
             ParticleSystem sparksEffect = sparks.GetComponent<ParticleSystem>();
-            // adjusts rotation of particle effect
+            // Adjust rotation of particle effect
             var shapeModule = sparksEffect.shape;
             shapeModule.rotation = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon 
                 ? new Vector3(0, 90, 0) 
@@ -182,7 +182,11 @@ namespace GamePlay.Player
             onDeath?.Invoke(playerNo);
             otherPlayer.godMode = true;
             combatState = CombatState.Dead;
-            // die animation
+
+            // Disable input
+            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+
+            // Die animation
             anim.SetBool("Dead", true);
              
             // offset particles to be emitted at body level
@@ -199,7 +203,7 @@ namespace GamePlay.Player
         }
         
         private void ResetPlayer()
-        // resets player position based on start position and resets combatState
+        // Reset player position based on start position and resets combatState
         {
             attack.charges.RefillCharges();
             block.charges.RefillCharges();
@@ -216,7 +220,7 @@ namespace GamePlay.Player
         }
         
         private void PassPlayerSkills(int player, GameObject assignSkill)
-        // assign player skills based on skill selection menu
+        // Assign player skills based on skill selection menu
         {
             if (player != playerNo) return;
             skill = Instantiate(assignSkill).GetComponent<Skill>();
