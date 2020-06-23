@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Cinemachine;
 using GamePlay.Player;
 using UI.GameUI;
 using UnityEngine;
@@ -205,7 +206,8 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             AudioManager.instance.PlaySoundEffect("Sword Smash");
-            CameraShake.ShakeOnce();
+            //CameraShake.ShakeOnce();
+            player.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
             player.combatState = PlayerController.CombatState.NonCombatState;
 
             #region Particles
