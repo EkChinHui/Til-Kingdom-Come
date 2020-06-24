@@ -206,7 +206,6 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             AudioManager.instance.PlaySoundEffect("Sword Smash");
-            //CameraShake.ShakeOnce();
             player.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
             player.combatState = PlayerController.CombatState.NonCombatState;
 
