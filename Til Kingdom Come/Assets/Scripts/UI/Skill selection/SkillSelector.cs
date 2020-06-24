@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GamePlay;
 using GamePlay.Information;
 using GamePlay.Player;
 using GamePlay.Skills;
@@ -13,8 +12,13 @@ namespace UI.Skill_selection
     {
         public List<GameObject> skillPrefabs;
         public GameObject skillCellPrefab;
-        private int playerOneSkill = 0;
-        private int playerTwoSkill = 0;
+        public List<GameObject> skillCells;
+        private int playerOneSkill;
+        private int playerTwoSkill;
+        public KeyCode playerOneLeft;
+        public KeyCode playerOneRight;
+        public KeyCode playerTwoLeft;
+        public KeyCode playerTwoRight;
 
         private void Awake()
         {
@@ -29,6 +33,79 @@ namespace UI.Skill_selection
             {
                 SpawnSkillCell(skills);
             }
+
+            playerOneSkill = 0;
+            playerTwoSkill = 0;
+            SetBorder(playerOneSkill,1);
+            SetBorder(playerTwoSkill, 2);
+        }
+
+        private void Update()
+        {
+            var maxSkills = skillPrefabs.Count - 1;
+            
+            if (Input.GetKeyDown(playerOneLeft))
+            {
+                ClearBorder(playerOneSkill, 1);
+                playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
+                SetBorder(playerOneSkill, 1);
+            } else if (Input.GetKeyDown(playerOneRight))
+            {
+                print(maxSkills);
+                ClearBorder(playerOneSkill, 1);
+                playerOneSkill = playerOneSkill == maxSkills ? 0 : playerOneSkill + 1;
+                print(playerOneSkill);
+                SetBorder(playerOneSkill, 1);
+            }
+
+            if (Input.GetKeyDown(playerTwoLeft))
+            {
+                ClearBorder(playerTwoSkill, 2);
+                playerTwoSkill = playerTwoSkill == 0 ? maxSkills : playerTwoSkill - 1;
+                SetBorder(playerTwoSkill, 2);
+            } else if (Input.GetKeyDown(playerTwoRight))
+            {
+                ClearBorder(playerTwoSkill, 2);
+                playerTwoSkill = playerTwoSkill == maxSkills ? 0 : playerTwoSkill + 1;
+                SetBorder(playerTwoSkill, 2);
+            }
+            
+
+        }
+
+        private void SetBorder(int skill, int playerNo)
+        {
+            var border = "Border" + playerNo;
+            var image = GetBorderByName(border, skillCells[skill]);
+            switch (playerNo)
+            {
+                case 1:
+                    image.color = Color.red;
+                    break;
+                case 2:
+                    image.color = Color.blue;
+                    break;
+            }
+        }
+
+        private void ClearBorder(int skill, int playerNo)
+        {
+            var border = "Border" + playerNo;
+            var image = GetBorderByName(border, skillCells[skill]);
+            image.color = Color.clear;
+            
+        }
+
+        private Image GetBorderByName(string componentName, GameObject go)
+        {
+            foreach (var border in go.GetComponentsInChildren<Image>())
+            {
+                if (border.gameObject.name == componentName)
+                {
+                    return border;
+                }
+            }
+            return null;
         }
 
         private void SpawnSkillCell(GameObject go)
@@ -48,6 +125,7 @@ namespace UI.Skill_selection
             skillInfo.text = skill.SkillInfo;
             skillCooldown.text = "Cooldown: " + skill.SkillCooldown + "s";
             skillNumber.skillNumber = skill.SkillNumber;
+            skillCells.Add(skillCell);
         }
         
         private void SelectSkills(int playerNo, int skillNo)

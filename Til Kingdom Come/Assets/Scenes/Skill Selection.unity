@@ -442,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &486776955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,7 +1636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1709127379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1803,6 +1803,11 @@ MonoBehaviour:
   - {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938, type: 3}
   skillCellPrefab: {fileID: 8844277990344288591, guid: efe3b02b7b32ca04fb256e1b396145af,
     type: 3}
+  skillCells: []
+  playerOneLeft: 97
+  playerOneRight: 100
+  playerTwoLeft: 276
+  playerTwoRight: 275
 --- !u!114 &1918064797
 MonoBehaviour:
   m_ObjectHideFlags: 0
