@@ -9,7 +9,6 @@ namespace GamePlay.Skills
         [SerializeField] private float pushDistance = 6f;
         [SerializeField] private float confusionDuration = 4f;
 
-
         private void Start()
         { 
             skillName = "Confusion";
@@ -27,7 +26,6 @@ namespace GamePlay.Skills
             opponent.KnockBack(pushDistance);
             StartCoroutine(Confuse(opponent));
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
-       
         }
 
         private IEnumerator AnimDelay()
@@ -43,7 +41,13 @@ namespace GamePlay.Skills
         private IEnumerator Confuse(PlayerController opponent)
         {
             opponent.playerInput.SwitchKeys();
+            var heightOffset = new Vector3(0, 4f, 0);
+            ParticleSystem confusion = opponent.confusion.GetComponent<ParticleSystem>();
+            var confusionParticle = Instantiate(opponent.confusion, 
+                opponent.transform.position + heightOffset, Quaternion.identity);
+            confusionParticle.transform.parent = opponent.transform;
             yield return new WaitForSeconds(confusionDuration);
+            Destroy(confusionParticle.gameObject);
             opponent.playerInput.SwitchKeys();
             yield return null;
         }

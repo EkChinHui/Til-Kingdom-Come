@@ -21,6 +21,7 @@ namespace GamePlay.Player
         [Header("Particle effects")]
         public GameObject bloodSplash;
         public GameObject sparks;
+        public GameObject confusion;
         
         public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
         public bool godMode = false;
