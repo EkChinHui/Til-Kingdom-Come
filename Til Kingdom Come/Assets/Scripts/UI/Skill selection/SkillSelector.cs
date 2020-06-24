@@ -11,19 +11,20 @@ namespace UI.Skill_selection
     public class SkillSelector : MonoBehaviour
     {
         public List<GameObject> skillPrefabs;
-        public GameObject skillCellPrefab;
+        public GameObject skillCellTemplate;
         public List<GameObject> skillCells;
         private int playerOneSkill;
         private int playerTwoSkill;
+
+        #region Keycodes
+
         public KeyCode playerOneLeft;
         public KeyCode playerOneRight;
         public KeyCode playerTwoLeft;
         public KeyCode playerTwoRight;
 
-        private void Awake()
-        {
-            CursorDetection.onSkillSelect += SelectSkills;
-        }
+        #endregion
+
 
         private void Start()
         {
@@ -34,6 +35,7 @@ namespace UI.Skill_selection
                 SpawnSkillCell(skills);
             }
 
+            // set initial border
             playerOneSkill = 0;
             playerTwoSkill = 0;
             SetBorder(playerOneSkill,1);
@@ -43,7 +45,15 @@ namespace UI.Skill_selection
         private void Update()
         {
             var maxSkills = skillPrefabs.Count - 1;
+
+            /*
+             * On keypress, clears current border of color, then sets the border of
+             * selected skill.
+             * Ternary operator allows the selected border to loop to the first or last
+             * skill.
+             */
             
+            // Change Player One skill
             if (Input.GetKeyDown(playerOneLeft))
             {
                 ClearBorder(playerOneSkill, 1);
@@ -51,13 +61,12 @@ namespace UI.Skill_selection
                 SetBorder(playerOneSkill, 1);
             } else if (Input.GetKeyDown(playerOneRight))
             {
-                print(maxSkills);
                 ClearBorder(playerOneSkill, 1);
                 playerOneSkill = playerOneSkill == maxSkills ? 0 : playerOneSkill + 1;
-                print(playerOneSkill);
                 SetBorder(playerOneSkill, 1);
             }
 
+            // Change Player Two skill
             if (Input.GetKeyDown(playerTwoLeft))
             {
                 ClearBorder(playerTwoSkill, 2);
@@ -77,6 +86,8 @@ namespace UI.Skill_selection
         {
             var border = "Border" + playerNo;
             var image = GetBorderByName(border, skillCells[skill]);
+            
+            // Sets corresponding color based on player number
             switch (playerNo)
             {
                 case 1:
@@ -88,29 +99,35 @@ namespace UI.Skill_selection
             }
         }
 
+        // Clears the color of existing border
         private void ClearBorder(int skill, int playerNo)
         {
             var border = "Border" + playerNo;
             var image = GetBorderByName(border, skillCells[skill]);
             image.color = Color.clear;
-            
         }
 
-        private Image GetBorderByName(string componentName, GameObject go)
+        private Image GetBorderByName(string borderName, GameObject go)
         {
             foreach (var border in go.GetComponentsInChildren<Image>())
             {
-                if (border.gameObject.name == componentName)
+                if (border.gameObject.name == borderName)
                 {
                     return border;
                 }
             }
             return null;
         }
-
+        
+        /*
+         * Instantiates each skill cell using the skillCellTemplate,
+         * replacing values in the skillCellTemplate with info of the
+         * skills found in each skillPrefab.
+         * Skill Cells are then aligned using a horizontal layout group.
+         */
         private void SpawnSkillCell(GameObject go)
         {
-            GameObject skillCell = Instantiate(skillCellPrefab, transform);
+            GameObject skillCell = Instantiate(skillCellTemplate, transform);
             var skill = go.GetComponent<Skill>();
             skillCell.name = skill.SkillName;
             
@@ -128,19 +145,6 @@ namespace UI.Skill_selection
             skillCells.Add(skillCell);
         }
         
-        private void SelectSkills(int playerNo, int skillNo)
-        {
-            switch (playerNo)
-            {
-                case 1:
-                    playerOneSkill = skillNo;
-                    break;
-                case 2:
-                    playerTwoSkill = skillNo;
-                    break;
-            }
-        }
-
         public void PassSkills()
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Add(playerOneSkill);
@@ -148,10 +152,6 @@ namespace UI.Skill_selection
             // resets the total players to 0
             PlayerController.totalPlayers = 0;
         }
-
-        private void OnDestroy()
-        {
-            CursorDetection.onSkillSelect -= SelectSkills;
-        }
+        
     }
 }
