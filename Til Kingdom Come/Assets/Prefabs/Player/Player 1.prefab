@@ -99,6 +99,7 @@ Transform:
   m_Children:
   - {fileID: 4415915515717092464}
   - {fileID: 4415915514473835688}
+  - {fileID: 5738496867537705068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -194,6 +195,7 @@ MonoBehaviour:
   bloodSplash: {fileID: 291438960380146473, guid: 29a8723467d5ab940970b3762af580b0,
     type: 3}
   sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
+  confusion: {fileID: 0}
   godMode: 0
   combatState: 0
   enemyLayer:
@@ -252,12 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b30b06101f4536ab8729a59e918df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftKey: 97
-  rightKey: 100
-  rollKey: 115
-  blockKey: 103
-  attackKey: 102
-  skillKey: 104
+  playerInputInterface: {fileID: 1266155273380187013}
 --- !u!114 &4415915515710630159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +288,8 @@ MonoBehaviour:
   attackPoint: {fileID: 4415915515717092464}
   comboEffect: {fileID: 1469282148606194943, guid: 9b0e0c01b9ded3047829f41048fbea8c,
     type: 3}
+  attack2: {fileID: 0}
+  attack3: {fileID: 0}
   attRange: 1.85
   knockDistAttacking: 8
   charges: {fileID: 0}
@@ -335,3 +334,46 @@ MonoBehaviour:
   skillNumber: 0
   dashing: 0
   rollSpeed: 1.5
+--- !u!1 &5851477479244374649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5738496867537705068}
+  - component: {fileID: 1266155273380187013}
+  m_Layer: 0
+  m_Name: Player 1 Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5738496867537705068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851477479244374649}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5766306, y: -0.18096352, z: -0.04850467}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4415915516255590480}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1266155273380187013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851477479244374649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad732c2d80383437fa09c203cee29cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
