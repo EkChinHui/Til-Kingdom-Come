@@ -8,13 +8,14 @@ namespace GamePlay
         public static Action onToggleInput;
         private bool inputIsEnabled = true;
         [Header("Input")]
+        public PlayerInputInterface playerInputInterface;
         // note to use getAxis for multi-player mode so user can change their input
-        public KeyCode leftKey;
-        public KeyCode rightKey;
-        public KeyCode rollKey;
-        public KeyCode blockKey;
-        public KeyCode attackKey;
-        public KeyCode skillKey;
+        private KeyCode leftKey;
+        private KeyCode rightKey;
+        private KeyCode rollKey;
+        private KeyCode blockKey;
+        private KeyCode attackKey;
+        private KeyCode skillKey;
         private bool attemptLeft;
         private bool attemptRight;
         private bool attemptRoll;
@@ -32,6 +33,12 @@ namespace GamePlay
         private void Start()
         {
             onToggleInput += Toggle;
+            leftKey = playerInputInterface.GetLeftKey();
+            rightKey = playerInputInterface.GetRightKey();
+            rollKey = playerInputInterface.GetRollKey();
+            attackKey = playerInputInterface.GetAttackKey();
+            blockKey = playerInputInterface.GetBlockKey();
+            skillKey = playerInputInterface.GetSkillKey();
         }
         
         private void Update()

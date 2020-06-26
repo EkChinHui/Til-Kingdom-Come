@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace GamePlay
+namespace GamePlay.Player
 {
     public class ReskinAnimation : MonoBehaviour
     {
