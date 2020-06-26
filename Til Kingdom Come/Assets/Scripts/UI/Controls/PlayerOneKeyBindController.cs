@@ -43,6 +43,7 @@ public class PlayerOneKeyBindController : MonoBehaviour
     {
         Debug.Log("Player 1 changing key binding for " + clicked.name + ".");
         currentKey = clicked;
+        currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Choose Key";
     }
     public void SaveKeys()
     {
