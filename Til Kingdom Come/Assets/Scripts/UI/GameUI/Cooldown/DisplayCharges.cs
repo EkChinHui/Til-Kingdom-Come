@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace UI.GameUI
+namespace UI.GameUI.Cooldown
 {
     public class DisplayCharges : MonoBehaviour
     {

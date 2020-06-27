@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.GameUI
+namespace UI.GameUI.Cooldown
 {
-    public class CooldownUi : MonoBehaviour
+    public class CooldownUI : MonoBehaviour
     {
         public Image image;
         public Image darkMask;

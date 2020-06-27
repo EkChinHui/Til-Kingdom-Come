@@ -3,6 +3,7 @@ using System.Collections;
 using Cinemachine;
 using GamePlay.Player;
 using UI.GameUI;
+using UI.GameUI.Cooldown;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,13 +14,13 @@ namespace GamePlay.Skills
         public Transform attackPoint;
         public GameObject comboEffect;
         private LayerMask playerLayer;
-        public Sprite attack2;
-        public Sprite attack3;
+        public Sprite attackTwo;
+        public Sprite attackThree;
         
         [Header("Variables")]
         private const int Damage = 1;
-        public float attRange = 1.85f;
-        public float knockDistAttacking = 8f;
+        private float attRange = 1.85f;
+        private float knockDistAttacking = 8f;
         private float knockDistBlocking = 4f;
         private float attackCooldown = 0f;
         private float reactionDelay = 0.2f;
@@ -27,7 +28,7 @@ namespace GamePlay.Skills
         public int maxCharges = 3;
         public float chargeTime = 5f;
         public Combo combo;
-        private CooldownUi attackIcon;
+        private CooldownUI attackIcon;
         private Image darkMask;
         private void Start()
         {
@@ -62,12 +63,12 @@ namespace GamePlay.Skills
                        darkMask.sprite = icon;
                        break;
                    case Combo.ComboNumber.Two:
-                       attackIcon.image.sprite = attack2;
-                       darkMask.sprite = attack2;
+                       attackIcon.image.sprite = attackTwo;
+                       darkMask.sprite = attackTwo;
                        break;
                    case Combo.ComboNumber.Three:
-                       attackIcon.image.sprite = attack3;
-                       darkMask.sprite = attack3;
+                       attackIcon.image.sprite = attackThree;
+                       darkMask.sprite = attackThree;
                        break;
                }
         }

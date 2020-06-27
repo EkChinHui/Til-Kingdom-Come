@@ -2,6 +2,7 @@
 using GamePlay.Information;
 using GamePlay.Skills;
 using UI.GameUI;
+using UI.GameUI.Cooldown;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -29,12 +30,9 @@ namespace GamePlay.Player
 
         [Header("Movement")] 
         private float runSpeed = 4f;
-        private Vector2 originalPos;
+        private Vector2 originalPosition;
         private Quaternion originalRotation;
-
-        [Header("Combat")]
-        public LayerMask enemyLayer = 8;
-
+        
         [Header("Health")]
         // Health system to make it convenient to change
         private const int MaxHealth = 1;
@@ -47,7 +45,7 @@ namespace GamePlay.Player
         public Skill skill;
 
         [Header("UI")] 
-        public CooldownUiController cooldownUiController;
+        public CooldownUIController cooldownUiController;
 
         #region Events
         public static Action<int> onDeath;
@@ -57,12 +55,12 @@ namespace GamePlay.Player
         private void Awake()
         {
             // Remember the original position of the players so match can be reset
-            originalPos = gameObject.transform.position;
+            originalPosition = gameObject.transform.position;
             originalRotation = gameObject.transform.rotation;
             totalPlayers++;
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
-            SkillSelectionManager.passPlayerSkills += PassPlayerSkills;
+            SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
             SkillSelectionManager.instance.AssignSkills();
             onSuccessfulBlock += SuccessfulBlock;
         }
@@ -216,17 +214,17 @@ namespace GamePlay.Player
             enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
-            gameObject.transform.position = originalPos;
+            gameObject.transform.position = originalPosition;
             gameObject.transform.rotation = originalRotation;
         }
         
-        private void PassPlayerSkills(int player, GameObject assignSkill)
+        private void PassPlayerSkill(int player, GameObject skill)
         // Assign player skills based on skill selection menu
         {
             if (player != playerNo) return;
-            skill = Instantiate(assignSkill).GetComponent<Skill>();
-            skill.AssignPlayer(this);
-            var skillCharges = skill.GetComponent<Charges>();
+            this.skill = Instantiate(skill).GetComponent<Skill>();
+            this.skill.AssignPlayer(this);
+            var skillCharges = this.skill.GetComponent<Charges>();
             if (skillCharges != null)
             {
                 cooldownUiController.skillIcon.GetComponent<DisplayCharges>().charges = skillCharges.CurrentCharge;
@@ -236,7 +234,7 @@ namespace GamePlay.Player
         private void OnDestroy()
         {
             ScoreKeeper.resetPlayersEvent -= ResetPlayer;
-            SkillSelectionManager.passPlayerSkills -= PassPlayerSkills;
+            SkillSelectionManager.passPlayerSkills -= PassPlayerSkill;
             onSuccessfulBlock -= SuccessfulBlock;
         }
     }

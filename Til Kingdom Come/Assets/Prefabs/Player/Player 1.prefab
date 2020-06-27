@@ -198,9 +198,6 @@ MonoBehaviour:
   confusion: {fileID: 0}
   godMode: 0
   combatState: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
   currentHealth: 0
   attack: {fileID: 4415915515710630146}
   block: {fileID: 4415915515710630147}
@@ -254,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b30b06101f4536ab8729a59e918df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInputInterface: {fileID: 1266155273380187013}
+  playerKeyInput: {fileID: 1266155273380187013}
 --- !u!114 &4415915515710630159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,10 +285,8 @@ MonoBehaviour:
   attackPoint: {fileID: 4415915515717092464}
   comboEffect: {fileID: 1469282148606194943, guid: 9b0e0c01b9ded3047829f41048fbea8c,
     type: 3}
-  attack2: {fileID: 0}
-  attack3: {fileID: 0}
-  attRange: 1.85
-  knockDistAttacking: 8
+  attackTwo: {fileID: 21300000, guid: a31454502c9664d43a89f3068cff3a0f, type: 3}
+  attackThree: {fileID: 21300000, guid: 0b8d640637222ce408fac5bc9fdfbc69, type: 3}
   charges: {fileID: 0}
   maxCharges: 3
   chargeTime: 5

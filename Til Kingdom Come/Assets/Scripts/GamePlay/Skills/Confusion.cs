@@ -40,15 +40,15 @@ namespace GamePlay.Skills
 
         private IEnumerator Confuse(PlayerController opponent)
         {
-            opponent.playerInput.SwitchKeys();
+            opponent.playerInput.InvertKeys();
             var heightOffset = new Vector3(0, 4f, 0);
             ParticleSystem confusion = opponent.confusion.GetComponent<ParticleSystem>();
             var confusionParticle = Instantiate(opponent.confusion, 
                 opponent.transform.position + heightOffset, Quaternion.identity);
             confusionParticle.transform.parent = opponent.transform;
             yield return new WaitForSeconds(confusionDuration);
-            Destroy(confusionParticle.gameObject);
-            opponent.playerInput.SwitchKeys();
+            Destroy(confusionParticle.gameObject); 
+            opponent.playerInput.InvertKeys();
             yield return null;
         }
     }

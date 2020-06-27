@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using GamePlay;
+using GamePlay.Player;
 
 public class PauseMenuController : MonoBehaviour
 {

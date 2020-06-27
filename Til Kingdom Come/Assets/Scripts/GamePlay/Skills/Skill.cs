@@ -10,7 +10,7 @@ namespace GamePlay.Skills
         [SerializeField] protected string skillInfo;
         public Sprite icon;
         [SerializeField] protected float skillCooldown;
-        protected float nextAvailTime;
+        private float nextAvailTime;
         [SerializeField] protected int skillNumber;
 
         #region getters
@@ -21,16 +21,11 @@ namespace GamePlay.Skills
         #endregion
 
         
-        protected virtual bool CanCast()
+        protected bool CanCast()
         {
             if (Time.time < nextAvailTime) return false;
             nextAvailTime = skillCooldown + Time.time;
             return true;
-        }
-
-        public float TimeLeft()
-        {
-            return nextAvailTime - Time.time;
         }
 
         public abstract void Cast(PlayerController opponent);

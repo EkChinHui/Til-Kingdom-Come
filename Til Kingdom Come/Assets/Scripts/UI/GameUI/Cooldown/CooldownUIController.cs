@@ -1,17 +1,16 @@
-﻿using GamePlay;
-using GamePlay.Information;
+﻿using GamePlay.Information;
 using GamePlay.Skills;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.GameUI
+namespace UI.GameUI.Cooldown
 {
-    public class CooldownUiController : MonoBehaviour
+    public class CooldownUIController : MonoBehaviour
     {
-        public CooldownUi attackIcon;
-        public CooldownUi blockIcon;
-        public CooldownUi rollIcon;
-        public CooldownUi skillIcon;
+        public CooldownUI attackIcon;
+        public CooldownUI blockIcon;
+        public CooldownUI rollIcon;
+        public CooldownUI skillIcon;
         public int playerNo;
 
         private void Awake()

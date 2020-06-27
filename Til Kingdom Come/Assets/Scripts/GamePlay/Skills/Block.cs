@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using GamePlay.Player;
 using UI.GameUI;
+using UI.GameUI.Cooldown;
 using UnityEngine;
 
 namespace GamePlay.Skills
