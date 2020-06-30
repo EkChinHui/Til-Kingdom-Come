@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamePlay
+namespace GamePlay.Skills
 {
     public class AnimationTimes : MonoBehaviour
     {
