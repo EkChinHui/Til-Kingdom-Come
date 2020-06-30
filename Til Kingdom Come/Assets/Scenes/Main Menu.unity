@@ -466,6 +466,9 @@ MonoBehaviour:
     type: 3}
   forcePull: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
     type: 3}
+  heal: {fileID: 1118147380131412328, guid: 05ea85924c92afa4bbd8ea4dc26977c3, type: 3}
+  fireball: {fileID: 0}
+  lunge: {fileID: 0}
 --- !u!4 &503837650
 Transform:
   m_ObjectHideFlags: 0

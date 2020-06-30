@@ -23,10 +23,10 @@ namespace GamePlay.Skills
 
         private IEnumerator AnimDelay()
         {
-            var animationTime = 3f; // animation time
+            var animDelay = AnimationTimes.instance.FireBallAnim;
             player.combatState = PlayerController.CombatState.Skill;
-            yield return new WaitForSeconds(animationTime);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            yield return new WaitForSeconds(animDelay);
+            player.combatState = PlayerController.CombatState.NonCombat;
             yield return null;
         }
     }

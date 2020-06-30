@@ -1221,6 +1221,7 @@ MonoBehaviour:
   skillPrefabs:
   - {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09, type: 3}
   - {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938, type: 3}
+  - {fileID: 1118147380131412328, guid: 05ea85924c92afa4bbd8ea4dc26977c3, type: 3}
   skillCellTemplate: {fileID: 8844277990344288591, guid: efe3b02b7b32ca04fb256e1b396145af,
     type: 3}
   skillCells: []
@@ -1245,7 +1246,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 300, y: 400}

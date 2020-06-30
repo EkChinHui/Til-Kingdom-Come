@@ -8,6 +8,7 @@ namespace GamePlay.Skills
 
         public Animator anim;
 
+        private float hurtAnim;
         private float attackAnim;
         private float attack2Anim;
         private float attack3Anim;
@@ -15,6 +16,12 @@ namespace GamePlay.Skills
         private float rollAnim;
         private float confusionAnim;
         private float throwKnivesAnim;
+        private float healAnim;
+        private float fireBallAnim;
+        private float lungeAnim;
+
+        #region Getters
+        public float HurtAnim => hurtAnim;
         public float AttackAnim => attackAnim;
         public float Attack2Anim => attack2Anim;
         public float Attack3Anim => attack3Anim;
@@ -22,6 +29,11 @@ namespace GamePlay.Skills
         public float RollAnim => rollAnim;
         public float ConfusionAnim => confusionAnim;
         public float ThrowKnivesAnim => throwKnivesAnim;
+        public float HealAnim => healAnim;
+        public float FireBallAnim => fireBallAnim;
+        public float LungeAnim => lungeAnim;
+        #endregion
+
         private void Awake()
         {
             if (instance == null)
@@ -49,6 +61,9 @@ namespace GamePlay.Skills
             {
                 switch(clip.name)
                 {
+                    case "Hurt":
+                        instance.hurtAnim = clip.length;
+                        break;
                     case "Attack":
                         instance.attackAnim = clip.length;
                         break;
@@ -69,6 +84,15 @@ namespace GamePlay.Skills
                         break;
                     case "ThrowKnives":
                         instance.throwKnivesAnim = clip.length;
+                        break;
+                    case "Heal":
+                        instance.healAnim = clip.length;
+                        break;
+                    case "Fireball":
+                        instance.fireBallAnim = clip.length;
+                        break;
+                    case "Lunge":
+                        instance.lungeAnim = clip.length;
                         break;
                 }
             }

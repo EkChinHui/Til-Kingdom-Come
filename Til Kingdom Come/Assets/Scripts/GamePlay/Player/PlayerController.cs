@@ -38,7 +38,7 @@ namespace GamePlay.Player
         [Header("Health")]
         // Health system to make it convenient to change
         private const int MaxHealth = 1;
-        public int currentHealth;
+        public float currentHealth;
 
         [Header("Skills")] 
         public Attack attack;
