@@ -34,7 +34,7 @@ namespace GamePlay.Skills
             var animDelay = AnimationTimes.instance.ConfusionAnim;
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(animDelay);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
             yield return null;
         }
 

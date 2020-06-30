@@ -4,6 +4,7 @@ using GamePlay.Skills;
 using UI.GameUI;
 using UI.GameUI.Cooldown;
 using UnityEngine;
+using System.Collections;
 
 namespace GamePlay.Player
 {
@@ -24,12 +25,13 @@ namespace GamePlay.Player
         public GameObject sparks;
         public GameObject confusion;
         
-        public enum CombatState { NonCombatState, Blocking, Rolling, Attacking, Skill, Dead}
+        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
         public bool godMode = false;
-        public CombatState combatState = CombatState.NonCombatState;
+        public CombatState combatState = CombatState.NonCombat;
 
         [Header("Movement")] 
         private float runSpeed = 4f;
+        private float hurtDuration = 1f;
         private Vector2 originalPosition;
         private Quaternion originalRotation;
         
@@ -64,7 +66,6 @@ namespace GamePlay.Player
             SkillSelectionManager.instance.AssignSkills();
             onSuccessfulBlock += SuccessfulBlock;
         }
-
         private void Start()
         {
             // Instantiate variables on creation
@@ -72,7 +73,6 @@ namespace GamePlay.Player
             anim = GetComponent<Animator>();
             currentHealth = MaxHealth;
         }
-
         public void Update()
         {
             // combo system
@@ -83,36 +83,32 @@ namespace GamePlay.Player
                     attack.Cast(otherPlayer);
                 }
             }
-            
+
             // if the player is dead, the player state should not be updated
             if (combatState == CombatState.Dead) return;
-            // the player should only be able to perform other actions in the NonCombatState
-            if (combatState != CombatState.NonCombatState) return;
-            if (playerInput.AttemptSkill)
+            // the player can only move, block and roll whil hurt
+            else if (combatState == CombatState.Hurt)
             {
-                skill.Cast(otherPlayer);
+                ListenForRoll();
+                ListenForBlock();
+                Move();
             }
-            else if (playerInput.AttemptAttack)
+            else if (combatState == CombatState.NonCombat)
             {
-                attack.Cast(otherPlayer);
-            }
-            else if (playerInput.AttemptBlock)
-            {
-                block.Cast(otherPlayer);
-            } 
-            else if (playerInput.AttemptRoll)
-            {
-                roll.Cast(otherPlayer);
-            }
-            else if (combatState == CombatState.NonCombatState)
-            {
+                ListenForRoll();
+                ListenForAttack();
+                ListenForBlock();
+                ListenForSkill();
                 Move();
             }
         }
-
         private void Move()
         {
-            if (playerInput.AttemptRight)
+            if (playerInput.AttemptRight && playerInput.AttemptLeft)
+            {
+                anim.SetInteger("state", 0);
+            }
+            else if (playerInput.AttemptRight)
             {
                 anim.SetInteger("state", 1);
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
@@ -134,6 +130,41 @@ namespace GamePlay.Player
             {
                 anim.SetInteger("state", 0);
             }
+        }
+        private void ListenForRoll()
+        {
+            if (playerInput.AttemptRoll)
+            {
+                roll.Cast(otherPlayer);
+            }
+        }
+        private void ListenForAttack()
+        {
+            if (playerInput.AttemptAttack)
+            {
+                attack.Cast(otherPlayer);
+            }
+        }
+        private void ListenForBlock()
+        {
+            if (playerInput.AttemptBlock)
+            {
+                block.Cast(otherPlayer);
+            }
+        }
+        private void ListenForSkill()
+        {
+            if (playerInput.AttemptSkill)
+            {
+                skill.Cast(otherPlayer);
+            }
+        }
+
+        private IEnumerator Hurt()
+        {
+            combatState = CombatState.Hurt;
+            yield return new WaitForSeconds(hurtDuration);
+            combatState = CombatState.NonCombat;
         }
 
         public void KnockBack(float distance)
@@ -158,6 +189,7 @@ namespace GamePlay.Player
                 else
                 {
                     // Hurt;
+                    StartCoroutine(Hurt());
                 }
             }
         }
@@ -210,7 +242,7 @@ namespace GamePlay.Player
             anim.SetBool("Dead", false);
             anim.SetInteger("State", 0);
             rb.velocity = Vector2.zero;
-            combatState = CombatState.NonCombatState;
+            combatState = CombatState.NonCombat;
             enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;

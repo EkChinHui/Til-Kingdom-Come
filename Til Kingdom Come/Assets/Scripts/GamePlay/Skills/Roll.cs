@@ -55,7 +55,7 @@ namespace GamePlay.Skills
             player.anim.SetTrigger("Roll");
             yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
             dashing = false;
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
             player.rb.velocity = Vector2.zero;
         }
         

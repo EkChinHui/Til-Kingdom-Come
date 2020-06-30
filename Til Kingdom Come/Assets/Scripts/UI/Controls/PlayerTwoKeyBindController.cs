@@ -42,6 +42,7 @@ public class PlayerTwoKeyBindController : MonoBehaviour
     {
         Debug.Log("Player 2 changing key binding for " + clicked.name + ".");
         currentKey = clicked;
+        currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Choose Key";
     }
     public void SaveKeys()
     {
