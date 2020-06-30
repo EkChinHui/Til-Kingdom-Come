@@ -9,13 +9,13 @@ namespace GamePlay.Skills
     {
         public bool dashing;
         public float rollSpeed = 1.5f;
-        private const float RollCooldown = 2f;
+        private const float rollCooldown = 2f;
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
             skillName = "Roll";
             skillInfo = "Rolls a short distance, invulnerable while rolling";
-            skillCooldown = RollCooldown;
+            skillCooldown = rollCooldown;
         }
 
         private void FixedUpdate()
