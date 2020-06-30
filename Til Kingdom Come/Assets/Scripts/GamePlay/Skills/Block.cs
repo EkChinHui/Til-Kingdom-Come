@@ -55,7 +55,7 @@ namespace GamePlay.Skills
             player.playerInput.Toggle();
             player.anim.SetTrigger("Block");
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.Toggle();
         }
     }

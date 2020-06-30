@@ -173,7 +173,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.Toggle();
         }
 
@@ -189,7 +189,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.Toggle();
         }
 
@@ -208,7 +208,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             AudioManager.instance.PlaySoundEffect("Sword Smash");
             player.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
 
             #region Particles
             var distanceOffset = Math.Abs(transform.localRotation.eulerAngles.y) < Mathf.Epsilon

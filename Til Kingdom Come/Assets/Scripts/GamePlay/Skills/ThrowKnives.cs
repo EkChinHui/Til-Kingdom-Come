@@ -76,7 +76,7 @@ namespace GamePlay.Skills
             var pos = new Vector3(tempOffset, heightOffset, 0);
             Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
             yield return new WaitForSeconds(animDelay - knifeDelay);
-            player.combatState = PlayerController.CombatState.NonCombatState;
+            player.combatState = PlayerController.CombatState.NonCombat;
         }
 
     }
