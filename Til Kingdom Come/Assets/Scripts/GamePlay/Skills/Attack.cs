@@ -2,7 +2,6 @@
 using System.Collections;
 using Cinemachine;
 using GamePlay.Player;
-using UI.GameUI;
 using UI.GameUI.Cooldown;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +17,7 @@ namespace GamePlay.Skills
         public Sprite attackThree;
         
         [Header("Variables")]
-        private const int Damage = 1;
+        public const int Damage = 1;
         private float attRange = 1.85f;
         private float knockDistAttacking = 8f;
         private float knockDistBlocking = 4f;
@@ -30,6 +29,8 @@ namespace GamePlay.Skills
         public Combo combo;
         private CooldownUI attackIcon;
         private Image darkMask;
+        private float moveDistance = 10f;
+        
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
@@ -183,8 +184,8 @@ namespace GamePlay.Skills
             player.anim.SetTrigger("Attack 2");
             var velocity = player.rb.velocity;
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
-                ? new Vector2(-10f, velocity.y)
-                : new Vector2(10f, velocity.y);
+                ? new Vector2(-moveDistance, velocity.y)
+                : new Vector2(moveDistance, velocity.y);
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
@@ -200,8 +201,8 @@ namespace GamePlay.Skills
             var velocity = player.rb.velocity;
             // move forward
             player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
-                ? new Vector2(-10f, velocity.y)
-                : new Vector2(10f, velocity.y);
+                ? new Vector2(-moveDistance, velocity.y)
+                : new Vector2(moveDistance, velocity.y);
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();

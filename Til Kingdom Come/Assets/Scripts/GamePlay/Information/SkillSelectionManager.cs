@@ -19,8 +19,9 @@ namespace GamePlay.Information
         public GameObject throwKnives;
         public GameObject forcePull;
         public GameObject heal;
-        public GameObject fireball;
         public GameObject lunge;
+        public GameObject fireball;
+
         #endregion
         
         public static SkillSelectionManager instance;
@@ -44,6 +45,8 @@ namespace GamePlay.Information
             skillPrefabs.Add(throwKnives); // 1
             skillPrefabs.Add(forcePull); // 2
             skillPrefabs.Add(heal); // 3
+            skillPrefabs.Add(lunge); // 4
+            skillPrefabs.Add(fireball); // 5
         }
 
         public void AssignSkills()

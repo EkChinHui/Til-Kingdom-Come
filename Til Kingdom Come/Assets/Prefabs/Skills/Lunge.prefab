@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1118147380131412328
+--- !u!1 &2832383605654232797
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1118147380131412330}
-  - component: {fileID: 1118147380131412331}
+  - component: {fileID: 2832383605654232799}
+  - component: {fileID: 2832383605654232796}
   m_Layer: 0
-  m_Name: Heal
+  m_Name: Lunge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1118147380131412330
+--- !u!4 &2832383605654232799
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118147380131412328}
+  m_GameObject: {fileID: 2832383605654232797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.87451, y: -0.5065223, z: -1338.2871}
+  m_LocalPosition: {x: -0.3154306, y: 1.05188, z: -26.582031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1118147380131412331
+--- !u!114 &2832383605654232796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118147380131412328}
+  m_GameObject: {fileID: 2832383605654232797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c269d0bc790d7c649967d0ed7cbdd2fe, type: 3}
+  m_Script: {fileID: 11500000, guid: b3ee841c9b2e4392be57df29867a3f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Heal
-  skillInfo: Heals the player for 40 hp
-  icon: {fileID: 21300000, guid: 44be9792c9c83ce4b8125260122c5aeb, type: 3}
+  skillName: Lunge
+  skillInfo: Channels an attack and charges at the enemy
+  icon: {fileID: 21300000, guid: 3c455414dceebd64b86e7a397c4edbe1, type: 3}
   skillCooldown: 10
-  skillNumber: 3
-  glow: {fileID: 1471350893045230102, guid: e3d7bf619f986264798bf245b4947b8d, type: 3}
-  healParticles: {fileID: 5111142782585077209, guid: c26b9d37c0fccfb4b956dda0eea821b5,
-    type: 3}
-  healAmount: 40
-  healDuration: 5
+  skillNumber: 4

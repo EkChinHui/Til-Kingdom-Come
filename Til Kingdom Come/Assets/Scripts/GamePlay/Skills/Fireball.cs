@@ -19,10 +19,12 @@ namespace GamePlay.Skills
         {
             if (!CanCast()) return;
             StartCoroutine(AnimDelay());
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
 
         private IEnumerator AnimDelay()
         {
+            player.anim.SetTrigger(skillName);
             var animDelay = AnimationTimes.instance.FireBallAnim;
             player.combatState = PlayerController.CombatState.Skill;
             yield return new WaitForSeconds(animDelay);
