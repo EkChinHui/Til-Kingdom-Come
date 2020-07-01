@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections;
 using GamePlay.Player;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GamePlay.Skills
 {
     public class Heal : Skill
     {
+        public GameObject glow;
         public GameObject healParticles;
         public int healAmount = 40;
         public float healDuration = 5f;
         private bool isHealing;
-        
+
         void Start()
         {
             skillName = "Heal";
@@ -25,9 +27,7 @@ namespace GamePlay.Skills
             if (isHealing)
             {
                 var rateIncrease = healAmount / healDuration;
-                print(rateIncrease * Time.deltaTime);
                 player.currentHealth += rateIncrease * Time.deltaTime;
-                print("Player health: " + player.currentHealth);
                 player.currentHealth = Math.Min(player.currentHealth, 100);
             }
         }
@@ -37,6 +37,7 @@ namespace GamePlay.Skills
             if (!CanCast()) return;
             StartCoroutine(AnimDelay());
             StartCoroutine(HealOverTime());
+            StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
 
         private IEnumerator AnimDelay()
@@ -52,6 +53,14 @@ namespace GamePlay.Skills
         private IEnumerator HealOverTime()
         {
             isHealing = true;
+            var heightOffset = new Vector3(0, 4f, 0);
+            var glowOffset = new Vector3(0, 0.5f, 0);
+            var glowParticle = Instantiate(glow, player.transform.position + glowOffset,
+                Quaternion.identity);
+            var healParticle = Instantiate(healParticles, player.transform.position + heightOffset, 
+                Quaternion.identity);
+            //glowParticle.transform.parent = player.transform;
+            healParticle.transform.parent = player.transform;
             yield return new WaitForSeconds(healDuration);
             isHealing = false;
             yield return null;

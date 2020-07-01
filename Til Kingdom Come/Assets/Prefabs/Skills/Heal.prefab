@@ -48,6 +48,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9d972393b9571e6448c50d6dbca4681b, type: 3}
   skillCooldown: 10
   skillNumber: 3
-  healParticles: {fileID: 0}
+  glow: {fileID: 1471350893045230102, guid: e3d7bf619f986264798bf245b4947b8d, type: 3}
+  healParticles: {fileID: 5111142782585077209, guid: c26b9d37c0fccfb4b956dda0eea821b5,
+    type: 3}
   healAmount: 40
   healDuration: 5
