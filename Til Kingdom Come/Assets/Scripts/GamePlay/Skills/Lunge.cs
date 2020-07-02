@@ -8,18 +8,18 @@ namespace GamePlay.Skills
     public class Lunge : Skill
     {
         public Transform attackOrigin;
-        public float lungeRange = 20f;
         private LayerMask playerLayer;
         public float channelTime = 0.3f;
         private bool isLunging;
-        private float lungeDistance = 30f;
+        private float lungeDistance = 140f;
         public int attackDistance = 10;
         private float knockDistAttacking = 8f;
         private float knockDistBlocking = 4f;
         public int damage = 50;
         private Vector2 originOffset = new Vector2(1.5f, 2f);
-        
-        
+        private float distanceBetweenImages = 2f;
+        private float lastImageXpos;
+
         private void Start()
         {
             playerLayer = 1 << 8;
@@ -32,20 +32,20 @@ namespace GamePlay.Skills
 
         private void Update()
         {
-            var transform2D = new Vector2(player.transform.position.x, player.transform.position.y);
-            var direction = Math.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
-                ? new Vector2(-1, 0)
-                : new Vector2(1, 0);
-            var tempOffset= Math.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
-                ? new Vector2(-originOffset.x, originOffset.y)
-                : new Vector2(originOffset.x, originOffset.y);
-            Debug.DrawRay(transform2D + tempOffset, direction * attackDistance, Color.red,0);
-            
+            if (isLunging)
+            {
+                if (Mathf.Abs(player.transform.position.x - lastImageXpos) > distanceBetweenImages)
+                {
+                    PlayerAfterImagePool.Instance.GetFromPool(player.playerNo);
+                    lastImageXpos = player.transform.position.x;
+                }
+            }
         }
 
         public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
+            PlayerAfterImagePool.Instance.GetFromPool(player.playerNo);
             StartCoroutine(AnimDelay());
             StartCoroutine(LungeMove());
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
@@ -61,7 +61,7 @@ namespace GamePlay.Skills
             var tempOffset= Math.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(-originOffset.x, originOffset.y)
                 : new Vector2(originOffset.x, originOffset.y);
-            // Debug.DrawRay(transform2D + originOffset, direction * attackDistance, Color.red,3);
+            Debug.DrawRay(transform2D + tempOffset, direction * attackDistance, Color.red,3);
 
             RaycastHit2D rayCast = Physics2D.Raycast(transform2D + tempOffset, direction,
                 attackDistance, playerLayer);
@@ -103,6 +103,8 @@ namespace GamePlay.Skills
         
         private IEnumerator LungeMove()
         {
+            var originalDrag = player.rb.drag;
+            player.rb.drag = 10f;
             yield return new WaitForSeconds(channelTime);
             LungeCast();
             /*var velocity = player.rb.velocity;
@@ -117,29 +119,23 @@ namespace GamePlay.Skills
             {
                 player.rb.AddForce(player.transform.right * lungeDistance, ForceMode2D.Impulse);
             }
+
+            yield return new WaitUntil(() => player.rb.velocity == Vector2.zero);
+            player.rb.drag = originalDrag;
             yield return null;
         }
         
         private IEnumerator AnimDelay()
         {
+            isLunging = true;
             player.anim.SetTrigger(skillName);
             var animTime = AnimationTimes.instance.LungeAnim;
             player.combatState = PlayerController.CombatState.Skill;
             yield return new WaitForSeconds(animTime);
             player.combatState = PlayerController.CombatState.NonCombat;
+            isLunging = false;
             yield return null;
         }
         
-        // draws wireframe for attack point to make it easier to set attack range
-        private void OnDrawGizmosSelected()
-        {
-            var offset = new Vector2(10, 3);
-            if (attackOrigin == null)
-            {
-                return;
-            }
-            Gizmos.DrawWireSphere((Vector2) attackOrigin.position + offset , 
-                 lungeRange);
-        }
     }
 }

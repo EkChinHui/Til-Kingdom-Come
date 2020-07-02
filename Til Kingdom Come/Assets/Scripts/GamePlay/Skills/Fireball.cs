@@ -6,6 +6,9 @@ namespace GamePlay.Skills
 {
     public class Fireball : Skill
     {
+        private GameObject fireParticles;
+        private GameObject damageCollider;
+        
         // Start is called before the first frame update
         void Start()
         {
