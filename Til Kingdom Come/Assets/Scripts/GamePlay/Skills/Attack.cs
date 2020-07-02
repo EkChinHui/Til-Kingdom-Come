@@ -183,7 +183,7 @@ namespace GamePlay.Skills
             player.combatState = PlayerController.CombatState.Attacking;
             player.anim.SetTrigger("Attack 2");
             var velocity = player.rb.velocity;
-            player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
+            player.rb.velocity = Mathf.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(-moveDistance, velocity.y)
                 : new Vector2(moveDistance, velocity.y);
             // reaction delay to allow opponent to react
@@ -200,7 +200,7 @@ namespace GamePlay.Skills
             player.anim.SetTrigger("Attack 3");
             var velocity = player.rb.velocity;
             // move forward
-            player.rb.velocity = Math.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
+            player.rb.velocity = Mathf.Abs(transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(-moveDistance, velocity.y)
                 : new Vector2(moveDistance, velocity.y);
             // reaction delay to allow opponent to react

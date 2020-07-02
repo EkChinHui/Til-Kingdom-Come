@@ -7,13 +7,12 @@ namespace GamePlay.Skills
 {
     public class Lunge : Skill
     {
-        public Transform attackOrigin;
+        private Transform attackOrigin;
         private LayerMask playerLayer;
         public float channelTime = 0.3f;
         private bool isLunging;
         private float lungeDistance = 140f;
         public int attackDistance = 10;
-        private float knockDistAttacking = 8f;
         private float knockDistBlocking = 4f;
         public int damage = 50;
         private Vector2 originOffset = new Vector2(1.5f, 2f);

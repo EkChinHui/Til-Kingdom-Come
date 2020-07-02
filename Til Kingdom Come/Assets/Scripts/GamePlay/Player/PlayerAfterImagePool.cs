@@ -6,9 +6,7 @@ namespace GamePlay.Player
 {
     public class PlayerAfterImagePool : MonoBehaviour
     {
-        [SerializeField] 
-        private GameObject afterImagePrefab1;
-
+        public GameObject afterImagePrefab1;
         public GameObject afterImagePrefab2;
         
         public Queue<GameObject> playerOneAfterImages = new Queue<GameObject>();

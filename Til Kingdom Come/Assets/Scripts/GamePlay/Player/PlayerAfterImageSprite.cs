@@ -9,7 +9,7 @@ namespace GamePlay.Player
         private SpriteRenderer sr;
         private SpriteRenderer playerSR;
 
-        private float activeTime = 0.2f;
+        //private float activeTime = 0.2f;
         private float timeActivated;
         private float alpha;
         private float alphaSet = 1f;
