@@ -12,9 +12,35 @@ namespace GamePlay.Player
     public class PlayerController : MonoBehaviour
     {
         public static int totalPlayers;
-
-        [Header("fields")]
         private SpriteRenderer sprite;
+        private float runSpeed = 4f;
+        private Vector2 originalPosition;
+        private Quaternion originalRotation;
+        
+        #region States
+        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
+        public bool godMode = false;
+        public CombatState combatState = CombatState.NonCombat;
+        #endregion
+
+        #region Health Properties
+        private const float maxHealth = 100;
+        public float currentHealth;
+        #endregion
+
+        #region Hurt Properties
+        private float hurtDuration = 1.2f;
+        private float hurtInterval = 0.2f;
+        private float hurtDistance = 8f;
+        private float stunDuration = 0.6f;
+        #endregion
+
+        #region Events
+        public static Action<int> onDeath;
+        public Action onSuccessfulBlock;
+        #endregion
+
+        [Header("Fields")]
         public Rigidbody2D rb;
         public Animator anim;
         public PlayerController otherPlayer;
@@ -26,25 +52,9 @@ namespace GamePlay.Player
         public GameObject sparks;
         public GameObject confusion;
         
-        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
-        public bool godMode = false;
-        public CombatState combatState = CombatState.NonCombat;
-
-        [Header("Movement")] 
-        private float runSpeed = 4f;
-        private Vector2 originalPosition;
-        private Quaternion originalRotation;
-        
         [Header("Health")]
-        // Health system to make it convenient to change
-        private const float MaxHealth = 100;
-        public float currentHealth;
-
-        [Header("Hurt")]
-        private float hurtDuration = 1.2f;
-        private float hurtInterval = 0.2f;
-        private float hurtDistance = 8f;
-        private float stunDuration = 0.6f;
+        // Health System to make it convenient to change
+        public HealthBarController healthBarController;
 
         [Header("Skills")] 
         public Attack attack;
@@ -54,11 +64,6 @@ namespace GamePlay.Player
 
         [Header("UI")] 
         public CooldownUIController cooldownUiController;
-
-        #region Events
-        public static Action<int> onDeath;
-        public Action onSuccessfulBlock;
-        #endregion
 
         private void Awake()
         {
@@ -78,10 +83,11 @@ namespace GamePlay.Player
             sprite = GetComponent<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-            currentHealth = MaxHealth;
+            currentHealth = maxHealth;
         }
         public void Update()
         {
+            healthBarController.SetHealth(currentHealth);
             // combo system
             if (combatState == CombatState.Attacking)
             {
