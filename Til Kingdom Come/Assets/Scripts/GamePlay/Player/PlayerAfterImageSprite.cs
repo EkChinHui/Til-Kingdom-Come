@@ -8,17 +8,19 @@ namespace GamePlay.Player
         public int playerNo;
         private SpriteRenderer sr;
         private SpriteRenderer playerSR;
-
-        //private float activeTime = 0.2f;
+        
         private float timeActivated;
         private float alpha;
+        // starting alpha value
         private float alphaSet = 1f;
-        private float alphaMultiplier = 0.90f;
+        // how much the alpha is decreased
+        private float alphaMultiplier = 0.95f;
     
         private Color color;
 
         private void OnEnable()
         {
+            // find player thru player names
             var playerName = "Player " + playerNo;
             foreach (var players in GameObject.FindGameObjectsWithTag("Player"))
             {
@@ -50,6 +52,7 @@ namespace GamePlay.Player
                 : PlayerAfterImagePool.Instance.playerTwoAfterImages;
             if (Time.time >= timeActivated + Time.time)
             {
+                // add to the correct queue after time is up so game object can be reused
                 PlayerAfterImagePool.Instance.AddToPool(gameObject, queue);
             }
         }

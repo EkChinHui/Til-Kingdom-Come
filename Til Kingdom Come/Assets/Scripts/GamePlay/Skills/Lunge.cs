@@ -7,7 +7,6 @@ namespace GamePlay.Skills
 {
     public class Lunge : Skill
     {
-        private Transform attackOrigin;
         private LayerMask playerLayer;
         public float channelTime = 0.3f;
         private bool isLunging;
@@ -26,7 +25,6 @@ namespace GamePlay.Skills
             skillInfo = "Channels an attack and charges at the enemy";
             skillCooldown = 10f;
             skillNumber = 4;
-            attackOrigin = player.transform;
         }
 
         private void Update()
