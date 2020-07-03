@@ -22,7 +22,7 @@ namespace GamePlay.Skills
             skillName = "Throw Knives"; 
             skillInfo = "Throws knives at opponent";
             skillNumber = 2;
-            skillCooldown = 0f;
+            skillCooldown = chargeTime;
             charges = gameObject.AddComponent<Charges>();
             charges.SetCharges(maxCharges, chargeTime);
         }

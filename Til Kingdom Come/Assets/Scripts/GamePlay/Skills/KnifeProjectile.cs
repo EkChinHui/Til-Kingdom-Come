@@ -7,8 +7,8 @@ namespace GamePlay.Skills
     public class KnifeProjectile : MonoBehaviour
     {
         public Rigidbody2D rb;
-        public float speed = 15f;
-        public int damage = 1;
+        public float speed = 100;
+        private int damage = 15;
 
         private void Awake()
         {
@@ -17,7 +17,8 @@ namespace GamePlay.Skills
 
         private void Update()
         {
-            rb.velocity = transform.right * speed;
+            var vel = new Vector3(transform.right.x * speed, transform.right.y, transform.right.z);
+            rb.velocity = vel;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

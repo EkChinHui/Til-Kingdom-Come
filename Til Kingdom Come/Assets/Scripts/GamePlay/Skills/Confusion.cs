@@ -1,31 +1,49 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using GamePlay.Player;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace GamePlay.Skills
 {
     public class Confusion : Skill
     {
-        [SerializeField] private float pushDistance = 6f;
-        [SerializeField] private float confusionDuration = 4f;
+        private float pushDistance = 6f;
+        private float confusionDuration = 4f;
 
         private void Start()
         { 
             skillName = "Confusion";
             skillInfo = "Confuse the enemy, reversing the controls of the enemy";
             skillNumber = 1;
-            skillCooldown = 10f;
+            skillCooldown = 8f;
         }
 
         public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
+
+            
+
             StartCoroutine(AnimDelay());
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Force Pull");
-            opponent.KnockBack(pushDistance);
-            StartCoroutine(Confuse(opponent));
+            if (isFacingOppponent(player, opponent))
+            {
+                opponent.KnockBack(pushDistance);
+                StartCoroutine(Confuse(opponent));
+            }
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
+        }
+
+        private bool isFacingOppponent(PlayerController player, PlayerController opponent)
+        {
+            float playerDirection = player.transform.rotation.eulerAngles.y; // either 0 or 180
+            float playerPositionX = player.transform.position.x;
+            float opponentPositionX = opponent.transform.position.x;
+            return (playerPositionX > opponentPositionX && Math.Abs(playerDirection - 180) < Mathf.Epsilon) ||
+                   (playerPositionX < opponentPositionX && Math.Abs(playerDirection) < Mathf.Epsilon);
+
         }
 
         private IEnumerator AnimDelay()

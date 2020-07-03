@@ -8,8 +8,8 @@ namespace GamePlay.Skills
     public class Roll : Skill
     {
         public bool dashing;
-        public float rollSpeed = 1.5f;
-        private const float rollCooldown = 2f;
+        private float rollSpeed = 1.5f;
+        private const float rollCooldown = 5f;
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
@@ -40,11 +40,11 @@ namespace GamePlay.Skills
         {
             if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
             {
-                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Impulse);
+                player.rb.AddForce(player.transform.right * rollSpeed, ForceMode2D.Impulse);
             }
             else if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
             {
-                player.rb.AddForce(transform.right * rollSpeed, ForceMode2D.Impulse);
+                player.rb.AddForce(player.transform.right * rollSpeed, ForceMode2D.Impulse);
             }
         }
 

@@ -14,7 +14,7 @@ namespace GamePlay.Player
         // starting alpha value
         private float alphaSet = 1f;
         // how much the alpha is decreased
-        private float alphaMultiplier = 0.95f;
+        private float alphaMultiplier = 0.96f;
     
         private Color color;
 

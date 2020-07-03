@@ -8,7 +8,7 @@ namespace GamePlay.Skills
     public class Lunge : Skill
     {
         private LayerMask playerLayer;
-        public float channelTime = 0.3f;
+        private float channelTime = 0.5f;
         private bool isLunging;
         private float lungeDistance = 140f;
         public int attackDistance = 10;

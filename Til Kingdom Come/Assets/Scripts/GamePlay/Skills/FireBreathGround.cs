@@ -1,4 +1,5 @@
-﻿using GamePlay.Player;
+﻿using System;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -9,13 +10,13 @@ namespace GamePlay.Skills
         private int damagePerTick = 5;
         private float nextTime;
         private float timeBetweenTicks = 0.5f;
-    
+
         // Start is called before the first frame update
         void Start()
         {
             coll2D = gameObject.GetComponent<BoxCollider2D>();
         }
-    
+
         private void OnTriggerStay2D(Collider2D other)
         {
             var player = other.gameObject.GetComponent<PlayerController>();
@@ -26,5 +27,6 @@ namespace GamePlay.Skills
                 nextTime = Time.time + timeBetweenTicks;
             }
         }
+        
     }
 }

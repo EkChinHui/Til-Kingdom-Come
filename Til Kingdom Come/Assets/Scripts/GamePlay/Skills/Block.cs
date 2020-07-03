@@ -7,16 +7,14 @@ namespace GamePlay.Skills
 {
     public class Block : Skill
     {
-        private const float blockCooldown = 0f;
-        public int maxCharges = 3;
-        public float chargeTime = 5f;
+        private int maxCharges = 2;
+        private float chargeTime = 4f;
         public Charges charges;
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
             skillName = "Block";
             skillInfo = "Blocks various attacks";
-            skillCooldown = blockCooldown;
             charges = gameObject.AddComponent<Charges>();
             charges.SetCharges(maxCharges, chargeTime);
         }

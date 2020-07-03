@@ -172,7 +172,7 @@ Rigidbody2D:
   m_GravityScale: 3.4
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4415915516255590486
@@ -291,7 +291,6 @@ MonoBehaviour:
   attackThree: {fileID: 21300000, guid: 0b8d640637222ce408fac5bc9fdfbc69, type: 3}
   charges: {fileID: 0}
   maxCharges: 3
-  chargeTime: 5
 --- !u!114 &4415915515710630147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,8 +308,6 @@ MonoBehaviour:
   icon: {fileID: 0}
   skillCooldown: 0
   skillNumber: 0
-  maxCharges: 3
-  chargeTime: 5
   charges: {fileID: 0}
 --- !u!114 &4415915515710630144
 MonoBehaviour:
@@ -330,7 +327,6 @@ MonoBehaviour:
   skillCooldown: 0
   skillNumber: 0
   dashing: 0
-  rollSpeed: 1.5
 --- !u!1 &5851477479244374649
 GameObject:
   m_ObjectHideFlags: 0

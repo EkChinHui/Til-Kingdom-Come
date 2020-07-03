@@ -29,10 +29,10 @@ namespace GamePlay.Player
         #endregion
 
         #region Hurt Properties
-        private float hurtDuration = 1.2f;
+        private float hurtDuration = 0.4f;
         private float hurtInterval = 0.2f;
         private float hurtDistance = 8f;
-        private float stunDuration = 0.6f;
+        private float stunDuration = 0.2f;
         #endregion
 
         #region Events
@@ -187,6 +187,7 @@ namespace GamePlay.Player
             yield return new WaitForSeconds(hurtDuration);
             // stop hurt animation
             StopCoroutine(animationRoutine);
+            sprite.color = Color.white;
             // disable god mode
             godMode = false;
             combatState = CombatState.NonCombat;

@@ -17,19 +17,20 @@ namespace GamePlay.Skills
         public Sprite attackThree;
         
         [Header("Variables")]
-        public const int Damage = 1;
+        private const int AttackDamage = 20;
+        private const int FinalComboDamage = 40;
         private float attRange = 1.85f;
-        private float knockDistAttacking = 8f;
-        private float knockDistBlocking = 4f;
+        private float knockDistAttacking = 10f;
+        private float knockDistBlocking = 5f;
         private float attackCooldown = 0f;
         private float reactionDelay = 0.2f;
         public Charges charges;
         public int maxCharges = 3;
-        public float chargeTime = 5f;
+        private float chargeTime = 4f;
         public Combo combo;
         private CooldownUI attackIcon;
         private Image darkMask;
-        private float moveDistance = 10f;
+        private float moveDistance = 12f;
         
         private void Start()
         {
@@ -104,7 +105,6 @@ namespace GamePlay.Skills
                     StartCoroutine(ComboThreeAnimDelay());
                     break;
             }
-            combo.UpdateCombo();
 
             Debug.Log("Attack Charges Left: " + charges.CurrentCharge);
             Debug.Log("Attack Executed: " + combo.CurrentCombo);
@@ -150,11 +150,16 @@ namespace GamePlay.Skills
                     }
                     else
                     {
+                        var damage = combo.CurrentCombo == Combo.ComboNumber.Three
+                            ? FinalComboDamage
+                            : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
-                        player.otherPlayer.TakeDamage(Damage);
+                        player.otherPlayer.TakeDamage(damage);
+                        print("Combo: " + combo.CurrentCombo);
                     }
                 }
             }
+            combo.UpdateCombo();
         }
 
         private bool AttackPriority(PlayerController opponent)
