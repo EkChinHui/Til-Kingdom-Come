@@ -14,6 +14,7 @@ namespace GamePlay.Player
         public static int totalPlayers;
 
         [Header("fields")]
+        private SpriteRenderer sprite;
         public Rigidbody2D rb;
         public Animator anim;
         public PlayerController otherPlayer;
@@ -31,14 +32,19 @@ namespace GamePlay.Player
 
         [Header("Movement")] 
         private float runSpeed = 4f;
-        private float hurtDuration = 1f;
         private Vector2 originalPosition;
         private Quaternion originalRotation;
         
         [Header("Health")]
         // Health system to make it convenient to change
-        private const int MaxHealth = 1;
+        private const float MaxHealth = 100;
         public float currentHealth;
+
+        [Header("Hurt")]
+        private float hurtDuration = 1.2f;
+        private float hurtInterval = 0.2f;
+        private float hurtDistance = 8f;
+        private float stunDuration = 0.6f;
 
         [Header("Skills")] 
         public Attack attack;
@@ -69,6 +75,7 @@ namespace GamePlay.Player
         private void Start()
         {
             // Instantiate variables on creation
+            sprite = GetComponent<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = MaxHealth;
@@ -163,8 +170,44 @@ namespace GamePlay.Player
         private IEnumerator Hurt()
         {
             combatState = CombatState.Hurt;
+            // enable god mode
+            godMode = true;
+            // start hurt animation
+            var animationRoutine = StartCoroutine(ChangeSpriteColorAndWait(hurtInterval));
+            // stun player
+            StartCoroutine(Stun(stunDuration));
+            // knock player up
+            HurtKnockUp(hurtDistance);
             yield return new WaitForSeconds(hurtDuration);
+            // stop hurt animation
+            StopCoroutine(animationRoutine);
+            // disable god mode
+            godMode = false;
             combatState = CombatState.NonCombat;
+        }
+
+        private IEnumerator Stun(float duration)
+        {
+            playerInput.Toggle();
+            yield return new WaitForSeconds(duration);
+            playerInput.Toggle();
+        }
+
+        private IEnumerator ChangeSpriteColorAndWait(float interval)
+        {
+            while (true)
+            {
+                sprite.color = Color.red;
+                yield return new WaitForSeconds(interval);
+                sprite.color = Color.white;
+                yield return new WaitForSeconds(interval);
+            }
+        }
+
+        private void HurtKnockUp(float distance)
+        {
+            var velocity = rb.velocity;
+            rb.velocity = new Vector2(velocity.x, distance);
         }
 
         public void KnockBack(float distance)
