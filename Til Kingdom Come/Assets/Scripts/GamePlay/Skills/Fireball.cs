@@ -9,9 +9,9 @@ namespace GamePlay.Skills
     {
         public GameObject fireBall;
         public GameObject damageCollider;
-        private float fireballLandDelay = 0.4f;
+        private float fireballLandDelay = 0.5f;
         private float originOffset = 10f;
-        private float fireDuration = 5f;
+        private float fireDuration = 5.6f;
         private float FireballOffset = 0.5f;
         private float handAnimDelay = 0.40f;
         
