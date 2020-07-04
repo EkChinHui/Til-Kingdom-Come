@@ -58,7 +58,7 @@ namespace GamePlay.Skills
                 Quaternion.identity);
             var healParticle = Instantiate(healParticles, player.transform.position + heightOffset, 
                 Quaternion.identity);
-            //glowParticle.transform.parent = player.transform;
+            glowParticle.transform.parent = player.transform;
             healParticle.transform.parent = player.transform;
             yield return new WaitForSeconds(healDuration);
             isHealing = false;

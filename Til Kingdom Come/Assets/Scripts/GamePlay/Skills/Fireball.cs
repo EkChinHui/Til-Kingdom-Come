@@ -49,7 +49,7 @@ namespace GamePlay.Skills
             var fireballOffset = Mathf.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector3(-1 *  FireballOffset, 2.8f, 0)
                 : new Vector3(FireballOffset, 2.8f, 0);
-            Instantiate(fireBall, player.transform.position + fireballOffset, player.transform.rotation);
+            var ball = Instantiate(fireBall, player.transform.position + fireballOffset, player.transform.rotation);
 
             // fire burning ground
             yield return new WaitForSeconds(fireballLandDelay);

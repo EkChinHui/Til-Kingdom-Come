@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3577808186947221994}
   - component: {fileID: 5494051651861861384}
   - component: {fileID: 5345726525392230215}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boulder Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2906398646524433552}
   - component: {fileID: 5366680230494931435}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 8191890002591460282}
   - component: {fileID: 5342681004746683591}
   - component: {fileID: 1920839628496578343}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boulder
   m_TagString: Projectile
   m_Icon: {fileID: 0}
