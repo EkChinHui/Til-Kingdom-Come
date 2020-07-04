@@ -2,6 +2,7 @@
 using System.Collections;
 using GamePlay.Player;
 using UI.GameUI.Cooldown;
+using UnityEditor;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -9,12 +10,13 @@ namespace GamePlay.Skills
     public class ThrowKnives : Skill
     {
         public Transform rangePoint;
+        private float speed = 20;
         public GameObject knife;
         private float knifeDelay = 0.6f;
         public float heightOffset;
         public float distanceOffset;
         public Charges charges;
-        public int maxCharges = 2;
+        private int maxCharges = 2;
         public float chargeTime = 5f;
         
         void Start()
@@ -40,7 +42,6 @@ namespace GamePlay.Skills
 
         public override void Cast(PlayerController opponent)
         {
-            if (!CanCast()) return;
             if (charges.CurrentCharge <= 0) {
                 print("0 charges left");
                 return;
@@ -49,7 +50,7 @@ namespace GamePlay.Skills
             // Trigger cooldown UI
             if (charges.CurrentCharge == maxCharges)
             {
-                Debug.Log("Block Charging");
+                Debug.Log("Throw Knives Charging");
                 charges.isCharging = true;
             }
 
@@ -67,13 +68,16 @@ namespace GamePlay.Skills
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(knifeDelay);
             var tempOffset = distanceOffset;
+            var flipSpeed = speed;
             if (Math.Abs(rangePoint.rotation.eulerAngles.y - 180) < Mathf.Epsilon)
             {
                 tempOffset = -distanceOffset;
+                flipSpeed *= -1;
             }
             
             var pos = new Vector3(tempOffset, heightOffset, 0);
-            Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
+            var knifeGameObject = Instantiate(knife, rangePoint.position + pos, Quaternion.identity);
+            knifeGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(flipSpeed, 0);
             yield return new WaitForSeconds(animDelay - knifeDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
         }

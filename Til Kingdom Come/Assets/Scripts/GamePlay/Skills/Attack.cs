@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cinemachine;
+using GamePlay.Map.Map_Two;
 using GamePlay.Player;
 using UI.GameUI.Cooldown;
 using UnityEngine;
@@ -112,6 +113,7 @@ namespace GamePlay.Skills
         
         private void AttackCast()
         {
+            BreakBoulders();
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // Maximum distance between both players for attack to be successful
@@ -162,6 +164,18 @@ namespace GamePlay.Skills
             combo.UpdateCombo();
         }
 
+        private void BreakBoulders()
+        {
+            Collider2D[] boulders = Physics2D.OverlapCircleAll(attackPoint.position, attRange + 0.5f,
+                1 << LayerMask.NameToLayer("Interactables"));
+            print(boulders);
+            foreach (var boulder in boulders)
+            {
+                var boulderProjectile = boulder.GetComponent<BoulderProjectile>();
+                boulderProjectile.Impact();
+            }
+        }
+        
         private bool AttackPriority(PlayerController opponent)
         // 5.0125 value is the maximum distance between 2 players for the attack to be successful
         // currently obtained manually by trial and error but we should find a way to calculate it`

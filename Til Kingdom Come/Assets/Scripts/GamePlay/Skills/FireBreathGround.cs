@@ -15,6 +15,7 @@ namespace GamePlay.Skills
         void Start()
         {
             coll2D = gameObject.GetComponent<BoxCollider2D>();
+            nextTime = Time.time + 0.6f;
         }
 
         private void OnTriggerStay2D(Collider2D other)

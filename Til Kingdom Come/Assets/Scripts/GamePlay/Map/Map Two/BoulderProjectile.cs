@@ -8,7 +8,7 @@ namespace GamePlay.Map.Map_Two
     {
         public static int soundEffectClipNumber = 1;
         private int totalSoundEffectClips = 3;
-        public int damage = 1;
+        private int damage = 10;
         public GameObject collideEffect;
         public float heightOffset;
         public GameObject parent;
@@ -38,7 +38,7 @@ namespace GamePlay.Map.Map_Two
                     return;
             }
         }
-        private void Impact()
+        public void Impact()
         {
             // Alternate between clips to prevent sound from being cut off
             AudioManager.instance.PlaySoundEffect("Boulder Hit " + soundEffectClipNumber);

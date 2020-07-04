@@ -9,9 +9,9 @@ namespace GamePlay.Skills
     {
         public GameObject fireBall;
         public GameObject damageCollider;
-        private float fireballLandDelay = 0.4f;
+        private float fireballLandDelay = 0.5f;
         private float originOffset = 10f;
-        private float fireDuration = 5f;
+        private float fireDuration = 5.6f;
         private float FireballOffset = 0.5f;
         private float handAnimDelay = 0.40f;
         
@@ -49,7 +49,7 @@ namespace GamePlay.Skills
             var fireballOffset = Mathf.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector3(-1 *  FireballOffset, 2.8f, 0)
                 : new Vector3(FireballOffset, 2.8f, 0);
-            Instantiate(fireBall, player.transform.position + fireballOffset, player.transform.rotation);
+            var ball = Instantiate(fireBall, player.transform.position + fireballOffset, player.transform.rotation);
 
             // fire burning ground
             yield return new WaitForSeconds(fireballLandDelay);

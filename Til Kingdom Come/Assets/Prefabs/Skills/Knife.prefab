@@ -103,7 +103,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &5600714974360708656
@@ -119,9 +119,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.40196705, y: 0}
+  m_Offset: {x: 0.2812739, y: 0}
   serializedVersion: 2
-  m_Radius: 0.09803295
+  m_Radius: 0.2187261
 --- !u!114 &-7243731116663652529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,9 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9113267feb7712345ad5eb15513a21d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 7673934122989433470}
-  speed: 15
-  damage: 1
+  sparks: {fileID: 3845532461121840968, guid: 6365b462451e81345bbb24a1ee98c3e1, type: 3}
 --- !u!1 &4470287431446149966
 GameObject:
   m_ObjectHideFlags: 0

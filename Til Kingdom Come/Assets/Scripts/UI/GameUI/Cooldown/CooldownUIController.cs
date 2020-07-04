@@ -20,6 +20,7 @@ namespace UI.GameUI.Cooldown
 
         private void SetSkillIcon(int player, GameObject skill)
         {
+            print("Player: " + player + "skill: " + skill.name);
             if (player != playerNo) return;
             Skill chosenSkill = skill.GetComponent<Skill>();
             Sprite icon = chosenSkill.icon;

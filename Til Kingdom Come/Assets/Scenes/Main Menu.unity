@@ -461,10 +461,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedPlayerSkills: 
-  totalPlayers: 2
   throwKnives: {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09,
     type: 3}
-  forcePull: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
+  confusion: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
     type: 3}
   heal: {fileID: 1118147380131412328, guid: 05ea85924c92afa4bbd8ea4dc26977c3, type: 3}
   lunge: {fileID: 2832383605654232797, guid: 4d4b56414b5ec0b498e88e24dc01dc5f, type: 3}
