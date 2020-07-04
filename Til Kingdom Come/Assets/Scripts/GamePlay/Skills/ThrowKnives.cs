@@ -2,6 +2,7 @@
 using System.Collections;
 using GamePlay.Player;
 using UI.GameUI.Cooldown;
+using UnityEditor;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -9,6 +10,7 @@ namespace GamePlay.Skills
     public class ThrowKnives : Skill
     {
         public Transform rangePoint;
+        private float speed = 20;
         public GameObject knife;
         private float knifeDelay = 0.6f;
         public float heightOffset;
@@ -48,7 +50,7 @@ namespace GamePlay.Skills
             // Trigger cooldown UI
             if (charges.CurrentCharge == maxCharges)
             {
-                Debug.Log("Block Charging");
+                Debug.Log("Throw Knives Charging");
                 charges.isCharging = true;
             }
 
@@ -72,7 +74,8 @@ namespace GamePlay.Skills
             }
             
             var pos = new Vector3(tempOffset, heightOffset, 0);
-            Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
+            var knifeGameObject = Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
+            knifeGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
             yield return new WaitForSeconds(animDelay - knifeDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
         }

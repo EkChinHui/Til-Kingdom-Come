@@ -15,11 +15,13 @@ namespace GamePlay.Skills
             ScoreKeeper.resetPlayersEvent += DestroyProjectile;
         }
 
+        /*
         private void Update()
         {
             var vel = new Vector3(transform.right.x * speed, transform.right.y, transform.right.z);
             rb.velocity = vel;
         }
+        */
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
