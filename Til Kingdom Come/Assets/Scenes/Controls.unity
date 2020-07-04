@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 14000595}
   - component: {fileID: 14000594}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: P1Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 101110574}
   - component: {fileID: 101110573}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: P2Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 107250293}
   - component: {fileID: 107250292}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: P1Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -1170,9 +1170,8 @@ GameObject:
   - component: {fileID: 298513119}
   - component: {fileID: 298513118}
   - component: {fileID: 298513120}
-  - component: {fileID: 298513121}
   m_Layer: 5
-  m_Name: Player 1 Controls
+  m_Name: Player 1 Keys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,7 +1184,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298513116}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
@@ -1196,8 +1195,8 @@ RectTransform:
   - {fileID: 291529054}
   - {fileID: 1019529504}
   - {fileID: 388658121}
-  m_Father: {fileID: 397501196}
-  m_RootOrder: 2
+  m_Father: {fileID: 527476846}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1260,24 +1259,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &298513121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298513116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ab08f0ae175461a99d39a1a515ab9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  left: {fileID: 173117079}
-  right: {fileID: 949771259}
-  roll: {fileID: 1051363940}
-  attack: {fileID: 2084220926}
-  block: {fileID: 1846171102}
-  skill: {fileID: 1714574438}
 --- !u!1 &321671793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1498,7 @@ GameObject:
   - component: {fileID: 355039162}
   - component: {fileID: 355039161}
   m_Layer: 5
-  m_Name: Roll
+  m_Name: P2Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1586,7 +1567,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -1857,8 +1838,7 @@ RectTransform:
   m_Children:
   - {fileID: 1255917613}
   - {fileID: 2020739959}
-  - {fileID: 298513117}
-  - {fileID: 1587171764}
+  - {fileID: 527476846}
   - {fileID: 2077967211}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1962,18 +1942,7 @@ MonoBehaviour:
           m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 298513121}
-        m_MethodName: SaveKeys
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: SaveKeys
         m_Mode: 1
         m_Arguments:
@@ -2275,7 +2244,7 @@ GameObject:
   - component: {fileID: 510238726}
   - component: {fileID: 510238725}
   m_Layer: 5
-  m_Name: Left
+  m_Name: P1Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2344,7 +2313,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -2392,6 +2361,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510238723}
   m_CullTransparentMesh: 0
+--- !u!1 &527476845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 527476846}
+  - component: {fileID: 527476847}
+  m_Layer: 5
+  m_Name: Key Bind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &527476846
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527476845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 298513117}
+  - {fileID: 1587171764}
+  m_Father: {fileID: 397501196}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &527476847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527476845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afede51db174485b97104e2cee16f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1left: {fileID: 173117079}
+  p1right: {fileID: 949771259}
+  p1roll: {fileID: 1051363940}
+  p1attack: {fileID: 2084220926}
+  p1block: {fileID: 1846171102}
+  p1skill: {fileID: 1714574438}
+  p2left: {fileID: 1490823550}
+  p2right: {fileID: 1848168829}
+  p2roll: {fileID: 773931449}
+  p2attack: {fileID: 948019435}
+  p2block: {fileID: 579834551}
+  p2skill: {fileID: 620113097}
 --- !u!1 &579834549
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3539,7 @@ GameObject:
   - component: {fileID: 905927031}
   - component: {fileID: 905927030}
   m_Layer: 5
-  m_Name: Block
+  m_Name: P1Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3577,7 +3608,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -4109,7 +4140,7 @@ GameObject:
   - component: {fileID: 1002766462}
   - component: {fileID: 1002766461}
   m_Layer: 5
-  m_Name: Attack
+  m_Name: P2Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4178,7 +4209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -5172,7 +5203,7 @@ GameObject:
   - component: {fileID: 1231434380}
   - component: {fileID: 1231434379}
   m_Layer: 5
-  m_Name: Right
+  m_Name: P1Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5241,7 +5272,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -5899,9 +5930,8 @@ GameObject:
   - component: {fileID: 1587171767}
   - component: {fileID: 1587171766}
   - component: {fileID: 1587171765}
-  - component: {fileID: 1587171768}
   m_Layer: 5
-  m_Name: Player 2 Controls
+  m_Name: Player 2 Keys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5914,7 +5944,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587171763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
@@ -5925,8 +5955,8 @@ RectTransform:
   - {fileID: 4598512}
   - {fileID: 1206840820}
   - {fileID: 456543843}
-  m_Father: {fileID: 397501196}
-  m_RootOrder: 3
+  m_Father: {fileID: 527476846}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5989,24 +6019,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587171763}
   m_CullTransparentMesh: 0
---- !u!114 &1587171768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587171763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1ebbe3757424df2ace9091d1890877, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  left: {fileID: 1490823550}
-  right: {fileID: 1848168829}
-  roll: {fileID: 773931449}
-  attack: {fileID: 948019435}
-  block: {fileID: 579834551}
-  skill: {fileID: 620113097}
 --- !u!1 &1650927716
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,7 +6032,7 @@ GameObject:
   - component: {fileID: 1650927719}
   - component: {fileID: 1650927718}
   m_Layer: 5
-  m_Name: Right
+  m_Name: P2Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6089,7 +6101,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -6394,7 +6406,7 @@ GameObject:
   - component: {fileID: 1785112146}
   - component: {fileID: 1785112145}
   m_Layer: 5
-  m_Name: Block
+  m_Name: P2Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6463,7 +6475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -7342,7 +7354,7 @@ GameObject:
   - component: {fileID: 2002951486}
   - component: {fileID: 2002951485}
   m_Layer: 5
-  m_Name: Roll
+  m_Name: P1Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7411,7 +7423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 298513121}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -7666,7 +7678,7 @@ GameObject:
   - component: {fileID: 2048166490}
   - component: {fileID: 2048166489}
   m_Layer: 5
-  m_Name: Left
+  m_Name: P2Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7735,7 +7747,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1587171768}
+      - m_Target: {fileID: 527476847}
         m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
@@ -7814,7 +7826,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 0.00926}
   m_Children: []
   m_Father: {fileID: 397501196}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

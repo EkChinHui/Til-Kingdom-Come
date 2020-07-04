@@ -33,9 +33,31 @@ public class PlayerOneKeyBindController : MonoBehaviour
             Event e = Event.current;
             if (e.isKey)
             {
-                keys[currentKey.name] = e.keyCode;
-                currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = e.keyCode.ToString();
-                currentKey = null;
+                Debug.Log(e);
+                // check for duplicate keys
+                bool isDuplicate = false;
+                foreach (var key in keys)
+                {
+                    if (key.Key != currentKey.name && key.Value == e.keyCode)
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                // check for KeyCode.None
+                bool isNone = e.keyCode == KeyCode.None;
+
+                if (!isDuplicate && !isNone)
+                {
+                    keys[currentKey.name] = e.keyCode;
+                    currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = e.keyCode.ToString();
+                    currentKey = null;
+                }
+                else
+                {
+                    Debug.Log("Duplicate key detected.");
+                }
             }
         }
     }
