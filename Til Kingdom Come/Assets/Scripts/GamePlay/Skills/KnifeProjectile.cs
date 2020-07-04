@@ -6,27 +6,23 @@ namespace GamePlay.Skills
 {
     public class KnifeProjectile : MonoBehaviour
     {
-        public Rigidbody2D rb;
-        public float speed = 100;
         private int damage = 15;
+        public GameObject sparks;
 
         private void Awake()
         {
             ScoreKeeper.resetPlayersEvent += DestroyProjectile;
         }
 
-        /*
-        private void Update()
-        {
-            var vel = new Vector3(transform.right.x * speed, transform.right.y, transform.right.z);
-            rb.velocity = vel;
-        }
-        */
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // destroys projectile if it touches a wall
             if (collision.CompareTag("Wall")) DestroyProjectile();
+            if (collision.CompareTag("Projectile"))
+            {
+                Instantiate(sparks, transform.position, Quaternion.identity);
+                DestroyProjectile();
+            }
             
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             // projectile collides a player

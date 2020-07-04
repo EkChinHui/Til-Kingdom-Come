@@ -68,14 +68,16 @@ namespace GamePlay.Skills
             player.anim.SetTrigger(skillName);
             yield return new WaitForSeconds(knifeDelay);
             var tempOffset = distanceOffset;
+            var flipSpeed = speed;
             if (Math.Abs(rangePoint.rotation.eulerAngles.y - 180) < Mathf.Epsilon)
             {
                 tempOffset = -distanceOffset;
+                flipSpeed *= -1;
             }
             
             var pos = new Vector3(tempOffset, heightOffset, 0);
-            var knifeGameObject = Instantiate(knife, rangePoint.position + pos, rangePoint.rotation);
-            knifeGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+            var knifeGameObject = Instantiate(knife, rangePoint.position + pos, Quaternion.identity);
+            knifeGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(flipSpeed, 0);
             yield return new WaitForSeconds(animDelay - knifeDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
         }
