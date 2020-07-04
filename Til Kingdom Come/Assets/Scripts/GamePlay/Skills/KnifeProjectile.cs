@@ -16,6 +16,7 @@ namespace GamePlay.Skills
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            print("collision: " + collision.name);
             // destroys projectile if it touches a wall
             if (collision.CompareTag("Wall")) DestroyProjectile();
             if (collision.CompareTag("Projectile"))
