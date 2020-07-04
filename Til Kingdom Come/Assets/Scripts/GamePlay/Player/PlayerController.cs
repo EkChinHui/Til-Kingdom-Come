@@ -226,7 +226,7 @@ namespace GamePlay.Player
             rb.velocity = velocity;
         }
 
-        public void TakeDamage(int damageTaken)
+        public void TakeDamage(float damageTaken)
         {
             if (!godMode)
             {
