@@ -9,8 +9,6 @@ namespace GamePlay.Information
         private List<GameObject> skillPrefabs = new List<GameObject>();
         public List<int> assignedPlayerSkills; // add in order of player number
 
-        private int totalPlayers = 2;
-
         #region Events
         public static Action<int, GameObject> passPlayerSkills;
         #endregion
@@ -21,7 +19,6 @@ namespace GamePlay.Information
         public GameObject heal;
         public GameObject lunge;
         public GameObject fireball;
-
         #endregion
         
         public static SkillSelectionManager instance;
