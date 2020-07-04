@@ -53,7 +53,6 @@ namespace GamePlay.Player
         public GameObject confusion;
         
         [Header("Health")]
-        // Health System to make it convenient to change
         public HealthBarController healthBarController;
 
         [Header("Skills")] 
@@ -74,7 +73,7 @@ namespace GamePlay.Player
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
-            SkillSelectionManager.instance.AssignSkills();
+
             onSuccessfulBlock += SuccessfulBlock;
         }
         private void Start()
@@ -84,6 +83,7 @@ namespace GamePlay.Player
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
+            SkillSelectionManager.instance.AssignSkills(playerNo);
         }
         public void Update()
         {
@@ -99,8 +99,8 @@ namespace GamePlay.Player
 
             // if the player is dead, the player state should not be updated
             if (combatState == CombatState.Dead) return;
-            // the player can only move, block and roll whil hurt
-            else if (combatState == CombatState.Hurt)
+            // the player can only move, block and roll while hurt
+            if (combatState == CombatState.Hurt)
             {
                 ListenForRoll();
                 ListenForBlock();
@@ -243,6 +243,7 @@ namespace GamePlay.Player
                 }
             }
         }
+        
         private void SuccessfulBlock()
         {
             var heightOffset = new Vector3(0, 1.5f, 0);
@@ -304,7 +305,9 @@ namespace GamePlay.Player
         // Assign player skills based on skill selection menu
         {
             if (player != playerNo) return;
-            this.skill = Instantiate(skill).GetComponent<Skill>();
+            var skillObject = Instantiate(skill).GetComponent<Skill>();
+            this.skill = skillObject;
+            skillObject.transform.parent = transform;
             this.skill.AssignPlayer(this);
             var skillCharges = this.skill.GetComponent<Charges>();
             if (skillCharges != null)

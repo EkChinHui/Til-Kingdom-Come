@@ -14,7 +14,7 @@ namespace GamePlay.Skills
         public float heightOffset;
         public float distanceOffset;
         public Charges charges;
-        public int maxCharges = 2;
+        private int maxCharges = 2;
         public float chargeTime = 5f;
         
         void Start()
@@ -40,7 +40,6 @@ namespace GamePlay.Skills
 
         public override void Cast(PlayerController opponent)
         {
-            if (!CanCast()) return;
             if (charges.CurrentCharge <= 0) {
                 print("0 charges left");
                 return;
