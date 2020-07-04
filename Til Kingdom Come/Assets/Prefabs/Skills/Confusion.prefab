@@ -45,8 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Confusion
   skillInfo: Confuses the enemy reversing their controls
-  icon: {fileID: 21300000, guid: 10e4ecad28f89fb49886909bf2354e46, type: 3}
+  icon: {fileID: 21300000, guid: 045207e19347d794da7b32f6a2b5f742, type: 3}
   skillCooldown: 10
   skillNumber: 1
-  pushDistance: 10
-  confusionDuration: 5

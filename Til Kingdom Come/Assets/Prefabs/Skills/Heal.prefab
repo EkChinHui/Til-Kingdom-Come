@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Heal
   skillInfo: Heals the player for 40 hp
-  icon: {fileID: 21300000, guid: 44be9792c9c83ce4b8125260122c5aeb, type: 3}
+  icon: {fileID: 21300000, guid: 72e1ce5ef37961f40b483277304ff8d2, type: 3}
   skillCooldown: 10
   skillNumber: 3
   glow: {fileID: 1471350893045230102, guid: e3d7bf619f986264798bf245b4947b8d, type: 3}
