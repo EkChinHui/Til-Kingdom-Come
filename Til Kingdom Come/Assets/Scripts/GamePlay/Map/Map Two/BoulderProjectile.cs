@@ -8,10 +8,16 @@ namespace GamePlay.Map.Map_Two
     {
         public static int soundEffectClipNumber = 1;
         private int totalSoundEffectClips = 3;
-        private int damage = 10;
+        private float damage = 10; // ranges from 10 to 30 based on size
         public GameObject collideEffect;
         public float heightOffset;
         public GameObject parent;
+        private float size;
+
+        private void Start()
+        {
+            size = parent.GetComponent<BoulderController>().size;
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -32,7 +38,7 @@ namespace GamePlay.Map.Map_Two
                     return;
                 default:
                     Debug.Log(damagedPlayer.combatState);
-                    damagedPlayer.TakeDamage(damage);
+                    damagedPlayer.TakeDamage(damage * size);
                     Debug.Log("Projectile Hits Target");
                     Impact();
                     return;

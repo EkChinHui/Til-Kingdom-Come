@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Lunge
   skillInfo: Channels an attack and charges at the enemy
-  icon: {fileID: 21300000, guid: 3c455414dceebd64b86e7a397c4edbe1, type: 3}
+  icon: {fileID: 21300000, guid: ebea78b579299764aa4bb2051ab0955a, type: 3}
   skillCooldown: 10
   skillNumber: 4
+  attackDistance: 10
+  damage: 50

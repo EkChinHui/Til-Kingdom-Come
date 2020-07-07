@@ -7,6 +7,7 @@ namespace GamePlay.Map.Map_Two
 {
     public class BoulderController : MonoBehaviour
     {
+        public float size;
         private void Awake()
         {
             ScoreKeeper.resetPlayersEvent += DestroyBoulder;
@@ -16,6 +17,7 @@ namespace GamePlay.Map.Map_Two
         private void Start()
         {
             float randomSize = Random.Range(1, 3);
+            size = randomSize;
             transform.localScale = new Vector3(randomSize, randomSize, 1);
         }
 
