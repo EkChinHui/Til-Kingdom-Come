@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4778445649696163028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4778445649696163019}
+  - component: {fileID: 4778445649696163016}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4778445649696163019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778445649696163028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 71.07513, y: 33.409325, z: -4038.628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4778445649696163016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778445649696163028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100e956c15e613944ba15aefdcc5f819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedPlayerSkills: 
+  throwKnives: {fileID: 4474963390020203858, guid: 01e5aaf66131d1045af5db9712a97b09,
+    type: 3}
+  confusion: {fileID: 2456135712691065298, guid: 71cd0000097546f4ab1382747157a938,
+    type: 3}
+  heal: {fileID: 1118147380131412328, guid: 05ea85924c92afa4bbd8ea4dc26977c3, type: 3}
+  lunge: {fileID: 2832383605654232797, guid: 4d4b56414b5ec0b498e88e24dc01dc5f, type: 3}
+  fireball: {fileID: 4427876413476399640, guid: 9e86d6a4577c87643880b62720d80d68,
+    type: 3}
