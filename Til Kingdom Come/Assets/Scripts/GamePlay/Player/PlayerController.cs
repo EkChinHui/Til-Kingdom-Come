@@ -292,6 +292,7 @@ namespace GamePlay.Player
             godMode = false;
             anim.SetBool("Dead", false);
             anim.SetInteger("State", 0);
+            currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
             enabled = true;
