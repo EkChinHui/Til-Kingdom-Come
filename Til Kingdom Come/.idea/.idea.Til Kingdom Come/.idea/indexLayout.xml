@@ -31,7 +31,9 @@
       <Path>.vscode</Path>
       <Path>Library</Path>
       <Path>Temp</Path>
+      <Path>config</Path>
       <Path>obj</Path>
+      <Path>results</Path>
     </explicitExcludes>
   </component>
 </project>

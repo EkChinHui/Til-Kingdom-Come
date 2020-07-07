@@ -39,6 +39,11 @@ namespace GamePlay.Information
         }
         private void Start()
         {
+            #region default skills assigned
+            assignedPlayerSkills.Add(1);
+            assignedPlayerSkills.Add(1);
+            #endregion
+            
             skillPrefabs.Add(throwKnives); // 1
             skillPrefabs.Add(confusion); // 2
             skillPrefabs.Add(heal); // 3

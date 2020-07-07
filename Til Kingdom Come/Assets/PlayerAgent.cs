@@ -18,6 +18,7 @@ public class PlayerAgent : Agent
 
     private void EndEpisodeHelper(int i)
     {
+        print("episode ended");
         EndEpisode();
     }
     

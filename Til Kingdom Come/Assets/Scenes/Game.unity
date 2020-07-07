@@ -37735,7 +37735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1827599685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42250,7 +42250,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 12500
   enemyController: {fileID: 2320867614734944203}
 --- !u!114 &2088536727503779136
 MonoBehaviour:

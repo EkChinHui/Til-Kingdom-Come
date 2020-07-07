@@ -13,7 +13,7 @@ namespace GamePlay.Information
         public PauseMenuController pauseMenuController;
         private int playerOneScore;
         private int playerTwoScore;
-        public static int winsToGame = 1;
+        public static int winsToGame = 1000000;
         public RoundStartPanelController roundStartPanel;
 
         #region Events

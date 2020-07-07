@@ -31,7 +31,7 @@ namespace GamePlay.Skills
         public Combo combo;
         private CooldownUI attackIcon;
         private Image darkMask;
-        private float moveDistance = 12f;
+        private float moveDistance = 0;//12f;
         
         private void Start()
         {
