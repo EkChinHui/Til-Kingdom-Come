@@ -6,8 +6,11 @@ namespace GamePlay.Information
 {
     public class SkillSelectionManager : MonoBehaviour
     {
-        private List<GameObject> skillPrefabs = new List<GameObject>();
+        public List<GameObject> skillPrefabs = new List<GameObject>();
         public List<int> assignedPlayerSkills; // add in order of player number
+        public int playerOneAISkill;
+        public int playerTwoAISkill;
+        public bool testingAI;
 
         #region Events
         public static Action<int, GameObject> passPlayerSkills;
@@ -36,19 +39,21 @@ namespace GamePlay.Information
                 return;
             }
             DontDestroyOnLoad(gameObject);
-        }
-        private void Start()
-        {
-            #region default skills assigned
-            assignedPlayerSkills.Add(1);
-            assignedPlayerSkills.Add(1);
-            #endregion
             
-            skillPrefabs.Add(throwKnives); // 1
+            /*skillPrefabs.Add(throwKnives); // 1
             skillPrefabs.Add(confusion); // 2
             skillPrefabs.Add(heal); // 3
             skillPrefabs.Add(lunge); // 4
-            skillPrefabs.Add(fireball); // 5
+            skillPrefabs.Add(fireball); // 5*/
+            if (testingAI)
+            {
+                assignedPlayerSkills.Add(playerOneAISkill);
+                assignedPlayerSkills.Add(playerTwoAISkill);
+            }
+        }
+        private void Start()
+        {
+
         }
 
         public void AssignSkills(int playerNo)

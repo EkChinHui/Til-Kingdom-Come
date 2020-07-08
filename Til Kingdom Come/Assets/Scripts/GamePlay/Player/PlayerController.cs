@@ -83,6 +83,7 @@ namespace GamePlay.Player
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
+            print("player number before assigning skill is " + playerNo);
             SkillSelectionManager.instance.AssignSkills(playerNo);
         }
         public void Update()
@@ -266,7 +267,7 @@ namespace GamePlay.Player
             combatState = CombatState.Dead;
 
             // Disable input
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            // if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
 
             // Die animation
             anim.SetBool("Dead", true);
@@ -284,14 +285,14 @@ namespace GamePlay.Player
             Instantiate(bloodSplash, transform.position + heightOffset, Quaternion.identity);
         }
         
-        private void ResetPlayer()
+        public void ResetPlayer()
         // Reset player position based on start position and resets combatState
         {
             attack.charges.RefillCharges();
             block.charges.RefillCharges();
             godMode = false;
             anim.SetBool("Dead", false);
-            anim.SetInteger("State", 0);
+            anim.SetInteger("state", 0);
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;

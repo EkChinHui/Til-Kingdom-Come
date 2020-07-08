@@ -6,7 +6,7 @@ namespace GamePlay.Player
     public class PlayerInput : MonoBehaviour
     {
         public static Action onToggleInput;
-        private bool inputIsEnabled = true;
+        public bool inputIsEnabled = true;
         [Header("Input")]
         public PlayerKeyInput playerKeyInput;
         // note to use getAxis for multi-player mode so user can change their input

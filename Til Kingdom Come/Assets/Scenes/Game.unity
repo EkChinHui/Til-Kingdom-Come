@@ -14270,7 +14270,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4415915515471677114}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4415915515471677115}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
@@ -42229,74 +42229,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &2088536727503779134 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3313347806456565350, guid: efe0454a22dd72746899cea94240f756,
-    type: 3}
-  m_PrefabInstance: {fileID: 3530990680527731544}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2088536727503779135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088536727503779134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ce1a0bf2d647942b962dabc6868153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 12500
-  enemyController: {fileID: 2320867614734944203}
---- !u!114 &2088536727503779136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088536727503779134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &2088536727503779137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088536727503779134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 1
-    NumStackedVectorObservations: 1
-    VectorActionSize: 01000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 1
-  m_Model: {fileID: 5022602860645237092, guid: 9ccc7b3face422c49a57ff6e8d597902, type: 3}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: Player Behaviour
-  TeamId: 0
-  m_UseChildSensors: 1
 --- !u!114 &2320867614734944203 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6994200491213559185, guid: 7d948a8acf830fb4cb16f521d3494355,
     type: 3}
   m_PrefabInstance: {fileID: 4694163162933072474}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694163162933072475}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
@@ -42542,6 +42481,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3930476303825800705, guid: efe0454a22dd72746899cea94240f756,
+        type: 3}
+      propertyPath: enemyController
+      value: 
+      objectReference: {fileID: 2320867614734944203}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efe0454a22dd72746899cea94240f756, type: 3}
 --- !u!114 &4257573321156918089
@@ -42725,53 +42669,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c908bebe607dc2e4fa265c441dc47a50, type: 3}
---- !u!1 &4415915515471677115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4415915516255590493, guid: c908bebe607dc2e4fa265c441dc47a50,
-    type: 3}
-  m_PrefabInstance: {fileID: 4415915515471677114}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4415915515471677116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4415915515471677115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
-    m_AmplitudeGain: 2
-    m_FrequencyGain: 100
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 1000
 --- !u!1001 &4694163162933072474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42885,53 +42782,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d948a8acf830fb4cb16f521d3494355, type: 3}
---- !u!1 &4694163162933072475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6994200491213559194, guid: 7d948a8acf830fb4cb16f521d3494355,
-    type: 3}
-  m_PrefabInstance: {fileID: 4694163162933072474}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4694163162933072476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694163162933072475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
-    m_AmplitudeGain: 2
-    m_FrequencyGain: 100
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 1000
 --- !u!224 &5852969321104489644
 RectTransform:
   m_ObjectHideFlags: 0

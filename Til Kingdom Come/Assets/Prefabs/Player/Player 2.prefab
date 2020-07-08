@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 4694163163192250293}
   - component: {fileID: 4694163163192250282}
   - component: {fileID: 4694163163192250283}
+  - component: {fileID: 3428080691446746824}
   m_Layer: 8
   m_Name: Player 2
   m_TagString: Player
@@ -185,7 +186,7 @@ SpriteRenderer:
   m_SortingLayerID: 990055777
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3345508739736421500, guid: f3a9c1cb2dcdd5e4cadd0afbed133890,
+  m_Sprite: {fileID: -2311659948842064771, guid: 7d4a316b6d6884af0b85d037f79f35e1,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -194,7 +195,7 @@ SpriteRenderer:
   m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!50 &6994200491213559189
@@ -369,4 +370,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b30b06101f4536ab8729a59e918df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputIsEnabled: 1
   playerKeyInput: {fileID: 4230642871663334277}
+--- !u!114 &3428080691446746824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994200491213559194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
+    m_AmplitudeGain: 2
+    m_FrequencyGain: 100
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000

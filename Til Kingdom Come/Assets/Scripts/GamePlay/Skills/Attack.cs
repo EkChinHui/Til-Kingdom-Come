@@ -78,6 +78,7 @@ namespace GamePlay.Skills
 
         public override void Cast(PlayerController opponent)
         {
+            Debug.Log("player cast attack");
             if (AttackPriority(opponent) || !CanCast()) return;
             if (charges.CurrentCharge <= 0) return;
 
