@@ -1,5 +1,6 @@
 ﻿using System;
 using GamePlay.Player;
+using GamePlay.Skills;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
@@ -16,13 +17,6 @@ public class PlayerAgent : Agent
 
     public event Action OnEnvironmentReset;
 
-    private void EndEpisodeHelper(int i)
-    {
-        print("episode ended");
-        EndEpisode();
-    }
-    
-
     public override void CollectObservations(VectorSensor sensor)
     {
         //sensor.AddObservation(enemyController.transform.position - playerController.transform.position);
@@ -32,12 +26,19 @@ public class PlayerAgent : Agent
 
     private void FixedUpdate()
     {
-        if (playerController.combatState == PlayerController.CombatState.Dead ||
-            enemyController.combatState == PlayerController.CombatState.Dead)
+        if (playerController.combatState == PlayerController.CombatState.Dead)
         {
             EndEpisode();
         }
-        //AddReward(-1f/MaxStep);
+
+        if (enemyController.combatState == PlayerController.CombatState.Dead)
+        {
+            AddReward(1f);
+            Debug.Log("player killed");
+            EndEpisode();
+        }
+        AddReward(-1f/MaxStep);
+        
     }
     public override void OnActionReceived(float[] vectorAction)
     {
@@ -47,18 +48,6 @@ public class PlayerAgent : Agent
             if (playerController.attack.charges.CurrentCharge > 0 && playerController.playerInput.inputIsEnabled)
             {
                 playerController.attack.Cast(enemyController);
-                if (enemyController.currentHealth < enemyHealth)
-                {
-                    Debug.Log("hit");
-                    //AddReward(1.0f);
-                }
-                else
-                {
-                    Debug.Log("missed");
-                    //AddReward(-0.033f);
-                }
-
-                Debug.Log("previous health:" + enemyHealth + "player current health" + enemyController.currentHealth);
             }
             
         }
@@ -73,13 +62,24 @@ public class PlayerAgent : Agent
         playerController = gameObject.GetComponent<PlayerController>();
         // PlayerController.onDeath += EndEpisodeHelper;
         OnEnvironmentReset += ResetPlayers;
+        Attack.onSuccessfulAttack += SuccessfulAttack;
+        Attack.onMissedAttack += MissAttack;
         /*Rb = GetComponent<Rigidbody>();
         
         //TODO: Delete
         Rb.freezeRotation = true;*/
         //EnvironmentParameters = Academy.Instance.EnvironmentParameters;
     }
-    
+
+    private void MissAttack()
+    {
+        AddReward(-0.5f);
+    }
+
+    private void SuccessfulAttack()
+    {
+        AddReward(1f);
+    }
     public override void Heuristic(float[] actionsOut)
     {
         // actionsOut[0] = Input.GetKey(KeyCode.P) ? 1f : 0f;

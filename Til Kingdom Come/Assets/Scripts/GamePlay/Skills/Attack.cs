@@ -32,6 +32,9 @@ namespace GamePlay.Skills
         private CooldownUI attackIcon;
         private Image darkMask;
         private float moveDistance = 0;//12f;
+
+        public static Action onMissedAttack;
+        public static Action onSuccessfulAttack;
         
         private void Start()
         {
@@ -120,6 +123,7 @@ namespace GamePlay.Skills
             // Maximum distance between both players for attack to be successful
             if (hitEnemies.Length == 0) {
                 AudioManager.instance.PlaySoundEffect("Sword Swing");
+                onMissedAttack?.Invoke();
             }
             else
             {
@@ -158,6 +162,7 @@ namespace GamePlay.Skills
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
                         player.otherPlayer.TakeDamage(damage);
+                        onSuccessfulAttack?.Invoke();
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }

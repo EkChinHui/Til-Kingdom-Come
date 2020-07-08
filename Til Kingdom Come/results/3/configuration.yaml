@@ -76,11 +76,11 @@ engine_settings:
 parameter_randomization: null
 curriculum: null
 checkpoint_settings:
-  run_id: '2'
+  run_id: '3'
   initialize_from: null
   load_model: false
   resume: false
-  force: true
+  force: false
   train_model: false
   inference: false
 debug: false
