@@ -19,7 +19,7 @@ public class PlayerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        //sensor.AddObservation(enemyController.transform.position - playerController.transform.position);
+        sensor.AddObservation(enemyController.transform.position - playerController.transform.position);
         //sensor.AddObservation(ShotAvaliable);
         //Add Angle Y
     }

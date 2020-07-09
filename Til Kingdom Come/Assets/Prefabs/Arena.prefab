@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7734520103602191520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740540067041544555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e4607fd6bb03e49aec395db4f94242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIposition: {fileID: 5092983249488278581}
+  dummyPosition: {fileID: 740540067041544550}
+  rb: {fileID: 740540067041544548}
+  speed: 0
+  direction: 0
 --- !u!1 &7734520103313492618
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,23 +461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5fec301b026f44748e1d6673876a7b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7734520103602191520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740540067041544555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e4607fd6bb03e49aec395db4f94242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AIposition: {fileID: 5092983249488278581}
-  dummyPosition: {fileID: 740540067041544550}
-  rb: {fileID: 740540067041544548}
-  speed: 0
-  direction: 0
 --- !u!1 &7734520103611140902
 GameObject:
   m_ObjectHideFlags: 0
@@ -39644,21 +39644,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BehaviorType
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
-        type: 3}
-      propertyPath: m_BrainParameters.VectorObservationSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
-        type: 3}
-      propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
-        type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
         type: 3}
