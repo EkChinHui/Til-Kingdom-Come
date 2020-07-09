@@ -14264,18 +14264,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4415915515471677114}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &828350188 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4415915516255590486, guid: c908bebe607dc2e4fa265c441dc47a50,
-    type: 3}
-  m_PrefabInstance: {fileID: 4415915515471677114}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &828350189 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4415915516255590487, guid: c908bebe607dc2e4fa265c441dc47a50,
@@ -15351,6 +15339,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224062808}
   m_CullTransparentMesh: 0
+--- !u!114 &1269965557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3313347806456565357, guid: efe0454a22dd72746899cea94240f756,
+    type: 3}
+  m_PrefabInstance: {fileID: 3530990680527731544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277847147
 GameObject:
   m_ObjectHideFlags: 0
@@ -42390,6 +42390,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 9ccc7b3face422c49a57ff6e8d597902,
+        type: 3}
+    - target: {fileID: 2145309150629478330, guid: efe0454a22dd72746899cea94240f756,
+        type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3313347806456565350, guid: efe0454a22dd72746899cea94240f756,
         type: 3}
       propertyPath: m_Name
@@ -42698,7 +42709,7 @@ PrefabInstance:
         type: 3}
       propertyPath: otherPlayer
       value: 
-      objectReference: {fileID: 828350188}
+      objectReference: {fileID: 1269965557}
     - target: {fileID: 6994200491213559185, guid: 7d948a8acf830fb4cb16f521d3494355,
         type: 3}
       propertyPath: cooldownUiController

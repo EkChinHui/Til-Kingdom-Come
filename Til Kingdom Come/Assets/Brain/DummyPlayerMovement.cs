@@ -15,8 +15,9 @@ public class DummyPlayerMovement : MonoBehaviour
     void Start()
     {
         speed = 4f;
-        leftBound = AIposition.position.x - 5f;
-        rightBound = AIposition.position.x + 6f;
+        leftBound = AIposition.position.x - 16f;
+        rightBound = AIposition.position.x + 21f;
+        direction = Random.Range(0f, 1f) > 0.5;
     }
 
     // Update is called once per frame

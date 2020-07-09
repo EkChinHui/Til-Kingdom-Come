@@ -12,16 +12,23 @@ public class PlayerAgent : Agent
     private PlayerController playerController;
     public PlayerController enemyController;
 
-    //private Vector3 StartingPosition;
-    //private EnvironmentParameters EnvironmentParameters;
+    #region Rewards
 
+    private float enemyDeath = 5f;
+    private float successfulAttack = 0.8f;
+    private float missedAttack = -1f;
+    private float movement = 0.1f;
+    private float overTime = -7f; // per episode
+
+    #endregion
+    
     public event Action OnEnvironmentReset;
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(enemyController.transform.position - playerController.transform.position);
-        //sensor.AddObservation(ShotAvaliable);
-        //Add Angle Y
+        sensor.AddObservation(enemyController.transform.position.x - playerController.transform.position.x); // 1
+        // sensor.AddObservation(enemyController.transform.rotation.y); // 1
+        sensor.AddObservation(playerController.transform.rotation.y); // 1
     }
 
     private void FixedUpdate()
@@ -33,29 +40,48 @@ public class PlayerAgent : Agent
 
         if (enemyController.combatState == PlayerController.CombatState.Dead)
         {
-            AddReward(1f);
+            AddReward(5f);
             Debug.Log("player killed");
             EndEpisode();
         }
-        AddReward(-1f/MaxStep);
-        
+        AddReward(overTime/MaxStep);
     }
     public override void OnActionReceived(float[] vectorAction)
     {
-        var enemyHealth = enemyController.currentHealth;
         if (Mathf.RoundToInt(vectorAction[0]) >= 1)
         {
             if (playerController.attack.charges.CurrentCharge > 0 && playerController.playerInput.inputIsEnabled)
             {
-                playerController.attack.Cast(enemyController);
+                playerController.AttackTrigger();
             }
-            
+        }
+
+        if (vectorAction[1] >= 1 && vectorAction[2] >= 1)
+        {
+        }
+        else if (vectorAction[2] >= 1) // move right
+        {
+            AddReward(movement);
+            playerController.MoveRight();
+        }
+        else if (vectorAction[1] >= 1) // move left
+        {
+            AddReward(movement);
+            playerController.MoveLeft();
         }
 
         /*Rb.velocity = new Vector3(vectorAction[1] * speed, 0f, vectorAction[2] * speed);
         transform.Rotate(Vector3.up, vectorAction[3] * rotationSpeed);*/
     }
 
+    public override void Heuristic(float[] actionsOut)
+    {
+        // actionsOut[0] = Input.GetKey(KeyCode.P) ? 1f : 0f;
+        actionsOut[0] = Input.GetKey(KeyCode.F) ? 1f : 0f; // attack
+        actionsOut[1] = Input.GetKey(KeyCode.A) ? 1f : 0f; // move left
+        actionsOut[2] = Input.GetKey(KeyCode.D) ? 1f : 0f; // move right
+    }
+    
     public override void Initialize()
     {
         //StartingPosition = transform.position;
@@ -73,18 +99,14 @@ public class PlayerAgent : Agent
 
     private void MissAttack()
     {
-        AddReward(-0.5f);
+        AddReward(missedAttack);
     }
 
     private void SuccessfulAttack()
     {
-        AddReward(1f);
+        AddReward(successfulAttack);
     }
-    public override void Heuristic(float[] actionsOut)
-    {
-        // actionsOut[0] = Input.GetKey(KeyCode.P) ? 1f : 0f;
-        actionsOut[0] = Input.GetKey(KeyCode.F) ? 1f : 0f;
-    }
+
 
     public override void OnEpisodeBegin()
     {
@@ -92,7 +114,7 @@ public class PlayerAgent : Agent
 
         //Load Parameter from Curciulum
         //minStepsBetweenShots = Mathf.FloorToInt(EnvironmentParameters.GetWithDefault("shootingFrequenzy", 30f));
-        //enemyController.transform.position = new Vector2(Random.Range(-20f, 12f), enemyController.transform.position.y);
+        enemyController.transform.position = new Vector2(Random.Range(-10f, 10f) + enemyController.transform.position.x, enemyController.transform.position.y);
         //playerController.transform.position = new Vector2(Random.Range(-20f, 12f), playerController.transform.position.y);
     }
 

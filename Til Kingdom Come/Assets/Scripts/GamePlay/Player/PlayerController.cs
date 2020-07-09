@@ -1,7 +1,6 @@
 ﻿using System;
 using GamePlay.Information;
 using GamePlay.Skills;
-using UI.GameUI;
 using UI.GameUI.Cooldown;
 using UnityEngine;
 using System.Collections;
@@ -86,6 +85,7 @@ namespace GamePlay.Player
             print("player number before assigning skill is " + playerNo);
             SkillSelectionManager.instance.AssignSkills(playerNo);
         }
+        
         public void Update()
         {
             healthBarController.SetHealth(currentHealth);
@@ -116,63 +116,102 @@ namespace GamePlay.Player
                 Move();
             }
         }
+
+        #region Movement
+
+        public void MoveRight()
+        {
+            anim.SetInteger("state", 1);
+            rb.velocity = new Vector2(runSpeed, rb.velocity.y);
+            if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+
+        public void MoveLeft()
+        {
+            anim.SetInteger("state", 1);
+            rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
+            if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
+            {
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+            }
+            
+        }
+
+        #endregion
         private void Move()
         {
             if (playerInput.AttemptRight && playerInput.AttemptLeft)
             {
                 anim.SetInteger("state", 0);
-            }
-            else if (playerInput.AttemptRight)
+            } else if (playerInput.AttemptRight)
             {
-                anim.SetInteger("state", 1);
-                rb.velocity = new Vector2(runSpeed, rb.velocity.y);
-                if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                }
-            }
-            else if (playerInput.AttemptLeft)
+                MoveRight();
+            } else if (playerInput.AttemptLeft)
             {
-                anim.SetInteger("state", 1);
-                rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
-                if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180f, 0);
-                }
+                MoveLeft();
             }
-            else
-            {
+            else {
                 anim.SetInteger("state", 0);
             }
         }
+
+        #region Skill listeners
+
         private void ListenForRoll()
         {
             if (playerInput.AttemptRoll)
             {
-                roll.Cast(otherPlayer);
+                RollTrigger();
             }
         }
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
             {
-                attack.Cast(otherPlayer);
+                AttackTrigger();
             }
         }
         private void ListenForBlock()
         {
             if (playerInput.AttemptBlock)
             {
-                block.Cast(otherPlayer);
+                BlockTrigger();
             }
         }
         private void ListenForSkill()
         {
             if (playerInput.AttemptSkill)
             {
-                skill.Cast(otherPlayer);
+                SkillTrigger();
             }
         }
+
+        #endregion
+        
+        #region Skill Triggers
+
+        public void AttackTrigger()
+        {
+            attack.Cast(otherPlayer);
+        }
+        public void BlockTrigger()
+        {
+            block.Cast(otherPlayer);
+        }
+        public void RollTrigger()
+        {
+            roll.Cast(otherPlayer);
+        }
+
+        public void SkillTrigger()
+        {
+            skill.Cast(otherPlayer);
+        }
+        
+        #endregion
 
         private IEnumerator Hurt()
         {
@@ -267,7 +306,7 @@ namespace GamePlay.Player
             combatState = CombatState.Dead;
 
             // Disable input
-            // if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
 
             // Die animation
             anim.SetBool("Dead", true);
