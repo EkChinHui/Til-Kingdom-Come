@@ -11,6 +11,7 @@ public class PlayerAgent : Agent
 {
     private PlayerController playerController;
     public PlayerController enemyController;
+    private Vector3 startingPosition;
 
     #region Rewards
 
@@ -28,7 +29,7 @@ public class PlayerAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(enemyController.transform.position.x - playerController.transform.position.x); // 1
-        // sensor.AddObservation(enemyController.transform.rotation.y); // 1
+        sensor.AddObservation(enemyController.transform.rotation.y); // 1
         sensor.AddObservation(playerController.transform.rotation.y); // 1
     }
 
@@ -85,7 +86,6 @@ public class PlayerAgent : Agent
 
     public override void Heuristic(float[] actionsOut)
     {
-        // actionsOut[0] = Input.GetKey(KeyCode.P) ? 1f : 0f;
         actionsOut[0] = Input.GetKey(KeyCode.F) ? 1f : 0f; // attack
         actionsOut[1] = Input.GetKey(KeyCode.A) ? 1f : 0f; // move left
         actionsOut[2] = Input.GetKey(KeyCode.D) ? 1f : 0f; // move right
@@ -94,19 +94,14 @@ public class PlayerAgent : Agent
     
     public override void Initialize()
     {
-        //StartingPosition = transform.position;
+        startingPosition = transform.position;
         playerController = gameObject.GetComponent<PlayerController>();
-        // PlayerController.onDeath += EndEpisodeHelper;
         OnEnvironmentReset += ResetPlayers;
         PlayerController.onDamageTaken += TakeDamage;
         PlayerController.onSuccessfulAttack += SuccessfulAttack;
         PlayerController.onMissedAttack += MissAttack;
         PlayerController.onSuccessfulDodge += SuccessfulDodge;
-        /*Rb = GetComponent<Rigidbody>();
-        
-        //TODO: Delete
-        Rb.freezeRotation = true;*/
-        //EnvironmentParameters = Academy.Instance.EnvironmentParameters;
+
     }
 
     private void MissAttack(int no)
@@ -146,10 +141,8 @@ public class PlayerAgent : Agent
     {
         OnEnvironmentReset?.Invoke();
 
-        //Load Parameter from Curciulum
-        //minStepsBetweenShots = Mathf.FloorToInt(EnvironmentParameters.GetWithDefault("shootingFrequenzy", 30f));
-        enemyController.transform.position = new Vector2(Random.Range(-10f, 10f) + enemyController.transform.position.x, enemyController.transform.position.y);
-        //playerController.transform.position = new Vector2(Random.Range(-20f, 12f), playerController.transform.position.y);
+        //enemyController.transform.position = new Vector2(Random.Range(-10f, 10f) + enemyController.transform.position.x, enemyController.transform.position.y);
+        playerController.transform.position = new Vector2(playerController.transform.position.x + Random.Range(-10f, 10f), playerController.transform.position.y);
     }
 
     private void ResetPlayers()
