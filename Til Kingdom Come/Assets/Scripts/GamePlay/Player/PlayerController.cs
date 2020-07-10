@@ -37,6 +37,10 @@ namespace GamePlay.Player
         #region Events
         public static Action<int> onDeath;
         public Action onSuccessfulBlock;
+        public static Action<int> onSuccessfulDodge;
+        public static Action<int> onMissedAttack;
+        public static Action<int> onSuccessfulAttack;
+        public static Action<int> onDamageTaken;
         #endregion
 
         [Header("Fields")]
@@ -63,6 +67,8 @@ namespace GamePlay.Player
         [Header("UI")] 
         public CooldownUIController cooldownUiController;
 
+        
+        
         private void Awake()
         {
             // Remember the original position of the players so match can be reset
@@ -270,6 +276,7 @@ namespace GamePlay.Player
         {
             if (!godMode)
             {
+                onDamageTaken?.Invoke(playerNo);
                 Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
                 currentHealth -= damageTaken;
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
@@ -305,8 +312,8 @@ namespace GamePlay.Player
             otherPlayer.godMode = true;
             combatState = CombatState.Dead;
 
-            // Disable input
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            // Disable input (deactivated for agent training)
+            // if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput(); 
 
             // Die animation
             anim.SetBool("Dead", true);

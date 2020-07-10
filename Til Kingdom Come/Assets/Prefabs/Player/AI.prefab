@@ -391,7 +391,7 @@ MonoBehaviour:
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 5022602860645237092, guid: 3cbc85dbc8480984a81ca1ee8add11f5, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 9ccc7b3face422c49a57ff6e8d597902, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Player Behaviour

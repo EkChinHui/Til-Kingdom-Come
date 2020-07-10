@@ -19,6 +19,7 @@ public class PlayerAgent : Agent
     private float missedAttack = -1f;
     private float movement = 0.1f;
     private float overTime = -7f; // per episode
+    private float takeDamage = -2f;
 
     #endregion
     
@@ -48,12 +49,19 @@ public class PlayerAgent : Agent
     }
     public override void OnActionReceived(float[] vectorAction)
     {
+        if (!playerController.playerInput.inputIsEnabled) return;
+
         if (Mathf.RoundToInt(vectorAction[0]) >= 1)
         {
-            if (playerController.attack.charges.CurrentCharge > 0 && playerController.playerInput.inputIsEnabled)
+            if (playerController.attack.charges.CurrentCharge > 0)
             {
                 playerController.AttackTrigger();
             }
+        }
+        
+        if (Mathf.RoundToInt(vectorAction[3]) >= 1)
+        {
+            playerController.RollTrigger();
         }
 
         if (vectorAction[1] >= 1 && vectorAction[2] >= 1)
@@ -69,6 +77,7 @@ public class PlayerAgent : Agent
             AddReward(movement);
             playerController.MoveLeft();
         }
+        
 
         /*Rb.velocity = new Vector3(vectorAction[1] * speed, 0f, vectorAction[2] * speed);
         transform.Rotate(Vector3.up, vectorAction[3] * rotationSpeed);*/
@@ -80,6 +89,7 @@ public class PlayerAgent : Agent
         actionsOut[0] = Input.GetKey(KeyCode.F) ? 1f : 0f; // attack
         actionsOut[1] = Input.GetKey(KeyCode.A) ? 1f : 0f; // move left
         actionsOut[2] = Input.GetKey(KeyCode.D) ? 1f : 0f; // move right
+        actionsOut[3] = Input.GetKey(KeyCode.S) ? 1f : 0f; // roll
     }
     
     public override void Initialize()
@@ -88,8 +98,10 @@ public class PlayerAgent : Agent
         playerController = gameObject.GetComponent<PlayerController>();
         // PlayerController.onDeath += EndEpisodeHelper;
         OnEnvironmentReset += ResetPlayers;
-        Attack.onSuccessfulAttack += SuccessfulAttack;
-        Attack.onMissedAttack += MissAttack;
+        PlayerController.onDamageTaken += TakeDamage;
+        PlayerController.onSuccessfulAttack += SuccessfulAttack;
+        PlayerController.onMissedAttack += MissAttack;
+        PlayerController.onSuccessfulDodge += SuccessfulDodge;
         /*Rb = GetComponent<Rigidbody>();
         
         //TODO: Delete
@@ -97,14 +109,36 @@ public class PlayerAgent : Agent
         //EnvironmentParameters = Academy.Instance.EnvironmentParameters;
     }
 
-    private void MissAttack()
+    private void MissAttack(int no)
     {
-        AddReward(missedAttack);
+        if (playerController.playerNo == no)
+        {
+            AddReward(missedAttack);
+        }
     }
 
-    private void SuccessfulAttack()
+    private void SuccessfulAttack(int no)
     {
-        AddReward(successfulAttack);
+        if (playerController.playerNo == no)
+        {
+            AddReward(successfulAttack);
+        }
+    }
+
+    private void TakeDamage(int no)
+    {
+        if (playerController.playerNo == no)
+        {
+            AddReward(takeDamage);
+        }
+    }
+
+    private void SuccessfulDodge(int no)
+    {
+        if (playerController.playerNo == no)
+        {
+            AddReward(takeDamage);
+        }
     }
 
 

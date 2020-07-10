@@ -31,11 +31,8 @@ namespace GamePlay.Skills
         public Combo combo;
         private CooldownUI attackIcon;
         private Image darkMask;
-        private float moveDistance = 0;//12f;
+        private float moveDistance = 12f;
 
-        public static Action onMissedAttack;
-        public static Action onSuccessfulAttack;
-        
         private void Start()
         {
             player = gameObject.GetComponentInParent<PlayerController>();
@@ -123,7 +120,7 @@ namespace GamePlay.Skills
             // Maximum distance between both players for attack to be successful
             if (hitEnemies.Length == 0) {
                 AudioManager.instance.PlaySoundEffect("Sword Swing");
-                onMissedAttack?.Invoke();
+                PlayerController.onMissedAttack?.Invoke(player.playerNo);
             }
             else
             {
@@ -147,6 +144,7 @@ namespace GamePlay.Skills
                     {
                         // enemy is rolling and is invulnerable
                         AudioManager.instance.PlaySoundEffect("Sword Swing");
+                        PlayerController.onSuccessfulDodge?.Invoke(player.playerNo);
                         return;
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Dead)
@@ -162,7 +160,7 @@ namespace GamePlay.Skills
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
                         player.otherPlayer.TakeDamage(damage);
-                        onSuccessfulAttack?.Invoke();
+                        PlayerController.onSuccessfulAttack?.Invoke(player.playerNo);
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }
