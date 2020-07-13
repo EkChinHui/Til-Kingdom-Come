@@ -57,7 +57,6 @@ namespace GamePlay.Skills
             player.combatState = PlayerController.CombatState.Rolling;
             player.playerInput.Toggle();
             dashing = true;
-            player.playerInput.Toggle();
             player.anim.SetTrigger("Roll");
             yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
             dashing = false;

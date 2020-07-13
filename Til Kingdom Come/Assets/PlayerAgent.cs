@@ -99,13 +99,27 @@ public class PlayerAgent : Agent
         }
         else if (vectorAction[1] >= 1) // move left
         {
-            AddReward(movement);
+            if (Math.Abs(playerController.rb.velocity.x) > Mathf.Epsilon)
+            {
+                AddReward(movement);
+            }
+            else
+            {
+                Debug.Log("Move left reward not added");
+            }
             Debug.Log("moving left");
             playerController.MoveLeft();
         }        
         else if (vectorAction[2] >= 1) // move right
         {
-            AddReward(movement);
+            if (Math.Abs(playerController.rb.velocity.x) > Mathf.Epsilon)
+            {
+                AddReward(movement);
+            }
+            else
+            {
+                Debug.Log("Move right reward not added");
+            }
             Debug.Log("moving right");
             playerController.MoveRight();
         }
