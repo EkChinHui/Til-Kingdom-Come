@@ -15,13 +15,13 @@ public class PlayerAgent : Agent
 
     #region Rewards
 
-    private float enemyDeath = 1f;
-    private float playerDeath = -1f;
+    private float enemyDeath = 3f;
+    private float playerDeath = -3f;
+    private float movement = 0.01f;
     
     
     /*private float successfulAttack = 0f;//2f;
     private float missedAttack = 0f;// -0.5f;
-    private float movement = 0.1f;
     private float overTime = 0f; //-5f; // per episode
     private float takeDamage = 0f;
     private float successfulDodge = 0f;*/
@@ -54,6 +54,7 @@ public class PlayerAgent : Agent
             AddReward(enemyDeath);
             EndEpisode();
         }
+        
         if (StepCount >= MaxStep - 1)
         {
             var playerHealth = playerController.currentHealth;
@@ -89,6 +90,7 @@ public class PlayerAgent : Agent
         
         if (Mathf.RoundToInt(vectorAction[3]) >= 1)
         {
+            Debug.Log("Rolling");
             playerController.RollTrigger();
         }
 
@@ -97,13 +99,13 @@ public class PlayerAgent : Agent
         }
         else if (vectorAction[1] >= 1) // move left
         {
-            // AddReward(movement);
+            AddReward(movement);
             Debug.Log("moving left");
             playerController.MoveLeft();
         }        
         else if (vectorAction[2] >= 1) // move right
         {
-            //AddReward(movement);
+            AddReward(movement);
             Debug.Log("moving right");
             playerController.MoveRight();
         }
@@ -112,10 +114,10 @@ public class PlayerAgent : Agent
     public override void Heuristic(float[] actionsOut)
     {
         Array.Clear(actionsOut, 0, actionsOut.Length);
-        actionsOut[0] = Input.GetKey(playerController.playerInput.attackKey) ? 1f : 0f; // attack
+        actionsOut[0] = Input.GetKeyDown(playerController.playerInput.attackKey) ? 1f : 0f; // attack
         actionsOut[1] = Input.GetKey(playerController.playerInput.leftKey) ? 1f : 0f; // move left
         actionsOut[2] = Input.GetKey(playerController.playerInput.rightKey) ? 1f : 0f; // move right
-        actionsOut[3] = Input.GetKey(playerController.playerInput.rollKey) ? 1f : 0f; // roll
+        actionsOut[3] = Input.GetKeyDown(playerController.playerInput.rollKey) ? 1f : 0f; // roll
     }
     
     public override void Initialize()
