@@ -10,12 +10,12 @@ namespace GamePlay.Player
         [Header("Input")]
         public PlayerKeyInput playerKeyInput;
         // note to use getAxis for multi-player mode so user can change their input
-        private KeyCode leftKey;
-        private KeyCode rightKey;
-        private KeyCode rollKey;
-        private KeyCode attackKey;
-        private KeyCode blockKey;
-        private KeyCode skillKey;
+        public KeyCode leftKey;
+        public KeyCode rightKey;
+        public KeyCode rollKey;
+        public KeyCode attackKey;
+        public KeyCode blockKey;
+        public KeyCode skillKey;
         private bool attemptLeft;
         private bool attemptRight;
         private bool attemptRoll;

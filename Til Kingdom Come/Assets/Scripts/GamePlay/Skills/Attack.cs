@@ -144,7 +144,7 @@ namespace GamePlay.Skills
                     {
                         // enemy is rolling and is invulnerable
                         AudioManager.instance.PlaySoundEffect("Sword Swing");
-                        PlayerController.onSuccessfulDodge?.Invoke(player.playerNo);
+                        PlayerController.onSuccessfulDodge?.Invoke(otherPlayer.playerNo);
                         return;
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Dead)

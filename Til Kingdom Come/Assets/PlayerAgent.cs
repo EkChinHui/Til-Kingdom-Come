@@ -15,12 +15,16 @@ public class PlayerAgent : Agent
 
     #region Rewards
 
-    private float enemyDeath = 5f;
-    private float successfulAttack = 0.8f;
-    private float missedAttack = -1f;
+    private float enemyDeath = 1f;
+    private float playerDeath = -1f;
+    
+    
+    /*private float successfulAttack = 0f;//2f;
+    private float missedAttack = 0f;// -0.5f;
     private float movement = 0.1f;
-    private float overTime = -7f; // per episode
-    private float takeDamage = -2f;
+    private float overTime = 0f; //-5f; // per episode
+    private float takeDamage = 0f;
+    private float successfulDodge = 0f;*/
 
     #endregion
     
@@ -28,25 +32,48 @@ public class PlayerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(enemyController.transform.position.x - playerController.transform.position.x); // 1
+        sensor.AddObservation(Math.Abs(transform.position.x - playerController.transform.position.x)); // 1
         sensor.AddObservation(enemyController.transform.rotation.y); // 1
         sensor.AddObservation(playerController.transform.rotation.y); // 1
+        // sensor.AddObservation(playerController.currentHealth);
+        // sensor.AddObservation(enemyController.currentHealth);
     }
 
     private void FixedUpdate()
     {
         if (playerController.combatState == PlayerController.CombatState.Dead)
         {
+            Debug.Log("Lose by death");
+            AddReward(playerDeath);
             EndEpisode();
         }
 
         if (enemyController.combatState == PlayerController.CombatState.Dead)
         {
-            AddReward(5f);
-            Debug.Log("player killed");
+            Debug.Log("Win by death");
+            AddReward(enemyDeath);
             EndEpisode();
         }
-        AddReward(overTime/MaxStep);
+        if (StepCount >= MaxStep - 1)
+        {
+            var playerHealth = playerController.currentHealth;
+            var enemyHealth = enemyController.currentHealth;
+            if (playerHealth > enemyHealth)
+            {
+                Debug.Log("Win by overtime");
+                AddReward(1f);
+            }
+            else if(playerHealth < enemyHealth)
+            {
+                Debug.Log("Lose by overtime");
+                AddReward(-1f);
+            }
+            else
+            {
+                Debug.Log("Draw by overtime");
+                AddReward(0f);
+            }
+        }
     }
     public override void OnActionReceived(float[] vectorAction)
     {
@@ -68,28 +95,27 @@ public class PlayerAgent : Agent
         if (vectorAction[1] >= 1 && vectorAction[2] >= 1)
         {
         }
-        else if (vectorAction[2] >= 1) // move right
-        {
-            AddReward(movement);
-            playerController.MoveRight();
-        }
         else if (vectorAction[1] >= 1) // move left
         {
-            AddReward(movement);
+            // AddReward(movement);
+            Debug.Log("moving left");
             playerController.MoveLeft();
+        }        
+        else if (vectorAction[2] >= 1) // move right
+        {
+            //AddReward(movement);
+            Debug.Log("moving right");
+            playerController.MoveRight();
         }
-        
-
-        /*Rb.velocity = new Vector3(vectorAction[1] * speed, 0f, vectorAction[2] * speed);
-        transform.Rotate(Vector3.up, vectorAction[3] * rotationSpeed);*/
     }
 
     public override void Heuristic(float[] actionsOut)
     {
-        actionsOut[0] = Input.GetKey(KeyCode.F) ? 1f : 0f; // attack
-        actionsOut[1] = Input.GetKey(KeyCode.A) ? 1f : 0f; // move left
-        actionsOut[2] = Input.GetKey(KeyCode.D) ? 1f : 0f; // move right
-        actionsOut[3] = Input.GetKey(KeyCode.S) ? 1f : 0f; // roll
+        Array.Clear(actionsOut, 0, actionsOut.Length);
+        actionsOut[0] = Input.GetKey(playerController.playerInput.attackKey) ? 1f : 0f; // attack
+        actionsOut[1] = Input.GetKey(playerController.playerInput.leftKey) ? 1f : 0f; // move left
+        actionsOut[2] = Input.GetKey(playerController.playerInput.rightKey) ? 1f : 0f; // move right
+        actionsOut[3] = Input.GetKey(playerController.playerInput.rollKey) ? 1f : 0f; // roll
     }
     
     public override void Initialize()
@@ -108,7 +134,8 @@ public class PlayerAgent : Agent
     {
         if (playerController.playerNo == no)
         {
-            AddReward(missedAttack);
+            Debug.Log("Missed attack");
+            //AddReward(missedAttack);
         }
     }
 
@@ -116,7 +143,8 @@ public class PlayerAgent : Agent
     {
         if (playerController.playerNo == no)
         {
-            AddReward(successfulAttack);
+            Debug.Log("Successful attack");
+            //AddReward(successfulAttack);
         }
     }
 
@@ -124,7 +152,8 @@ public class PlayerAgent : Agent
     {
         if (playerController.playerNo == no)
         {
-            AddReward(takeDamage);
+            Debug.Log("Take damage");
+            //AddReward(takeDamage);
         }
     }
 
@@ -132,7 +161,8 @@ public class PlayerAgent : Agent
     {
         if (playerController.playerNo == no)
         {
-            AddReward(takeDamage);
+            Debug.Log("Successful Dodge");
+            //AddReward(successfulDodge);
         }
     }
 
@@ -141,8 +171,18 @@ public class PlayerAgent : Agent
     {
         OnEnvironmentReset?.Invoke();
 
-        //enemyController.transform.position = new Vector2(Random.Range(-10f, 10f) + enemyController.transform.position.x, enemyController.transform.position.y);
+        enemyController.transform.position = new Vector2(Random.Range(-10f, 10f) + enemyController.transform.position.x, enemyController.transform.position.y);
         playerController.transform.position = new Vector2(playerController.transform.position.x + Random.Range(-10f, 10f), playerController.transform.position.y);
+        var rotation = new Quaternion
+        {
+            eulerAngles = Random.Range(0f, 1f) > 0.5 ? new Vector3(0, 180, 0) : new Vector3(0, 0, 0)
+        };
+        var rotation1 = new Quaternion
+        {
+            eulerAngles = Random.Range(0f, 1f) > 0.5 ? new Vector3(0, 180, 0) : new Vector3(0, 0, 0)
+        };
+        playerController.transform.rotation = rotation;
+        enemyController.transform.rotation = rotation1;
     }
 
     private void ResetPlayers()
