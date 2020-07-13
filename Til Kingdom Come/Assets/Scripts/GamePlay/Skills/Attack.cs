@@ -20,7 +20,7 @@ namespace GamePlay.Skills
         [Header("Variables")]
         private const int AttackDamage = 20;
         private const int FinalComboDamage = 40;
-        private float attRange = 1.85f;
+        private float attRange = 2.31f;
         private float knockDistAttacking = 10f;
         private float knockDistBlocking = 5f;
         private float attackCooldown = 0f;
@@ -127,6 +127,10 @@ namespace GamePlay.Skills
                 {
                     if (enemy.GetComponent<PlayerController>() == null) continue;
                     PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
+                    if (otherPlayer.playerNo == player.playerNo)
+                    {
+                        continue;
+                    }
                     float enemyDirection = otherPlayer.transform.rotation.eulerAngles.y;
                     float myDirection = player.transform.rotation.eulerAngles.y;
                     if (otherPlayer.combatState == PlayerController.CombatState.Blocking && Math.Abs(enemyDirection - myDirection) > 1f - Mathf.Epsilon)

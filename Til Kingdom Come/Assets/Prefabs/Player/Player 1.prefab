@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4415915515717092467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.61, y: 1.57, z: 0}
+  m_LocalPosition: {x: 2.18, y: 1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4415915516255590480}
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_SortingLayerID: 990055777
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7896879507418422366, guid: 09ff06fd98bbd434ba371da3defc1446,
+  m_Sprite: {fileID: -2311659948842064771, guid: 3c6edad56e9a34676b1b08b05276b927,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!50 &4415915516255590482
@@ -289,6 +289,7 @@ MonoBehaviour:
     type: 3}
   attackTwo: {fileID: 21300000, guid: a31454502c9664d43a89f3068cff3a0f, type: 3}
   attackThree: {fileID: 21300000, guid: 0b8d640637222ce408fac5bc9fdfbc69, type: 3}
+  attRange: 2.31
   charges: {fileID: 0}
   maxCharges: 3
 --- !u!114 &4415915515710630147
