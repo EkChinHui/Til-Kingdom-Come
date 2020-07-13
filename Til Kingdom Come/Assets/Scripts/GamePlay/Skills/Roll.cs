@@ -8,7 +8,7 @@ namespace GamePlay.Skills
     public class Roll : Skill
     {
         public bool dashing;
-        private float rollSpeed = 1.5f;
+        private float rollSpeed = 18f;
         private const float rollCooldown = 5f;
         private void Start()
         {
@@ -38,14 +38,18 @@ namespace GamePlay.Skills
 
         private void RollMove()
         {
-            if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
+            /*if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
             {
                 player.rb.AddForce(player.transform.right * rollSpeed, ForceMode2D.Impulse);
             }
             else if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
             {
                 player.rb.AddForce(player.transform.right * rollSpeed, ForceMode2D.Impulse);
-            }
+            }*/
+            var velocity = player.rb.velocity;
+            player.rb.velocity = Mathf.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
+                ? new Vector2(-rollSpeed, velocity.y)
+                : new Vector2(rollSpeed, velocity.y);
         }
 
         private IEnumerator RollAnimDelay()
