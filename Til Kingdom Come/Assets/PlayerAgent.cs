@@ -17,7 +17,8 @@ public class PlayerAgent : Agent
 
     private float enemyDeath = 3f;
     private float playerDeath = -3f;
-    private float movement = 0.01f;
+    private float movement = 0.005f;
+    private float notFacingEnemy = -0.001f;
     
     
     /*private float successfulAttack = 0f;//2f;
@@ -54,6 +55,24 @@ public class PlayerAgent : Agent
             AddReward(enemyDeath);
             EndEpisode();
         }
+
+        if (playerController.transform.position.x < enemyController.transform.position.x) // enemy is on the right of player
+        {
+            if (Math.Abs(enemyController.transform.rotation.y - 180) < Mathf.Epsilon) // face right is 0 left is 180 for rot.y
+            {
+                Debug.Log("Not facing enemy");
+                AddReward(notFacingEnemy);
+            }
+        }
+        else
+        {
+            if (Math.Abs(enemyController.transform.rotation.y) < Mathf.Epsilon) // face right is 0 left is 180 for rot.y
+            {
+                Debug.Log("Not facing enemy");
+                AddReward(notFacingEnemy);
+            }
+        }
+        
         
         if (StepCount >= MaxStep - 1)
         {
