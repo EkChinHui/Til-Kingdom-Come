@@ -15,9 +15,9 @@ public class PlayerAgent : Agent
 
     #region Rewards
 
-    private float enemyDeath = 3f;
+    private float enemyDeath = 10f;
     private float playerDeath = -3f;
-    private float movement = 0.005f;
+    private float movement = 0.002f;
     private float notFacingEnemy = -0.001f;
     
     
