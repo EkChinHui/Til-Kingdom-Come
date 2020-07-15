@@ -15,8 +15,8 @@ public class PlayerAgent : Agent
 
     #region Rewards
 
-    private float enemyDeath = 10f;
-    private float playerDeath = -3f;
+    private float enemyDeath = 2f;
+    private float playerDeath = -2f;
     private float movement = 0.002f;
     private float notFacingEnemy = -0.01f;
     private float stationaryMovement = -0.01f;
@@ -37,8 +37,8 @@ public class PlayerAgent : Agent
         sensor.AddObservation(Math.Abs(transform.position.x - playerController.transform.position.x)); // 1
         sensor.AddObservation(enemyController.transform.rotation.y); // 1
         sensor.AddObservation(playerController.transform.rotation.y); // 1
-        // sensor.AddObservation(playerController.currentHealth);
-        // sensor.AddObservation(enemyController.currentHealth);
+        sensor.AddObservation(playerController.currentHealth);
+        sensor.AddObservation(enemyController.currentHealth);
     }
 
     private void FixedUpdate()
