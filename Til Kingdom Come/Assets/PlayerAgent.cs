@@ -18,7 +18,8 @@ public class PlayerAgent : Agent
     private float enemyDeath = 10f;
     private float playerDeath = -3f;
     private float movement = 0.002f;
-    private float notFacingEnemy = -0.001f;
+    private float notFacingEnemy = -0.01f;
+    private float stationaryMovement = -0.01f;
     
     
     /*private float successfulAttack = 0f;//2f;
@@ -124,6 +125,7 @@ public class PlayerAgent : Agent
             }
             else
             {
+                AddReward(stationaryMovement);
                 Debug.Log("Move left reward not added");
             }
             Debug.Log("moving left");
@@ -137,6 +139,7 @@ public class PlayerAgent : Agent
             }
             else
             {
+                AddReward(stationaryMovement);
                 Debug.Log("Move right reward not added");
             }
             Debug.Log("moving right");
