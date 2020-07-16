@@ -28,7 +28,6 @@
       <Path>.vscode</Path>
       <Path>Library</Path>
       <Path>Temp</Path>
-      <Path>config</Path>
       <Path>obj</Path>
     </explicitExcludes>
   </component>

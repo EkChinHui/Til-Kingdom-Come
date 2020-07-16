@@ -1,4 +1,5 @@
-﻿using GamePlay.Player;
+﻿using GamePlay.Multiplayer;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -34,6 +35,11 @@ namespace GamePlay.Skills
         {
             this.player = player;
         }
+        
+        /*public void AssignPlayer(MultiplayerController player)
+        {
+            this.player = player;
+        }*/
         
     }
 }
