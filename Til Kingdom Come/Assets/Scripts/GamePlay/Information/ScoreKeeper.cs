@@ -28,6 +28,7 @@ namespace GamePlay.Information
 
         private void UpdateWins(int player)
         {
+            Debug.Log("Wins to Game " + winsToGame);
             switch (player)
             {
                 case 1:

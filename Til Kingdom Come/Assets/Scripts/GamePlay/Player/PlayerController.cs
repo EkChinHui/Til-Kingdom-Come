@@ -1,10 +1,10 @@
 ﻿using System;
 using GamePlay.Information;
 using GamePlay.Skills;
-using UI.GameUI;
 using UI.GameUI.Cooldown;
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
 namespace GamePlay.Player
 {
@@ -16,6 +16,7 @@ namespace GamePlay.Player
         private float runSpeed = 4f;
         private Vector2 originalPosition;
         private Quaternion originalRotation;
+        private PhotonView photonView;
         
         #region States
         public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
@@ -73,6 +74,7 @@ namespace GamePlay.Player
             playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
+            photonView = GetComponent<PhotonView>();
 
             onSuccessfulBlock += SuccessfulBlock;
         }
@@ -87,6 +89,11 @@ namespace GamePlay.Player
         }
         public void Update()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+            
             healthBarController.SetHealth(currentHealth);
             // combo system
             if (combatState == CombatState.Attacking)
@@ -287,6 +294,7 @@ namespace GamePlay.Player
         private void ResetPlayer()
         // Reset player position based on start position and resets combatState
         {
+            Debug.Log("resetting player");
             attack.charges.RefillCharges();
             block.charges.RefillCharges();
             godMode = false;
@@ -295,7 +303,7 @@ namespace GamePlay.Player
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
-            enabled = true;
+            // enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPosition;
