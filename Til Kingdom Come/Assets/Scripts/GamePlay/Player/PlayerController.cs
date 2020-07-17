@@ -19,7 +19,7 @@ namespace GamePlay.Player
         private PhotonView photonView;
         
         #region States
-        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
+        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead }
         public bool godMode = false;
         public CombatState combatState = CombatState.NonCombat;
         #endregion
