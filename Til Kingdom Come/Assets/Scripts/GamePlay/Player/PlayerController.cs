@@ -123,8 +123,6 @@ namespace GamePlay.Player
             {
                 return;
             }
-            
-            healthBarController.SetHealth(currentHealth);
             // combo system
             if (combatState == CombatState.Attacking)
             {
@@ -151,12 +149,6 @@ namespace GamePlay.Player
                 ListenForSkill();
                 Move();
             }
-        }
-        [PunRPC]
-        public void Test()
-        {
-            Debug.Log("Hello");
-            Debug.Log("I am player: " + playerNo + " and I am getting attacked.");
         }
         private void Move()
         {
@@ -237,6 +229,7 @@ namespace GamePlay.Player
             // disable god mode
             godMode = false;
             combatState = CombatState.NonCombat;
+            healthBarController.SetHealth(currentHealth);
         }
 
         private IEnumerator Stun(float duration)
