@@ -82,10 +82,12 @@ namespace GamePlay.Player
             if (PhotonNetwork.IsMasterClient)
             {
                 playerNo = 2;
+                healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
             }
             else
             {
                 playerNo = 1;
+                healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
             }
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
@@ -230,7 +232,6 @@ namespace GamePlay.Player
             // disable god mode
             godMode = false;
             combatState = CombatState.NonCombat;
-            healthBarController.SetHealth(currentHealth);
         }
 
         private IEnumerator Stun(float duration)
@@ -273,6 +274,7 @@ namespace GamePlay.Player
             {
                 Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
                 currentHealth -= damageTaken;
+                healthBarController.SetHealth(currentHealth);
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
                 {
                     // Die();
