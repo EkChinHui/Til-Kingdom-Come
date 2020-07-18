@@ -77,8 +77,16 @@ namespace GamePlay.Player
             // Remember the original position of the players so match can be reset
             originalPosition = gameObject.transform.position;
             originalRotation = gameObject.transform.rotation;
-            totalPlayers++;
-            playerNo = totalPlayers;
+            // totalPlayers++;
+            // playerNo = totalPlayers;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                playerNo = 1;
+            }
+            else
+            {
+                playerNo = 2;
+            }
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
             photonView = GetComponent<PhotonView>();
