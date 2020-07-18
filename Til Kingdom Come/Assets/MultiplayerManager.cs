@@ -22,8 +22,9 @@ public class MultiplayerManager : MonoBehaviour
         {
             Debug.Log("Master client");
             var player = PhotonNetwork.Instantiate("Player 1 Multiplayer Variant", Vector3.zero, Quaternion.identity);
-            player.name = "PLayer 1";
+            player.name = "Player 1";
             PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.playerNo = 1;
             cameraGroup.AddMember(player.transform, 1, 0);
             playerController.healthBarController = healthBarControllerOne;
             playerController.cooldownUiController = cooldownUiControllerOne;
@@ -36,6 +37,7 @@ public class MultiplayerManager : MonoBehaviour
             var player = PhotonNetwork.Instantiate("Player 2 Multiplayer Variant", Vector3.zero, Quaternion.identity);
             player.name = "Player 2";
             PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.playerNo = 2;
             playerController.playerInput.Toggle();
             cameraGroup.AddMember(player.transform, 1, 0);
             playerController.healthBarController = healthBarControllerTwo;
