@@ -27,7 +27,6 @@ public class MultiplayerManager : MonoBehaviour
             cameraGroup.AddMember(player.transform, 1, 0);
             playerController.healthBarController = healthBarControllerOne;
             playerController.cooldownUiController = cooldownUiControllerOne;
-            playerController.playerNo = 1;
             playerOne = playerController;
             playerController.playerInput.Toggle();
         }
@@ -38,7 +37,6 @@ public class MultiplayerManager : MonoBehaviour
             player.name = "Player 2";
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerInput.Toggle();
-            playerController.playerNo = 2;
             cameraGroup.AddMember(player.transform, 1, 0);
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;
