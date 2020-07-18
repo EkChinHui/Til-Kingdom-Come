@@ -144,6 +144,11 @@ namespace GamePlay.Player
                 Move();
             }
         }
+        [PunRPC]
+        public void Test()
+        {
+            Debug.Log("Hello");
+        }
         private void Move()
         {
             if (playerInput.AttemptRight && playerInput.AttemptLeft)

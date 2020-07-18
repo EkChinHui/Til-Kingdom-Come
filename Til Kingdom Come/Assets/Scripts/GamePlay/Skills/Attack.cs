@@ -128,6 +128,7 @@ namespace GamePlay.Skills
                 {
                     if (enemy.GetComponent<PlayerController>() == null) continue;
                     PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
+                    otherPlayer.photonView.RPC("Test", RpcTarget.All);
                     if (otherPlayer.playerNo == player.playerNo)
                     {
                         continue;
