@@ -81,11 +81,11 @@ namespace GamePlay.Player
             // playerNo = totalPlayers;
             if (PhotonNetwork.IsMasterClient)
             {
-                playerNo = 1;
+                playerNo = 2;
             }
             else
             {
-                playerNo = 2;
+                playerNo = 1;
             }
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
