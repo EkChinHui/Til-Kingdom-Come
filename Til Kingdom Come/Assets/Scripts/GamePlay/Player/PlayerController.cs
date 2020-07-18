@@ -148,6 +148,7 @@ namespace GamePlay.Player
         public void Test()
         {
             Debug.Log("Hello");
+            Debug.Log("I am player: " + playerNo + " and I am getting attacked.");
         }
         private void Move()
         {

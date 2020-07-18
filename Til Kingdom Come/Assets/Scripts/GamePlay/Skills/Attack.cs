@@ -128,7 +128,6 @@ namespace GamePlay.Skills
                 {
                     if (enemy.GetComponent<PlayerController>() == null) continue;
                     PlayerController otherPlayer = enemy.GetComponent<PlayerController>();
-                    otherPlayer.photonView.RPC("Test", RpcTarget.All);
                     if (otherPlayer.playerNo == player.playerNo)
                     {
                         continue;
@@ -162,6 +161,8 @@ namespace GamePlay.Skills
                             ? FinalComboDamage
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
+                        otherPlayer.photonView.RPC("Test", RpcTarget.All);
+                        Debug.Log(otherPlayer.playerNo);
                         otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
                         // otherPlayer.TakeDamage(damage);
                         print("Combo: " + combo.CurrentCombo);
