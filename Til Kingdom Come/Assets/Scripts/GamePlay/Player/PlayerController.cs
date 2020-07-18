@@ -100,6 +100,7 @@ namespace GamePlay.Player
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
+            healthBarController.SetHealth(currentHealth);
             SkillSelectionManager.instance.AssignSkills(playerNo);
 
    

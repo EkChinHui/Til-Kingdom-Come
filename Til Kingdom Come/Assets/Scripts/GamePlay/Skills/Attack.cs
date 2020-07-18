@@ -164,6 +164,7 @@ namespace GamePlay.Skills
                         Debug.Log(otherPlayer.playerNo);
                         otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
                         otherPlayer.TakeDamage(damage);
+                        Debug.Log("I am " + otherPlayer.name);
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }
