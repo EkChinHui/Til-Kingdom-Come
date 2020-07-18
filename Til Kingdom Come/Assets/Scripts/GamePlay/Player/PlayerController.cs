@@ -83,11 +83,13 @@ namespace GamePlay.Player
             {
                 playerNo = 2;
                 healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
+                cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
             }
             else
             {
                 playerNo = 1;
                 healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
+                cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
             }
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
@@ -379,6 +381,7 @@ namespace GamePlay.Player
             if (stream.IsWriting)
             {
                 stream.SendNext(this.currentHealth);
+                stream.SendNext(this.attack.charges.CurrentCharge);
             }
             else
             {
@@ -386,7 +389,7 @@ namespace GamePlay.Player
                 {
                     this.m_firstTake = false;
                 }*/
-
+                this.attack.charges.CurrentCharge = (int) stream.ReceiveNext();
                 this.currentHealth = (float) stream.ReceiveNext();
             }
         }
