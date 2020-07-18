@@ -162,8 +162,8 @@ namespace GamePlay.Skills
                             ? FinalComboDamage
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
-                        player.otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
-                        player.otherPlayer.TakeDamage(damage);
+                        otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
+                        // otherPlayer.TakeDamage(damage);
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }
