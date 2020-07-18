@@ -296,7 +296,7 @@ namespace GamePlay.Player
             
             Instantiate(sparks, transform.position + heightOffset, Quaternion.identity);
         }
-
+        [PunRPC]
         private void Die()
         {
             Debug.Log("Player " + playerNo + " dies.");
