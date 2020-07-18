@@ -273,7 +273,8 @@ namespace GamePlay.Player
                 currentHealth -= damageTaken;
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
                 {
-                    Die();
+                    // Die();
+                    photonView.RPC("Die", RpcTarget.All);
                 } 
                 else
                 {
