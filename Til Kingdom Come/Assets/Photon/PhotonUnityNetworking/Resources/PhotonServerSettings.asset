@@ -38,6 +38,7 @@ MonoBehaviour:
   - Cast
   - ListenForAttack
   - TakeDamage
+  - Test
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
