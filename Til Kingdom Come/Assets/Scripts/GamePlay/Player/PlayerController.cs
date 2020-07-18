@@ -5,18 +5,25 @@ using UI.GameUI.Cooldown;
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 namespace GamePlay.Player
 {
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPunObservable
     {
         public static int totalPlayers;
         private SpriteRenderer sprite;
         private float runSpeed = 4f;
         private Vector2 originalPosition;
         private Quaternion originalRotation;
-        private PhotonView photonView;
+        public PhotonView photonView;
+
+        #region Multiplayer
+
+        public bool multiplayerToggle;
+
+        #endregion
         
         #region States
         public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead }
@@ -86,6 +93,21 @@ namespace GamePlay.Player
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
             SkillSelectionManager.instance.AssignSkills(playerNo);
+
+   
+            foreach (var player in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                Debug.Log(player.playerNo + ": " + playerInput.inputIsEnabled);
+                if (player.name == "Player 1" && playerNo == 2)
+                {
+                    otherPlayer = player;
+                }
+                else if (player.name == "Player 2" && playerNo == 1)
+                {
+                    otherPlayer = player;
+                }
+            }
+            
         }
         public void Update()
         {
@@ -158,11 +180,14 @@ namespace GamePlay.Player
                 roll.Cast(otherPlayer);
             }
         }
+        
+        [PunRPC]
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
             {
                 attack.Cast(otherPlayer);
+                photonView.RPC("ListenForAttack", RpcTarget.All);
             }
         }
         private void ListenForBlock()
@@ -233,6 +258,7 @@ namespace GamePlay.Player
             rb.velocity = velocity;
         }
 
+        [PunRPC]
         public void TakeDamage(float damageTaken)
         {
             if (!godMode)
@@ -299,11 +325,12 @@ namespace GamePlay.Player
             block.charges.RefillCharges();
             godMode = false;
             anim.SetBool("Dead", false);
-            anim.SetInteger("State", 0);
+            anim.SetInteger("state", 0);
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
             // enabled = true;
+            playerInput.Toggle(); // multiplayer test
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPosition;
@@ -330,6 +357,27 @@ namespace GamePlay.Player
             ScoreKeeper.resetPlayersEvent -= ResetPlayer;
             SkillSelectionManager.passPlayerSkills -= PassPlayerSkill;
             onSuccessfulBlock -= SuccessfulBlock;
+        }
+        
+        
+        void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            // currently there is no strategy to improve on bandwidth, just passing the current distance and speed is enough, 
+            // Input could be passed and then used to better control speed value
+            //  Data could be wrapped as a vector2 or vector3 to save a couple of bytes
+            if (stream.IsWriting)
+            {
+                stream.SendNext(this.currentHealth);
+            }
+            else
+            {
+                /*if (this.m_firstTake)
+                {
+                    this.m_firstTake = false;
+                }*/
+
+                this.currentHealth = (float) stream.ReceiveNext();
+            }
         }
     }
 }

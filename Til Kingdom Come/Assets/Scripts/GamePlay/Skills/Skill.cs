@@ -1,5 +1,6 @@
 ﻿using GamePlay.Multiplayer;
 using GamePlay.Player;
+using Photon.Pun;
 using UnityEngine;
 
 namespace GamePlay.Skills
@@ -28,7 +29,7 @@ namespace GamePlay.Skills
             nextAvailTime = skillCooldown + Time.time;
             return true;
         }
-
+        
         public abstract void Cast(PlayerController opponent);
 
         public void AssignPlayer(PlayerController player)

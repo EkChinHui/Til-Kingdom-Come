@@ -3,6 +3,7 @@ using System.Collections;
 using Cinemachine;
 using GamePlay.Map.Map_Two;
 using GamePlay.Player;
+using Photon.Pun;
 using UI.GameUI.Cooldown;
 using UnityEngine;
 using UnityEngine.UI;
@@ -160,6 +161,7 @@ namespace GamePlay.Skills
                             ? FinalComboDamage
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
+                        player.otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
                         player.otherPlayer.TakeDamage(damage);
                         print("Combo: " + combo.CurrentCombo);
                     }

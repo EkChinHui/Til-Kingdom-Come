@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
+  multiplayerToggle: 0
   godMode: 0
   combatState: 0
   currentHealth: 0
@@ -241,7 +243,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   otherPlayer: {fileID: 2074240535436496080, guid: f6c2328b6eab6d64bbba790e00d950a4,
     type: 3}
-  playerNo: 0
+  playerNo: 1
   playerInput: {fileID: 8902710218046659416}
   bloodSplash: {fileID: 291438960380146473, guid: 29a8723467d5ab940970b3762af580b0,
     type: 3}
