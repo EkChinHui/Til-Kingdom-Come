@@ -197,10 +197,13 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptAttack)
             {
+                //if (!PhotonNetwork.IsMasterClient)
+                Debug.Log("Dummy attempt attack");
                 attack.Cast(otherPlayer);
                 photonView.RPC("ListenForAttack", RpcTarget.All);
             }
         }
+        
         private void ListenForBlock()
         {
             if (playerInput.AttemptBlock)
