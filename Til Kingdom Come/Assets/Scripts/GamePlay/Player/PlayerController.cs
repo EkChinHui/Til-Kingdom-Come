@@ -171,7 +171,14 @@ namespace GamePlay.Player
             if (playerInput.AttemptAttack)
             {
                 attack.Cast(otherPlayer);
+                photonView.RPC("RPCAttack", RpcTarget.All);
             }
+        }
+
+        [PunRPC]
+        private void RPCAttack()
+        {
+            attack.Cast(otherPlayer);
         }
         private void ListenForBlock()
         {
