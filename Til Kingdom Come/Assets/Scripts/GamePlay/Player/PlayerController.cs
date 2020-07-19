@@ -193,8 +193,15 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptBlock)
             {
-                block.Cast(otherPlayer);
+                // block.Cast(otherPlayer);
+                photonView.RPC("RPCBlock", RpcTarget.All);
             }
+        }
+
+        [PunRPC]
+        private void RPCBlock()
+        {
+            block.Cast(otherPlayer);
         }
         private void ListenForSkill()
         {
