@@ -39,6 +39,8 @@ MonoBehaviour:
   - ListenForAttack
   - TakeDamage
   - Test
+  - Die
+  - BlockRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
