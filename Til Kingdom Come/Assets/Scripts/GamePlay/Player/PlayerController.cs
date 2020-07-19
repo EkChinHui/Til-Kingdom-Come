@@ -192,15 +192,11 @@ namespace GamePlay.Player
             }
         }
         
-        //[PunRPC]
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
             {
-                //if (!PhotonNetwork.IsMasterClient)
-                Debug.Log("Dummy attempt attack");
                 attack.Cast(otherPlayer);
-                // photonView.RPC("ListenForAttack", RpcTarget.All);
             }
         }
         
@@ -271,6 +267,7 @@ namespace GamePlay.Player
             rb.velocity = new Vector2(velocity.x, distance);
         }
 
+        [PunRPC]
         public void KnockBack(float distance)
         {
             var velocity = rb.velocity;
