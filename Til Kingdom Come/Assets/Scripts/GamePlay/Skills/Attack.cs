@@ -141,8 +141,7 @@ namespace GamePlay.Skills
                         // trigger successful block event
                         otherPlayer.onSuccessfulBlock?.Invoke();
                         player.KnockBack(knockDistAttacking);
-                        // otherPlayer.KnockBack(knockDistBlocking);
-                        otherPlayer.photonView.RPC("KnockBack", RpcTarget.All, knockDistBlocking);
+                        otherPlayer.KnockBack(knockDistBlocking);
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
                     {
@@ -162,10 +161,7 @@ namespace GamePlay.Skills
                             ? FinalComboDamage
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
-                        Debug.Log(otherPlayer.playerNo);
-                        otherPlayer.photonView.RPC("TakeDamage", RpcTarget.All, (float) damage);
                         otherPlayer.TakeDamage(damage);
-                        Debug.Log("I am " + otherPlayer.name);
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }
@@ -197,12 +193,14 @@ namespace GamePlay.Skills
         private IEnumerator ComboOneAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
+            player.photonView.RPC("ChangeCombatState", RpcTarget.All, PlayerController.CombatState.Attacking);
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
+            player.photonView.RPC("ChangeCombatState", RpcTarget.All, PlayerController.CombatState.NonCombat);
             player.playerInput.Toggle();
         }
 

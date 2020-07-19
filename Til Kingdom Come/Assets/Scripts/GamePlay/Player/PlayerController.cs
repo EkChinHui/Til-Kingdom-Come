@@ -13,20 +13,14 @@ namespace GamePlay.Player
     public class PlayerController : MonoBehaviour, IPunObservable
     {
         public static int totalPlayers;
+        public PhotonView photonView;
         private SpriteRenderer sprite;
         private float runSpeed = 4f;
         private Vector2 originalPosition;
         private Quaternion originalRotation;
-        public PhotonView photonView;
-
-        #region Multiplayer
-
-        public bool multiplayerToggle;
-
-        #endregion
         
         #region States
-        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead }
+        public enum CombatState { NonCombat, Blocking, Rolling, Attacking, Hurt, Skill, Dead}
         public bool godMode = false;
         public CombatState combatState = CombatState.NonCombat;
         #endregion
@@ -74,26 +68,14 @@ namespace GamePlay.Player
 
         private void Awake()
         {
+            photonView = GetComponent<PhotonView>();
             // Remember the original position of the players so match can be reset
             originalPosition = gameObject.transform.position;
             originalRotation = gameObject.transform.rotation;
-            // totalPlayers++;
-            // playerNo = totalPlayers;
-            if (PhotonNetwork.IsMasterClient)
-            {
-                playerNo = 2;
-                healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
-                cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
-            }
-            else
-            {
-                playerNo = 1;
-                healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
-                cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
-            }
+            totalPlayers++;
+            playerNo = totalPlayers;
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
-            photonView = GetComponent<PhotonView>();
 
             onSuccessfulBlock += SuccessfulBlock;
         }
@@ -104,30 +86,11 @@ namespace GamePlay.Player
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
-            healthBarController.SetHealth(currentHealth);
             SkillSelectionManager.instance.AssignSkills(playerNo);
-
-   
-            foreach (var player in GameObject.FindObjectsOfType<PlayerController>())
-            {
-                Debug.Log(player.playerNo + ": " + playerInput.inputIsEnabled);
-                if (player.name == "Player 1" && playerNo == 2)
-                {
-                    otherPlayer = player;
-                }
-                else if (player.name == "Player 2" && playerNo == 1)
-                {
-                    otherPlayer = player;
-                }
-            }
-            
         }
         public void Update()
         {
-            if (!photonView.IsMine)
-            {
-                return;
-            }
+            healthBarController.SetHealth(currentHealth);
             // combo system
             if (combatState == CombatState.Attacking)
             {
@@ -191,7 +154,6 @@ namespace GamePlay.Player
                 roll.Cast(otherPlayer);
             }
         }
-        
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
@@ -199,22 +161,13 @@ namespace GamePlay.Player
                 attack.Cast(otherPlayer);
             }
         }
-        
         private void ListenForBlock()
         {
             if (playerInput.AttemptBlock)
             {
-                BlockRPC();
-                photonView.RPC("BlockRPC", RpcTarget.All);
+                block.Cast(otherPlayer);
             }
         }
-
-        [PunRPC]
-        private void BlockRPC()
-        {
-            block.Cast(otherPlayer);
-        }
-        
         private void ListenForSkill()
         {
             if (playerInput.AttemptSkill)
@@ -267,7 +220,6 @@ namespace GamePlay.Player
             rb.velocity = new Vector2(velocity.x, distance);
         }
 
-        [PunRPC]
         public void KnockBack(float distance)
         {
             var velocity = rb.velocity;
@@ -277,18 +229,15 @@ namespace GamePlay.Player
             rb.velocity = velocity;
         }
 
-        [PunRPC]
         public void TakeDamage(float damageTaken)
         {
             if (!godMode)
             {
                 Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
                 currentHealth -= damageTaken;
-                healthBarController.SetHealth(currentHealth);
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
                 {
-                    // Die();
-                    photonView.RPC("Die", RpcTarget.All);
+                    Die();
                 } 
                 else
                 {
@@ -310,7 +259,7 @@ namespace GamePlay.Player
             
             Instantiate(sparks, transform.position + heightOffset, Quaternion.identity);
         }
-        [PunRPC]
+
         private void Die()
         {
             Debug.Log("Player " + playerNo + " dies.");
@@ -341,17 +290,15 @@ namespace GamePlay.Player
         private void ResetPlayer()
         // Reset player position based on start position and resets combatState
         {
-            Debug.Log("resetting player");
             attack.charges.RefillCharges();
             block.charges.RefillCharges();
             godMode = false;
             anim.SetBool("Dead", false);
-            anim.SetInteger("state", 0);
+            anim.SetInteger("State", 0);
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
-            // enabled = true;
-            playerInput.Toggle(); // multiplayer test
+            enabled = true;
             GetComponent<Collider2D>().enabled = true;
             GetComponent<Rigidbody2D>().simulated = true;
             gameObject.transform.position = originalPosition;
@@ -365,7 +312,7 @@ namespace GamePlay.Player
             var skillObject = Instantiate(skill).GetComponent<Skill>();
             this.skill = skillObject;
             skillObject.transform.parent = transform;
-            this.skill.AssignPlayer(this);
+            // this.skill.AssignPlayer(this);
             var skillCharges = this.skill.GetComponent<Charges>();
             if (skillCharges != null)
             {
@@ -380,7 +327,12 @@ namespace GamePlay.Player
             onSuccessfulBlock -= SuccessfulBlock;
         }
         
-        
+        [PunRPC]
+        public void ChangeCombatState(CombatState combatState)
+        {
+            this.combatState = combatState;
+        }
+                
         void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             // currently there is no strategy to improve on bandwidth, just passing the current distance and speed is enough, 
