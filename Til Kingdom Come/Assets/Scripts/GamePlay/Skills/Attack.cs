@@ -141,7 +141,7 @@ namespace GamePlay.Skills
                         // trigger successful block event
                         otherPlayer.onSuccessfulBlock?.Invoke();
                         player.KnockBack(knockDistAttacking);
-                        otherPlayer.KnockBack(knockDistBlocking);
+                        // otherPlayer.KnockBack(knockDistBlocking);
                         otherPlayer.photonView.RPC("KnockBack", RpcTarget.All, knockDistBlocking);
                     }
                     else if (otherPlayer.combatState == PlayerController.CombatState.Rolling)
