@@ -134,13 +134,13 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptRight && playerInput.AttemptLeft)
             {
-                // anim.SetInteger("state", 0);
-                photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
+                anim.SetInteger("state", 0);
+                //photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
             }
             else if (playerInput.AttemptRight)
             {
-                // anim.SetInteger("state", 1);
-                photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
+                anim.SetInteger("state", 1);
+                // photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
                 {
@@ -149,8 +149,8 @@ namespace GamePlay.Player
             }
             else if (playerInput.AttemptLeft)
             {
-                // anim.SetInteger("state", 1);
-                photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
+                anim.SetInteger("state", 1);
+                // photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
                 rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
                 {
@@ -159,8 +159,8 @@ namespace GamePlay.Player
             }
             else
             {
-                // anim.SetInteger("state", 0);
-                photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
+                anim.SetInteger("state", 0);
+                // photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
             }
         }
 
@@ -339,9 +339,9 @@ namespace GamePlay.Player
             attack.charges.RefillCharges();
             block.charges.RefillCharges();
             godMode = false;
-            anim.SetBool("Dead", false);
-            // anim.SetInteger("state", 0);
-            photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
+            anim.SetBool("Dead", false); 
+            anim.SetInteger("state", 0);
+            // photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
 
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
