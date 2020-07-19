@@ -103,6 +103,7 @@ namespace GamePlay.Player
         public void Update()
         {
             healthBarController.SetHealth(currentHealth);
+            if (!photonView.IsMine) return;
             // combo system
             if (combatState == CombatState.Attacking)
             {
