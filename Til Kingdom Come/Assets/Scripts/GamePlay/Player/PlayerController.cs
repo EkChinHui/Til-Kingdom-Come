@@ -345,13 +345,6 @@ namespace GamePlay.Player
             SkillSelectionManager.passPlayerSkills -= PassPlayerSkill;
             onSuccessfulBlock -= SuccessfulBlock;
         }
-        
-        [PunRPC]
-        public void ChangeCombatState(CombatState combatState)
-        {
-            this.combatState = combatState;
-            Debug.Log("I am Player " + playerNo);
-        }
-        
+
     }
 }

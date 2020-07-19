@@ -193,14 +193,12 @@ namespace GamePlay.Skills
         private IEnumerator ComboOneAnimDelay()
         {
             player.combatState = PlayerController.CombatState.Attacking;
-            player.photonView.RPC("ChangeCombatState", RpcTarget.All, PlayerController.CombatState.Attacking);
             player.anim.SetTrigger("Attack");
             // reaction delay to allow opponent to react
             yield return new WaitForSeconds(reactionDelay);
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.photonView.RPC("ChangeCombatState", RpcTarget.All, PlayerController.CombatState.NonCombat);
             player.playerInput.Toggle();
         }
 
