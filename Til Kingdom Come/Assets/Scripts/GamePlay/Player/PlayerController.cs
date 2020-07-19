@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 namespace GamePlay.Player
 {
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerController : MonoBehaviour, IPunObservable
+    public class PlayerController : MonoBehaviour
     {
         public static int totalPlayers;
         public PhotonView photonView;
@@ -331,29 +331,8 @@ namespace GamePlay.Player
         public void ChangeCombatState(CombatState combatState)
         {
             this.combatState = combatState;
+            Debug.Log("I am Player " + playerNo);
         }
-                
-        void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            // currently there is no strategy to improve on bandwidth, just passing the current distance and speed is enough, 
-            // Input could be passed and then used to better control speed value
-            //  Data could be wrapped as a vector2 or vector3 to save a couple of bytes
-            if (stream.IsWriting)
-            {
-                stream.SendNext(this.currentHealth);
-                stream.SendNext(this.attack.charges.CurrentCharge);
-                stream.SendNext(this.combatState);
-            }
-            else
-            {
-                /*if (this.m_firstTake)
-                {
-                    this.m_firstTake = false;
-                }*/
-                this.combatState = (CombatState) stream.ReceiveNext();
-                this.attack.charges.CurrentCharge = (int) stream.ReceiveNext();
-                this.currentHealth = (float) stream.ReceiveNext();
-            }
-        }
+        
     }
 }
