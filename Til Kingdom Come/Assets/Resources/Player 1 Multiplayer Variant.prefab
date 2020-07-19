@@ -123,9 +123,9 @@ GameObject:
   - component: {fileID: 8902710218046659408}
   - component: {fileID: 8902710218046659411}
   - component: {fileID: 3252210204858642266}
-  - component: {fileID: 3523362414864438809}
   - component: {fileID: 4415915515471677116}
   - component: {fileID: 6585389377671298888}
+  - component: {fileID: 2290295523807131728}
   m_Layer: 8
   m_Name: Player 1 Multiplayer Variant
   m_TagString: Player
@@ -394,60 +394,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &3523362414864438809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8902710218575899150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 3
-    SynchronizeType: 1
-    Name: state
-  - Type: 9
-    SynchronizeType: 1
-    Name: Attack
-  - Type: 9
-    SynchronizeType: 1
-    Name: Attack 2
-  - Type: 9
-    SynchronizeType: 1
-    Name: Attack 3
-  - Type: 9
-    SynchronizeType: 1
-    Name: Roll
-  - Type: 9
-    SynchronizeType: 1
-    Name: Block
-  - Type: 9
-    SynchronizeType: 1
-    Name: Confusion
-  - Type: 9
-    SynchronizeType: 1
-    Name: Throw Knives
-  - Type: 4
-    SynchronizeType: 1
-    Name: Dead
-  - Type: 9
-    SynchronizeType: 1
-    Name: Heal
-  - Type: 9
-    SynchronizeType: 1
-    Name: Lunge
-  - Type: 9
-    SynchronizeType: 1
-    Name: Fireball
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
 --- !u!114 &4415915515471677116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,8 +453,62 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3523362414864438809}
+  - {fileID: 2290295523807131728}
   - {fileID: 3252210204858642266}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2290295523807131728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902710218575899150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 1
+    Name: state
+  - Type: 9
+    SynchronizeType: 1
+    Name: Attack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Attack 2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Attack 3
+  - Type: 9
+    SynchronizeType: 1
+    Name: Roll
+  - Type: 9
+    SynchronizeType: 1
+    Name: Block
+  - Type: 9
+    SynchronizeType: 1
+    Name: Confusion
+  - Type: 9
+    SynchronizeType: 1
+    Name: Throw Knives
+  - Type: 4
+    SynchronizeType: 1
+    Name: Dead
+  - Type: 9
+    SynchronizeType: 1
+    Name: Heal
+  - Type: 9
+    SynchronizeType: 1
+    Name: Lunge
+  - Type: 9
+    SynchronizeType: 1
+    Name: Fireball
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0

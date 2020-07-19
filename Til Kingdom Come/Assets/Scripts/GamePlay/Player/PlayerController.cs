@@ -80,10 +80,12 @@ namespace GamePlay.Player
             if (PhotonNetwork.IsMasterClient)
             {
                 playerNo = 2;
+                healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
             }
             else
             {
                 playerNo = 1;
+                healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
             }
             
 
@@ -304,7 +306,7 @@ namespace GamePlay.Player
             block.charges.RefillCharges();
             godMode = false;
             anim.SetBool("Dead", false);
-            anim.SetInteger("State", 0);
+            anim.SetInteger("state", 0);
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
