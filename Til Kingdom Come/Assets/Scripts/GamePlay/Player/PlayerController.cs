@@ -390,6 +390,7 @@ namespace GamePlay.Player
             {
                 stream.SendNext(this.currentHealth);
                 stream.SendNext(this.attack.charges.CurrentCharge);
+                stream.SendNext(this.combatState);
             }
             else
             {
@@ -397,6 +398,7 @@ namespace GamePlay.Player
                 {
                     this.m_firstTake = false;
                 }*/
+                this.combatState = (CombatState) stream.ReceiveNext();
                 this.attack.charges.CurrentCharge = (int) stream.ReceiveNext();
                 this.currentHealth = (float) stream.ReceiveNext();
             }

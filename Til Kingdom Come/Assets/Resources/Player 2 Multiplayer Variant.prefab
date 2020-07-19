@@ -130,6 +130,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1253173290882646687}
   - {fileID: 910711145870638044}
+  - {fileID: 2074240535436496080}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -356,6 +357,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2414304355443561606}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2074240535436496080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4415915516255590486, guid: c908bebe607dc2e4fa265c441dc47a50,
+    type: 3}
+  m_PrefabInstance: {fileID: 2414304355443561606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074240535436496091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2074240534908845444 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4415915515710630146, guid: c908bebe607dc2e4fa265c441dc47a50,
