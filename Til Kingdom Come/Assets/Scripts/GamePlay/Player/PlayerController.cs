@@ -170,7 +170,7 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptAttack)
             {
-                attack.Cast(otherPlayer);
+                // attack.Cast(otherPlayer);
                 photonView.RPC("RPCAttack", RpcTarget.All);
             }
         }
