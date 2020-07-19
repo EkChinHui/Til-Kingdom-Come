@@ -474,7 +474,7 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: state
   - Type: 9
     SynchronizeType: 1
