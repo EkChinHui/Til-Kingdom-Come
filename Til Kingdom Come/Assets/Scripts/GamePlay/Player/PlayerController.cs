@@ -163,9 +163,17 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptRoll)
             {
-                roll.Cast(otherPlayer);
+                // roll.Cast(otherPlayer);
+                photonView.RPC("RPCRoll", RpcTarget.All);
             }
         }
+
+        [PunRPC]
+        private void RPCRoll()
+        {
+            roll.Cast(otherPlayer);
+        }
+        
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
@@ -180,6 +188,7 @@ namespace GamePlay.Player
         {
             attack.Cast(otherPlayer);
         }
+        
         private void ListenForBlock()
         {
             if (playerInput.AttemptBlock)
