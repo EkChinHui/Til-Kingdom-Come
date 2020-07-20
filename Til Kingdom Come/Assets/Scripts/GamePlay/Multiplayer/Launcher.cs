@@ -1,18 +1,50 @@
-﻿using Photon.Pun;
+﻿using System;
+using System.Collections.Generic;
+using GamePlay.Multiplayer.Lobby;
+using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GamePlay.Multiplayer
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
-        #region Private Serializable Fields
+        [Header("Login Panel")]
+        public GameObject LoginPanel;
 
+        // public InputField PlayerNameInput;
+        public TextMeshProUGUI PlayerNameInput;
 
-        #endregion
+        [Header("Selection Panel")]
+        public GameObject SelectionPanel;
+
+        [Header("Create Room Panel")]
+        public GameObject CreateRoomPanel;
+        // public InputField RoomNameInputField;
+        public TextMeshProUGUI RoomNameInputField;
+
+        [Header("Room List Panel")]
+        public GameObject RoomListPanel;
+
+        public GameObject RoomListContent;
+        public GameObject RoomListEntryPrefab;
+
+        [Header("Room Lobby Panel")]
+        public GameObject RoomLobbyPanel;
+        public Transform LobbyVerticalLayoutGroup;
+        public GameObject PlayerEntryPrefab;
+        public GameObject startButton;
+        public Button button;
+        
+        
+        private Dictionary<string, RoomInfo> cachedRoomList;
+        private Dictionary<string, GameObject> roomListEntries;
+        private Dictionary<int, GameObject> playerListEntries;
+        
 
 
         #region Private Fields
@@ -38,6 +70,10 @@ namespace GamePlay.Multiplayer
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
+            button = startButton.GetComponent<Button>();
+            
+            cachedRoomList = new Dictionary<string, RoomInfo>();
+            roomListEntries = new Dictionary<string, GameObject>();
         }
 
 
@@ -46,40 +82,154 @@ namespace GamePlay.Multiplayer
         /// </summary>
         void Start()
         {
-            Connect();
+            
         }
 
+        private void Update()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+                {
+                    button.interactable = true;
+                }
+                else
+                {
+                    button.interactable = false;
+                }
+            }
+        }
 
         #endregion
 
+        
 
-        #region Public Methods
 
+        #region UI CALLBACKS
 
-        /// <summary>
-        /// Start the connection process.
-        /// - If already connected, we attempt joining a random room
-        /// - if not yet connected, Connect this application instance to Photon Cloud Network
-        /// </summary>
-        public void Connect()
+        public void OnCreateRoomButtonClicked()
         {
-            // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
-            if (PhotonNetwork.IsConnected)
+            string roomName = RoomNameInputField.text;
+            roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
+            var roomOptions = new RoomOptions {MaxPlayers = 2};
+            PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
+        }
+
+        #endregion
+
+        public void SetActivePanel(string activePanel)
+        {
+            LoginPanel.SetActive(activePanel.Equals(LoginPanel.name));
+            SelectionPanel.SetActive(activePanel.Equals(SelectionPanel.name));
+            CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
+            RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
+            RoomLobbyPanel.SetActive(activePanel.Equals(RoomLobbyPanel.name));
+        }
+        
+        public void OnRoomListButtonClicked()
+        {
+            if (!PhotonNetwork.InLobby)
             {
-                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinLobby();
+            }
+
+            SetActivePanel(RoomListPanel.name);
+        }
+        
+        public void OnLoginButtonClicked()
+        {
+            string playerName = PlayerNameInput.text;
+
+            if (!playerName.Equals(""))
+            {
+                PhotonNetwork.LocalPlayer.NickName = playerName;
+                PhotonNetwork.ConnectUsingSettings();
             }
             else
             {
-                // #Critical, we must first and foremost connect to Photon Online Server.
-                isConnecting = PhotonNetwork.ConnectUsingSettings();
-                PhotonNetwork.GameVersion = gameVersion;
+                Debug.LogError("Player Name is invalid.");
             }
         }
+        
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 2;
+            PhotonNetwork.CreateRoom("testRoom", roomOptions, TypedLobby.Default);
+        }
 
+        public void OnStartButtonClicked()
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
+                return;
+            }
+            PhotonNetwork.LoadLevel("MultiplayerArena");
+        }
+
+
+
+        #region PUN CALLBACKS
+
+
+        public override void OnConnectedToMaster()
+        {
+            Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+            // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
+            /*if (isConnecting)
+            {
+                PhotonNetwork.JoinRandomRoom();
+                isConnecting = false;
+            }*/
+            SetActivePanel(SelectionPanel.name);
+
+        }
+
+
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+        }
+        
         public override void OnJoinedRoom()
         {
+            if (playerListEntries == null)
+            {
+                playerListEntries = new Dictionary<int, GameObject>();
+            }
+
+            foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+            {
+                GameObject entry = Instantiate(PlayerEntryPrefab);
+                entry.transform.SetParent(LobbyVerticalLayoutGroup);
+                entry.transform.localScale = Vector3.one;
+                entry.GetComponent<PlayerEntry>().SetName(player.NickName);
+                playerListEntries.Add(player.ActorNumber, entry);
+            }
             Debug.Log("Joined room");
+            SetActivePanel(RoomLobbyPanel.name);
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                startButton.SetActive(false);
+            }
+        }
+        
+        public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+        {
+            GameObject entry = Instantiate(PlayerEntryPrefab);
+            entry.transform.SetParent(RoomLobbyPanel.transform);
+            entry.transform.localScale = Vector3.one;
+            entry.GetComponent<PlayerEntry>().SetName(newPlayer.NickName);
+            playerListEntries.Add(newPlayer.ActorNumber, entry);
+        }
+        
+        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            ClearRoomListView();
+
+            UpdateCachedRoomList(roomList);
+            UpdateRoomListView();
         }
 
 
@@ -88,48 +238,58 @@ namespace GamePlay.Multiplayer
             Debug.Log("Room created");
         }
 
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 2;
-            PhotonNetwork.CreateRoom("testRoom", roomOptions, TypedLobby.Default);
-        }
-
-        public void LoadGame()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
-            }
-            PhotonNetwork.LoadLevel("MultiplayerArena");
-        }
-
         #endregion
-
-        #region MonoBehaviourPunCallbacks Callbacks
-
-
-        public override void OnConnectedToMaster()
+        
+        private void ClearRoomListView()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-            if (isConnecting)
+            foreach (GameObject entry in roomListEntries.Values)
             {
-                PhotonNetwork.JoinRandomRoom();
-                isConnecting = false;
+                Destroy(entry.gameObject);
             }
-            
+
+            roomListEntries.Clear();
         }
-
-
-        public override void OnDisconnected(DisconnectCause cause)
+        
+        private void UpdateCachedRoomList(List<RoomInfo> roomList)
         {
-            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-            isConnecting = false;
+            foreach (RoomInfo info in roomList)
+            {
+                // Remove room from cached room list if it got closed, became invisible or was marked as removed
+                if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
+                {
+                    if (cachedRoomList.ContainsKey(info.Name))
+                    {
+                        cachedRoomList.Remove(info.Name);
+                    }
+
+                    continue;
+                }
+
+                // Update cached room info
+                if (cachedRoomList.ContainsKey(info.Name))
+                {
+                    cachedRoomList[info.Name] = info;
+                }
+                // Add new room info to cache
+                else
+                {
+                    cachedRoomList.Add(info.Name, info);
+                }
+            }
         }
 
+        private void UpdateRoomListView()
+        {
+            foreach (RoomInfo info in cachedRoomList.Values)
+            {
+                GameObject entry = Instantiate(RoomListEntryPrefab);
+                entry.transform.SetParent(RoomListContent.transform);
+                entry.transform.localScale = Vector3.one;
+                entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
 
-        #endregion
+                roomListEntries.Add(info.Name, entry);
+            }
+        }
 
     }
 }
