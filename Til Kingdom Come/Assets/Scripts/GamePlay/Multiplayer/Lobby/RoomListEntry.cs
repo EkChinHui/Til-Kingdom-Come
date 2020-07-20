@@ -7,8 +7,8 @@ namespace GamePlay.Multiplayer.Lobby
 {
     public class RoomListEntry : MonoBehaviour
     {
-        public Text RoomNameText;
-        public Text RoomPlayersText;
+        public TextMeshProUGUI RoomNameText;
+        public TextMeshProUGUI RoomPlayersText;
         public Button JoinRoomButton;
 
         private string roomName;
