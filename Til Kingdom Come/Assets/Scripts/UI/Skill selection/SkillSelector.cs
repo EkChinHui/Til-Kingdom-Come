@@ -66,17 +66,17 @@ namespace UI.Skill_selection
         [PunRPC]
         private void IncreasePlayerTwoSkill()
         {
-            ClearBorder(playerOneSkill, 1);
-            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill + 1;
-            SetBorder(playerOneSkill, 1);
+            ClearBorder(playerTwoSkill, 2);
+            playerTwoSkill = playerTwoSkill == 0 ? maxSkills: playerTwoSkill + 1;
+            SetBorder(playerTwoSkill, 2);
         }
 
         [PunRPC]
         private void DecreasePlayerTwoSkill()
         {
-            ClearBorder(playerOneSkill, 1);
-            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
-            SetBorder(playerOneSkill, 1);
+            ClearBorder(playerTwoSkill, 2);
+            playerTwoSkill = playerTwoSkill == 0 ? maxSkills: playerTwoSkill - 1;
+            SetBorder(playerTwoSkill, 2);
         }
         
 
