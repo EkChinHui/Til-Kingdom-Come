@@ -371,7 +371,7 @@ namespace GamePlay.Player
             var skillObject = Instantiate(skill).GetComponent<Skill>();
             this.skill = skillObject;
             skillObject.transform.parent = transform;
-            // this.skill.AssignPlayer(this);
+            this.skill.AssignPlayer(this);
             var skillCharges = this.skill.GetComponent<Charges>();
             if (skillCharges != null)
             {
