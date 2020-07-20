@@ -39,7 +39,7 @@ namespace GamePlay.Skills
 
         private bool isFacingOppponent(PlayerController player, PlayerController opponent)
         {
-            float playerDirection = player.transform.rotation.eulerAngles.y; // either 0 or 180
+            float playerDirection = player.transform.rotation.eulerAngles.y; // either 0 (right) or 180 (left)
             float playerPositionX = player.transform.position.x;
             float opponentPositionX = opponent.transform.position.x;
             return (playerPositionX > opponentPositionX && Math.Abs(playerDirection - 180) < Mathf.Epsilon) ||

@@ -30,6 +30,7 @@ public class MultiplayerManager : MonoBehaviour
             playerController.cooldownUiController = cooldownUiControllerOne;
             playerOne = playerController;
             playerController.playerInput.Toggle();
+            playerController.otherPlayer = GameObject.Find("Player 2 Multiplayer Variant(clone)").GetComponent<PlayerController>();
         }
         else
         {
@@ -43,6 +44,7 @@ public class MultiplayerManager : MonoBehaviour
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;
             playerTwo = playerController;
+            playerController.otherPlayer = GameObject.Find("Player 1 Multiplayer Variant(clone)").GetComponent<PlayerController>();
         }
     }
 

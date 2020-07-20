@@ -88,15 +88,18 @@ namespace GamePlay.Player
                 photonView = GetComponent<PhotonView>();
                 if (PhotonNetwork.IsMasterClient)
                 {
+                    // setting for dummy player on Master client side
                     playerNo = 2;
                     healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
                     cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
+                    otherPlayer = GameObject.Find("Player 2").GetComponent<PlayerController>();
                 }
                 else
                 {
                     playerNo = 1;
                     healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
                     cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
+                    otherPlayer = GameObject.Find("Player 1").GetComponent<PlayerController>();
                 }
             }
             else
