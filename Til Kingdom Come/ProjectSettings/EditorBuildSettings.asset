@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 3f38d079771234736af611072c93238d
+  - enabled: 1
+    path: Assets/Scenes/Skill Selection Multiplayer.unity
+    guid: 88552820f57997a46bbce08e427ff1f8
   m_configObjects: {}
