@@ -36,6 +36,8 @@ namespace GamePlay.Information
                 return;
             }
             DontDestroyOnLoad(gameObject);
+            assignedPlayerSkills.Add(1);
+            assignedPlayerSkills.Add(1);
         }
         private void Start()
         {

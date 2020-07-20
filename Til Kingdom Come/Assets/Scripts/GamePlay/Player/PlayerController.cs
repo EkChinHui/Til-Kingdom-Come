@@ -81,11 +81,13 @@ namespace GamePlay.Player
             {
                 playerNo = 2;
                 healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
+                cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
             }
             else
             {
                 playerNo = 1;
                 healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
+                cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
             }
             
 
@@ -215,12 +217,20 @@ namespace GamePlay.Player
         {
             block.Cast(otherPlayer);
         }
+        
         private void ListenForSkill()
         {
             if (playerInput.AttemptSkill)
             {
-                skill.Cast(otherPlayer);
+                // skill.Cast(otherPlayer);
+                photonView.RPC("RPCSkill", RpcTarget.All);
             }
+        }
+
+        [PunRPC]
+        private void RPCSkill()
+        {
+            skill.Cast(otherPlayer);
         }
 
         private IEnumerator Hurt()
