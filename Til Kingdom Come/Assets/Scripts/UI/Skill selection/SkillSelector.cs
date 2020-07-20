@@ -2,6 +2,7 @@
 using GamePlay.Information;
 using GamePlay.Player;
 using GamePlay.Skills;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ namespace UI.Skill_selection
         public List<GameObject> skillCells;
         private int playerOneSkill;
         private int playerTwoSkill;
+        private int maxSkills;
+        private PhotonView photonView;
 
         #region Keycodes
 
@@ -29,6 +32,8 @@ namespace UI.Skill_selection
         private void Start()
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Clear();
+            photonView = GetComponent<PhotonView>();
+            maxSkills = skillPrefabs.Count - 1;
 
             foreach (var skills in skillPrefabs)
             {
@@ -42,10 +47,42 @@ namespace UI.Skill_selection
             SetBorder(playerTwoSkill, 2);
         }
 
+        [PunRPC]
+        private void IncreasePlayerOneSkill()
+        {
+            ClearBorder(playerOneSkill, 1);
+            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill + 1;
+            SetBorder(playerOneSkill, 1);
+        }
+
+        [PunRPC]
+        private void DecreasePlayerOneSkill()
+        {
+            ClearBorder(playerOneSkill, 1);
+            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
+            SetBorder(playerOneSkill, 1);
+        }
+        
+        [PunRPC]
+        private void IncreasePlayerTwoSkill()
+        {
+            ClearBorder(playerOneSkill, 1);
+            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill + 1;
+            SetBorder(playerOneSkill, 1);
+        }
+
+        [PunRPC]
+        private void DecreasePlayerTwoSkill()
+        {
+            ClearBorder(playerOneSkill, 1);
+            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
+            SetBorder(playerOneSkill, 1);
+        }
+        
+
+        
         private void Update()
         {
-            var maxSkills = skillPrefabs.Count - 1;
-
             /*
              * On keypress, clears current border of color, then sets the border of
              * selected skill.
@@ -56,27 +93,32 @@ namespace UI.Skill_selection
             // Change Player One skill
             if (Input.GetKeyDown(playerOneLeft))
             {
-                ClearBorder(playerOneSkill, 1);
+                /*ClearBorder(playerOneSkill, 1);
                 playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
-                SetBorder(playerOneSkill, 1);
+                SetBorder(playerOneSkill, 1);*/
+                photonView.RPC("DecreasePlayerOneSkill", RpcTarget.All);
+
             } else if (Input.GetKeyDown(playerOneRight))
             {
-                ClearBorder(playerOneSkill, 1);
+                /*ClearBorder(playerOneSkill, 1);
                 playerOneSkill = playerOneSkill == maxSkills ? 0 : playerOneSkill + 1;
-                SetBorder(playerOneSkill, 1);
+                SetBorder(playerOneSkill, 1);*/
+                photonView.RPC("IncreasePlayerOneSkill", RpcTarget.All);
             }
 
             // Change Player Two skill
             if (Input.GetKeyDown(playerTwoLeft))
             {
-                ClearBorder(playerTwoSkill, 2);
+                /*ClearBorder(playerTwoSkill, 2);
                 playerTwoSkill = playerTwoSkill == 0 ? maxSkills : playerTwoSkill - 1;
-                SetBorder(playerTwoSkill, 2);
+                SetBorder(playerTwoSkill, 2);*/
+                photonView.RPC("DecreasePlayerTwoSkill", RpcTarget.All);
             } else if (Input.GetKeyDown(playerTwoRight))
             {
-                ClearBorder(playerTwoSkill, 2);
+                /*ClearBorder(playerTwoSkill, 2);
                 playerTwoSkill = playerTwoSkill == maxSkills ? 0 : playerTwoSkill + 1;
-                SetBorder(playerTwoSkill, 2);
+                SetBorder(playerTwoSkill, 2);*/
+                photonView.RPC("IncreasePlayerTwoSkill", RpcTarget.All);
             }
             
 

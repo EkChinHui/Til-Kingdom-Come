@@ -165,7 +165,7 @@ namespace GamePlay.Multiplayer
                 Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
                 return;
             }
-            PhotonNetwork.LoadLevel("MultiplayerArena");
+            PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
         }
 
 

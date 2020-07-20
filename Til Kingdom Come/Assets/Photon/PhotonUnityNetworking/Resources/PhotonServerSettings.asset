@@ -40,6 +40,11 @@ MonoBehaviour:
   - RPCRoll
   - RPCBlock
   - SetMovementAnim
+  - RPCSkill
+  - DecreasePlayerOneSkill
+  - DecreasePlayerTwoSkill
+  - IncreasePlayerOneSkill
+  - IncreasePlayerTwoSkill
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

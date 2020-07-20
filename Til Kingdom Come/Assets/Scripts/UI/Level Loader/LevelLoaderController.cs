@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +37,11 @@ namespace UI
         public void FadeOutCurrentMusic()
         {
             AudioManager.instance.FadeOutCurrentMusic();
+        }
+
+        public void StartMultiplayerGame()
+        {
+            PhotonNetwork.LoadLevel("MultiplayerArena");
         }
     }
 }
