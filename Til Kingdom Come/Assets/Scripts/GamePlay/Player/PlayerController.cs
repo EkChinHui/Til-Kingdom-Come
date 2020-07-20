@@ -66,6 +66,8 @@ namespace GamePlay.Player
         [Header("UI")] 
         public CooldownUIController cooldownUiController;
 
+        #region MONOBEHAVIOUR CALLS
+
         private void Awake()
         {
             photonView = GetComponent<PhotonView>();
@@ -100,11 +102,11 @@ namespace GamePlay.Player
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             currentHealth = maxHealth;
+            healthBarController.SetHealth(currentHealth);
             SkillSelectionManager.instance.AssignSkills(playerNo);
         }
         public void Update()
         {
-            healthBarController.SetHealth(currentHealth);
             if (!photonView.IsMine) return;
             // combo system
             if (combatState == CombatState.Attacking)
@@ -133,17 +135,25 @@ namespace GamePlay.Player
                 Move();
             }
         }
+        
+        private void OnDestroy()
+        {
+            ScoreKeeper.resetPlayersEvent -= ResetPlayer;
+            SkillSelectionManager.passPlayerSkills -= PassPlayerSkill;
+            onSuccessfulBlock -= SuccessfulBlock;
+        }
+
+        #endregion
+
         private void Move()
         {
             if (playerInput.AttemptRight && playerInput.AttemptLeft)
             {
                 anim.SetInteger("state", 0);
-                //photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
             }
             else if (playerInput.AttemptRight)
             {
                 anim.SetInteger("state", 1);
-                // photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
                 rb.velocity = new Vector2(runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) > Mathf.Epsilon)
                 {
@@ -153,7 +163,6 @@ namespace GamePlay.Player
             else if (playerInput.AttemptLeft)
             {
                 anim.SetInteger("state", 1);
-                // photonView.RPC("SetMovementAnim", RpcTarget.All, 1);
                 rb.velocity = new Vector2(-1 * runSpeed, rb.velocity.y);
                 if (Math.Abs(transform.rotation.y) < Mathf.Epsilon)
                 {
@@ -163,16 +172,40 @@ namespace GamePlay.Player
             else
             {
                 anim.SetInteger("state", 0);
-                // photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
             }
         }
 
+        #region RPC METHODS
+        
         [PunRPC]
-        private void SetMovementAnim(int i)
+        private void RPCRoll()
         {
-            anim.SetInteger("state", i);
+            roll.Cast(otherPlayer);
         }
         
+        [PunRPC]
+        private void RPCAttack()
+        {
+            attack.Cast(otherPlayer);
+        }
+        
+        [PunRPC]
+        private void RPCBlock()
+        {
+            block.Cast(otherPlayer);
+        }
+        
+        [PunRPC]
+        private void RPCSkill()
+        {
+            skill.Cast(otherPlayer);
+        }
+        
+
+        #endregion
+
+        #region LISTEN FOR
+
         private void ListenForRoll()
         {
             if (playerInput.AttemptRoll)
@@ -182,12 +215,6 @@ namespace GamePlay.Player
             }
         }
 
-        [PunRPC]
-        private void RPCRoll()
-        {
-            roll.Cast(otherPlayer);
-        }
-        
         private void ListenForAttack()
         {
             if (playerInput.AttemptAttack)
@@ -197,12 +224,6 @@ namespace GamePlay.Player
             }
         }
 
-        [PunRPC]
-        private void RPCAttack()
-        {
-            attack.Cast(otherPlayer);
-        }
-        
         private void ListenForBlock()
         {
             if (playerInput.AttemptBlock)
@@ -210,12 +231,6 @@ namespace GamePlay.Player
                 // block.Cast(otherPlayer);
                 photonView.RPC("RPCBlock", RpcTarget.All);
             }
-        }
-
-        [PunRPC]
-        private void RPCBlock()
-        {
-            block.Cast(otherPlayer);
         }
         
         private void ListenForSkill()
@@ -227,11 +242,8 @@ namespace GamePlay.Player
             }
         }
 
-        [PunRPC]
-        private void RPCSkill()
-        {
-            skill.Cast(otherPlayer);
-        }
+        #endregion
+       
 
         private IEnumerator Hurt()
         {
@@ -251,6 +263,25 @@ namespace GamePlay.Player
             // disable god mode
             godMode = false;
             combatState = CombatState.NonCombat;
+        }
+        
+        public void TakeDamage(float damageTaken)
+        {
+            if (!godMode)
+            {
+                Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
+                currentHealth -= damageTaken;
+                healthBarController.SetHealth(currentHealth);
+                if (currentHealth <= 0 && combatState != CombatState.Dead)
+                {
+                    Die();
+                } 
+                else
+                {
+                    // Hurt;
+                    StartCoroutine(Hurt());
+                }
+            }
         }
 
         private IEnumerator Stun(float duration)
@@ -286,24 +317,6 @@ namespace GamePlay.Player
             rb.velocity = velocity;
         }
 
-        public void TakeDamage(float damageTaken)
-        {
-            if (!godMode)
-            {
-                Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
-                currentHealth -= damageTaken;
-                if (currentHealth <= 0 && combatState != CombatState.Dead)
-                {
-                    Die();
-                } 
-                else
-                {
-                    // Hurt;
-                    StartCoroutine(Hurt());
-                }
-            }
-        }
-        
         private void SuccessfulBlock()
         {
             var heightOffset = new Vector3(0, 1.5f, 0);
@@ -377,16 +390,6 @@ namespace GamePlay.Player
             {
                 cooldownUiController.skillIcon.GetComponent<DisplayCharges>().charges = skillCharges.CurrentCharge;
             }
-        }
-        
-        /*[PunRPC]
-        private void RPCPassSkills*/
-
-        private void OnDestroy()
-        {
-            ScoreKeeper.resetPlayersEvent -= ResetPlayer;
-            SkillSelectionManager.passPlayerSkills -= PassPlayerSkill;
-            onSuccessfulBlock -= SuccessfulBlock;
         }
 
     }
