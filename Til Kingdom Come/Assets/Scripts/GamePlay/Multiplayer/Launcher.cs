@@ -218,7 +218,7 @@ namespace GamePlay.Multiplayer
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             GameObject entry = Instantiate(PlayerEntryPrefab);
-            entry.transform.SetParent(RoomLobbyPanel.transform);
+            entry.transform.SetParent(LobbyVerticalLayoutGroup.transform);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().SetName(newPlayer.NickName);
             playerListEntries.Add(newPlayer.ActorNumber, entry);
