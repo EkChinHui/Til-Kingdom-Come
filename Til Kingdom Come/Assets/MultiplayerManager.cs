@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using GamePlay.Player;
 using Photon.Pun;
 using UI.GameUI.Cooldown;
@@ -13,8 +14,8 @@ public class MultiplayerManager : MonoBehaviour
     public CooldownUIController cooldownUiControllerOne;
     public CooldownUIController cooldownUiControllerTwo;
     
-    public static PlayerController playerOne;
-    public static PlayerController playerTwo;
+    public PlayerController playerOne;
+    public PlayerController playerTwo;
     
     private void Awake()
     {
@@ -30,7 +31,6 @@ public class MultiplayerManager : MonoBehaviour
             playerController.cooldownUiController = cooldownUiControllerOne;
             playerOne = playerController;
             playerController.playerInput.Toggle();
-            playerController.otherPlayer = GameObject.Find("Player 2 Multiplayer Variant(clone)").GetComponent<PlayerController>();
         }
         else
         {
@@ -44,9 +44,16 @@ public class MultiplayerManager : MonoBehaviour
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;
             playerTwo = playerController;
-            playerController.otherPlayer = GameObject.Find("Player 1 Multiplayer Variant(clone)").GetComponent<PlayerController>();
         }
     }
 
-
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            playerOne.otherPlayer = GameObject.Find("Player 2 Multiplayer Variant(Clone)").GetComponent<PlayerController>();
+        }
+        else 
+            playerTwo.otherPlayer = GameObject.Find("Player 1 Multiplayer Variant(Clone)").GetComponent<PlayerController>();
+    }
 }
