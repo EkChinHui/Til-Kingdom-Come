@@ -209,12 +209,18 @@ namespace UI.Skill_selection
             skillCells.Add(skillCell);
         }
         
+        [PunRPC]
         public void PassSkills()
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Add(playerOneSkill);
             SkillSelectionManager.instance.assignedPlayerSkills.Add(playerTwoSkill);
             // resets the total players to 0
             PlayerController.totalPlayers = 0;
+        }
+
+        public void RPCPassSkills()
+        {
+            photonView.RPC("PassSkills", RpcTarget.All);
         }
         
     }

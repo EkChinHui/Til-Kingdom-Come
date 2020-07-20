@@ -747,7 +747,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1918064796}
-        m_MethodName: PassSkills
+        m_MethodName: RPCPassSkills
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

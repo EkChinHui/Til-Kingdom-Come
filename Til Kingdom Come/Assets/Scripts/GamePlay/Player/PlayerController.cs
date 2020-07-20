@@ -378,6 +378,9 @@ namespace GamePlay.Player
                 cooldownUiController.skillIcon.GetComponent<DisplayCharges>().charges = skillCharges.CurrentCharge;
             }
         }
+        
+        /*[PunRPC]
+        private void RPCPassSkills*/
 
         private void OnDestroy()
         {
