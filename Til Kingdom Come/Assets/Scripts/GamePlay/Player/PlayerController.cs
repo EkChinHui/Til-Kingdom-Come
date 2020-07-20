@@ -111,6 +111,10 @@ namespace GamePlay.Player
         }
         private void Start()
         {
+            if (PhotonNetwork.IsMasterClient)
+                otherPlayer = GameObject.Find("Player 2").GetComponent<PlayerController>();
+            else 
+                otherPlayer = GameObject.Find("Player 1").GetComponent<PlayerController>();
             // Instantiate variables on creation
             sprite = GetComponent<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
