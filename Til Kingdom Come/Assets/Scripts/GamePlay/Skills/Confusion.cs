@@ -21,9 +21,7 @@ namespace GamePlay.Skills
         public override void Cast(PlayerController opponent)
         {
             if (!CanCast()) return;
-
             
-
             StartCoroutine(AnimDelay());
             Debug.Log($"Player {player.playerNo} used {skillName}");
             AudioManager.instance.PlaySoundEffect("Force Pull");
@@ -31,6 +29,10 @@ namespace GamePlay.Skills
             {
                 opponent.KnockBack(pushDistance);
                 StartCoroutine(Confuse(opponent));
+            }
+            else
+            {
+                Debug.Log("Not facing opponent");
             }
             StartCoroutine(player.cooldownUiController.skillIcon.ChangesFillAmount(skillCooldown));
         }
@@ -58,6 +60,7 @@ namespace GamePlay.Skills
         private IEnumerator Confuse(PlayerController opponent)
         {
             opponent.playerInput.InvertKeys();
+            Debug.Log("Player " + player.playerNo + " cast confuse successfully");
             var heightOffset = new Vector3(0, 4f, 0);
             ParticleSystem confusion = opponent.confusion.GetComponent<ParticleSystem>();
             var confusionParticle = Instantiate(opponent.confusion, 

@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad869da2efbe12f41b33c852f905c6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MultiplayerMode: 1
   photonView: {fileID: 0}
   godMode: 0
   combatState: 0

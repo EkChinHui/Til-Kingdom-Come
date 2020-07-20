@@ -1297,6 +1297,7 @@ MonoBehaviour:
   skillCellTemplate: {fileID: 8844277990344288591, guid: efe3b02b7b32ca04fb256e1b396145af,
     type: 3}
   skillCells: []
+  startButton: {fileID: 867960605}
   playerOneLeft: 97
   playerOneRight: 100
   playerTwoLeft: 276

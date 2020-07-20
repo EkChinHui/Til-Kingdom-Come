@@ -12,8 +12,14 @@ namespace GamePlay.Player
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerController : MonoBehaviour
     {
-        public static int totalPlayers;
+        #region Multiplayer
+
+        public bool MultiplayerMode = false;
         public PhotonView photonView;
+
+        #endregion
+        
+        public static int totalPlayers;
         private SpriteRenderer sprite;
         private float runSpeed = 4f;
         private Vector2 originalPosition;
@@ -70,29 +76,34 @@ namespace GamePlay.Player
 
         private void Awake()
         {
-            photonView = GetComponent<PhotonView>();
             // Remember the original position of the players so match can be reset
             originalPosition = gameObject.transform.position;
             originalRotation = gameObject.transform.rotation;
-            /*totalPlayers++;
-            playerNo = totalPlayers;*/
+            
             ScoreKeeper.resetPlayersEvent += ResetPlayer;
             SkillSelectionManager.passPlayerSkills += PassPlayerSkill;
 
-            if (PhotonNetwork.IsMasterClient)
+            if (MultiplayerMode)
             {
-                playerNo = 2;
-                healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
-                cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
+                photonView = GetComponent<PhotonView>();
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    playerNo = 2;
+                    healthBarController = GameObject.Find("Player 2 Health").GetComponent<HealthBarController>();
+                    cooldownUiController = GameObject.Find("Player 2 Cooldown").GetComponent<CooldownUIController>();
+                }
+                else
+                {
+                    playerNo = 1;
+                    healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
+                    cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
+                }
             }
             else
             {
-                playerNo = 1;
-                healthBarController = GameObject.Find("Player 1 Health").GetComponent<HealthBarController>();
-                cooldownUiController = GameObject.Find("Player 1 Cooldown").GetComponent<CooldownUIController>();
+                totalPlayers++;
+                playerNo = totalPlayers;
             }
-            
-
             onSuccessfulBlock += SuccessfulBlock;
         }
         private void Start()
@@ -107,7 +118,11 @@ namespace GamePlay.Player
         }
         public void Update()
         {
-            if (!photonView.IsMine) return;
+            if (MultiplayerMode)
+            {
+                if (!photonView.IsMine) return;
+            }
+
             // combo system
             if (combatState == CombatState.Attacking)
             {
@@ -210,8 +225,10 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptRoll)
             {
-                // roll.Cast(otherPlayer);
-                photonView.RPC("RPCRoll", RpcTarget.All);
+                if (MultiplayerMode)
+                    photonView.RPC("RPCRoll", RpcTarget.All);
+                else 
+                    roll.Cast(otherPlayer);
             }
         }
 
@@ -219,8 +236,11 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptAttack)
             {
-                // attack.Cast(otherPlayer);
-                photonView.RPC("RPCAttack", RpcTarget.All);
+                if (MultiplayerMode) 
+                    photonView.RPC("RPCAttack", RpcTarget.All);
+                else 
+                    attack.Cast(otherPlayer);
+                
             }
         }
 
@@ -228,8 +248,10 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptBlock)
             {
-                // block.Cast(otherPlayer);
-                photonView.RPC("RPCBlock", RpcTarget.All);
+                if (MultiplayerMode) 
+                    photonView.RPC("RPCBlock", RpcTarget.All);
+                else 
+                    block.Cast(otherPlayer);
             }
         }
         
@@ -237,8 +259,10 @@ namespace GamePlay.Player
         {
             if (playerInput.AttemptSkill)
             {
-                // skill.Cast(otherPlayer);
-                photonView.RPC("RPCSkill", RpcTarget.All);
+                if (MultiplayerMode) 
+                    photonView.RPC("RPCSkill", RpcTarget.All);
+                else 
+                    skill.Cast(otherPlayer);
             }
         }
 
@@ -365,7 +389,6 @@ namespace GamePlay.Player
             godMode = false;
             anim.SetBool("Dead", false); 
             anim.SetInteger("state", 0);
-            // photonView.RPC("SetMovementAnim", RpcTarget.All, 0);
 
             currentHealth = maxHealth;
             rb.velocity = Vector2.zero;
