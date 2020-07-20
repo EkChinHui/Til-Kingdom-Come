@@ -59,7 +59,7 @@ namespace UI.Skill_selection
         private void DecreasePlayerOneSkill()
         {
             ClearBorder(playerOneSkill, 1);
-            playerOneSkill = playerOneSkill == 0 ? maxSkills: playerOneSkill - 1;
+            playerOneSkill = playerOneSkill == maxSkills ? 0: playerOneSkill - 1;
             SetBorder(playerOneSkill, 1);
         }
         
@@ -75,7 +75,7 @@ namespace UI.Skill_selection
         private void DecreasePlayerTwoSkill()
         {
             ClearBorder(playerTwoSkill, 2);
-            playerTwoSkill = playerTwoSkill == 0 ? maxSkills: playerTwoSkill - 1;
+            playerTwoSkill = playerTwoSkill == maxSkills ? 0: playerTwoSkill - 1;
             SetBorder(playerTwoSkill, 2);
         }
         
