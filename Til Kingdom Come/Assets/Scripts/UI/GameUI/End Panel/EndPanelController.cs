@@ -1,12 +1,11 @@
-﻿using GamePlay;
-using GamePlay.Information;
+﻿using GamePlay.Information;
 using GamePlay.Player;
 using JetBrains.Annotations;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-namespace UI
+namespace UI.GameUI.End_Panel
 {
     public class EndPanelController : MonoBehaviour
     {
@@ -41,7 +40,10 @@ namespace UI
         {
             Debug.Log("Reloading Game");
             PlayerController.totalPlayers = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "Game")
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            else
+                PhotonNetwork.LoadLevel("MultiplayerArena");
         }
 
         public void Home()
