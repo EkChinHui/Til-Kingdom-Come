@@ -10401,7 +10401,6 @@ GameObject:
   - component: {fileID: 1110248373}
   - component: {fileID: 1110248374}
   - component: {fileID: 1110248376}
-  - component: {fileID: 1110248375}
   m_Layer: 5
   m_Name: EndPanel
   m_TagString: Untagged
@@ -10446,21 +10445,7 @@ MonoBehaviour:
   board: {fileID: 106440838}
   redVictoryScreen: {fileID: 1718654276}
   blueVictoryScreen: {fileID: 929441542}
---- !u!114 &1110248375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110248372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
+  photonView: {fileID: 1110248376}
 --- !u!114 &1110248376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10479,7 +10464,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 1110248375}
+  - {fileID: 0}
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -36516,6 +36501,8 @@ MonoBehaviour:
   healthBarControllerTwo: {fileID: 487331833}
   cooldownUiControllerOne: {fileID: 2111674107}
   cooldownUiControllerTwo: {fileID: 97155045}
+  playerOne: {fileID: 0}
+  playerTwo: {fileID: 0}
 --- !u!4 &1917393090
 Transform:
   m_ObjectHideFlags: 0
