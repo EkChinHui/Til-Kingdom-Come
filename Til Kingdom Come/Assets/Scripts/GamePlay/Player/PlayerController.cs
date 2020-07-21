@@ -347,9 +347,9 @@ namespace GamePlay.Player
 
         private IEnumerator Stun(float duration)
         {
-            playerInput.Toggle();
+            playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
-            playerInput.Toggle();
+            playerInput.EnableInput();
         }
 
         private IEnumerator ChangeSpriteColorAndWait(float interval)
@@ -400,7 +400,7 @@ namespace GamePlay.Player
             combatState = CombatState.Dead;
 
             // Disable input
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
 
             // Die animation
             anim.SetBool("Dead", true);

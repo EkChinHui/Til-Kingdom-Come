@@ -49,11 +49,11 @@ namespace GamePlay.Skills
         private IEnumerator BlockAnimDelay(PlayerController player)
         {
             player.combatState = PlayerController.CombatState.Blocking;
-            player.playerInput.Toggle();
+            player.playerInput.DisableInput();
             player.anim.SetTrigger("Block");
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
         }
     }
 }

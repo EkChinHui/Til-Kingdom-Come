@@ -17,12 +17,12 @@ public class PauseMenuController : MonoBehaviour
             {
                 if(gameIsPaused)
                 {
-                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+                    if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
                     Resume();
                 }
                 else
                 {
-                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+                    if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
                     Pause();
                 }
             }

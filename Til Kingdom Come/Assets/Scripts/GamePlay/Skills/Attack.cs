@@ -90,7 +90,7 @@ namespace GamePlay.Skills
 
             charges.CurrentCharge -= 1;
             // Disable input
-            player.playerInput.Toggle();
+            player.playerInput.DisableInput();
 
             // Combo will be upgraded to next combo if it is executed within the decay time
             combo.SetDecay();
@@ -199,7 +199,7 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
         }
 
         private IEnumerator ComboTwoAnimDelay()
@@ -215,7 +215,7 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
         }
 
         private IEnumerator ComboThreeAnimDelay()
@@ -245,7 +245,7 @@ namespace GamePlay.Skills
             
             #endregion
             
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
         }
         
         

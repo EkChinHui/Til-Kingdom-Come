@@ -5,7 +5,8 @@ namespace GamePlay.Player
 {
     public class PlayerInput : MonoBehaviour
     {
-        public static Action onToggleInput;
+        public static Action onEnableInput;
+        public static Action onDisableInput;
         [SerializeField] public bool inputIsEnabled = true;
         [Header("Input")]
         public PlayerKeyInput playerKeyInput;
@@ -32,7 +33,8 @@ namespace GamePlay.Player
 
         private void Start()
         {
-            onToggleInput += Toggle;
+            onEnableInput += EnableInput;
+            onDisableInput += DisableInput;
             leftKey = playerKeyInput.GetLeftKey();
             rightKey = playerKeyInput.GetRightKey();
             rollKey = playerKeyInput.GetRollKey();
@@ -57,7 +59,7 @@ namespace GamePlay.Player
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
-        public void Toggle()
+        public void EnableInput()
         {
             if (inputIsEnabled)
             {
@@ -68,8 +70,22 @@ namespace GamePlay.Player
                 attemptBlock = false;
                 attemptSkill = false;
             }
-            inputIsEnabled = !inputIsEnabled;
-            Debug.Log("Toggle Input");
+            inputIsEnabled = true;
+            Debug.Log("Enable Input");
+        }
+        public void DisableInput()
+        {
+            if (inputIsEnabled)
+            {
+                attemptLeft = false;
+                attemptRight = false;
+                attemptRoll = false;
+                attemptAttack = false;
+                attemptBlock = false;
+                attemptSkill = false;
+            }
+            inputIsEnabled = true;
+            Debug.Log("Disable Input");
         }
 
         public void InvertKeys()
@@ -81,7 +97,8 @@ namespace GamePlay.Player
 
         private void OnDestroy()
         {
-            onToggleInput -= Toggle;
+            onEnableInput -= EnableInput;
+            onDisableInput -= DisableInput;
         }
         
     }

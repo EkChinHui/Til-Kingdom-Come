@@ -32,7 +32,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             playerController.healthBarController = healthBarControllerOne;
             playerController.cooldownUiController = cooldownUiControllerOne;
             playerOne = playerController;
-            playerController.playerInput.Toggle();
+            playerController.playerInput.DisableInput();
         }
         else
         {
@@ -41,7 +41,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             player.name = "Player 2";
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 2;
-            playerController.playerInput.Toggle();
+            playerController.playerInput.DisableInput();
             cameraGroup.AddMember(player.transform, 1, 0);
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;

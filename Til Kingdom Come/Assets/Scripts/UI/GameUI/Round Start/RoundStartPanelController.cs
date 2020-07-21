@@ -24,7 +24,7 @@ namespace UI.GameUI.Round_Start
         {
             rectTransform = GetComponent<RectTransform>();
             startYAxis = rectTransform.anchoredPosition.y;
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
             lowering = true;
             playSound = true;
             pauseMenuController.canPause = false;
@@ -59,7 +59,7 @@ namespace UI.GameUI.Round_Start
                 rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
             } else {
                 raising = false;
-                if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+                if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
                 pauseMenuController.canPause = true;
             }
         }
@@ -76,7 +76,7 @@ namespace UI.GameUI.Round_Start
 
         public void nextRound() {
             UpdateRoundNumber();
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
             lowering = true;
             pauseMenuController.canPause = false;
             playSound = true;
