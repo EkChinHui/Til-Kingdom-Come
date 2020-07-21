@@ -398,6 +398,7 @@ namespace GamePlay.Player
             anim.SetInteger("state", 0);
 
             currentHealth = maxHealth;
+            healthBarController.SetHealth(currentHealth);
             rb.velocity = Vector2.zero;
             combatState = CombatState.NonCombat;
             enabled = true;
