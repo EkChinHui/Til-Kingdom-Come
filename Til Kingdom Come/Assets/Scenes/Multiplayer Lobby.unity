@@ -745,6 +745,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210166225}
   m_CullTransparentMesh: 0
+--- !u!1 &249780264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249780267}
+  - component: {fileID: 249780266}
+  - component: {fileID: 249780265}
+  m_Layer: 0
+  m_Name: Update Wins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &249780265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249780264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &249780266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249780264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c470f1348338a2d45bef57ce4abe317a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonView: {fileID: 249780265}
+  text: {fileID: 136999627}
+  message: 'No. of Wins: '
+--- !u!4 &249780267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249780264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7478034, y: -0.15894935, z: -6915.5684}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263114155
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +823,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263114156}
-  - component: {fileID: 263114157}
   m_Layer: 5
   m_Name: Map Changer
   m_TagString: Untagged
@@ -784,22 +852,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 15, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &263114157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263114155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fac739304894cf45a39a33de09df28e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 325708282}
-  sprites:
-  - {fileID: 21300000, guid: 5c49b36ca0d2b4c69b77117b3cb86435, type: 3}
-  - {fileID: 21300000, guid: 6ea8eeb58b8f64ce18058262bf7d0cd2, type: 3}
 --- !u!1 &288149832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2417,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 263114157}
+      - m_Target: {fileID: 1860519077}
         m_MethodName: PreviousOption
         m_Mode: 1
         m_Arguments:
@@ -2679,7 +2731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1173845749}
+      - m_Target: {fileID: 249780266}
         m_MethodName: MinusWins
         m_Mode: 1
         m_Arguments:
@@ -2967,8 +3019,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1173845748}
-  - component: {fileID: 1173845749}
-  - component: {fileID: 1173845750}
   m_Layer: 5
   m_Name: Number of Wins
   m_TagString: Untagged
@@ -2998,43 +3048,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -334}
   m_SizeDelta: {x: -1592, y: -422}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1173845749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173845747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c470f1348338a2d45bef57ce4abe317a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 1173845750}
-  text: {fileID: 136999627}
-  message: 'No. of Wins: '
---- !u!114 &1173845750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173845747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1175354590
 GameObject:
   m_ObjectHideFlags: 0
@@ -4030,8 +4043,8 @@ MonoBehaviour:
   SelectionPanel: {fileID: 1869284013}
   CreateRoomPanel: {fileID: 104095275}
   RoomNameInputField: {fileID: 1911392687}
-  UpdateWins: {fileID: 1173845749}
-  MapChanger: {fileID: 263114157}
+  UpdateWins: {fileID: 249780266}
+  MapChanger: {fileID: 1860519077}
   RoomListPanel: {fileID: 1089307667}
   RoomListContent: {fileID: 1699307153}
   RoomListEntryPrefab: {fileID: 3218021453726785269, guid: b6152ed5292aed746a3c20e39f1c6254,
@@ -4316,7 +4329,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1173845749}
+      - m_Target: {fileID: 249780266}
         m_MethodName: AddWins
         m_Mode: 1
         m_Arguments:
@@ -4474,6 +4487,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794860076}
   m_CullTransparentMesh: 0
+--- !u!1 &1860519076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1860519078}
+  - component: {fileID: 1860519077}
+  m_Layer: 0
+  m_Name: Map Changer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1860519077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860519076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fac739304894cf45a39a33de09df28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 325708282}
+  sprites:
+  - {fileID: 21300000, guid: 5c49b36ca0d2b4c69b77117b3cb86435, type: 3}
+  - {fileID: 21300000, guid: 6ea8eeb58b8f64ce18058262bf7d0cd2, type: 3}
+--- !u!4 &1860519078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860519076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1158.9194, y: 667.36053, z: -7050.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869284013
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,7 +5205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 263114157}
+      - m_Target: {fileID: 1860519077}
         m_MethodName: NextOption
         m_Mode: 1
         m_Arguments:
