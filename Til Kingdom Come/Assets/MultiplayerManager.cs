@@ -2,10 +2,12 @@
 using Cinemachine;
 using GamePlay.Player;
 using Photon.Pun;
+using Photon.Realtime;
 using UI.GameUI.Cooldown;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MultiplayerManager : MonoBehaviour
+public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     public CinemachineTargetGroup cameraGroup;
     public GameObject playerPrefab;
@@ -55,5 +57,17 @@ public class MultiplayerManager : MonoBehaviour
         }
         else 
             playerTwo.otherPlayer = GameObject.Find("Player 1 Multiplayer Variant(Clone)").GetComponent<PlayerController>();
+    }
+
+
+    public void QuitRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Multiplayer Lobby");
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        QuitRoom();
     }
 }
