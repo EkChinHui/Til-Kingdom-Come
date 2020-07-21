@@ -25,6 +25,7 @@ namespace GamePlay.Skills
             if (nextTime < Time.time)
             {
                 player.TakeDamage(damagePerTick);
+                player.TakeDamageCheckHelper(damagePerTick);
                 nextTime = Time.time + timeBetweenTicks;
             }
         }

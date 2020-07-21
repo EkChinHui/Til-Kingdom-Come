@@ -93,6 +93,7 @@ namespace GamePlay.Skills
                 {
                     AudioManager.instance.PlaySoundEffect("Decapitation");
                     opponent.TakeDamage(damage);
+                    opponent.TakeDamageCheckHelper(damage);
                     Debug.Log("successful lunge hit");
                 }
             }

@@ -340,6 +340,11 @@ namespace GamePlay.Player
             }
         }
 
+        public void TakeDamageCheckHelper(float damageTaken)
+        {
+            if (MultiplayerMode) photonView.RPC("TakeDamageCheck", RpcTarget.All, damageTaken);
+        }
+
         private IEnumerator Stun(float duration)
         {
             playerInput.Toggle();
