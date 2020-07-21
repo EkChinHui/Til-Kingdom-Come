@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GamePlay.Map.Map_Two
 {
@@ -23,7 +25,15 @@ namespace GamePlay.Map.Map_Two
                 {
                     float boulderSpawnXAxis = Random.Range(-15, 15);
                     var boulderSpawnPosition = new Vector3(boulderSpawnXAxis, boulderSpawnYAxis, 0);
-                    Instantiate(boulder, boulderSpawnPosition, Quaternion.identity);
+                    if (SceneManager.GetActiveScene().name == "Game")
+                        Instantiate(boulder, boulderSpawnPosition, Quaternion.identity);
+                    else
+                    {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            PhotonNetwork.InstantiateSceneObject("Boulder", boulderSpawnPosition, Quaternion.identity);
+                        }
+                    }
                 }
             }
         }
