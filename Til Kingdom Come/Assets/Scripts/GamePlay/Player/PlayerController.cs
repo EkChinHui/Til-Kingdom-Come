@@ -238,6 +238,15 @@ namespace GamePlay.Player
                 tookDamage = false;
             }
         }
+
+        [PunRPC]
+        public void DieCheck()
+        {
+            if (combatState != CombatState.Dead)
+            {
+                Die();
+            }
+        }
         #endregion
 
         #region LISTEN FOR
@@ -321,6 +330,7 @@ namespace GamePlay.Player
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
                 {
                     Die();
+                    photonView.RPC("DieCheck", RpcTarget.All);
                 } 
                 else
                 {
