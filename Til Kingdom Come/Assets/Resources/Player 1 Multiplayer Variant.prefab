@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MultiplayerMode: 1
   photonView: {fileID: 0}
-  godMode: 0
+  godMode: 1
   combatState: 0
   currentHealth: 0
   rb: {fileID: 0}

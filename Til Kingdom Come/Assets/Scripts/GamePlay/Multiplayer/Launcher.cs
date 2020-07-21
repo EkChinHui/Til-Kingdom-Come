@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UI.GameUI.Player_Score;
+using UI.Map;
 
 namespace GamePlay.Multiplayer
 {
@@ -24,12 +26,12 @@ namespace GamePlay.Multiplayer
 
         [Header("Create Room Panel")]
         public GameObject CreateRoomPanel;
-        // public InputField RoomNameInputField;
         public TextMeshProUGUI RoomNameInputField;
+        public UpdateWins UpdateWins;
+        public MapChanger MapChanger;
 
         [Header("Room List Panel")]
         public GameObject RoomListPanel;
-
         public GameObject RoomListContent;
         public GameObject RoomListEntryPrefab;
 
@@ -39,8 +41,7 @@ namespace GamePlay.Multiplayer
         public GameObject PlayerEntryPrefab;
         public GameObject startButton;
         public Button button;
-        
-        
+
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
         private Dictionary<int, GameObject> playerListEntries;
@@ -82,7 +83,7 @@ namespace GamePlay.Multiplayer
         /// </summary>
         void Start()
         {
-            
+
         }
 
         private void Update()
@@ -165,6 +166,7 @@ namespace GamePlay.Multiplayer
                 Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
                 return;
             }
+            UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
         }
 
