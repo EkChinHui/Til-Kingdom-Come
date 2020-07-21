@@ -3010,7 +3010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c470f1348338a2d45bef57ce4abe317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
+  photonView: {fileID: 1173845750}
   text: {fileID: 136999627}
   message: 'No. of Wins: '
 --- !u!114 &1173845750

@@ -16,10 +16,6 @@ namespace UI.GameUI.Player_Score
         public static int player2Wins = 0;
         public string message = "No. of wins: ";
         
-        private void Awake()
-        {
-            photonView = GetComponent<PhotonView>();
-        }
 
         public void AddWins()
         {
