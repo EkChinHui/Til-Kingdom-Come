@@ -16,6 +16,7 @@ namespace GamePlay.Player
 
         public bool MultiplayerMode = false;
         public PhotonView photonView;
+        private bool tookDamage = false;
 
         #endregion
         
@@ -224,7 +225,19 @@ namespace GamePlay.Player
             skill.Cast(otherPlayer);
         }
         
-
+        [PunRPC]
+        public void TakeDamageCheck(float damageTaken)
+        {
+            if (tookDamage)
+            {
+                tookDamage = false;
+            }
+            else
+            {
+                TakeDamage(damageTaken);
+                tookDamage = false;
+            }
+        }
         #endregion
 
         #region LISTEN FOR
@@ -301,6 +314,7 @@ namespace GamePlay.Player
         {
             if (!godMode)
             {
+                tookDamage = true; // used in TakeDamageCheck for multiplayer
                 Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
                 currentHealth -= damageTaken;
                 healthBarController.SetHealth(currentHealth);
