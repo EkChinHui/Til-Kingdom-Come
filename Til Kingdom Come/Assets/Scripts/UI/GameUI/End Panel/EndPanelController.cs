@@ -12,12 +12,13 @@ namespace UI.GameUI.End_Panel
         public GameObject board;
         public RedVictoryScreenController redVictoryScreen;
         public BlueVictoryScreenController blueVictoryScreen;
-        // public PhotonView photonView;
+        public PhotonView photonView;
 
         private void Start()
         {
             ScoreKeeper.onGameEnd += EndGame;
-            // photonView = GetComponent<PhotonView>();
+            photonView = GetComponent<PhotonView>();
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         private void EndGame(int player)
@@ -45,15 +46,14 @@ namespace UI.GameUI.End_Panel
             if (SceneManager.GetActiveScene().name == "Game")
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             else
-                PhotonNetwork.LoadLevel("MultiplayerArena");
-                //photonView.RPC("RPCReloadGame", RpcTarget.All);
+                photonView.RPC("RPCReloadGame", RpcTarget.All);
         }
 
-        /*[PunRPC]
+        [PunRPC]
         public void RPCReloadGame()
         {
             PhotonNetwork.LoadLevel("MultiplayerArena");
-        }*/
+        }
 
         public void Home()
         {

@@ -19,7 +19,6 @@ public class MultiplayerManager : MonoBehaviour
     
     private void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Master client");
