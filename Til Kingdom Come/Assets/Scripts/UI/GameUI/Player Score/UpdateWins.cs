@@ -3,6 +3,7 @@ using GamePlay.Information;
 using TMPro;
 using UnityEngine;
 using Photon.Pun;
+using UI.Map;
 
 namespace UI.GameUI.Player_Score
 {
