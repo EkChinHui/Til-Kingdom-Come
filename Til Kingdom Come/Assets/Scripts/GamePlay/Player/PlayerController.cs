@@ -122,6 +122,7 @@ namespace GamePlay.Player
             currentHealth = maxHealth;
             healthBarController.SetHealth(currentHealth);
             SkillSelectionManager.instance.AssignSkills(playerNo);
+            godMode = false;
         }
         public void Update()
         {
