@@ -28,6 +28,7 @@ namespace GamePlay.Skills
                 var rateIncrease = healAmount / healDuration;
                 player.currentHealth += rateIncrease * Time.deltaTime;
                 player.currentHealth = Math.Min(player.currentHealth, 100);
+                player.healthBarController.SetHealth(player.currentHealth);
             }
         }
 
