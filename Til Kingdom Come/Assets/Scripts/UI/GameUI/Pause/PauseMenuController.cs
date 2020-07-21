@@ -18,6 +18,7 @@ public class PauseMenuController : MonoBehaviour
                 if(gameIsPaused)
                 {
                     if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
+                    Debug.Log("Player enable input after pausing");
                     Resume();
                 }
                 else

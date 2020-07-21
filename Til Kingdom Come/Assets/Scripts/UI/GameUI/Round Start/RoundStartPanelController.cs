@@ -60,6 +60,7 @@ namespace UI.GameUI.Round_Start
             } else {
                 raising = false;
                 if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
+                Debug.Log("Player enable input after round start");
                 pauseMenuController.canPause = true;
             }
         }

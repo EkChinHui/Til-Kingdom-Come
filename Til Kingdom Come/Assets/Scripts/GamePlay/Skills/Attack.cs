@@ -200,6 +200,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo one");
         }
 
         private IEnumerator ComboTwoAnimDelay()
@@ -216,6 +217,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo two");
         }
 
         private IEnumerator ComboThreeAnimDelay()
@@ -246,6 +248,7 @@ namespace GamePlay.Skills
             #endregion
             
             player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo three");
         }
         
         

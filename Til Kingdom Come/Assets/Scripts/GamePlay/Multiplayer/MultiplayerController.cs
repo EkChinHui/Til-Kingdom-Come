@@ -203,6 +203,7 @@ namespace GamePlay.Multiplayer
             playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
             playerInput.EnableInput();
+            Debug.Log("Player " + playerNo + " enable input after stun");
         }
 
         private IEnumerator ChangeSpriteColorAndWait(float interval)

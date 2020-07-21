@@ -54,6 +54,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             player.combatState = PlayerController.CombatState.NonCombat;
             player.playerInput.EnableInput();
+            Debug.Log("Player enable input after blocking");
         }
     }
 }

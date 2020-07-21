@@ -61,6 +61,7 @@ namespace GamePlay.Skills
             yield return new WaitForSeconds(AnimationTimes.instance.RollAnim);
             dashing = false;
             player.playerInput.EnableInput();
+            Debug.Log("Player enable input after rolling");
             player.combatState = PlayerController.CombatState.NonCombat;
             player.rb.velocity = Vector2.zero;
         }
