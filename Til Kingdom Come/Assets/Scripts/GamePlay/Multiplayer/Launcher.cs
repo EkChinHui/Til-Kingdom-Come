@@ -184,6 +184,16 @@ namespace GamePlay.Multiplayer
 
         #region PUN CALLBACKS
 
+        public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+        {
+            GameObject playerEntry = null;
+            if (playerListEntries.TryGetValue(otherPlayer.ActorNumber, out playerEntry))
+            {
+                GameObject.Destroy(playerEntry);
+            }
+
+            playerListEntries.Remove(otherPlayer.ActorNumber);
+        }
 
         public override void OnConnectedToMaster()
         {
