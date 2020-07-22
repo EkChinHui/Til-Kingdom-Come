@@ -108,6 +108,16 @@ namespace GamePlay.Multiplayer
 
         #region UI CALLBACKS
 
+        public void OnNicknamePanelBackButtonClicked()
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+
+        public void OnSelectionPanelBackButtonClicked()
+        {
+            PhotonNetwork.Disconnect();
+        }
+        
         public void OnCreateRoomButtonClicked()
         {
             string roomName = RoomNameInputField.text;
@@ -192,6 +202,7 @@ namespace GamePlay.Multiplayer
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+            SetActivePanel("Nickname panel");
         }
         
         public override void OnJoinedRoom()

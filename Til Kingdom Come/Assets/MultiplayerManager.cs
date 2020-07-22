@@ -30,7 +30,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 1;
             cameraGroup.AddMember(player.transform, 1, 0);
-            cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
+            // Have not added dummy player to camera target group
+            // cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
             playerController.healthBarController = healthBarControllerOne;
             playerController.cooldownUiController = cooldownUiControllerOne;
             playerOne = playerController;
@@ -48,7 +49,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             playerController.playerNo = 2;
             playerController.playerInput.DisableInput();
             cameraGroup.AddMember(player.transform, 1, 0);
-            cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
+            // cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;
             playerTwo = playerController;
