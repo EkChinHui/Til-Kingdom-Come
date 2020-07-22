@@ -6,16 +6,22 @@ public class MenuController : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject playMenu;
-
-    public void Play()
+    private Vector3 activeScale;
+    private Vector3 inactiveScale;
+    private void Start()
     {
-        playMenu.SetActive(true);
-        mainMenu.SetActive(false);
+        activeScale = mainMenu.transform.localScale;
+        inactiveScale = new Vector3(0,0,0);
+    }
+    public void ToPlayMenu()
+    {
+        playMenu.transform.localScale = activeScale;
+        mainMenu.transform.localScale = inactiveScale;
     }
     
-    public void Main()
+    public void ToMainMenu()
     {
-        mainMenu.SetActive(true);
-        playMenu.SetActive(false);
+        mainMenu.transform.localScale = activeScale;
+        playMenu.transform.localScale = inactiveScale;
     }
 }
