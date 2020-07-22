@@ -15,6 +15,8 @@ namespace GamePlay.Multiplayer
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
+        private PhotonView photonView;
+        
         [Header("Login Panel")]
         public GameObject LoginPanel;
 
@@ -41,6 +43,10 @@ namespace GamePlay.Multiplayer
         public GameObject PlayerEntryPrefab;
         public GameObject startButton;
         public Button button;
+
+        [Header("Skill Select Panel")] 
+        public GameObject SkillSelectPanel;
+        
 
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
@@ -75,6 +81,7 @@ namespace GamePlay.Multiplayer
             
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
+            photonView = GetComponent<PhotonView>();
         }
 
 
@@ -140,6 +147,7 @@ namespace GamePlay.Multiplayer
             CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
             RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
             RoomLobbyPanel.SetActive(activePanel.Equals(RoomLobbyPanel.name));
+            SkillSelectPanel.SetActive(activePanel.Equals(SkillSelectPanel.name));
         }
         
         public void OnRoomListButtonClicked()
@@ -182,9 +190,20 @@ namespace GamePlay.Multiplayer
                 return;
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
-            PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
+            photonView.RPC("SkillSelectRPC", RpcTarget.All);
+            //PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
         }
 
+        [PunRPC]
+        private void SkillSelectRPC()
+        {
+            SetActivePanel(SkillSelectPanel.name);
+        }
+
+        public void OnSkillSelectStartButtonClicked()
+        {
+            PhotonNetwork.LoadLevel("MultiplayerArena");
+        }
 
 
         #region PUN CALLBACKS

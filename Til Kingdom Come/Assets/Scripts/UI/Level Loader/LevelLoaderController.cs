@@ -3,7 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI
+namespace UI.Level_Loader
 {
     public class LevelLoaderController : MonoBehaviour
     {
@@ -39,9 +39,6 @@ namespace UI
             AudioManager.instance.FadeOutCurrentMusic();
         }
 
-        public void StartMultiplayerGame()
-        {
-            PhotonNetwork.LoadLevel("MultiplayerArena");
-        }
+        
     }
 }
