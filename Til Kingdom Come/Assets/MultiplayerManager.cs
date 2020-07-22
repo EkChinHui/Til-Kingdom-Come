@@ -24,7 +24,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Master client");
-            var player = PhotonNetwork.Instantiate("Player 1 Multiplayer Variant", Vector3.zero, Quaternion.identity);
+            var startOffset = new Vector3(-10, 0, 0);
+            var player = PhotonNetwork.Instantiate("Player 1 Multiplayer Variant", Vector3.zero + startOffset, Quaternion.identity);
             player.name = "Player 1";
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 1;
@@ -37,7 +38,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Not Master client");
-            var player = PhotonNetwork.Instantiate("Player 2 Multiplayer Variant", Vector3.zero, Quaternion.identity);
+            var startOffset = new Vector3(10, 0, 0);
+            var player = PhotonNetwork.Instantiate("Player 2 Multiplayer Variant", Vector3.zero + startOffset, Quaternion.identity);
             player.name = "Player 2";
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 2;
