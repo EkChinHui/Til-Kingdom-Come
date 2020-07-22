@@ -228,6 +228,7 @@ namespace GamePlay.Player
         [PunRPC]
         public void TakeDamageCheck(float damageTaken)
         {
+            if (combatState == CombatState.Dead) return;
             if (tookDamage)
             {
                 tookDamage = false;
