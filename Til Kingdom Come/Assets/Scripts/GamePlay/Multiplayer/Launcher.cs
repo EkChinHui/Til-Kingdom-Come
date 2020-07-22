@@ -108,6 +108,12 @@ namespace GamePlay.Multiplayer
 
         #region UI CALLBACKS
 
+        public void OnRoomLobbyBackButtonClicked()
+        {
+            PhotonNetwork.LeaveRoom();
+            SetActivePanel(SelectionPanel.name);
+        }
+
         public void OnNicknamePanelBackButtonClicked()
         {
             SceneManager.LoadScene("Main Menu");
