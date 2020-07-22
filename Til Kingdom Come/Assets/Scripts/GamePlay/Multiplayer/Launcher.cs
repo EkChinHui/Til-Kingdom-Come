@@ -189,6 +189,14 @@ namespace GamePlay.Multiplayer
 
         #region PUN CALLBACKS
 
+        public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+        {
+            if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+            {
+                startButton.gameObject.SetActive(true);
+            }
+        }
+        
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
             Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
