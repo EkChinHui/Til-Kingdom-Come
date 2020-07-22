@@ -90,7 +90,7 @@ namespace GamePlay.Multiplayer
         /// </summary>
         void Start()
         {
-
+            PlayerNameInput.text = PlayerPrefs.GetString("Nickname", "");
         }
 
         private void Update()
@@ -132,8 +132,7 @@ namespace GamePlay.Multiplayer
         
         public void OnCreateRoomButtonClicked()
         {
-            string roomName = RoomNameInputField.text;
-            roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
+            string roomName = PlayerPrefs.GetString("Nickname", "") + "'s room";
             var roomOptions = new RoomOptions {MaxPlayers = 2};
             PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
@@ -163,8 +162,9 @@ namespace GamePlay.Multiplayer
         public void OnLoginButtonClicked()
         {
             string playerName = PlayerNameInput.text;
+            PlayerPrefs.SetString("Nickname", playerName);
 
-            if (!playerName.Equals(""))
+            if (!playerName.Equals("") || playerName.Length > 12)
             {
                 PhotonNetwork.LocalPlayer.NickName = playerName;
                 PhotonNetwork.ConnectUsingSettings();
@@ -253,7 +253,7 @@ namespace GamePlay.Multiplayer
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-            SetActivePanel("Nickname panel");
+            SetActivePanel(LoginPanel.name);
         }
         
         public override void OnJoinedRoom()
