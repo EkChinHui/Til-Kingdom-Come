@@ -111,7 +111,6 @@ namespace GamePlay.Multiplayer
         public void OnRoomLobbyBackButtonClicked()
         {
             PhotonNetwork.LeaveRoom();
-            SetActivePanel(SelectionPanel.name);
         }
 
         public void OnNicknamePanelBackButtonClicked()
@@ -193,14 +192,23 @@ namespace GamePlay.Multiplayer
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
             Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
-            GameObject playerEntry = null;
-            playerListEntries.TryGetValue(otherPlayer.ActorNumber, out playerEntry);
-            Debug.Log("Before remove: " + playerListEntries);
+            Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
             playerListEntries.Remove(otherPlayer.ActorNumber);
-            Debug.Log("After remove: " + playerListEntries);
-            Destroy(playerEntry);
         }
 
+        public override void OnLeftRoom()
+        {
+            SetActivePanel(SelectionPanel.name);
+
+            foreach (GameObject entry in playerListEntries.Values)
+            {
+                Destroy(entry.gameObject);
+            }
+
+            playerListEntries.Clear();
+            playerListEntries = null;
+        }
+        
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
