@@ -192,13 +192,11 @@ namespace GamePlay.Multiplayer
 
         public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
         {
+            Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
             GameObject playerEntry = null;
-            if (playerListEntries.TryGetValue(otherPlayer.ActorNumber, out playerEntry))
-            {
-                GameObject.Destroy(playerEntry);
-            }
-
+            playerListEntries.TryGetValue(otherPlayer.ActorNumber, out playerEntry);
             playerListEntries.Remove(otherPlayer.ActorNumber);
+            Destroy(playerEntry);
         }
 
         public override void OnConnectedToMaster()
