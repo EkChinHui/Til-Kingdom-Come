@@ -32,14 +32,14 @@ namespace GamePlay.Multiplayer
         public UpdateWins UpdateWins;
         public MapChanger MapChanger;
 
-        [Header("Room List Panel")]
+        [Header("Lobby Panel")]
         public GameObject RoomListPanel;
         public GameObject RoomListContent;
         public GameObject RoomListEntryPrefab;
 
-        [Header("Room Lobby Panel")]
+        [Header("Room Panel")]
         public GameObject RoomLobbyPanel;
-        public Transform LobbyVerticalLayoutGroup;
+        public Transform LobbyHorizontalLayoutGroup;
         public GameObject PlayerEntryPrefab;
         public GameObject startButton;
         public Button button;
@@ -266,7 +266,7 @@ namespace GamePlay.Multiplayer
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
                 GameObject entry = Instantiate(PlayerEntryPrefab);
-                entry.transform.SetParent(LobbyVerticalLayoutGroup);
+                entry.transform.SetParent(LobbyHorizontalLayoutGroup);
                 entry.transform.localScale = Vector3.one;
                 entry.GetComponent<PlayerEntry>().SetName(player.NickName);
                 playerListEntries.Add(player.ActorNumber, entry);
@@ -282,7 +282,7 @@ namespace GamePlay.Multiplayer
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             GameObject entry = Instantiate(PlayerEntryPrefab);
-            entry.transform.SetParent(LobbyVerticalLayoutGroup.transform);
+            entry.transform.SetParent(LobbyHorizontalLayoutGroup.transform);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().SetName(newPlayer.NickName);
             playerListEntries.Add(newPlayer.ActorNumber, entry);
