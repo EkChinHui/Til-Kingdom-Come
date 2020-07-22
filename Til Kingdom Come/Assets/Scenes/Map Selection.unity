@@ -469,7 +469,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 335}
-  m_SizeDelta: {x: 1356.7432, y: 108.86734}
+  m_SizeDelta: {x: 1000, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696903336
 MonoBehaviour:
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Map Selection
+  m_text: Choose Thy Map
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd783b11a574fad4686834855945083d, type: 2}
   m_sharedMaterial: {fileID: 4170527769760963022, guid: cd783b11a574fad4686834855945083d,
@@ -560,10 +560,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 696903336}
-    characterCount: 13
+    characterCount: 14
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1010,8 +1010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c470f1348338a2d45bef57ce4abe317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   text: {fileID: 1316818844}
-  wins: 1
   message: 'No. of Wins: '
 --- !u!1 &1717820933
 GameObject:
