@@ -83,7 +83,7 @@ namespace GamePlay.Player
                 attemptBlock = false;
                 attemptSkill = false;
             }
-            inputIsEnabled = true;
+            inputIsEnabled = false;
         }
 
         public void InvertKeys()

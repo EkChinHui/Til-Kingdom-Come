@@ -25,6 +25,7 @@ namespace UI.GameUI.Round_Start
             rectTransform = GetComponent<RectTransform>();
             startYAxis = rectTransform.anchoredPosition.y;
             if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
+            Debug.Log("Player disable input after round start");
             lowering = true;
             playSound = true;
             pauseMenuController.canPause = false;
@@ -78,6 +79,7 @@ namespace UI.GameUI.Round_Start
         public void nextRound() {
             UpdateRoundNumber();
             if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
+            Debug.Log("Player disable input after round start");
             lowering = true;
             pauseMenuController.canPause = false;
             playSound = true;
