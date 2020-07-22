@@ -195,7 +195,9 @@ namespace GamePlay.Multiplayer
             Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
             GameObject playerEntry = null;
             playerListEntries.TryGetValue(otherPlayer.ActorNumber, out playerEntry);
+            Debug.Log("Before remove: " + playerListEntries);
             playerListEntries.Remove(otherPlayer.ActorNumber);
+            Debug.Log("After remove: " + playerListEntries);
             Destroy(playerEntry);
         }
 
