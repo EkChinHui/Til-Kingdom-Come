@@ -31,7 +31,7 @@ namespace GamePlay.Multiplayer.Lobby
             roomName = name;
 
             RoomNameText.text = name;
-            RoomPlayersText.text = currentPlayers + " / " + maxPlayers;
+            RoomPlayersText.text = currentPlayers + "/" + maxPlayers;
         }
     }
 }
