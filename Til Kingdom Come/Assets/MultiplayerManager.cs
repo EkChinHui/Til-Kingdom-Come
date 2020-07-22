@@ -30,6 +30,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 1;
             cameraGroup.AddMember(player.transform, 1, 0);
+            cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
             playerController.healthBarController = healthBarControllerOne;
             playerController.cooldownUiController = cooldownUiControllerOne;
             playerOne = playerController;
@@ -39,12 +40,15 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Not Master client");
             var startOffset = new Vector3(10, 0, 0);
-            var player = PhotonNetwork.Instantiate("Player 2 Multiplayer Variant", Vector3.zero + startOffset, Quaternion.identity);
+            var quaternion = new Quaternion();
+            quaternion.eulerAngles = new Vector3(0, 180, 0);
+            var player = PhotonNetwork.Instantiate("Player 2 Multiplayer Variant", Vector3.zero + startOffset, quaternion);
             player.name = "Player 2";
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerController.playerNo = 2;
             playerController.playerInput.DisableInput();
             cameraGroup.AddMember(player.transform, 1, 0);
+            cameraGroup.AddMember(playerController.otherPlayer.transform, 1, 0);
             playerController.healthBarController = healthBarControllerTwo;
             playerController.cooldownUiController = cooldownUiControllerTwo;
             playerTwo = playerController;
