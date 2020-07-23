@@ -350,8 +350,7 @@ namespace GamePlay.Player
         {
             playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
-            // additional check for server lag
-            if (combatState != CombatState.Dead)
+            if (!otherPlayer.godMode)
             {
                 playerInput.EnableInput();
                 Debug.Log("Player " + playerNo + " enable input after stun");

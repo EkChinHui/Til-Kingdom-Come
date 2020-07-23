@@ -27,7 +27,7 @@ namespace GamePlay.Skills
             AudioManager.instance.PlaySoundEffect("Force Pull");
             if (isFacingOppponent(player, opponent))
             {
-                opponent.KnockBack(pushDistance);
+                // opponent.KnockBack(pushDistance);
                 StartCoroutine(Confuse(opponent));
             }
             else
