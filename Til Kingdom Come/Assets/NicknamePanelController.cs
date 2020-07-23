@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class NicknamePanelController : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    public TMP_InputField text;
 
     private void OnEnable()
     {
-        text.SetText(PlayerPrefs.GetString("Nickname", ""));
+        text.text = PlayerPrefs.GetString("Nickname", "");
     }
 }
