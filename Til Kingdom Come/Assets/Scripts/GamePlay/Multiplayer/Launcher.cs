@@ -7,7 +7,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 using UI.GameUI.Player_Score;
 using UI.Map;
 
@@ -19,8 +18,6 @@ namespace GamePlay.Multiplayer
         
         [Header("Login Panel")]
         public GameObject LoginPanel;
-
-        // public InputField PlayerNameInput;
         public TextMeshProUGUI PlayerNameInput;
 
         [Header("Selection Panel")]
@@ -28,7 +25,6 @@ namespace GamePlay.Multiplayer
 
         [Header("Create Room Panel")]
         public GameObject CreateRoomPanel;
-        public TextMeshProUGUI RoomNameInputField;
         public UpdateWins UpdateWins;
         public MapChanger MapChanger;
 
@@ -127,6 +123,10 @@ namespace GamePlay.Multiplayer
 
         public void OnSelectionPanelBackButtonClicked()
         {
+            if (!PhotonNetwork.IsConnected)
+            {
+                SetActivePanel(LoginPanel.name);
+            }
             PhotonNetwork.Disconnect();
         }
         
@@ -141,6 +141,14 @@ namespace GamePlay.Multiplayer
 
         public void SetActivePanel(string activePanel)
         {
+            if (activePanel.Equals(LoginPanel.name))
+            {
+                Debug.Log("setting login panel to active");
+                Debug.Log(PlayerPrefs.GetString("Nickname", ""));
+                var name = PlayerPrefs.GetString("Nickname", "");
+                PlayerNameInput.text = name;
+                PlayerNameInput.SetText(PlayerPrefs.GetString("Nickname", ""));
+            }
             LoginPanel.SetActive(activePanel.Equals(LoginPanel.name));
             SelectionPanel.SetActive(activePanel.Equals(SelectionPanel.name));
             CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
@@ -173,13 +181,6 @@ namespace GamePlay.Multiplayer
             {
                 Debug.LogError("Player Name is invalid.");
             }
-        }
-        
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 2;
-            PhotonNetwork.CreateRoom("testRoom", roomOptions, TypedLobby.Default);
         }
 
         public void OnStartButtonClicked()
@@ -226,7 +227,10 @@ namespace GamePlay.Multiplayer
         public override void OnLeftRoom()
         {
             SetActivePanel(SelectionPanel.name);
-
+            if (playerListEntries == null)
+            {
+                playerListEntries = new Dictionary<int, GameObject>();
+            }
             foreach (GameObject entry in playerListEntries.Values)
             {
                 Destroy(entry.gameObject);
