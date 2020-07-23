@@ -15,6 +15,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     public HealthBarController healthBarControllerTwo;
     public CooldownUIController cooldownUiControllerOne;
     public CooldownUIController cooldownUiControllerTwo;
+    public static bool gameEnded = false;
     
     public PlayerController playerOne;
     public PlayerController playerTwo;

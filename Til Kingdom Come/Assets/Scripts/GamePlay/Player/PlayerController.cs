@@ -228,6 +228,7 @@ namespace GamePlay.Player
         [PunRPC]
         public void TakeDamageCheck(float damageTaken)
         {
+            if (MultiplayerManager.gameEnded) return;
             if (combatState == CombatState.Dead) return;
             if (tookDamage)
             {
@@ -248,6 +249,13 @@ namespace GamePlay.Player
                 Die();
             }
         }
+
+        [PunRPC]
+        public void EndGame()
+        {
+            MultiplayerManager.gameEnded = true;
+        }
+        
         #endregion
 
         #region LISTEN FOR
@@ -398,6 +406,8 @@ namespace GamePlay.Player
             Debug.Log("Player " + playerNo + " dies.");
             Debug.Log("Player " + otherPlayer.playerNo + " enters God mode.");
             onDeath?.Invoke(playerNo);
+            if (MultiplayerMode)
+                photonView.RPC("EndGame", RpcTarget.All);
             otherPlayer.godMode = true;
             combatState = CombatState.Dead;
 
