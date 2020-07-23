@@ -71,6 +71,7 @@ namespace GamePlay.Player
                 attemptSkill = false;
             }
             inputIsEnabled = true;
+            Debug.Log("Enable player input");
         }
         public void DisableInput()
         {
@@ -84,6 +85,7 @@ namespace GamePlay.Player
                 attemptSkill = false;
             }
             inputIsEnabled = false;
+            Debug.Log("Disable player input");
         }
 
         public void InvertKeys()

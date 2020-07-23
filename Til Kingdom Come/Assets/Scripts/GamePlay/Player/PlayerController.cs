@@ -350,11 +350,8 @@ namespace GamePlay.Player
         {
             playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
-            if (!otherPlayer.godMode)
-            {
-                playerInput.EnableInput();
-                Debug.Log("Player " + playerNo + " enable input after stun");
-            }
+            playerInput.EnableInput();
+            Debug.Log("Player " + playerNo + " enable input after stun");
         }
 
         private IEnumerator ChangeSpriteColorAndWait(float interval)
