@@ -141,14 +141,6 @@ namespace GamePlay.Multiplayer
 
         public void SetActivePanel(string activePanel)
         {
-            if (activePanel.Equals(LoginPanel.name))
-            {
-                Debug.Log("setting login panel to active");
-                Debug.Log(PlayerPrefs.GetString("Nickname", ""));
-                var name = PlayerPrefs.GetString("Nickname", "");
-                PlayerNameInput.text = name;
-                PlayerNameInput.SetText(PlayerPrefs.GetString("Nickname", ""));
-            }
             LoginPanel.SetActive(activePanel.Equals(LoginPanel.name));
             SelectionPanel.SetActive(activePanel.Equals(SelectionPanel.name));
             CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
@@ -156,7 +148,7 @@ namespace GamePlay.Multiplayer
             RoomLobbyPanel.SetActive(activePanel.Equals(RoomLobbyPanel.name));
             SkillSelectPanel.SetActive(activePanel.Equals(SkillSelectPanel.name));
         }
-        
+
         public void OnRoomListButtonClicked()
         {
             if (!PhotonNetwork.InLobby)
