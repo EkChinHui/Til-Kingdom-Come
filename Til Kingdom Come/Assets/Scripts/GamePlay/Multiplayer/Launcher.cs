@@ -186,8 +186,8 @@ namespace GamePlay.Multiplayer
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             photonView.RPC("SkillSelectRPC", RpcTarget.All);
-            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
-            skillSelectStartButton.interactable = false;
+            // skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+            // skillSelectStartButton.interactable = false;
         }
 
         [PunRPC]
@@ -214,7 +214,7 @@ namespace GamePlay.Multiplayer
                 noReadyPlayers++;
             else
                 noReadyPlayers--;
-            skillSelectStartButton.interactable = PhotonNetwork.IsMasterClient;
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
         }
 
         #region PUN CALLBACKS
