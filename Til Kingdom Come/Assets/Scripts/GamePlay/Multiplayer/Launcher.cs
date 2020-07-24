@@ -215,7 +215,7 @@ namespace GamePlay.Multiplayer
                 noReadyPlayers++;
             else
                 noReadyPlayers--;
-            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient && noReadyPlayers == 2);
         }
 
         #region PUN CALLBACKS
