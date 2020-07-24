@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GamePlay.Multiplayer.Lobby;
+using GamePlay.Skills;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -42,8 +43,7 @@ namespace GamePlay.Multiplayer
 
         [Header("Skill Select Panel")] 
         public GameObject SkillSelectPanel;
-        public int noReadyPlayers = 0;
-        public bool playerReady = false;
+        public GameObject ReadyButton;
         public Button skillSelectStartButton;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
@@ -186,7 +186,9 @@ namespace GamePlay.Multiplayer
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             photonView.RPC("SkillSelectRPC", RpcTarget.All);
-            skillSelectStartButton.gameObject.SetActive(false); //PhotonNetwork.IsMasterClient);
+            skillSelectStartButton.gameObject.SetActive(false);
+            ReadyButton.SetActive(!PhotonNetwork.IsMasterClient);
+
             // skillSelectStartButton.interactable = false;
         }
 
@@ -203,7 +205,6 @@ namespace GamePlay.Multiplayer
 
         public void OnReadyButtonClicked()
         {
-            playerReady = !playerReady;
             photonView.RPC("RPCReadyButton", RpcTarget.All);
         }
 
@@ -211,11 +212,8 @@ namespace GamePlay.Multiplayer
         private void RPCReadyButton()
         {
             Debug.Log("Sending ready button rpc");
-            if (playerReady)
-                noReadyPlayers++;
-            else
-                noReadyPlayers--;
-            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient && noReadyPlayers == 2);
+            bool isActive = skillSelectStartButton.gameObject.activeSelf;
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient && !isActive);
         }
 
         #region PUN CALLBACKS

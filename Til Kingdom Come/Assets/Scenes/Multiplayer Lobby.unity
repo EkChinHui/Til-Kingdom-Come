@@ -5558,8 +5558,7 @@ MonoBehaviour:
   startButton: {fileID: 801489924}
   button: {fileID: 0}
   SkillSelectPanel: {fileID: 1342414675}
-  noReadyPlayers: 0
-  playerReady: 0
+  ReadyButton: {fileID: 1855907653}
   skillSelectStartButton: {fileID: 675544837}
 --- !u!4 &1599532246
 Transform:
