@@ -2,6 +2,7 @@
 using GamePlay;
 using GamePlay.Player;
 using TMPro;
+using UI.GameUI.Pause;
 using UnityEngine;
 
 namespace UI.GameUI.Round_Start

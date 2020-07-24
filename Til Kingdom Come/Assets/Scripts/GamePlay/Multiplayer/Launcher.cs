@@ -42,7 +42,9 @@ namespace GamePlay.Multiplayer
 
         [Header("Skill Select Panel")] 
         public GameObject SkillSelectPanel;
-        
+        public int noReadyPlayers = 0;
+        public bool playerReady = false;
+        public Button skillSelectStartButton;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
@@ -184,7 +186,8 @@ namespace GamePlay.Multiplayer
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             photonView.RPC("SkillSelectRPC", RpcTarget.All);
-            //PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+            skillSelectStartButton.interactable = false;
         }
 
         [PunRPC]
@@ -198,6 +201,21 @@ namespace GamePlay.Multiplayer
             PhotonNetwork.LoadLevel("MultiplayerArena");
         }
 
+        public void OnReadyButtonClicked()
+        {
+            playerReady = !playerReady;
+            photonView.RPC("RPCReadyButton", RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RPCReadyButton()
+        {
+            if (playerReady)
+                noReadyPlayers++;
+            else
+                noReadyPlayers--;
+            skillSelectStartButton.interactable = PhotonNetwork.IsMasterClient;
+        }
 
         #region PUN CALLBACKS
 

@@ -38,10 +38,13 @@ MonoBehaviour:
   - DecreasePlayerTwoSkill
   - DestroyRpc
   - DieCheck
+  - EndGame
   - IncreasePlayerOneSkill
   - IncreasePlayerTwoSkill
   - MultiplayerPassWins
+  - OnPauseButtonClicked
   - PassSkills
+  - Resume
   - RPCAttack
   - RPCBlock
   - RPCReloadGame
@@ -49,6 +52,7 @@ MonoBehaviour:
   - RPCSkill
   - SkillSelectRPC
   - TakeDamageCheck
+  - RPCReadyButton
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

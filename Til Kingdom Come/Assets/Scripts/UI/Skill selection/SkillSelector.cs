@@ -48,10 +48,6 @@ namespace UI.Skill_selection
             playerTwoSkill = 0;
             SetBorder(playerOneSkill,1);
             SetBorder(playerTwoSkill, 2);
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                startButton.SetActive(false);
-            }
         }
 
         [PunRPC]
