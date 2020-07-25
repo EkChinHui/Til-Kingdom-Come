@@ -859,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &140440684
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2192,7 +2192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &489793251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3008,7 +3008,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 801489927}
   m_OnClick:
     m_PersistentCalls:
@@ -5975,7 +5975,6 @@ MonoBehaviour:
   PlayerEntryPrefab: {fileID: 2008557261109405504, guid: 3a0c463732b37bf4db0c2499edd41d1a,
     type: 3}
   startButton: {fileID: 801489924}
-  button: {fileID: 0}
   SkillSelectPanel: {fileID: 1342414675}
   ReadyButton: {fileID: 1855907653}
   ReadyText: {fileID: 1142543561}

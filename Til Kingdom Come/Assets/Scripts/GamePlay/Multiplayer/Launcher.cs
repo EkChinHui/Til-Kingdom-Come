@@ -39,7 +39,6 @@ namespace GamePlay.Multiplayer
         public Transform LobbyHorizontalLayoutGroup;
         public GameObject PlayerEntryPrefab;
         public GameObject startButton;
-        public Button button;
 
         [Header("Skill Select Panel")] 
         public GameObject SkillSelectPanel;
@@ -76,7 +75,6 @@ namespace GamePlay.Multiplayer
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
-            button = startButton.GetComponent<Button>();
             
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
@@ -90,21 +88,6 @@ namespace GamePlay.Multiplayer
         void Start()
         {
             PlayerNameInput.text = PlayerPrefs.GetString("Nickname", "");
-        }
-
-        private void Update()
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-                {
-                    button.interactable = true;
-                }
-                else
-                {
-                    button.interactable = false;
-                }
-            }
         }
 
         #endregion
@@ -249,6 +232,7 @@ namespace GamePlay.Multiplayer
             Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
             Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
             playerListEntries.Remove(otherPlayer.ActorNumber);
+            startButton.GetComponent<Button>().interactable = false;
         }
 
         public override void OnLeftRoom()
@@ -317,6 +301,7 @@ namespace GamePlay.Multiplayer
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().SetName(newPlayer.NickName);
             playerListEntries.Add(newPlayer.ActorNumber, entry);
+            startButton.GetComponent<Button>().interactable = true;
         }
         
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
