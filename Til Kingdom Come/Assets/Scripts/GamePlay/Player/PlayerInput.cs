@@ -7,6 +7,9 @@ namespace GamePlay.Player
     {
         public static Action onEnableInput;
         public static Action onDisableInput;
+        public static Action onLockDisableInput;
+        public static Action onUnlockDisableInput;
+        private bool disableLocked = false;
         [SerializeField] public bool inputIsEnabled = true;
         [Header("Input")]
         public PlayerKeyInput playerKeyInput;
@@ -35,6 +38,7 @@ namespace GamePlay.Player
         {
             onEnableInput += EnableInput;
             onDisableInput += DisableInput;
+            onLockDisableInput += LockDisable;
             leftKey = playerKeyInput.GetLeftKey();
             rightKey = playerKeyInput.GetRightKey();
             rollKey = playerKeyInput.GetRollKey();
@@ -59,19 +63,32 @@ namespace GamePlay.Player
             attemptSkill = Input.GetKeyDown(skillKey);
         }
 
+        public void LockDisable()
+        {
+            disableLocked = true;
+        }
+
+        public void ForceEnable()
+        {
+            disableLocked = false;
+        }
+
         public void EnableInput()
         {
-            if (inputIsEnabled)
+            if (!disableLocked)
             {
-                attemptLeft = false;
-                attemptRight = false;
-                attemptRoll = false;
-                attemptAttack = false;
-                attemptBlock = false;
-                attemptSkill = false;
+                if (inputIsEnabled)
+                {
+                    attemptLeft = false;
+                    attemptRight = false;
+                    attemptRoll = false;
+                    attemptAttack = false;
+                    attemptBlock = false;
+                    attemptSkill = false;
+                }
+                inputIsEnabled = true;
+                Debug.Log("Enable player input");
             }
-            inputIsEnabled = true;
-            Debug.Log("Enable player input");
         }
         public void DisableInput()
         {
@@ -99,6 +116,7 @@ namespace GamePlay.Player
         {
             onEnableInput -= EnableInput;
             onDisableInput -= DisableInput;
+            onLockDisableInput -= LockDisable;
         }
         
     }

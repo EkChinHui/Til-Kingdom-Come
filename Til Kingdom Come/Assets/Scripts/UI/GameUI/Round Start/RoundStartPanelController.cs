@@ -61,6 +61,9 @@ namespace UI.GameUI.Round_Start
                 rectTransform.anchoredPosition += new Vector2(0, Time.deltaTime * speed);
             } else {
                 raising = false;
+                // Unlock disable input so that input can be enabled
+                if (PlayerInput.onUnlockDisableInput != null) PlayerInput.onUnlockDisableInput();
+                // Enable input
                 if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
                 MultiplayerManager.gameEnded = false;
                 Debug.Log("Player enable input after round start");

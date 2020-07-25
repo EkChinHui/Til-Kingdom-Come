@@ -413,6 +413,8 @@ namespace GamePlay.Player
 
             // Disable input
             if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
+            // Lock disable input so that it will not be enabled accidentally
+            if (PlayerInput.onLockDisableInput != null) PlayerInput.onLockDisableInput();
 
             // Die animation
             anim.SetBool("Dead", true);
