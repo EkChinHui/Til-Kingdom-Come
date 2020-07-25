@@ -5559,8 +5559,8 @@ MonoBehaviour:
   startButton: {fileID: 801489924}
   button: {fileID: 0}
   SkillSelectPanel: {fileID: 1342414675}
-  ReadyButton: {fileID: 1142543559}
-  ReadyText: {fileID: 0}
+  ReadyButton: {fileID: 1855907653}
+  ReadyText: {fileID: 1142543561}
   skillSelectStartButton: {fileID: 675544837}
 --- !u!4 &1599532246
 Transform:
@@ -6229,7 +6229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1855907654
 RectTransform:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ namespace GamePlay.Multiplayer
         [Header("Skill Select Panel")] 
         public GameObject SkillSelectPanel;
         public GameObject ReadyButton;
-        public TextMeshPro ReadyText;
+        public TextMeshProUGUI ReadyText;
         public Button skillSelectStartButton;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
