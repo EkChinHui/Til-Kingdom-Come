@@ -21,7 +21,7 @@ namespace GamePlay.Skills
         
         private void Update()
         {
-            // player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
+            player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
             if (charges.isCharging && charges.CurrentCharge < maxCharges)
             {
                 charges.isCharging = false;
