@@ -44,6 +44,7 @@ namespace GamePlay.Multiplayer
         [Header("Skill Select Panel")] 
         public GameObject SkillSelectPanel;
         public GameObject ReadyButton;
+        public TextMeshPro ReadyText;
         public Button skillSelectStartButton;
 
         private Dictionary<string, RoomInfo> cachedRoomList;
@@ -214,6 +215,23 @@ namespace GamePlay.Multiplayer
             Debug.Log("Sending ready button rpc");
             bool isActive = skillSelectStartButton.gameObject.activeSelf;
             skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient && !isActive);
+            photonView.RPC("RPCReadyText", RpcTarget.All, !isActive);
+        }
+
+        [PunRPC]
+        private void RPCReadyText(bool ready)
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                if (ready)
+                {
+                    ReadyText.text = "Ready!";
+                }
+                else
+                {
+                    ReadyText.text = "Ready?";
+                }
+            }
         }
 
         #region PUN CALLBACKS
