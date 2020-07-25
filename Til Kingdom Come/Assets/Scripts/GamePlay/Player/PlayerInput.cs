@@ -39,6 +39,7 @@ namespace GamePlay.Player
             onEnableInput += EnableInput;
             onDisableInput += DisableInput;
             onLockDisableInput += LockDisable;
+            onUnlockDisableInput += UnlockDisable;
             leftKey = playerKeyInput.GetLeftKey();
             rightKey = playerKeyInput.GetRightKey();
             rollKey = playerKeyInput.GetRollKey();
@@ -65,11 +66,13 @@ namespace GamePlay.Player
 
         public void LockDisable()
         {
+            Debug.Log("Disable locked");
             disableLocked = true;
         }
 
-        public void ForceEnable()
+        public void UnlockDisable()
         {
+            Debug.Log("Disable unlocked");
             disableLocked = false;
         }
 
@@ -117,6 +120,7 @@ namespace GamePlay.Player
             onEnableInput -= EnableInput;
             onDisableInput -= DisableInput;
             onLockDisableInput -= LockDisable;
+            onUnlockDisableInput -= UnlockDisable;
         }
         
     }
