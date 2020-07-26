@@ -170,7 +170,7 @@ namespace GamePlay.Multiplayer
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             photonView.RPC("SkillSelectRPC", RpcTarget.All);
-            skillSelectStartButton.gameObject.SetActive(false);
+            skillSelectStartButton.gameObject.GetComponent<Button>().interactable = false;
             ReadyButton.SetActive(!PhotonNetwork.IsMasterClient);
 
             // skillSelectStartButton.interactable = false;
@@ -196,8 +196,11 @@ namespace GamePlay.Multiplayer
         private void RPCReadyButton()
         {
             Debug.Log("Sending ready button rpc");
-            bool isActive = skillSelectStartButton.gameObject.activeSelf;
-            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient && !isActive);
+            bool isActive = skillSelectStartButton.gameObject.GetComponent<Button>().interactable;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                skillSelectStartButton.gameObject.GetComponent<Button>().interactable = !isActive;
+            }
             photonView.RPC("RPCReadyText", RpcTarget.All, !isActive);
         }
 
