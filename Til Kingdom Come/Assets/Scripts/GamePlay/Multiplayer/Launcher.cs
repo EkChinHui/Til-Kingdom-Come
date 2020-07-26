@@ -170,7 +170,6 @@ namespace GamePlay.Multiplayer
             }
             UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
             photonView.RPC("SkillSelectRPC", RpcTarget.All);
-            skillSelectStartButton.gameObject.GetComponent<Button>().interactable = false;
             ReadyButton.SetActive(!PhotonNetwork.IsMasterClient);
 
             // skillSelectStartButton.interactable = false;
@@ -180,6 +179,7 @@ namespace GamePlay.Multiplayer
         private void SkillSelectRPC()
         {
             SetActivePanel(SkillSelectPanel.name);
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
         }
 
         public void OnSkillSelectStartButtonClicked()
