@@ -39382,7 +39382,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1110248374}
-        m_MethodName: RPCMusic
+        m_MethodName: RPCQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
