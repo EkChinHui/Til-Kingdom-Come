@@ -21,7 +21,7 @@ namespace GamePlay.Skills
         
         private void Update()
         {
-            // player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
+            player.cooldownUiController.blockIcon.gameObject.GetComponent<DisplayCharges>().UpdateCharges(charges.CurrentCharge);
             if (charges.isCharging && charges.CurrentCharge < maxCharges)
             {
                 charges.isCharging = false;
@@ -49,11 +49,12 @@ namespace GamePlay.Skills
         private IEnumerator BlockAnimDelay(PlayerController player)
         {
             player.combatState = PlayerController.CombatState.Blocking;
-            player.playerInput.Toggle();
+            player.playerInput.DisableInput();
             player.anim.SetTrigger("Block");
             yield return new WaitForSeconds(AnimationTimes.instance.BlockAnim);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
+            Debug.Log("Player enable input after blocking");
         }
     }
 }

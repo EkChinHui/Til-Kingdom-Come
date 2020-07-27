@@ -1825,6 +1825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 584988113}
   - component: {fileID: 584988114}
+  - component: {fileID: 584988115}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -1865,8 +1866,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPause: 1
+  photonView: {fileID: 584988115}
+  gameIsPaused: 0
   pauseMenu: {fileID: 1008306073}
   blurEffect: {fileID: 1929757069}
+--- !u!114 &584988115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584988112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &597973717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,17 +2216,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1110248374}
-        m_MethodName: ReloadGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 584988114}
         m_MethodName: Restart
         m_Mode: 1
@@ -10400,7 +10414,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1110248373}
   - component: {fileID: 1110248374}
-  - component: {fileID: 1110248376}
   - component: {fileID: 1110248375}
   m_Layer: 5
   m_Name: EndPanel
@@ -10446,22 +10459,8 @@ MonoBehaviour:
   board: {fileID: 106440838}
   redVictoryScreen: {fileID: 1718654276}
   blueVictoryScreen: {fileID: 929441542}
+  photonView: {fileID: 0}
 --- !u!114 &1110248375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110248372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
---- !u!114 &1110248376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10476,10 +10475,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 1110248375}
+  - {fileID: 0}
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -10644,7 +10643,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 584988114}
-        m_MethodName: Resume
+        m_MethodName: MultiplayerResume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -36516,6 +36515,8 @@ MonoBehaviour:
   healthBarControllerTwo: {fileID: 487331833}
   cooldownUiControllerOne: {fileID: 2111674107}
   cooldownUiControllerTwo: {fileID: 97155045}
+  playerOne: {fileID: 0}
+  playerTwo: {fileID: 0}
 --- !u!4 &1917393090
 Transform:
   m_ObjectHideFlags: 0
@@ -39167,8 +39168,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 584988114}
-        m_MethodName: Home
+      - m_Target: {fileID: 1917393089}
+        m_MethodName: QuitRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -39176,17 +39177,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2037314631}
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2078922502
@@ -39391,26 +39381,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037314631}
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Main Menu
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1110248374}
-        m_MethodName: Home
+        m_MethodName: RPCQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Theme
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &512347310747024115

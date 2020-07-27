@@ -51,6 +51,7 @@ namespace GamePlay.Skills
         // raycast
         private void LungeCast()
         {
+            AudioManager.instance.PlaySoundEffect("Lunge");
             var transform2D = new Vector2(player.transform.position.x, player.transform.position.y);
             var direction = Math.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? new Vector2(-1, 0)
@@ -93,6 +94,7 @@ namespace GamePlay.Skills
                 {
                     AudioManager.instance.PlaySoundEffect("Decapitation");
                     opponent.TakeDamage(damage);
+                    opponent.TakeDamageCheckHelper(damage);
                     Debug.Log("successful lunge hit");
                 }
             }

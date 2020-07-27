@@ -200,9 +200,10 @@ namespace GamePlay.Multiplayer
 
         private IEnumerator Stun(float duration)
         {
-            playerInput.Toggle();
+            playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
-            playerInput.Toggle();
+            playerInput.EnableInput();
+            Debug.Log("Player " + playerNo + " enable input after stun");
         }
 
         private IEnumerator ChangeSpriteColorAndWait(float interval)
@@ -271,7 +272,7 @@ namespace GamePlay.Multiplayer
             combatState = CombatState.Dead;
 
             // Disable input
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
 
             // Die animation
             anim.SetBool("Dead", true);

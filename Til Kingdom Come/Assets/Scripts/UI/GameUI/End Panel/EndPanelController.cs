@@ -1,22 +1,25 @@
-﻿using GamePlay;
+﻿using System.Collections;
 using GamePlay.Information;
 using GamePlay.Player;
 using JetBrains.Annotations;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-namespace UI
+namespace UI.GameUI.End_Panel
 {
     public class EndPanelController : MonoBehaviour
     {
         public GameObject board;
         public RedVictoryScreenController redVictoryScreen;
         public BlueVictoryScreenController blueVictoryScreen;
+        public PhotonView photonView;
 
         private void Start()
         {
             ScoreKeeper.onGameEnd += EndGame;
+            photonView = GetComponent<PhotonView>();
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         private void EndGame(int player)
@@ -41,7 +44,45 @@ namespace UI
         {
             Debug.Log("Reloading Game");
             PlayerController.totalPlayers = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "Game")
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            else
+                photonView.RPC("RPCReloadGame", RpcTarget.All);
+        }
+
+        public void RPCQuit()
+        {
+            photonView.RPC("RPCHome", RpcTarget.All);
+            photonView.RPC("RPCMusic", RpcTarget.All);
+        }
+
+        [PunRPC]
+        public void RPCHome()
+        {
+            PhotonNetwork.LeaveRoom();
+            StartCoroutine(SceneChange());
+
+        }
+
+        private IEnumerator SceneChange()
+        {
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("Multiplayer Lobby");
+            yield return null;
+        }
+
+
+        [PunRPC]
+        public void RPCReloadGame()
+        {
+            PhotonNetwork.LoadLevel("MultiplayerArena");
+        }
+
+        [PunRPC]
+        public void RPCMusic()
+        {
+            AudioManager.instance.FadeOutCurrentMusic();
+            AudioManager.instance.PlayMusic("Main Theme");
         }
 
         public void Home()

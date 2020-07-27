@@ -44,6 +44,7 @@ namespace GamePlay.Skills
                     break;
                 default:
                     damagedPlayer.TakeDamage(damage);
+                    damagedPlayer.TakeDamageCheckHelper(damage);
                     DestroyProjectile();
                     Debug.Log("Throwing Knife Hit");
                     return;

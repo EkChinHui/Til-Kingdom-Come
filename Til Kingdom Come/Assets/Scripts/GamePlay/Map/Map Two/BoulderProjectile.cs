@@ -39,6 +39,7 @@ namespace GamePlay.Map.Map_Two
                 default:
                     Debug.Log(damagedPlayer.combatState);
                     damagedPlayer.TakeDamage(damage * size);
+                    damagedPlayer.TakeDamageCheckHelper(damage * size);
                     Debug.Log("Projectile Hits Target");
                     Impact();
                     return;

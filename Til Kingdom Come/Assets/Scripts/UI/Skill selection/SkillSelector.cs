@@ -34,7 +34,7 @@ namespace UI.Skill_selection
         private void Start()
         {
             SkillSelectionManager.instance.assignedPlayerSkills.Clear();
-            if (SceneManager.GetActiveScene().name == "Skill Selection Multiplayer") 
+            if (SceneManager.GetActiveScene().name == "Multiplayer Lobby") 
                 photonView = GetComponent<PhotonView>();
             maxSkills = skillPrefabs.Count - 1;
 
@@ -48,10 +48,6 @@ namespace UI.Skill_selection
             playerTwoSkill = 0;
             SetBorder(playerOneSkill,1);
             SetBorder(playerTwoSkill, 2);
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                startButton.SetActive(false);
-            }
         }
 
         [PunRPC]
@@ -97,7 +93,7 @@ namespace UI.Skill_selection
              * skill.
              */
 
-            if (SceneManager.GetActiveScene().name == "Skill Selection Multiplayer")
+            if (SceneManager.GetActiveScene().name == "Multiplayer Lobby")
             {
                 if (PhotonNetwork.IsMasterClient)
                 {

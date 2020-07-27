@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using GamePlay.Multiplayer.Lobby;
+using GamePlay.Skills;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
+using UI.GameUI.Player_Score;
+using UI.Map;
 
 namespace GamePlay.Multiplayer
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
+        private PhotonView photonView;
+        
         [Header("Login Panel")]
         public GameObject LoginPanel;
-
-        // public InputField PlayerNameInput;
         public TextMeshProUGUI PlayerNameInput;
 
         [Header("Selection Panel")]
@@ -24,23 +26,26 @@ namespace GamePlay.Multiplayer
 
         [Header("Create Room Panel")]
         public GameObject CreateRoomPanel;
-        // public InputField RoomNameInputField;
-        public TextMeshProUGUI RoomNameInputField;
+        public UpdateWins UpdateWins;
+        public MapChanger MapChanger;
 
-        [Header("Room List Panel")]
+        [Header("Lobby Panel")]
         public GameObject RoomListPanel;
-
         public GameObject RoomListContent;
         public GameObject RoomListEntryPrefab;
 
-        [Header("Room Lobby Panel")]
+        [Header("Room Panel")]
         public GameObject RoomLobbyPanel;
-        public Transform LobbyVerticalLayoutGroup;
+        public Transform LobbyHorizontalLayoutGroup;
         public GameObject PlayerEntryPrefab;
         public GameObject startButton;
-        public Button button;
-        
-        
+
+        [Header("Skill Select Panel")] 
+        public GameObject SkillSelectPanel;
+        public GameObject ReadyButton;
+        public TextMeshProUGUI ReadyText;
+        public Button skillSelectStartButton;
+
         private Dictionary<string, RoomInfo> cachedRoomList;
         private Dictionary<string, GameObject> roomListEntries;
         private Dictionary<int, GameObject> playerListEntries;
@@ -70,10 +75,10 @@ namespace GamePlay.Multiplayer
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
-            button = startButton.GetComponent<Button>();
             
             cachedRoomList = new Dictionary<string, RoomInfo>();
             roomListEntries = new Dictionary<string, GameObject>();
+            photonView = GetComponent<PhotonView>();
         }
 
 
@@ -82,22 +87,7 @@ namespace GamePlay.Multiplayer
         /// </summary>
         void Start()
         {
-            
-        }
-
-        private void Update()
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-                {
-                    button.interactable = true;
-                }
-                else
-                {
-                    button.interactable = false;
-                }
-            }
+            PlayerNameInput.text = PlayerPrefs.GetString("Nickname", "");
         }
 
         #endregion
@@ -107,10 +97,28 @@ namespace GamePlay.Multiplayer
 
         #region UI CALLBACKS
 
+        public void OnRoomLobbyBackButtonClicked()
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+
+        public void OnNicknamePanelBackButtonClicked()
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+
+        public void OnSelectionPanelBackButtonClicked()
+        {
+            if (!PhotonNetwork.IsConnected)
+            {
+                SetActivePanel(LoginPanel.name);
+            }
+            PhotonNetwork.Disconnect();
+        }
+        
         public void OnCreateRoomButtonClicked()
         {
-            string roomName = RoomNameInputField.text;
-            roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
+            string roomName = PlayerPrefs.GetString("Nickname", "") + "'s room";
             var roomOptions = new RoomOptions {MaxPlayers = 2};
             PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
@@ -124,8 +132,9 @@ namespace GamePlay.Multiplayer
             CreateRoomPanel.SetActive(activePanel.Equals(CreateRoomPanel.name));
             RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
             RoomLobbyPanel.SetActive(activePanel.Equals(RoomLobbyPanel.name));
+            SkillSelectPanel.SetActive(activePanel.Equals(SkillSelectPanel.name));
         }
-        
+
         public void OnRoomListButtonClicked()
         {
             if (!PhotonNetwork.InLobby)
@@ -139,23 +148,24 @@ namespace GamePlay.Multiplayer
         public void OnLoginButtonClicked()
         {
             string playerName = PlayerNameInput.text;
-
+            PlayerPrefs.SetString("Nickname", playerName);
+            
             if (!playerName.Equals(""))
             {
                 PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.ConnectUsingSettings();
+                if (PhotonNetwork.IsConnected)
+                {
+                    SetActivePanel(SelectionPanel.name);
+                }
+                else
+                {
+                    PhotonNetwork.ConnectUsingSettings();
+                }
             }
             else
             {
                 Debug.LogError("Player Name is invalid.");
             }
-        }
-        
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 2;
-            PhotonNetwork.CreateRoom("testRoom", roomOptions, TypedLobby.Default);
         }
 
         public void OnStartButtonClicked()
@@ -165,14 +175,92 @@ namespace GamePlay.Multiplayer
                 Debug.Log("PhotonNetwork: Trying to load a level but we are not the master client");
                 return;
             }
-            PhotonNetwork.LoadLevel("Skill Selection Multiplayer");
+            UpdateWins.photonView.RPC("MultiplayerPassWins", RpcTarget.All, MapChanger.current + 1, UpdateWins.wins);
+            photonView.RPC("SkillSelectRPC", RpcTarget.All);
+            ReadyButton.SetActive(!PhotonNetwork.IsMasterClient);
+
+            // skillSelectStartButton.interactable = false;
         }
 
+        [PunRPC]
+        private void SkillSelectRPC()
+        {
+            SetActivePanel(SkillSelectPanel.name);
+            skillSelectStartButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+        }
 
+        public void OnSkillSelectStartButtonClicked()
+        {
+            PhotonNetwork.LoadLevel("MultiplayerArena");
+        }
+
+        public void OnReadyButtonClicked()
+        {
+            photonView.RPC("RPCReadyButton", RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RPCReadyButton()
+        {
+            Debug.Log("Sending ready button rpc");
+            bool isActive = skillSelectStartButton.gameObject.GetComponent<Button>().interactable;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                skillSelectStartButton.gameObject.GetComponent<Button>().interactable = !isActive;
+            }
+            photonView.RPC("RPCReadyText", RpcTarget.All, !isActive);
+        }
+
+        [PunRPC]
+        private void RPCReadyText(bool ready)
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                if (ready)
+                {
+                    ReadyText.text = "Ready!";
+                }
+                else
+                {
+                    ReadyText.text = "Ready?";
+                }
+            }
+        }
 
         #region PUN CALLBACKS
 
+        public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+        {
+            if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+            {
+                startButton.gameObject.SetActive(true);
+            }
+        }
+        
+        public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+        {
+            Debug.Log("Player " + otherPlayer.ActorNumber + " has left the room");
+            Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
+            playerListEntries.Remove(otherPlayer.ActorNumber);
+            startButton.GetComponent<Button>().interactable = false;
+        }
 
+        public override void OnLeftRoom()
+        {
+            SetActivePanel(SelectionPanel.name);
+            if (playerListEntries == null)
+            {
+                playerListEntries = new Dictionary<int, GameObject>();
+            }
+            foreach (GameObject entry in playerListEntries.Values)
+            {
+                Destroy(entry.gameObject);
+            }
+
+            playerListEntries.Clear();
+            playerListEntries = null;
+        }
+        
         public override void OnConnectedToMaster()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
@@ -190,6 +278,7 @@ namespace GamePlay.Multiplayer
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+            SetActivePanel(LoginPanel.name);
         }
         
         public override void OnJoinedRoom()
@@ -202,7 +291,7 @@ namespace GamePlay.Multiplayer
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
                 GameObject entry = Instantiate(PlayerEntryPrefab);
-                entry.transform.SetParent(LobbyVerticalLayoutGroup);
+                entry.transform.SetParent(LobbyHorizontalLayoutGroup);
                 entry.transform.localScale = Vector3.one;
                 entry.GetComponent<PlayerEntry>().SetName(player.NickName);
                 playerListEntries.Add(player.ActorNumber, entry);
@@ -218,10 +307,11 @@ namespace GamePlay.Multiplayer
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             GameObject entry = Instantiate(PlayerEntryPrefab);
-            entry.transform.SetParent(LobbyVerticalLayoutGroup.transform);
+            entry.transform.SetParent(LobbyHorizontalLayoutGroup.transform);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntry>().SetName(newPlayer.NickName);
             playerListEntries.Add(newPlayer.ActorNumber, entry);
+            startButton.GetComponent<Button>().interactable = true;
         }
         
         public override void OnRoomListUpdate(List<RoomInfo> roomList)

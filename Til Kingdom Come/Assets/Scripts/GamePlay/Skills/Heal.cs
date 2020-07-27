@@ -52,6 +52,7 @@ namespace GamePlay.Skills
 
         private IEnumerator HealOverTime()
         {
+            AudioManager.instance.PlaySoundEffect("Heal");
             isHealing = true;
             var heightOffset = new Vector3(0, 4f, 0);
             var glowOffset = new Vector3(0, 0.5f, 0);

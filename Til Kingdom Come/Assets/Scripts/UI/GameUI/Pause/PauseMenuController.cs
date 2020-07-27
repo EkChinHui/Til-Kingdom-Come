@@ -1,64 +1,88 @@
-﻿using UnityEngine;
-using System;
-using GamePlay;
-using GamePlay.Player;
+﻿using GamePlay.Player;
+using Photon.Pun;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PauseMenuController : MonoBehaviour
+namespace UI.GameUI.Pause
 {
-    public bool canPause = true;
-    private bool gameIsPaused = false;
-    public GameObject pauseMenu;
-    public GameObject blurEffect;
-    void Update()
+    public class PauseMenuController : MonoBehaviour
     {
-        if (canPause)
+        public bool canPause = true;
+        public PhotonView photonView;
+        [SerializeField] bool gameIsPaused = false;
+        public GameObject pauseMenu;
+        public GameObject blurEffect;
+        void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (canPause)
             {
-                if(gameIsPaused)
+                if(Input.GetKeyDown(KeyCode.Escape))
                 {
-                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
-                    Resume();
-                }
-                else
-                {
-                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
-                    Pause();
+                    if (SceneManager.GetActiveScene().name == "MultiplayerArena")
+                    {
+                        if (canPause)
+                            photonView.RPC("OnPauseButtonClicked", RpcTarget.All);
+                        Debug.Log("RPC sent");
+                    }
+                    else OnPauseButtonClicked();
                 }
             }
         }
-    }
 
-    public void Resume()
-    {
-        Debug.Log("Resuming Game");
-        AudioManager.instance.PlayCurrentMusic();
-        pauseMenu.SetActive(false);
-        blurEffect.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-    }
-    private void Pause()
-    {
-        Debug.Log("Pausing Game");
-        AudioManager.instance.PauseCurrentMusic();
-        pauseMenu.SetActive(true);
-        blurEffect.SetActive(true);
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-    }
+        [PunRPC]
+        public void OnPauseButtonClicked()
+        {
+            if(gameIsPaused)
+            {
+                if (PlayerInput.onEnableInput != null) PlayerInput.onEnableInput();
+                Debug.Log("Player enable input after pausing");
+                Resume();
+            }
+            else
+            {
+                if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
+                Pause();
+            }
+        }
+        
+        [PunRPC]
+        public void Resume()
+        {
+            Debug.Log("Resuming Game");
+            AudioManager.instance.PlayCurrentMusic();
+            pauseMenu.SetActive(false);
+            blurEffect.SetActive(false);
+            Time.timeScale = 1f;
+            gameIsPaused = false;
+        }
 
-    public void Home()
-    {
-        Debug.Log("Back to Main Menu");
-        AudioManager.instance.StopCurrentMusic();
-        AudioManager.instance.PlayMusic("Main Theme");
-        Time.timeScale = 1f;
-    }
+        public void MultiplayerResume()
+        {
+            photonView.RPC("Resume", RpcTarget.All);
+        }
+        
+        private void Pause()
+        {
+            Debug.Log("Pausing Game");
+            AudioManager.instance.PauseCurrentMusic();
+            pauseMenu.SetActive(true);
+            blurEffect.SetActive(true);
+            Time.timeScale = 0f;
+            gameIsPaused = true;
+        }
 
-    public void Restart()
-    {
-        AudioManager.instance.StopCurrentMusic();
-        Time.timeScale = 1f;
+        public void Home()
+        {
+            Debug.Log("Back to Main Menu");
+            AudioManager.instance.StopCurrentMusic();
+            AudioManager.instance.PlayMusic("Main Theme");
+            Time.timeScale = 1f;
+        }
+
+        public void Restart()
+        {
+            AudioManager.instance.StopCurrentMusic();
+            Time.timeScale = 1f;
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace GamePlay.Player
 
         public bool MultiplayerMode = false;
         public PhotonView photonView;
+        private bool tookDamage = false;
 
         #endregion
         
@@ -122,6 +123,7 @@ namespace GamePlay.Player
             currentHealth = maxHealth;
             healthBarController.SetHealth(currentHealth);
             SkillSelectionManager.instance.AssignSkills(playerNo);
+            godMode = false;
         }
         public void Update()
         {
@@ -223,7 +225,56 @@ namespace GamePlay.Player
             skill.Cast(otherPlayer);
         }
         
+        [PunRPC]
+        public void TakeDamageCheck(float damageTaken)
+        {
+            if (MultiplayerManager.gameEnded) return;
+            if (combatState == CombatState.Dead) return;
+            if (tookDamage)
+            {
+                tookDamage = false;
+            }
+            else
+            {
+                TakeDamage(damageTaken);
+                tookDamage = false;
+            }
+            HealthCheckHelper(currentHealth);
+        }
 
+        [PunRPC]
+        public void HealthCheck(float health)
+        {
+            if (MultiplayerManager.gameEnded) return;
+            if (combatState == CombatState.Dead) return;
+            if (health < currentHealth)
+            {
+                currentHealth = health;
+                healthBarController.SetHealth(health);
+            }
+            else if (health > currentHealth)
+            {
+                photonView.RPC("HealthCheck", RpcTarget.All, currentHealth);
+            }
+        }
+
+        [PunRPC]
+        public void DieCheck()
+        {
+            if (combatState != CombatState.Dead)
+            {
+                currentHealth = 0;
+                healthBarController.SetHealth(0);
+                Die();
+            }
+        }
+
+        [PunRPC]
+        public void EndGame()
+        {
+            MultiplayerManager.gameEnded = true;
+        }
+        
         #endregion
 
         #region LISTEN FOR
@@ -300,12 +351,14 @@ namespace GamePlay.Player
         {
             if (!godMode)
             {
+                tookDamage = true; // used in TakeDamageCheck for multiplayer
                 Debug.Log("Player " + playerNo + " takes " + damageTaken + " damage.");
                 currentHealth -= damageTaken;
                 healthBarController.SetHealth(currentHealth);
                 if (currentHealth <= 0 && combatState != CombatState.Dead)
                 {
                     Die();
+                    photonView.RPC("DieCheck", RpcTarget.All);
                 } 
                 else
                 {
@@ -315,11 +368,22 @@ namespace GamePlay.Player
             }
         }
 
+        public void HealthCheckHelper(float health)
+        {
+            if (MultiplayerMode) photonView.RPC("HealthCheck", RpcTarget.All, health);
+        }
+
+        public void TakeDamageCheckHelper(float damageTaken)
+        {
+            if (MultiplayerMode) photonView.RPC("TakeDamageCheck", RpcTarget.All, damageTaken);
+        }
+
         private IEnumerator Stun(float duration)
         {
-            playerInput.Toggle();
+            playerInput.DisableInput();
             yield return new WaitForSeconds(duration);
-            playerInput.Toggle();
+            playerInput.EnableInput();
+            Debug.Log("Player " + playerNo + " enable input after stun");
         }
 
         private IEnumerator ChangeSpriteColorAndWait(float interval)
@@ -366,11 +430,15 @@ namespace GamePlay.Player
             Debug.Log("Player " + playerNo + " dies.");
             Debug.Log("Player " + otherPlayer.playerNo + " enters God mode.");
             onDeath?.Invoke(playerNo);
+            if (MultiplayerMode)
+                photonView.RPC("EndGame", RpcTarget.All);
             otherPlayer.godMode = true;
             combatState = CombatState.Dead;
 
             // Disable input
-            if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+            if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
+            // Lock disable input so that it will not be enabled accidentally
+            if (PlayerInput.onLockDisableInput != null) PlayerInput.onLockDisableInput();
 
             // Die animation
             anim.SetBool("Dead", true);

@@ -28,24 +28,36 @@ MonoBehaviour:
     EnableLobbyStatistics: 0
     NetworkLogging: 1
   DevRegion: asia
-  PunLogging: 2
+  PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - ChangeCombatState
   - ClickRpc
-  - DestroyRpc
-  - RPCAttack
-  - RPCRoll
-  - RPCBlock
-  - SetMovementAnim
-  - RPCSkill
   - DecreasePlayerOneSkill
   - DecreasePlayerTwoSkill
+  - DestroyRpc
+  - DieCheck
+  - EndGame
   - IncreasePlayerOneSkill
   - IncreasePlayerTwoSkill
+  - MultiplayerPassWins
+  - OnPauseButtonClicked
   - PassSkills
+  - Resume
+  - RPCAttack
+  - RPCBlock
+  - RPCReloadGame
+  - RPCRoll
+  - RPCSkill
+  - SkillSelectRPC
+  - TakeDamageCheck
+  - RPCReadyButton
+  - RPCReadyText
+  - RPCQuit
+  - RPCMusic
+  - HealthCheck
+  - RPCHome
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

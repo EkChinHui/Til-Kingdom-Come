@@ -1,6 +1,7 @@
 ﻿using System;
 using GamePlay.Player;
 using TMPro;
+using UI.GameUI.Pause;
 using UI.GameUI.Round_Start;
 using UnityEngine;
 
@@ -61,7 +62,7 @@ namespace GamePlay.Information
                 {
                     roundStartPanel.nextRound();
                     resetPlayersEvent();
-                    if (PlayerInput.onToggleInput != null) PlayerInput.onToggleInput();
+                    if (PlayerInput.onDisableInput != null) PlayerInput.onDisableInput();
                 }
             }
             pauseMenuController.canPause = false;

@@ -6,6 +6,7 @@ public class MapOneController : MonoBehaviour
 {
     void Start()
     {
+        AudioManager.instance.FadeOutCurrentMusic();
         AudioManager.instance.PlayMusic("Battle Theme 1");
     }
 }

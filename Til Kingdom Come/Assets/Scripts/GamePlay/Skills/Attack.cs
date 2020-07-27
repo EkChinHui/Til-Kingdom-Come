@@ -3,7 +3,6 @@ using System.Collections;
 using Cinemachine;
 using GamePlay.Map.Map_Two;
 using GamePlay.Player;
-using Photon.Pun;
 using UI.GameUI.Cooldown;
 using UnityEngine;
 using UnityEngine.UI;
@@ -91,7 +90,7 @@ namespace GamePlay.Skills
 
             charges.CurrentCharge -= 1;
             // Disable input
-            player.playerInput.Toggle();
+            player.playerInput.DisableInput();
 
             // Combo will be upgraded to next combo if it is executed within the decay time
             combo.SetDecay();
@@ -118,7 +117,7 @@ namespace GamePlay.Skills
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // Maximum distance between both players for attack to be successful
-            if (hitEnemies.Length == 0) {
+            if (hitEnemies.Length == 1) {
                 AudioManager.instance.PlaySoundEffect("Sword Swing");
             }
             else
@@ -162,6 +161,7 @@ namespace GamePlay.Skills
                             : AttackDamage;
                         AudioManager.instance.PlaySoundEffect("Decapitation");
                         otherPlayer.TakeDamage(damage);
+                        otherPlayer.TakeDamageCheckHelper(damage);
                         print("Combo: " + combo.CurrentCombo);
                     }
                 }
@@ -199,7 +199,8 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo one");
         }
 
         private IEnumerator ComboTwoAnimDelay()
@@ -215,7 +216,8 @@ namespace GamePlay.Skills
             AttackCast();
             yield return new WaitForSeconds(AnimationTimes.instance.AttackAnim - reactionDelay);
             player.combatState = PlayerController.CombatState.NonCombat;
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo two");
         }
 
         private IEnumerator ComboThreeAnimDelay()
@@ -245,7 +247,8 @@ namespace GamePlay.Skills
             
             #endregion
             
-            player.playerInput.Toggle();
+            player.playerInput.EnableInput();
+            Debug.Log("Player enable input after combo three");
         }
         
         
