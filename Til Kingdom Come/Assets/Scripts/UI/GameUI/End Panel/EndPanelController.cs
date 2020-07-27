@@ -58,8 +58,15 @@ namespace UI.GameUI.End_Panel
         [PunRPC]
         public void RPCHome()
         {
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene("Multiplayer Lobby");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                
+            }
+            else
+            {
+                PhotonNetwork.LeaveRoom();
+                SceneManager.LoadScene("Multiplayer Lobby");
+            }
         }
 
 
