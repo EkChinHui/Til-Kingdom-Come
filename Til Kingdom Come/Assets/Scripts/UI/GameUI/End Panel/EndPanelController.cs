@@ -1,4 +1,5 @@
-﻿using GamePlay.Information;
+﻿using System.Collections;
+using GamePlay.Information;
 using GamePlay.Player;
 using JetBrains.Annotations;
 using Photon.Pun;
@@ -58,15 +59,16 @@ namespace UI.GameUI.End_Panel
         [PunRPC]
         public void RPCHome()
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                
-            }
-            else
-            {
-                PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene("Multiplayer Lobby");
-            }
+            PhotonNetwork.LeaveRoom();
+            StartCoroutine(SceneChange());
+
+        }
+
+        private IEnumerator SceneChange()
+        {
+            yield return new WaitForSeconds(2f);
+            SceneManager.LoadScene("Multiplayer Lobby");
+            yield return null;
         }
 
 
