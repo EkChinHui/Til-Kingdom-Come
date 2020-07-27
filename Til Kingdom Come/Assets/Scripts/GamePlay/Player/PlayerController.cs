@@ -263,6 +263,8 @@ namespace GamePlay.Player
         {
             if (combatState != CombatState.Dead)
             {
+                currentHealth = 0;
+                healthBarController.SetHealth(0);
                 Die();
             }
         }
