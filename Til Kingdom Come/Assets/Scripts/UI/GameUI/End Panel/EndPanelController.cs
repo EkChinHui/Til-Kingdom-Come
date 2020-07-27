@@ -66,7 +66,7 @@ namespace UI.GameUI.End_Panel
 
         private IEnumerator SceneChange()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1);
             SceneManager.LoadScene("Multiplayer Lobby");
             yield return null;
         }
