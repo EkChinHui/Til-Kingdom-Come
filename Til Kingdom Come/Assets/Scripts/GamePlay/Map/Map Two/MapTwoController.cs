@@ -13,6 +13,7 @@ namespace GamePlay.Map.Map_Two
         // Start is called before the first frame update
         private void Start()
         {
+            AudioManager.instance.FadeOutCurrentMusic();
             AudioManager.instance.PlayMusic("Battle Theme 2");
         }
 

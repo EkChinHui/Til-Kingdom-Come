@@ -49,10 +49,22 @@ namespace UI.GameUI.End_Panel
                 photonView.RPC("RPCReloadGame", RpcTarget.All);
         }
 
+        public void RPCQuit()
+        {
+            photonView.RPC("RPCMusic", RpcTarget.All);
+        }
+
         [PunRPC]
         public void RPCReloadGame()
         {
             PhotonNetwork.LoadLevel("MultiplayerArena");
+        }
+
+        [PunRPC]
+        public void RPCMusic()
+        {
+            AudioManager.instance.FadeOutCurrentMusic();
+            AudioManager.instance.PlayMusic("Main Theme");
         }
 
         public void Home()
