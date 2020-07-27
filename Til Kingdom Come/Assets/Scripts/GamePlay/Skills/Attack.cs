@@ -117,7 +117,7 @@ namespace GamePlay.Skills
             // Detect enemies in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attRange, playerLayer);
             // Maximum distance between both players for attack to be successful
-            if (hitEnemies.Length == 0) {
+            if (hitEnemies.Length == 1) {
                 AudioManager.instance.PlaySoundEffect("Sword Swing");
             }
             else

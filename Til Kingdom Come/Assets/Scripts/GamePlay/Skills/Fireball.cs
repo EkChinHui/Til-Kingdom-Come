@@ -53,6 +53,7 @@ namespace GamePlay.Skills
 
             // fire burning ground
             yield return new WaitForSeconds(fireballLandDelay);
+            AudioManager.instance.PlaySoundEffect("Fire");
             var direction = Mathf.Abs(player.transform.localRotation.eulerAngles.y - 180) < Mathf.Epsilon
                 ? -1 *  originOffset
                 : originOffset;
