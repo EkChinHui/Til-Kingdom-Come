@@ -51,8 +51,17 @@ namespace UI.GameUI.End_Panel
 
         public void RPCQuit()
         {
+            photonView.RPC("RPCHome", RpcTarget.All);
             photonView.RPC("RPCMusic", RpcTarget.All);
         }
+
+        [PunRPC]
+        public void RPCHome()
+        {
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("Multiplayer Lobby");
+        }
+
 
         [PunRPC]
         public void RPCReloadGame()
