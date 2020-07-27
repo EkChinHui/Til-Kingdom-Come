@@ -239,6 +239,23 @@ namespace GamePlay.Player
                 TakeDamage(damageTaken);
                 tookDamage = false;
             }
+            HealthCheckHelper(currentHealth);
+        }
+
+        [PunRPC]
+        public void HealthCheck(float health)
+        {
+            if (MultiplayerManager.gameEnded) return;
+            if (combatState == CombatState.Dead) return;
+            if (health < currentHealth)
+            {
+                currentHealth = health;
+                healthBarController.SetHealth(health);
+            }
+            else if (health > currentHealth)
+            {
+                photonView.RPC("HealthCheck", RpcTarget.All, currentHealth);
+            }
         }
 
         [PunRPC]
@@ -347,6 +364,11 @@ namespace GamePlay.Player
                     StartCoroutine(Hurt());
                 }
             }
+        }
+
+        public void HealthCheckHelper(float health)
+        {
+            if (MultiplayerMode) photonView.RPC("HealthCheck", RpcTarget.All, health);
         }
 
         public void TakeDamageCheckHelper(float damageTaken)
