@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Fireball
-  skillInfo: Throws a fireball burning the ground where the fireball lands
+  skillInfo: Burns the ground dealing 10 damage per second
   icon: {fileID: 21300000, guid: ab9f62b118fd4d14994b3ba6a6f531a4, type: 3}
   skillCooldown: 10
   skillNumber: 5
